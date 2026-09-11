@@ -1,0 +1,241 @@
+{
+  "passed": 47,
+  "total": 47,
+  "results": [
+    {
+      "name": "HTTP index.html",
+      "passed": true,
+      "detail": "status 200"
+    },
+    {
+      "name": "HTTP villas.html",
+      "passed": true,
+      "detail": "status 200"
+    },
+    {
+      "name": "HTTP villa.html?villa=providence",
+      "passed": true,
+      "detail": "status 200"
+    },
+    {
+      "name": "HTTP locations.html",
+      "passed": true,
+      "detail": "status 200"
+    },
+    {
+      "name": "HTTP about.html",
+      "passed": true,
+      "detail": "status 200"
+    },
+    {
+      "name": "HTTP reviews.html",
+      "passed": true,
+      "detail": "status 200"
+    },
+    {
+      "name": "HTTP guide.html",
+      "passed": true,
+      "detail": "status 200"
+    },
+    {
+      "name": "HTTP faq.html",
+      "passed": true,
+      "detail": "status 200"
+    },
+    {
+      "name": "HTTP policies.html",
+      "passed": true,
+      "detail": "status 200"
+    },
+    {
+      "name": "HTTP contact.html",
+      "passed": true,
+      "detail": "status 200"
+    },
+    {
+      "name": "Homepage identity",
+      "passed": true,
+      "detail": "{\"title\":\"Best E Villas | Barbados Vacation Rentals\",\"heading\":\"Beautiful Barbados villas.\",\"activeSlides\":1,\"slideCount\":3,\"forbidden\":0,\"missingImages\":0,\"missingImageSources\":[],\"overflow\":false}"
+    },
+    {
+      "name": "Homepage carousel rendered",
+      "passed": true,
+      "detail": "{\"title\":\"Best E Villas | Barbados Vacation Rentals\",\"heading\":\"Beautiful Barbados villas.\",\"activeSlides\":1,\"slideCount\":3,\"forbidden\":0,\"missingImages\":0,\"missingImageSources\":[],\"overflow\":false}"
+    },
+    {
+      "name": "Rejected overlay UI removed",
+      "passed": true,
+      "detail": "{\"title\":\"Best E Villas | Barbados Vacation Rentals\",\"heading\":\"Beautiful Barbados villas.\",\"activeSlides\":1,\"slideCount\":3,\"forbidden\":0,\"missingImages\":0,\"missingImageSources\":[],\"overflow\":false}"
+    },
+    {
+      "name": "Homepage images load",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Homepage desktop overflow",
+      "passed": true,
+      "detail": "false"
+    },
+    {
+      "name": "Analytics stays idle without Measurement ID",
+      "passed": true,
+      "detail": "{\"externalRequests\":[],\"apiPresent\":false}"
+    },
+    {
+      "name": "Carousel interaction",
+      "passed": true,
+      "detail": "{\"slide\":\"1\",\"count\":\"02\"}"
+    },
+    {
+      "name": "Carousel keyboard interaction",
+      "passed": true,
+      "detail": "{\"slide\":\"2\",\"count\":\"03\"}"
+    },
+    {
+      "name": "Villa listing rendered",
+      "passed": true,
+      "detail": "{\"title\":\"Barbados Villas | Best E Villas\",\"cards\":4,\"count\":\"4 villas\",\"missingImages\":0,\"directLinks\":4}"
+    },
+    {
+      "name": "Villa listing images load",
+      "passed": true,
+      "detail": "0 missing"
+    },
+    {
+      "name": "External booking links present",
+      "passed": true,
+      "detail": "4 links"
+    },
+    {
+      "name": "Villa location filter",
+      "passed": true,
+      "detail": "{\"visible\":1,\"count\":\"1 villa\",\"url\":\"http://127.0.0.1:4173/villas.html?location=south\"}"
+    },
+    {
+      "name": "Villa template selects requested villa",
+      "passed": true,
+      "detail": "{\"title\":\"Providence Terrace — 2 Bedroom | Best E Villas\",\"heading\":\"Providence Terrace — 2 Bedroom\",\"bookingAction\":\"https://direct-book.com/properties/bestevillaprovidencedirect\",\"factCount\":4,\"missingImages\":0,\"canonical\":\"https://bestevillas.com/villa.html?villa=providence\",\"ogUrl\":\"https://bestevillas.com/villa.html?villa=providence\",\"twitterTitle\":\"Providence Terrace — 2 Bedroom | Best E Villas\",\"schema\":{\"@context\":\"https://schema.org\",\"@type\":\"VacationRental\",\"@id\":\"https://bestevillas.com/villa.html?villa=providence#villa\",\"url\":\"https://bestevillas.com/villa.html?villa=providence\",\"name\":\"Providence Terrace — 2 Bedroom\",\"description\":\"A peaceful two-bedroom South Coast base near Miami Beach, Oistins, St. Lawrence Gap and Barbados Golf Club.\",\"image\":[\"https://bestevillas.com/assets/images/properties/providence/exterior.jpg\",\"https://bestevillas.com/assets/images/properties/providence/living.jpg\",\"https://bestevillas.com/assets/images/properties/providence/bedroom.jpg\"],\"address\":{\"@type\":\"PostalAddress\",\"addressLocality\":\"Providence\",\"addressRegion\":\"Christ Church\",\"addressCountry\":\"BB\"},\"numberOfBedrooms\":2,\"numberOfBathroomsTotal\":1,\"amenityFeature\":[{\"@type\":\"LocationFeatureSpecification\",\"name\":\"Shared pool\",\"value\":true},{\"@type\":\"LocationFeatureSpecification\",\"name\":\"Wi-Fi\",\"value\":true}],\"provider\":{\"@id\":\"https://bestevillas.com/#business\"},\"potentialAction\":{\"@type\":\"ReserveAction\",\"target\":\"https://direct-book.com/properties/bestevillaprovidencedirect\"}}}"
+    },
+    {
+      "name": "Villa booking destination",
+      "passed": true,
+      "detail": "https://direct-book.com/properties/bestevillaprovidencedirect"
+    },
+    {
+      "name": "Villa facts and gallery load",
+      "passed": true,
+      "detail": "{\"title\":\"Providence Terrace — 2 Bedroom | Best E Villas\",\"heading\":\"Providence Terrace — 2 Bedroom\",\"bookingAction\":\"https://direct-book.com/properties/bestevillaprovidencedirect\",\"factCount\":4,\"missingImages\":0,\"canonical\":\"https://bestevillas.com/villa.html?villa=providence\",\"ogUrl\":\"https://bestevillas.com/villa.html?villa=providence\",\"twitterTitle\":\"Providence Terrace — 2 Bedroom | Best E Villas\",\"schema\":{\"@context\":\"https://schema.org\",\"@type\":\"VacationRental\",\"@id\":\"https://bestevillas.com/villa.html?villa=providence#villa\",\"url\":\"https://bestevillas.com/villa.html?villa=providence\",\"name\":\"Providence Terrace — 2 Bedroom\",\"description\":\"A peaceful two-bedroom South Coast base near Miami Beach, Oistins, St. Lawrence Gap and Barbados Golf Club.\",\"image\":[\"https://bestevillas.com/assets/images/properties/providence/exterior.jpg\",\"https://bestevillas.com/assets/images/properties/providence/living.jpg\",\"https://bestevillas.com/assets/images/properties/providence/bedroom.jpg\"],\"address\":{\"@type\":\"PostalAddress\",\"addressLocality\":\"Providence\",\"addressRegion\":\"Christ Church\",\"addressCountry\":\"BB\"},\"numberOfBedrooms\":2,\"numberOfBathroomsTotal\":1,\"amenityFeature\":[{\"@type\":\"LocationFeatureSpecification\",\"name\":\"Shared pool\",\"value\":true},{\"@type\":\"LocationFeatureSpecification\",\"name\":\"Wi-Fi\",\"value\":true}],\"provider\":{\"@id\":\"https://bestevillas.com/#business\"},\"potentialAction\":{\"@type\":\"ReserveAction\",\"target\":\"https://direct-book.com/properties/bestevillaprovidencedirect\"}}}"
+    },
+    {
+      "name": "Villa SEO metadata selects requested villa",
+      "passed": true,
+      "detail": "{\"title\":\"Providence Terrace — 2 Bedroom | Best E Villas\",\"heading\":\"Providence Terrace — 2 Bedroom\",\"bookingAction\":\"https://direct-book.com/properties/bestevillaprovidencedirect\",\"factCount\":4,\"missingImages\":0,\"canonical\":\"https://bestevillas.com/villa.html?villa=providence\",\"ogUrl\":\"https://bestevillas.com/villa.html?villa=providence\",\"twitterTitle\":\"Providence Terrace — 2 Bedroom | Best E Villas\",\"schema\":{\"@context\":\"https://schema.org\",\"@type\":\"VacationRental\",\"@id\":\"https://bestevillas.com/villa.html?villa=providence#villa\",\"url\":\"https://bestevillas.com/villa.html?villa=providence\",\"name\":\"Providence Terrace — 2 Bedroom\",\"description\":\"A peaceful two-bedroom South Coast base near Miami Beach, Oistins, St. Lawrence Gap and Barbados Golf Club.\",\"image\":[\"https://bestevillas.com/assets/images/properties/providence/exterior.jpg\",\"https://bestevillas.com/assets/images/properties/providence/living.jpg\",\"https://bestevillas.com/assets/images/properties/providence/bedroom.jpg\"],\"address\":{\"@type\":\"PostalAddress\",\"addressLocality\":\"Providence\",\"addressRegion\":\"Christ Church\",\"addressCountry\":\"BB\"},\"numberOfBedrooms\":2,\"numberOfBathroomsTotal\":1,\"amenityFeature\":[{\"@type\":\"LocationFeatureSpecification\",\"name\":\"Shared pool\",\"value\":true},{\"@type\":\"LocationFeatureSpecification\",\"name\":\"Wi-Fi\",\"value\":true}],\"provider\":{\"@id\":\"https://bestevillas.com/#business\"},\"potentialAction\":{\"@type\":\"ReserveAction\",\"target\":\"https://direct-book.com/properties/bestevillaprovidencedirect\"}}}"
+    },
+    {
+      "name": "Booking form keeps verified base URL",
+      "passed": true,
+      "detail": "{\"namedDateFields\":0,\"guestClaim\":false}"
+    },
+    {
+      "name": "Unconfirmed capacity is not published",
+      "passed": true,
+      "detail": "{\"namedDateFields\":0,\"guestClaim\":false}"
+    },
+    {
+      "name": "Villa variant prospect-three",
+      "passed": true,
+      "detail": "{\"heading\":\"Prospect — 3 Bedroom\",\"canonical\":\"https://bestevillas.com/villa.html?villa=prospect-three\",\"ogUrl\":\"https://bestevillas.com/villa.html?villa=prospect-three\",\"twitterTitle\":\"Prospect — 3 Bedroom | Best E Villas\",\"schemaValid\":true,\"hasVacationRental\":true,\"bookingAction\":\"https://direct-book.com/properties/bestevillasprospctdirect\",\"missingImages\":0,\"overflow\":false}"
+    },
+    {
+      "name": "Villa variant prospect-two",
+      "passed": true,
+      "detail": "{\"heading\":\"Prospect — 2 Bedroom\",\"canonical\":\"https://bestevillas.com/villa.html?villa=prospect-two\",\"ogUrl\":\"https://bestevillas.com/villa.html?villa=prospect-two\",\"twitterTitle\":\"Prospect — 2 Bedroom | Best E Villas\",\"schemaValid\":true,\"hasVacationRental\":true,\"bookingAction\":\"https://direct-book.com/properties/bestevillasprospctdirect\",\"missingImages\":0,\"overflow\":false}"
+    },
+    {
+      "name": "Villa variant providence",
+      "passed": true,
+      "detail": "{\"heading\":\"Providence Terrace — 2 Bedroom\",\"canonical\":\"https://bestevillas.com/villa.html?villa=providence\",\"ogUrl\":\"https://bestevillas.com/villa.html?villa=providence\",\"twitterTitle\":\"Providence Terrace — 2 Bedroom | Best E Villas\",\"schemaValid\":true,\"hasVacationRental\":true,\"bookingAction\":\"https://direct-book.com/properties/bestevillaprovidencedirect\",\"missingImages\":0,\"overflow\":false}"
+    },
+    {
+      "name": "Villa variant st-silas",
+      "passed": true,
+      "detail": "{\"heading\":\"St. Silas — 3 Bedroom\",\"canonical\":\"https://bestevillas.com/villa.html?villa=st-silas\",\"ogUrl\":\"https://bestevillas.com/villa.html?villa=st-silas\",\"twitterTitle\":\"St. Silas — 3 Bedroom | Best E Villas\",\"schemaValid\":true,\"hasVacationRental\":true,\"bookingAction\":\"https://direct-book.com/properties/bestevillasstsilasstjames\",\"missingImages\":0,\"overflow\":false}"
+    },
+    {
+      "name": "Villa gallery interaction",
+      "passed": true,
+      "detail": "{\"before\":\"http://127.0.0.1:4173/assets/images/properties/providence/exterior.jpg\",\"after\":\"http://127.0.0.1:4173/assets/images/properties/providence/living.jpg\",\"active\":\"1\"}"
+    },
+    {
+      "name": "Mobile menu interaction",
+      "passed": true,
+      "detail": "{\"scrollBeforeMenu\":0,\"scrollAfterMenu\":0,\"expanded\":\"true\",\"navDisplay\":\"flex\",\"overflow\":false,\"headingVisible\":true,\"availabilityBottom\":761.0625,\"viewportHeight\":883}"
+    },
+    {
+      "name": "Homepage mobile layout",
+      "passed": true,
+      "detail": "{\"scrollBeforeMenu\":0,\"scrollAfterMenu\":0,\"expanded\":\"true\",\"navDisplay\":\"flex\",\"overflow\":false,\"headingVisible\":true,\"availabilityBottom\":761.0625,\"viewportHeight\":883}"
+    },
+    {
+      "name": "Mobile availability CTA is visible",
+      "passed": true,
+      "detail": "{\"scrollBeforeMenu\":0,\"scrollAfterMenu\":0,\"expanded\":\"true\",\"navDisplay\":\"flex\",\"overflow\":false,\"headingVisible\":true,\"availabilityBottom\":761.0625,\"viewportHeight\":883}"
+    },
+    {
+      "name": "Mobile hero composition",
+      "passed": true,
+      "detail": "{\"scrollY\":0,\"hero\":{\"top\":76,\"height\":624.0625},\"slides\":{\"top\":76,\"height\":390},\"copy\":{\"top\":466,\"height\":234.0625}}"
+    },
+    {
+      "name": "Villa listing mobile layout",
+      "passed": true,
+      "detail": "{\"overflow\":false,\"cards\":4,\"h1\":\"Find your Barbados villa\"}"
+    },
+    {
+      "name": "locations.html renders",
+      "passed": true,
+      "detail": "{\"heading\":\"Two coasts. Three welcoming neighbourhoods.\",\"missingImages\":0,\"overflow\":false}"
+    },
+    {
+      "name": "about.html renders",
+      "passed": true,
+      "detail": "{\"heading\":\"A local welcome and a comfortable place to stay.\",\"missingImages\":0,\"overflow\":false}"
+    },
+    {
+      "name": "reviews.html renders",
+      "passed": true,
+      "detail": "{\"heading\":\"Memories shared by our guests.\",\"missingImages\":0,\"overflow\":false}"
+    },
+    {
+      "name": "guide.html renders",
+      "passed": true,
+      "detail": "{\"heading\":\"Plan a Barbados stay that moves at your pace.\",\"missingImages\":0,\"overflow\":false}"
+    },
+    {
+      "name": "faq.html renders",
+      "passed": true,
+      "detail": "{\"heading\":\"Questions, answered simply.\",\"missingImages\":0,\"overflow\":false}"
+    },
+    {
+      "name": "policies.html renders",
+      "passed": true,
+      "detail": "{\"heading\":\"Booking policies, made clear.\",\"missingImages\":0,\"overflow\":false}"
+    },
+    {
+      "name": "contact.html renders",
+      "passed": true,
+      "detail": "{\"heading\":\"Let’s talk about your Barbados stay.\",\"missingImages\":0,\"overflow\":false}"
+    },
+    {
+      "name": "FAQ disclosure interaction",
+      "passed": true,
+      "detail": "{\"open\":true,\"answerVisible\":true}"
+    },
+    {
+      "name": "Browser console health",
+      "passed": true,
+      "detail": "[]"
+    }
+  ]
+}

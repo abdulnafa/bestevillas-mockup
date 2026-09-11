@@ -1,0 +1,14 @@
+{
+  "name": "bestevillas-static-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:production": "node scripts/build.mjs --mode production --base-path /",
+    "test:cms": "node testing/cms-build-audit.mjs"
+  },
+  "devDependencies": {
+    "yaml": "2.9.0"
+  }
+}

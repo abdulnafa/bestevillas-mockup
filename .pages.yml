@@ -1,0 +1,584 @@
+media:
+  input: assets/images
+  output: /assets/images
+  categories: [image]
+  extensions: [jpg, jpeg, png, webp, avif]
+  rename: safe
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: app
+    templates:
+      create: "content: create {path}"
+      update: "content: update {path}"
+      delete: "content: delete {path}"
+      rename: "content: rename {oldPath} to {newPath}"
+
+components:
+  seo:
+    type: object
+    label: Search and sharing
+    fields:
+      - name: meta_title
+        label: Meta title
+        type: string
+        required: true
+        options:
+          minlength: 20
+          maxlength: 60
+        description: Keep the most important phrase near the beginning.
+      - name: meta_description
+        label: Meta description
+        type: text
+        required: true
+        options:
+          minlength: 70
+          maxlength: 160
+      - name: canonical_path
+        label: Canonical path
+        type: string
+        required: true
+        pattern:
+          regex: '^/(?!/)(?!.*(?:^|/)\.\.(?:/|$))[^\s]*$'
+          message: Use a safe root-relative path beginning with one /, with no spaces or parent-directory segments.
+        description: "Example: /about.html"
+      - name: noindex
+        label: Hide from search engines
+        type: boolean
+        description: Leave off for approved production content.
+
+content:
+  - name: site_settings
+    label: Site settings
+    type: file
+    path: content/site.yml
+    format: yaml
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: site_name
+        label: Site name
+        type: string
+        required: true
+        options:
+          maxlength: 80
+      - name: brand_location
+        label: Brand location
+        type: string
+        required: true
+        options:
+          maxlength: 80
+      - name: tagline
+        label: Tagline
+        type: text
+        required: true
+        options:
+          maxlength: 180
+      - name: production_url
+        label: Production website
+        type: string
+        required: true
+        pattern:
+          regex: "^https://[^ ]+$"
+          message: Enter a complete secure URL beginning with https://.
+      - name: contact
+        label: Contact details
+        type: object
+        required: true
+        fields:
+          - name: email
+            label: Email
+            type: string
+            required: true
+            pattern:
+              regex: "^[^@ ]+@[^@ ]+\\.[^@ ]+$"
+              message: Enter a valid email address.
+          - name: phone_display
+            label: Telephone (display)
+            type: string
+            required: true
+          - name: phone_link
+            label: Telephone link
+            type: string
+            required: true
+            pattern:
+              regex: "^tel:\\+[0-9]+$"
+              message: Use tel:+ followed by digits only.
+      - name: address
+        label: Business address
+        type: object
+        required: true
+        fields:
+          - name: street
+            label: Street address
+            type: string
+            required: true
+          - name: locality
+            label: Parish / locality
+            type: string
+            required: true
+          - name: country_code
+            label: Country code
+            type: string
+            required: true
+            readonly: true
+            pattern: "^[A-Z]{2}$"
+      - name: footer_summary
+        label: Footer summary
+        type: text
+        required: true
+        options:
+          maxlength: 220
+      - name: primary_markets
+        label: Primary visitor markets
+        type: select
+        required: true
+        options:
+          multiple: true
+          min: 1
+          values: [USA, Canada, UK]
+      - name: social_links
+        label: Social links
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label}"
+        fields:
+          - name: label
+            type: string
+            required: true
+          - name: url
+            type: string
+            required: true
+            pattern:
+              regex: "^https://[^ ]+$"
+              message: Enter a complete secure URL beginning with https://.
+
+  - name: villas
+    label: Villas
+    type: collection
+    path: content/villas
+    format: yaml-frontmatter
+    subfolders: false
+    filename:
+      template: "{fields.slug}.md"
+      field: false
+    operations:
+      create: false
+      rename: false
+      delete: false
+    view:
+      fields: [title, status, location.neighbourhood, bedrooms, featured]
+      primary: title
+      sort: [sort_order, title]
+      search: [title, location.neighbourhood, location.parish]
+      default:
+        sort: sort_order
+        order: asc
+    fields:
+      - name: title
+        label: Villa name
+        type: string
+        required: true
+        options:
+          maxlength: 100
+      - name: slug
+        label: URL key
+        type: string
+        required: true
+        readonly: true
+        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        description: Protected because the current villa URL depends on this value.
+      - name: status
+        type: select
+        required: true
+        options:
+          values:
+            - name: draft
+              label: Draft
+            - name: published
+              label: Published
+      - name: featured
+        type: boolean
+      - name: sort_order
+        label: Display order
+        type: number
+        required: true
+        options:
+          min: 1
+          max: 99
+      - name: location
+        type: object
+        required: true
+        fields:
+          - name: neighbourhood
+            type: string
+            required: true
+          - name: parish
+            type: string
+            required: true
+          - name: coast
+            type: select
+            required: true
+            options:
+              values: [West Coast, South Coast]
+      - name: bedrooms
+        type: number
+        required: true
+        options:
+          min: 1
+          max: 20
+      - name: bathrooms
+        type: number
+        required: true
+        options:
+          min: 1
+          max: 20
+      - name: max_guests
+        label: Maximum guests
+        type: number
+        options:
+          min: 1
+          max: 40
+        description: Leave empty until the client confirms the occupancy.
+      - name: summary
+        type: text
+        required: true
+        options:
+          minlength: 40
+          maxlength: 240
+      - name: booking_url
+        label: External booking URL
+        type: string
+        required: true
+        pattern:
+          regex: "^https://direct-book\\.com/[^ ]+$"
+          message: Use the verified secure Direct-book URL.
+      - name: hero_image
+        type: image
+        required: true
+      - name: hero_image_alt
+        label: Hero image description
+        type: string
+        required: true
+        options:
+          minlength: 10
+          maxlength: 160
+      - name: gallery
+        type: object
+        required: true
+        list:
+          min: 1
+          max: 20
+          collapsible:
+            collapsed: true
+            summary: "{alt}"
+        fields:
+          - name: image
+            type: image
+            required: true
+          - name: alt
+            label: Image description
+            type: string
+            required: true
+            options:
+              minlength: 10
+              maxlength: 160
+      - name: amenities
+        type: string
+        required: true
+        list:
+          min: 1
+          max: 40
+      - name: highlights
+        type: object
+        list:
+          max: 12
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            type: string
+            required: true
+          - name: description
+            type: text
+            required: true
+            options:
+              maxlength: 240
+      - name: seo
+        component: seo
+        required: true
+      - name: body
+        label: Full villa description
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: false
+
+  - name: pages
+    label: Site pages
+    type: collection
+    path: content/pages
+    format: yaml-frontmatter
+    subfolders: false
+    filename:
+      template: "{fields.slug}.md"
+      field: false
+    operations:
+      create: false
+      rename: false
+      delete: false
+    view:
+      fields: [title, status, template, nav_label]
+      primary: title
+      sort: [title]
+      search: [title, nav_label, hero_heading]
+      default:
+        sort: title
+        order: asc
+    fields:
+      - name: title
+        label: Browser title
+        type: string
+        required: true
+        options:
+          maxlength: 80
+      - name: slug
+        label: File key
+        type: string
+        required: true
+        readonly: true
+        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        description: Protected because the production route will depend on this value.
+      - name: nav_label
+        label: Navigation label
+        type: string
+        required: true
+        options:
+          maxlength: 30
+      - name: template
+        type: select
+        required: true
+        readonly: true
+        options:
+          values:
+            - name: home
+              label: Home
+            - name: villa-listing
+              label: Villa listing
+            - name: standard
+              label: Standard page
+            - name: guide-index
+              label: Guide index
+      - name: status
+        type: select
+        required: true
+        options:
+          values:
+            - name: draft
+              label: Draft
+            - name: published
+              label: Published
+      - name: hero_heading
+        label: Main heading
+        type: string
+        required: true
+        options:
+          maxlength: 100
+      - name: hero_intro
+        label: Hero introduction
+        type: text
+        required: true
+        options:
+          minlength: 30
+          maxlength: 240
+      - name: hero_image
+        type: image
+        required: true
+      - name: hero_image_alt
+        label: Hero image description
+        type: string
+        required: true
+        options:
+          minlength: 10
+          maxlength: 160
+      - name: hero_gallery
+        type: object
+        list:
+          max: 8
+          collapsible:
+            collapsed: true
+            summary: "{alt}"
+        fields:
+          - name: image
+            type: image
+            required: true
+          - name: alt
+            label: Image description
+            type: string
+            required: true
+            options:
+              minlength: 10
+              maxlength: 160
+      - name: sections
+        type: object
+        list:
+          max: 20
+          collapsible:
+            collapsed: true
+            summary: "{heading}"
+        fields:
+          - name: heading
+            type: string
+            required: true
+          - name: text
+            type: rich-text
+            required: true
+            options:
+              format: markdown
+              media: false
+          - name: image
+            type: image
+          - name: image_alt
+            label: Image description
+            type: string
+            options:
+              maxlength: 160
+      - name: call_to_action
+        label: Closing action
+        type: object
+        fields:
+          - name: heading
+            type: string
+          - name: text
+            type: text
+          - name: label
+            label: Button label
+            type: string
+          - name: url
+            label: Button URL
+            type: string
+      - name: seo
+        component: seo
+        required: true
+      - name: body
+        label: Additional page content
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+
+  - name: guide_posts
+    label: Barbados guide posts
+    type: collection
+    path: content/guide
+    format: yaml-frontmatter
+    exclude: [README.md]
+    subfolders: false
+    filename:
+      template: "{year}-{month}-{day}-{fields.slug}.md"
+      field: false
+    operations:
+      create: true
+      rename: false
+      delete: true
+    view:
+      fields: [title, status, published_at, author]
+      primary: title
+      sort: [published_at, title]
+      search: [title, excerpt, categories]
+      default:
+        sort: published_at
+        order: desc
+    fields:
+      - name: title
+        type: string
+        required: true
+        options:
+          minlength: 10
+          maxlength: 100
+      - name: slug
+        type: string
+        required: true
+        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        options:
+          minlength: 3
+          maxlength: 100
+        description: Use lowercase words separated by hyphens. Avoid changing this after publication.
+      - name: status
+        type: select
+        required: true
+        options:
+          values:
+            - name: draft
+              label: Draft
+            - name: review
+              label: Ready for review
+            - name: published
+              label: Published
+      - name: published_at
+        label: Publication date
+        type: date
+        required: true
+      - name: updated_at
+        label: Last reviewed date
+        type: date
+      - name: author
+        type: string
+        required: true
+        options:
+          maxlength: 80
+      - name: excerpt
+        type: text
+        required: true
+        options:
+          minlength: 50
+          maxlength: 220
+      - name: hero_image
+        type: image
+        required: true
+      - name: hero_image_alt
+        label: Hero image description
+        type: string
+        required: true
+        options:
+          minlength: 10
+          maxlength: 160
+      - name: categories
+        type: select
+        required: true
+        options:
+          multiple: true
+          min: 1
+          max: 3
+          values:
+            - name: beaches
+              label: Beaches
+            - name: food-and-drink
+              label: Food and drink
+            - name: neighbourhoods
+              label: Neighbourhoods
+            - name: planning
+              label: Trip planning
+            - name: culture
+              label: Culture
+            - name: family-travel
+              label: Family travel
+      - name: seo
+        component: seo
+        required: true
+      - name: body
+        label: Article
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          path: guide
+          rename: safe

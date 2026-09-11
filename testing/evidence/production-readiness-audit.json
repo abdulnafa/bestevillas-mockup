@@ -1,0 +1,2480 @@
+{
+  "passed": 309,
+  "total": 309,
+  "requiredFailures": [],
+  "advisories": [],
+  "results": [
+    {
+      "area": "page",
+      "target": "index.html",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "index.html",
+      "check": "English document language",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "index.html",
+      "check": "one non-empty title",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "index.html",
+      "check": "one meta description",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "index.html",
+      "check": "preview remains noindex",
+      "passed": true,
+      "detail": "noindex, nofollow",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "index.html",
+      "check": "one absolute production canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "index.html",
+      "check": "complete unique Open Graph metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "index.html",
+      "check": "Open Graph URL matches canonical",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "index.html",
+      "check": "Open Graph image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "index.html",
+      "check": "complete unique Twitter metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "index.html",
+      "check": "Twitter image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "index.html",
+      "check": "JSON-LD exists and parses",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "index.html",
+      "check": "route-appropriate schema type",
+      "passed": true,
+      "detail": "found: LodgingBusiness, Organization, PostalAddress, AdministrativeArea, WebSite, WebPage, ImageObject",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "index.html",
+      "check": "one local analytics hook",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "index.html",
+      "check": "measurement ID intentionally empty",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "index.html",
+      "check": "no unconditional external analytics script",
+      "passed": true,
+      "detail": "0 found",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "index.html",
+      "check": "skip link targets main content",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "index.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "index.html",
+      "check": "every image has alt",
+      "passed": true,
+      "detail": "0 missing",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "index.html",
+      "check": "form controls have labels",
+      "passed": true,
+      "detail": "0 unlabeled",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "index.html",
+      "check": "buttons have accessible names",
+      "passed": true,
+      "detail": "0 unnamed",
+      "severity": "required"
+    },
+    {
+      "area": "performance",
+      "target": "index.html",
+      "check": "images reserve intrinsic space",
+      "passed": true,
+      "detail": "0 of 8 lack width/height",
+      "severity": "advisory"
+    },
+    {
+      "area": "page",
+      "target": "villas.html",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villas.html",
+      "check": "English document language",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villas.html",
+      "check": "one non-empty title",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villas.html",
+      "check": "one meta description",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villas.html",
+      "check": "preview remains noindex",
+      "passed": true,
+      "detail": "noindex, nofollow",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villas.html",
+      "check": "one absolute production canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/villas.html",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villas.html",
+      "check": "complete unique Open Graph metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villas.html",
+      "check": "Open Graph URL matches canonical",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villas.html",
+      "check": "Open Graph image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villas.html",
+      "check": "complete unique Twitter metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villas.html",
+      "check": "Twitter image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villas.html",
+      "check": "JSON-LD exists and parses",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villas.html",
+      "check": "route-appropriate schema type",
+      "passed": true,
+      "detail": "found: CollectionPage, ItemList, ListItem",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "villas.html",
+      "check": "one local analytics hook",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "villas.html",
+      "check": "measurement ID intentionally empty",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "villas.html",
+      "check": "no unconditional external analytics script",
+      "passed": true,
+      "detail": "0 found",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "villas.html",
+      "check": "skip link targets main content",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "villas.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "villas.html",
+      "check": "every image has alt",
+      "passed": true,
+      "detail": "0 missing",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "villas.html",
+      "check": "form controls have labels",
+      "passed": true,
+      "detail": "0 unlabeled",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "villas.html",
+      "check": "buttons have accessible names",
+      "passed": true,
+      "detail": "0 unnamed",
+      "severity": "required"
+    },
+    {
+      "area": "performance",
+      "target": "villas.html",
+      "check": "images reserve intrinsic space",
+      "passed": true,
+      "detail": "0 of 5 lack width/height",
+      "severity": "advisory"
+    },
+    {
+      "area": "page",
+      "target": "villa.html",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villa.html",
+      "check": "English document language",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villa.html",
+      "check": "one non-empty title",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villa.html",
+      "check": "one meta description",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villa.html",
+      "check": "preview remains noindex",
+      "passed": true,
+      "detail": "noindex, nofollow",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villa.html",
+      "check": "one absolute production canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/villa.html?villa=prospect-three",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villa.html",
+      "check": "complete unique Open Graph metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villa.html",
+      "check": "Open Graph URL matches canonical",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villa.html",
+      "check": "Open Graph image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villa.html",
+      "check": "complete unique Twitter metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villa.html",
+      "check": "Twitter image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villa.html",
+      "check": "JSON-LD exists and parses",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "villa.html",
+      "check": "route-appropriate schema type",
+      "passed": true,
+      "detail": "found: VacationRental, PostalAddress, LocationFeatureSpecification, ReserveAction",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "villa.html",
+      "check": "one local analytics hook",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "villa.html",
+      "check": "measurement ID intentionally empty",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "villa.html",
+      "check": "no unconditional external analytics script",
+      "passed": true,
+      "detail": "0 found",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "villa.html",
+      "check": "skip link targets main content",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "villa.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "villa.html",
+      "check": "every image has alt",
+      "passed": true,
+      "detail": "0 missing",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "villa.html",
+      "check": "form controls have labels",
+      "passed": true,
+      "detail": "0 unlabeled",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "villa.html",
+      "check": "buttons have accessible names",
+      "passed": true,
+      "detail": "0 unnamed",
+      "severity": "required"
+    },
+    {
+      "area": "performance",
+      "target": "villa.html",
+      "check": "images reserve intrinsic space",
+      "passed": true,
+      "detail": "0 of 5 lack width/height",
+      "severity": "advisory"
+    },
+    {
+      "area": "page",
+      "target": "locations.html",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "locations.html",
+      "check": "English document language",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "locations.html",
+      "check": "one non-empty title",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "locations.html",
+      "check": "one meta description",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "locations.html",
+      "check": "preview remains noindex",
+      "passed": true,
+      "detail": "noindex, nofollow",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "locations.html",
+      "check": "one absolute production canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/locations.html",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "locations.html",
+      "check": "complete unique Open Graph metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "locations.html",
+      "check": "Open Graph URL matches canonical",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "locations.html",
+      "check": "Open Graph image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "locations.html",
+      "check": "complete unique Twitter metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "locations.html",
+      "check": "Twitter image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "locations.html",
+      "check": "JSON-LD exists and parses",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "locations.html",
+      "check": "route-appropriate schema type",
+      "passed": true,
+      "detail": "found: CollectionPage, ItemList, ListItem, Place, BreadcrumbList",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "locations.html",
+      "check": "one local analytics hook",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "locations.html",
+      "check": "measurement ID intentionally empty",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "locations.html",
+      "check": "no unconditional external analytics script",
+      "passed": true,
+      "detail": "0 found",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "locations.html",
+      "check": "skip link targets main content",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "locations.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "locations.html",
+      "check": "every image has alt",
+      "passed": true,
+      "detail": "0 missing",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "locations.html",
+      "check": "form controls have labels",
+      "passed": true,
+      "detail": "0 unlabeled",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "locations.html",
+      "check": "buttons have accessible names",
+      "passed": true,
+      "detail": "0 unnamed",
+      "severity": "required"
+    },
+    {
+      "area": "performance",
+      "target": "locations.html",
+      "check": "images reserve intrinsic space",
+      "passed": true,
+      "detail": "0 of 4 lack width/height",
+      "severity": "advisory"
+    },
+    {
+      "area": "page",
+      "target": "about.html",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "about.html",
+      "check": "English document language",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "about.html",
+      "check": "one non-empty title",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "about.html",
+      "check": "one meta description",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "about.html",
+      "check": "preview remains noindex",
+      "passed": true,
+      "detail": "noindex, nofollow",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "about.html",
+      "check": "one absolute production canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/about.html",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "about.html",
+      "check": "complete unique Open Graph metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "about.html",
+      "check": "Open Graph URL matches canonical",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "about.html",
+      "check": "Open Graph image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "about.html",
+      "check": "complete unique Twitter metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "about.html",
+      "check": "Twitter image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "about.html",
+      "check": "JSON-LD exists and parses",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "about.html",
+      "check": "route-appropriate schema type",
+      "passed": true,
+      "detail": "found: AboutPage, BreadcrumbList, ListItem",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "about.html",
+      "check": "one local analytics hook",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "about.html",
+      "check": "measurement ID intentionally empty",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "about.html",
+      "check": "no unconditional external analytics script",
+      "passed": true,
+      "detail": "0 found",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "about.html",
+      "check": "skip link targets main content",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "about.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "about.html",
+      "check": "every image has alt",
+      "passed": true,
+      "detail": "0 missing",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "about.html",
+      "check": "form controls have labels",
+      "passed": true,
+      "detail": "0 unlabeled",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "about.html",
+      "check": "buttons have accessible names",
+      "passed": true,
+      "detail": "0 unnamed",
+      "severity": "required"
+    },
+    {
+      "area": "performance",
+      "target": "about.html",
+      "check": "images reserve intrinsic space",
+      "passed": true,
+      "detail": "0 of 3 lack width/height",
+      "severity": "advisory"
+    },
+    {
+      "area": "page",
+      "target": "reviews.html",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "reviews.html",
+      "check": "English document language",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "reviews.html",
+      "check": "one non-empty title",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "reviews.html",
+      "check": "one meta description",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "reviews.html",
+      "check": "preview remains noindex",
+      "passed": true,
+      "detail": "noindex, nofollow",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "reviews.html",
+      "check": "one absolute production canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/reviews.html",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "reviews.html",
+      "check": "complete unique Open Graph metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "reviews.html",
+      "check": "Open Graph URL matches canonical",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "reviews.html",
+      "check": "Open Graph image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "reviews.html",
+      "check": "complete unique Twitter metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "reviews.html",
+      "check": "Twitter image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "reviews.html",
+      "check": "JSON-LD exists and parses",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "reviews.html",
+      "check": "route-appropriate schema type",
+      "passed": true,
+      "detail": "found: CollectionPage",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "reviews.html",
+      "check": "one local analytics hook",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "reviews.html",
+      "check": "measurement ID intentionally empty",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "reviews.html",
+      "check": "no unconditional external analytics script",
+      "passed": true,
+      "detail": "0 found",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "reviews.html",
+      "check": "skip link targets main content",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "reviews.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "reviews.html",
+      "check": "every image has alt",
+      "passed": true,
+      "detail": "0 missing",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "reviews.html",
+      "check": "form controls have labels",
+      "passed": true,
+      "detail": "0 unlabeled",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "reviews.html",
+      "check": "buttons have accessible names",
+      "passed": true,
+      "detail": "0 unnamed",
+      "severity": "required"
+    },
+    {
+      "area": "performance",
+      "target": "reviews.html",
+      "check": "images reserve intrinsic space",
+      "passed": true,
+      "detail": "0 of 2 lack width/height",
+      "severity": "advisory"
+    },
+    {
+      "area": "page",
+      "target": "guide.html",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "guide.html",
+      "check": "English document language",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "guide.html",
+      "check": "one non-empty title",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "guide.html",
+      "check": "one meta description",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "guide.html",
+      "check": "preview remains noindex",
+      "passed": true,
+      "detail": "noindex, nofollow",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "guide.html",
+      "check": "one absolute production canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/guide.html",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "guide.html",
+      "check": "complete unique Open Graph metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "guide.html",
+      "check": "Open Graph URL matches canonical",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "guide.html",
+      "check": "Open Graph image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "guide.html",
+      "check": "complete unique Twitter metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "guide.html",
+      "check": "Twitter image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "guide.html",
+      "check": "JSON-LD exists and parses",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "guide.html",
+      "check": "route-appropriate schema type",
+      "passed": true,
+      "detail": "found: WebPage, TouristDestination",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "guide.html",
+      "check": "one local analytics hook",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "guide.html",
+      "check": "measurement ID intentionally empty",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "guide.html",
+      "check": "no unconditional external analytics script",
+      "passed": true,
+      "detail": "0 found",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "guide.html",
+      "check": "skip link targets main content",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "guide.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "guide.html",
+      "check": "every image has alt",
+      "passed": true,
+      "detail": "0 missing",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "guide.html",
+      "check": "form controls have labels",
+      "passed": true,
+      "detail": "0 unlabeled",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "guide.html",
+      "check": "buttons have accessible names",
+      "passed": true,
+      "detail": "0 unnamed",
+      "severity": "required"
+    },
+    {
+      "area": "performance",
+      "target": "guide.html",
+      "check": "images reserve intrinsic space",
+      "passed": true,
+      "detail": "0 of 6 lack width/height",
+      "severity": "advisory"
+    },
+    {
+      "area": "page",
+      "target": "faq.html",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "faq.html",
+      "check": "English document language",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "faq.html",
+      "check": "one non-empty title",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "faq.html",
+      "check": "one meta description",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "faq.html",
+      "check": "preview remains noindex",
+      "passed": true,
+      "detail": "noindex, nofollow",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "faq.html",
+      "check": "one absolute production canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/faq.html",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "faq.html",
+      "check": "complete unique Open Graph metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "faq.html",
+      "check": "Open Graph URL matches canonical",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "faq.html",
+      "check": "Open Graph image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "faq.html",
+      "check": "complete unique Twitter metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "faq.html",
+      "check": "Twitter image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "faq.html",
+      "check": "JSON-LD exists and parses",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "faq.html",
+      "check": "route-appropriate schema type",
+      "passed": true,
+      "detail": "found: FAQPage, Question, Answer",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "faq.html",
+      "check": "one local analytics hook",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "faq.html",
+      "check": "measurement ID intentionally empty",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "faq.html",
+      "check": "no unconditional external analytics script",
+      "passed": true,
+      "detail": "0 found",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "faq.html",
+      "check": "skip link targets main content",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "faq.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "faq.html",
+      "check": "every image has alt",
+      "passed": true,
+      "detail": "0 missing",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "faq.html",
+      "check": "form controls have labels",
+      "passed": true,
+      "detail": "0 unlabeled",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "faq.html",
+      "check": "buttons have accessible names",
+      "passed": true,
+      "detail": "0 unnamed",
+      "severity": "required"
+    },
+    {
+      "area": "performance",
+      "target": "faq.html",
+      "check": "images reserve intrinsic space",
+      "passed": true,
+      "detail": "0 of 1 lack width/height",
+      "severity": "advisory"
+    },
+    {
+      "area": "page",
+      "target": "policies.html",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "policies.html",
+      "check": "English document language",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "policies.html",
+      "check": "one non-empty title",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "policies.html",
+      "check": "one meta description",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "policies.html",
+      "check": "preview remains noindex",
+      "passed": true,
+      "detail": "noindex, nofollow",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "policies.html",
+      "check": "one absolute production canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/policies.html",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "policies.html",
+      "check": "complete unique Open Graph metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "policies.html",
+      "check": "Open Graph URL matches canonical",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "policies.html",
+      "check": "Open Graph image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "policies.html",
+      "check": "complete unique Twitter metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "policies.html",
+      "check": "Twitter image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "policies.html",
+      "check": "JSON-LD exists and parses",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "policies.html",
+      "check": "route-appropriate schema type",
+      "passed": true,
+      "detail": "found: WebPage",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "policies.html",
+      "check": "one local analytics hook",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "policies.html",
+      "check": "measurement ID intentionally empty",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "policies.html",
+      "check": "no unconditional external analytics script",
+      "passed": true,
+      "detail": "0 found",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "policies.html",
+      "check": "skip link targets main content",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "policies.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "policies.html",
+      "check": "every image has alt",
+      "passed": true,
+      "detail": "0 missing",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "policies.html",
+      "check": "form controls have labels",
+      "passed": true,
+      "detail": "0 unlabeled",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "policies.html",
+      "check": "buttons have accessible names",
+      "passed": true,
+      "detail": "0 unnamed",
+      "severity": "required"
+    },
+    {
+      "area": "performance",
+      "target": "policies.html",
+      "check": "images reserve intrinsic space",
+      "passed": true,
+      "detail": "0 of 1 lack width/height",
+      "severity": "advisory"
+    },
+    {
+      "area": "page",
+      "target": "contact.html",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "contact.html",
+      "check": "English document language",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "contact.html",
+      "check": "one non-empty title",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "contact.html",
+      "check": "one meta description",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "contact.html",
+      "check": "preview remains noindex",
+      "passed": true,
+      "detail": "noindex, nofollow",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "contact.html",
+      "check": "one absolute production canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/contact.html",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "contact.html",
+      "check": "complete unique Open Graph metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "contact.html",
+      "check": "Open Graph URL matches canonical",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "contact.html",
+      "check": "Open Graph image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "contact.html",
+      "check": "complete unique Twitter metadata",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "contact.html",
+      "check": "Twitter image is absolute",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "contact.html",
+      "check": "JSON-LD exists and parses",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "contact.html",
+      "check": "route-appropriate schema type",
+      "passed": true,
+      "detail": "found: ContactPage, LodgingBusiness, PostalAddress",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "contact.html",
+      "check": "one local analytics hook",
+      "passed": true,
+      "detail": "1 found",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "contact.html",
+      "check": "measurement ID intentionally empty",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "contact.html",
+      "check": "no unconditional external analytics script",
+      "passed": true,
+      "detail": "0 found",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "contact.html",
+      "check": "skip link targets main content",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "contact.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "contact.html",
+      "check": "every image has alt",
+      "passed": true,
+      "detail": "0 missing",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "contact.html",
+      "check": "form controls have labels",
+      "passed": true,
+      "detail": "0 unlabeled",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "contact.html",
+      "check": "buttons have accessible names",
+      "passed": true,
+      "detail": "0 unnamed",
+      "severity": "required"
+    },
+    {
+      "area": "performance",
+      "target": "contact.html",
+      "check": "images reserve intrinsic space",
+      "passed": true,
+      "detail": "0 of 3 lack width/height",
+      "severity": "advisory"
+    },
+    {
+      "area": "seo",
+      "target": "all pages",
+      "check": "canonical URLs are unique",
+      "passed": true,
+      "detail": "10 canonicals",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "stylesheets",
+      "check": "visible keyboard focus styles",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "accessibility",
+      "target": "stylesheets",
+      "check": "reduced-motion support",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "analytics.js",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "analytics.js",
+      "check": "valid Measurement ID guard",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "analytics",
+      "target": "analytics.js",
+      "check": "no analytics network bootstrap without valid ID",
+      "passed": true,
+      "detail": "0 elements appended",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "robots.txt",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "robots.txt",
+      "check": "production crawling allowed",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "robots.txt",
+      "check": "production sitemap declared",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "sitemap.xml",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "sitemap.xml",
+      "check": "13 canonical route URLs",
+      "passed": true,
+      "detail": "13 found",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "sitemap.xml",
+      "check": "only production URLs",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "sitemap.xml",
+      "check": "route URLs are unique",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "sitemap.xml",
+      "check": "villa route included: prospect-three",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "sitemap.xml",
+      "check": "villa route included: prospect-two",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "sitemap.xml",
+      "check": "villa route included: providence",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "seo",
+      "target": "sitemap.xml",
+      "check": "villa route included: st-silas",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "route",
+      "target": "script.js",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "route",
+      "target": "script.js",
+      "check": "dynamic villa supported: prospect-three",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "route",
+      "target": "script.js",
+      "check": "dynamic villa supported: prospect-two",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "route",
+      "target": "script.js",
+      "check": "dynamic villa supported: providence",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "route",
+      "target": "script.js",
+      "check": "dynamic villa supported: st-silas",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "route",
+      "target": "script.js",
+      "check": "dynamic SEO metadata update present",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": ".pages.yml",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": ".pages.yml",
+      "check": "media maps to local image directory",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": ".pages.yml",
+      "check": "collection configured: content/villas",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": ".pages.yml",
+      "check": "collection configured: content/pages",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": ".pages.yml",
+      "check": "collection configured: content/guide",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": ".pages.yml",
+      "check": "fixed content create/rename/delete restricted",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": ".pages.yml",
+      "check": "guide creation enabled",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": ".pages.yml",
+      "check": "guide README excluded",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "docs/CMS_SETUP.md",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/site.yml",
+      "check": "file exists",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/site.yml",
+      "check": "required site settings",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/site.yml",
+      "check": "production URL matches canonical origin",
+      "passed": true,
+      "detail": "https://bestevillas.com",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas",
+      "check": "content entries present",
+      "passed": true,
+      "detail": "4 found; expected at least 4",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/prospect-three.md",
+      "check": "valid frontmatter envelope",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/prospect-three.md",
+      "check": "required content fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/prospect-three.md",
+      "check": "non-empty editor body",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/prospect-three.md",
+      "check": "SEO title and description",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/prospect-three.md",
+      "check": "external booking URL",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/prospect-three.md",
+      "check": "gallery image and alt fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/prospect-two.md",
+      "check": "valid frontmatter envelope",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/prospect-two.md",
+      "check": "required content fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/prospect-two.md",
+      "check": "non-empty editor body",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/prospect-two.md",
+      "check": "SEO title and description",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/prospect-two.md",
+      "check": "external booking URL",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/prospect-two.md",
+      "check": "gallery image and alt fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/providence.md",
+      "check": "valid frontmatter envelope",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/providence.md",
+      "check": "required content fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/providence.md",
+      "check": "non-empty editor body",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/providence.md",
+      "check": "SEO title and description",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/providence.md",
+      "check": "external booking URL",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/providence.md",
+      "check": "gallery image and alt fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/st-silas.md",
+      "check": "valid frontmatter envelope",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/st-silas.md",
+      "check": "required content fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/st-silas.md",
+      "check": "non-empty editor body",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/st-silas.md",
+      "check": "SEO title and description",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/st-silas.md",
+      "check": "external booking URL",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/villas/st-silas.md",
+      "check": "gallery image and alt fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages",
+      "check": "content entries present",
+      "passed": true,
+      "detail": "9 found; expected at least 9",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/about.md",
+      "check": "valid frontmatter envelope",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/about.md",
+      "check": "required content fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/about.md",
+      "check": "SEO title and description",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/contact.md",
+      "check": "valid frontmatter envelope",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/contact.md",
+      "check": "required content fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/contact.md",
+      "check": "SEO title and description",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/faq.md",
+      "check": "valid frontmatter envelope",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/faq.md",
+      "check": "required content fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/faq.md",
+      "check": "SEO title and description",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/guide.md",
+      "check": "valid frontmatter envelope",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/guide.md",
+      "check": "required content fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/guide.md",
+      "check": "SEO title and description",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/home.md",
+      "check": "valid frontmatter envelope",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/home.md",
+      "check": "required content fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/home.md",
+      "check": "SEO title and description",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/locations.md",
+      "check": "valid frontmatter envelope",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/locations.md",
+      "check": "required content fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/locations.md",
+      "check": "SEO title and description",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/policies.md",
+      "check": "valid frontmatter envelope",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/policies.md",
+      "check": "required content fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/policies.md",
+      "check": "SEO title and description",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/reviews.md",
+      "check": "valid frontmatter envelope",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/reviews.md",
+      "check": "required content fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/reviews.md",
+      "check": "SEO title and description",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/villas.md",
+      "check": "valid frontmatter envelope",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/villas.md",
+      "check": "required content fields",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/pages/villas.md",
+      "check": "SEO title and description",
+      "passed": true,
+      "detail": "",
+      "severity": "required"
+    },
+    {
+      "area": "cms",
+      "target": "content/guide",
+      "check": "content entries present",
+      "passed": true,
+      "detail": "0 found; expected at least 0",
+      "severity": "required"
+    }
+  ]
+}

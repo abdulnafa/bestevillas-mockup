@@ -7,40 +7,80 @@
     <meta name="robots" content="noindex, nofollow" />
     <meta
       name="description"
-      content="Best E Villas offers comfortable, family-run vacation rentals on the West and South Coasts of Barbados."
+      content="Compare four comfortable, family-run Best E Villas vacation rentals on the West and South Coasts of Barbados, then check live availability."
     />
-    <meta property="og:title" content="Best E Villas — Barbados, Beautifully Yours" />
-    <meta
-      property="og:description"
-      content="A booking-first website concept for Best E Villas in Barbados."
-    />
-    <meta property="og:image" content="assets/images/villa-interior.jpg" />
+    <link rel="canonical" href="https://bestevillas.com/" />
+    <meta property="og:title" content="Best E Villas | Barbados Vacation Rentals" />
+    <meta property="og:description" content="Compare four comfortable Barbados vacation rentals on the West and South Coasts, then check live availability with the booking partner." />
+    <meta property="og:url" content="https://bestevillas.com/" />
+    <meta property="og:image" content="https://bestevillas.com/assets/images/new/pixieset-hero-balcony.jpg" />
+    <meta property="og:image:alt" content="Private balcony overlooking tropical palms at Best E Villas in Barbados" />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="1067" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Best E Villas" />
+    <meta property="og:locale" content="en_BB" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Best E Villas | Barbados Vacation Rentals" />
+    <meta name="twitter:description" content="Compare four comfortable Barbados vacation rentals on the West and South Coasts, then check live availability." />
+    <meta name="twitter:image" content="https://bestevillas.com/assets/images/new/pixieset-hero-balcony.jpg" />
+    <meta name="twitter:image:alt" content="Private balcony overlooking tropical palms at Best E Villas in Barbados" />
     <title>Best E Villas | Barbados Vacation Rentals</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/images/new/pixieset-hero-balcony.jpg" as="image" fetchpriority="high" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="analytics.js" data-ga-measurement-id="" defer></script>
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "LodgingBusiness",
-        "name": "Best E Villas",
-        "url": "https://bestevillas.com/",
-        "email": "errolbest@bestevillas.com",
-        "telephone": "+1-246-233-2814",
-        "description": "Family-run vacation rentals on the West and South Coasts of Barbados.",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Lot 249, 2nd Avenue, Valencia Close North, St. Silas",
-          "addressLocality": "St. James",
-          "addressCountry": "BB"
-        }
+        "@graph": [
+          {
+            "@type": ["LodgingBusiness", "Organization"],
+            "@id": "https://bestevillas.com/#business",
+            "name": "Best E Villas",
+            "url": "https://bestevillas.com/",
+            "email": "errolbest@bestevillas.com",
+            "telephone": "+1-246-233-2814",
+            "description": "Family-run vacation rentals on the West and South Coasts of Barbados.",
+            "image": "https://bestevillas.com/assets/images/new/pixieset-hero-balcony.jpg",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Lot 249, 2nd Avenue, Valencia Close North, St. Silas",
+              "addressLocality": "St. James",
+              "addressCountry": "BB"
+            },
+            "areaServed": [
+              { "@type": "AdministrativeArea", "name": "West Coast, Barbados" },
+              { "@type": "AdministrativeArea", "name": "South Coast, Barbados" }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://bestevillas.com/#website",
+            "url": "https://bestevillas.com/",
+            "name": "Best E Villas",
+            "publisher": { "@id": "https://bestevillas.com/#business" },
+            "inLanguage": "en"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://bestevillas.com/#webpage",
+            "url": "https://bestevillas.com/",
+            "name": "Best E Villas | Barbados Vacation Rentals",
+            "description": "Compare four comfortable, family-run Best E Villas vacation rentals on the West and South Coasts of Barbados, then check live availability.",
+            "isPartOf": { "@id": "https://bestevillas.com/#website" },
+            "about": { "@id": "https://bestevillas.com/#business" },
+            "primaryImageOfPage": {
+              "@type": "ImageObject",
+              "url": "https://bestevillas.com/assets/images/new/pixieset-hero-balcony.jpg",
+              "width": 1600,
+              "height": 1067
+            },
+            "inLanguage": "en"
+          }
+        ]
       }
     </script>
   </head>
@@ -119,11 +159,9 @@
       </symbol>
     </svg>
 
-    <div class="concept-ribbon">Homepage concept</div>
-
     <header class="site-header" id="site-header">
       <div class="header-inner container-wide">
-        <a class="brand" href="#top" aria-label="Best E Villas home">
+        <a class="brand" href="index.html" aria-label="Best E Villas home">
           <span class="brand-mark">BE</span>
           <span class="brand-copy">
             <strong>Best E Villas</strong>
@@ -132,19 +170,15 @@
         </a>
 
         <nav class="desktop-nav" aria-label="Primary navigation">
-          <a href="#villas">Villas</a>
-          <a href="#locations">Locations</a>
-          <a href="#story">Our Story</a>
-          <a href="#guide">Barbados Guide</a>
-          <a href="#reviews">Reviews</a>
+          <a href="villas.html">Villas</a>
+          <a href="locations.html">Locations</a>
+          <a href="about.html">Our Story</a>
+          <a href="guide.html">Barbados Guide</a>
+          <a href="reviews.html">Reviews</a>
         </nav>
 
         <div class="header-actions">
-          <a class="header-phone" href="tel:+12462332814" aria-label="Call Best E Villas">
-            <svg><use href="#icon-phone"></use></svg>
-            <span>+1 246 233 2814</span>
-          </a>
-          <a class="button button-light header-cta" href="#booking">Check availability</a>
+          <a class="button button-light header-cta" href="villas.html">Check availability</a>
           <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
             <svg><use href="#icon-menu"></use></svg>
           </button>
@@ -152,54 +186,48 @@
       </div>
 
       <nav class="mobile-nav" aria-label="Mobile navigation">
-        <a href="#villas">Villas</a>
-        <a href="#locations">Locations</a>
-        <a href="#story">Our Story</a>
-        <a href="#guide">Barbados Guide</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#faq">FAQs</a>
-        <a class="button button-coral" href="#booking">Check availability</a>
+        <a href="villas.html">Villas</a>
+        <a href="locations.html">Locations</a>
+        <a href="about.html">Our Story</a>
+        <a href="guide.html">Barbados Guide</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="faq.html">FAQs</a>
+        <a class="button button-coral" href="villas.html">Check availability</a>
       </nav>
     </header>
 
     <main id="main-content">
-      <section class="hero" id="top" aria-labelledby="hero-title">
-        <div class="hero-media" aria-hidden="true"></div>
-        <div class="hero-overlay" aria-hidden="true"></div>
-
-        <div class="hero-content container">
-          <p class="eyebrow eyebrow-light">Your home in Barbados</p>
-          <h1 id="hero-title">
-            Beautiful <br class="mobile-title-break" />Barbados villas. <br /><em>Effortless island <br class="mobile-title-break" />stays.</em>
-          </h1>
-          <p class="hero-copy">
-            Comfortable, fully equipped vacation rentals <br class="mobile-copy-break" />on Barbados’ West and South Coasts,
-            <br class="mobile-copy-break" />with friendly local service from enquiry to arrival.
-          </p>
-          <div class="hero-buttons">
-            <a class="button button-coral" href="#booking">
-              Find your villa
-              <svg><use href="#icon-arrow"></use></svg>
-            </a>
-            <a class="text-link text-link-light" href="#story">Discover our story</a>
-          </div>
+      <section class="hero hero-carousel" id="top" aria-labelledby="hero-title" aria-roledescription="carousel">
+        <div class="hero-slides" aria-live="polite">
+          <figure class="hero-slide active" data-slide="0">
+            <img src="assets/images/new/pixieset-hero-balcony.jpg" alt="Private balcony looking over tropical palms at Best E Villas" width="1600" height="1067" fetchpriority="high" />
+          </figure>
+          <figure class="hero-slide" data-slide="1" aria-hidden="true">
+            <img src="assets/images/new/pixieset-open-living-dining.jpg" alt="Open-plan living and dining space at Best E Villas" width="1600" height="1068" />
+          </figure>
+          <figure class="hero-slide" data-slide="2" aria-hidden="true">
+            <img src="assets/images/new/pixieset-garden-exterior.jpg" alt="Best E Villas property beside a landscaped tropical garden" width="1600" height="1064" />
+          </figure>
         </div>
 
-        <div class="hero-note" aria-label="Best E Villas locations">
-          <span class="note-line"></span>
-          <span>West Coast</span>
-          <span class="note-dot"></span>
-          <span>South Coast</span>
+        <div class="hero-content container">
+          <h1 id="hero-title">Beautiful Barbados villas.</h1>
+          <p class="hero-copy">Comfortable stays on the West and South Coasts, with warm local service.</p>
+        </div>
+
+        <div class="carousel-controls" aria-label="Villa gallery controls">
+          <button class="carousel-button carousel-previous" type="button" aria-label="Previous image">
+            <svg><use href="#icon-arrow"></use></svg>
+          </button>
+          <span class="carousel-count" aria-live="polite"><strong>01</strong> / 03</span>
+          <button class="carousel-button carousel-next" type="button" aria-label="Next image">
+            <svg><use href="#icon-arrow"></use></svg>
+          </button>
         </div>
       </section>
 
       <section class="booking-shell" id="booking" aria-label="Search villa availability">
-        <form class="booking-bar container" id="booking-form">
-          <div class="booking-heading">
-            <span>Plan your stay</span>
-            <strong>Find your Barbados villa</strong>
-          </div>
-
+        <form class="booking-bar container" id="booking-form" action="villas.html" method="get">
           <label class="booking-field">
             <span class="field-icon"><svg><use href="#icon-map"></use></svg></span>
             <span class="field-copy">
@@ -228,27 +256,12 @@
             </span>
           </label>
 
-          <label class="booking-field">
-            <span class="field-icon"><svg><use href="#icon-users"></use></svg></span>
-            <span class="field-copy">
-              <small>Guests</small>
-              <select id="guests" name="guests" aria-label="Number of guests">
-                <option value="2">2 guests</option>
-                <option value="3">3 guests</option>
-                <option value="4">4 guests</option>
-                <option value="5">5 guests</option>
-                <option value="6">6 guests</option>
-                <option value="7">7+ guests</option>
-              </select>
-            </span>
-          </label>
-
           <button class="button button-coral search-button" type="submit">
-            <svg><use href="#icon-search"></use></svg>
-            Search villas
+            Check availability
+            <svg><use href="#icon-arrow"></use></svg>
           </button>
         </form>
-        <div class="search-feedback container" id="search-feedback" role="status" aria-live="polite"></div>
+        <p class="booking-disclaimer container">Choose a villa, then continue to our external booking partner for live rates and confirmation.</p>
       </section>
 
       <section class="trust-strip" aria-label="Reasons to book with Best E Villas">
@@ -305,10 +318,7 @@
           <div class="villa-grid" id="villa-grid">
             <article class="villa-card reveal" data-location="west" data-villa="prospect-three">
               <div class="villa-image-wrap">
-                <img src="assets/images/prospect-3-bedroom.jpg" alt="Prospect three-bedroom villa exterior in Barbados" />
-                <button class="favorite-button" type="button" aria-label="Save Prospect 3 Bedroom">
-                  <svg><use href="#icon-heart"></use></svg>
-                </button>
+                <img src="assets/images/properties/prospect-three/exterior.jpg" alt="Guests relaxing beside the shared pool at Prospect" width="1440" height="1440" />
                 <span class="villa-tag">West Coast</span>
               </div>
               <div class="villa-card-body">
@@ -321,18 +331,15 @@
                   <span><svg><use href="#icon-pool"></use></svg> Pool</span>
                 </div>
                 <div class="villa-card-footer">
-                  <button class="text-link quick-view" type="button">View villa <svg><use href="#icon-arrow"></use></svg></button>
-                  <a href="#booking">Check dates</a>
+                  <a class="text-link" href="villa.html?villa=prospect-three">View villa <svg><use href="#icon-arrow"></use></svg></a>
+                  <a href="https://direct-book.com/properties/bestevillasprospctdirect" target="_blank" rel="noopener">Check availability</a>
                 </div>
               </div>
             </article>
 
             <article class="villa-card reveal" data-location="south" data-villa="providence">
               <div class="villa-image-wrap">
-                <img src="assets/images/providence-terrace.jpg" alt="Providence Terrace villa exterior in Barbados" />
-                <button class="favorite-button" type="button" aria-label="Save Providence Terrace">
-                  <svg><use href="#icon-heart"></use></svg>
-                </button>
+                <img src="assets/images/properties/providence/exterior.jpg" alt="Providence Terrace villa exterior in Barbados" width="1024" height="683" loading="lazy" />
                 <span class="villa-tag">South Coast</span>
               </div>
               <div class="villa-card-body">
@@ -345,18 +352,15 @@
                   <span><svg><use href="#icon-pool"></use></svg> Pool</span>
                 </div>
                 <div class="villa-card-footer">
-                  <button class="text-link quick-view" type="button">View villa <svg><use href="#icon-arrow"></use></svg></button>
-                  <a href="#booking">Check dates</a>
+                  <a class="text-link" href="villa.html?villa=providence">View villa <svg><use href="#icon-arrow"></use></svg></a>
+                  <a href="https://direct-book.com/properties/bestevillaprovidencedirect" target="_blank" rel="noopener">Check availability</a>
                 </div>
               </div>
             </article>
 
             <article class="villa-card reveal" data-location="west" data-villa="prospect-two">
               <div class="villa-image-wrap">
-                <img src="assets/images/prospect-2-bedroom.jpg" alt="Prospect two-bedroom villa exterior in Barbados" />
-                <button class="favorite-button" type="button" aria-label="Save Prospect 2 Bedroom">
-                  <svg><use href="#icon-heart"></use></svg>
-                </button>
+                <img src="assets/images/properties/prospect-two/exterior.jpg" alt="Prospect two-bedroom villa exterior in Barbados" width="2560" height="1707" loading="lazy" />
                 <span class="villa-tag">West Coast</span>
               </div>
               <div class="villa-card-body">
@@ -369,18 +373,15 @@
                   <span><svg><use href="#icon-pool"></use></svg> Pool</span>
                 </div>
                 <div class="villa-card-footer">
-                  <button class="text-link quick-view" type="button">View villa <svg><use href="#icon-arrow"></use></svg></button>
-                  <a href="#booking">Check dates</a>
+                  <a class="text-link" href="villa.html?villa=prospect-two">View villa <svg><use href="#icon-arrow"></use></svg></a>
+                  <a href="https://direct-book.com/properties/bestevillasprospctdirect" target="_blank" rel="noopener">Check availability</a>
                 </div>
               </div>
             </article>
 
             <article class="villa-card reveal" data-location="west" data-villa="st-silas">
               <div class="villa-image-wrap">
-                <img src="assets/images/st-silas.jpg" alt="St. Silas three-bedroom villa exterior in Barbados" />
-                <button class="favorite-button" type="button" aria-label="Save St. Silas 3 Bedroom">
-                  <svg><use href="#icon-heart"></use></svg>
-                </button>
+                <img src="assets/images/properties/st-silas/exterior.jpg" alt="St. Silas three-bedroom villa exterior in Barbados" width="2560" height="1440" loading="lazy" />
                 <span class="villa-tag">St. James</span>
               </div>
               <div class="villa-card-body">
@@ -393,8 +394,8 @@
                   <span><svg><use href="#icon-kitchen"></use></svg> Kitchen</span>
                 </div>
                 <div class="villa-card-footer">
-                  <button class="text-link quick-view" type="button">View villa <svg><use href="#icon-arrow"></use></svg></button>
-                  <a href="#booking">Check dates</a>
+                  <a class="text-link" href="villa.html?villa=st-silas">View villa <svg><use href="#icon-arrow"></use></svg></a>
+                  <a href="https://direct-book.com/properties/bestevillasstsilasstjames" target="_blank" rel="noopener">Check availability</a>
                 </div>
               </div>
             </article>
@@ -421,9 +422,9 @@
                 <div>
                   <p>Calm water · Beach clubs · Fine dining</p>
                   <h3>Platinum West Coast</h3>
-                  <button class="location-filter" type="button" data-filter="west">
+                  <a class="location-filter" href="villas.html?location=west">
                     View West Coast villas <svg><use href="#icon-arrow"></use></svg>
-                  </button>
+                  </a>
                 </div>
               </div>
             </article>
@@ -436,9 +437,9 @@
                 <div>
                   <p>Surf · Local flavour · Island nightlife</p>
                   <h3>Vibrant South Coast</h3>
-                  <button class="location-filter" type="button" data-filter="south">
+                  <a class="location-filter" href="villas.html?location=south">
                     View South Coast villas <svg><use href="#icon-arrow"></use></svg>
-                  </button>
+                  </a>
                 </div>
               </div>
             </article>
@@ -449,9 +450,7 @@
       <section class="story-section section-pad" id="story">
         <div class="container story-grid">
           <div class="story-images reveal">
-            <img class="story-image-main" src="assets/images/villa-exterior.jpg" alt="Comfortable living area at Best E Villas" />
-            <img class="story-image-float" src="assets/images/villa-hero.jpg" alt="Ocean view from a Best E Villas balcony" />
-            <div class="story-badge"><strong>20+</strong><span>years welcoming<br />returning guests</span></div>
+            <img class="story-image-main" src="assets/images/new/pixieset-wide-living-room.jpg" alt="Bright, spacious living room at Best E Villas" width="1600" height="1068" loading="lazy" />
           </div>
 
           <div class="story-copy reveal">
@@ -468,7 +467,7 @@
             <blockquote>
               “We want every guest to feel comfortable, cared for and completely at home in Barbados.”
             </blockquote>
-            <a class="button button-dark" href="mailto:errolbest@bestevillas.com">
+            <a class="button button-dark" href="about.html">
               Meet your local hosts <svg><use href="#icon-arrow"></use></svg>
             </a>
           </div>
@@ -532,7 +531,7 @@
               <span>03</span>
               <div class="step-icon"><svg><use href="#icon-shield"></use></svg></div>
               <h3>Book direct</h3>
-              <p>Confirm securely, with a friendly local team available when you need help.</p>
+              <p>Continue to our external booking partner for live rates and confirmation.</p>
             </article>
           </div>
         </div>
@@ -551,7 +550,7 @@
             <span class="author-line"></span>
             <div><strong>Tracey</strong><small>Best E Villas guest</small></div>
           </div>
-          <a class="text-link text-link-light" href="#villas">Find your stay <svg><use href="#icon-arrow"></use></svg></a>
+          <a class="text-link text-link-light" href="villas.html">Find your stay <svg><use href="#icon-arrow"></use></svg></a>
         </div>
       </section>
 
@@ -562,7 +561,7 @@
               <p class="eyebrow">Know Barbados like a local</p>
               <h2>Ideas for your island stay</h2>
             </div>
-            <a class="text-link desktop-only" href="#guide">Explore the Barbados guide <svg><use href="#icon-arrow"></use></svg></a>
+            <a class="text-link desktop-only" href="guide.html">Explore the Barbados guide <svg><use href="#icon-arrow"></use></svg></a>
           </div>
 
           <div class="guide-grid">
@@ -572,7 +571,7 @@
                 <span>Beaches</span>
                 <h3>Beautiful Barbados beaches near your villa</h3>
                 <p>Calm coves, lively shores and local favourites worth adding to your list.</p>
-                <a href="#guide" aria-label="Read the beach guide"><svg><use href="#icon-arrow"></use></svg></a>
+                <a href="guide.html" aria-label="Read the beach guide"><svg><use href="#icon-arrow"></use></svg></a>
               </div>
             </article>
             <article class="guide-card reveal">
@@ -580,7 +579,7 @@
               <div class="guide-card-body">
                 <span>Stay guide</span>
                 <h3>West Coast or South Coast: which is right for you?</h3>
-                <a href="#guide" aria-label="Read the coast guide"><svg><use href="#icon-arrow"></use></svg></a>
+                <a href="guide.html" aria-label="Read the coast guide"><svg><use href="#icon-arrow"></use></svg></a>
               </div>
             </article>
             <article class="guide-card reveal">
@@ -588,7 +587,7 @@
               <div class="guide-card-body">
                 <span>Plan your trip</span>
                 <h3>Everything to know before your Barbados villa stay</h3>
-                <a href="#guide" aria-label="Read the planning guide"><svg><use href="#icon-arrow"></use></svg></a>
+                <a href="guide.html" aria-label="Read the planning guide"><svg><use href="#icon-arrow"></use></svg></a>
               </div>
             </article>
           </div>
@@ -601,7 +600,7 @@
             <p class="eyebrow">Good to know</p>
             <h2>Your questions,<br /><em>answered.</em></h2>
             <p>Need help choosing? Our local team will be happy to guide you.</p>
-            <a class="text-link" href="mailto:errolbest@bestevillas.com">Ask us anything <svg><use href="#icon-arrow"></use></svg></a>
+            <a class="text-link" href="contact.html">Ask us anything <svg><use href="#icon-arrow"></use></svg></a>
           </div>
 
           <div class="faq-list reveal">
@@ -662,8 +661,8 @@
           <h2>Ready for Barbados?</h2>
           <p>Find the villa that feels like home, then let our local team take care of the rest.</p>
           <div>
-            <a class="button button-coral" href="#booking">Check availability <svg><use href="#icon-arrow"></use></svg></a>
-            <a class="button button-ghost" href="mailto:errolbest@bestevillas.com">Speak with us</a>
+            <a class="button button-coral" href="villas.html">Check availability <svg><use href="#icon-arrow"></use></svg></a>
+            <a class="button button-ghost" href="contact.html">Contact us</a>
           </div>
         </div>
       </section>
@@ -672,7 +671,7 @@
     <footer class="site-footer">
       <div class="container footer-main">
         <div class="footer-brand">
-          <a class="brand brand-footer" href="#top">
+          <a class="brand brand-footer" href="index.html">
             <span class="brand-mark">BE</span>
             <span class="brand-copy"><strong>Best E Villas</strong><small>Barbados</small></span>
           </a>
@@ -681,18 +680,18 @@
 
         <div class="footer-column">
           <h3>Explore</h3>
-          <a href="#villas">Our Villas</a>
-          <a href="#locations">Locations</a>
-          <a href="#guide">Barbados Guide</a>
-          <a href="#reviews">Guest Reviews</a>
+          <a href="villas.html">Our Villas</a>
+          <a href="locations.html">Locations</a>
+          <a href="guide.html">Barbados Guide</a>
+          <a href="reviews.html">Guest Reviews</a>
         </div>
 
         <div class="footer-column">
           <h3>About</h3>
-          <a href="#story">Our Story</a>
-          <a href="#faq">FAQs</a>
-          <a href="https://bestevillas.com/" target="_blank" rel="noreferrer">Current Website</a>
-          <a href="mailto:errolbest@bestevillas.com">Contact Us</a>
+          <a href="about.html">Our Story</a>
+          <a href="faq.html">FAQs</a>
+          <a href="policies.html">Policies</a>
+          <a href="contact.html">Contact Us</a>
         </div>
 
         <div class="footer-column footer-contact">
@@ -704,31 +703,16 @@
       </div>
 
       <div class="container footer-bottom">
-        <span>© <span id="current-year"></span> Best E Villas. Website concept.</span>
+        <span>© <span id="current-year"></span> Best E Villas.</span>
         <span>Made for memorable Barbados stays.</span>
       </div>
     </footer>
 
-    <a class="mobile-booking-cta" href="#booking">
+    <a class="mobile-booking-cta" href="villas.html">
       <svg><use href="#icon-calendar"></use></svg>
       <span><small>Plan your stay</small><strong>Check availability</strong></span>
       <svg><use href="#icon-arrow"></use></svg>
     </a>
-
-    <dialog class="villa-modal" id="villa-modal" aria-labelledby="modal-title">
-      <button class="modal-close" type="button" aria-label="Close villa preview"><svg><use href="#icon-close"></use></svg></button>
-      <img id="modal-image" src="" alt="" />
-      <div class="modal-content">
-        <p class="eyebrow" id="modal-location"></p>
-        <h2 id="modal-title"></h2>
-        <p id="modal-description"></p>
-        <div class="modal-meta" id="modal-meta"></div>
-        <div class="modal-actions">
-          <a class="button button-coral" href="#booking" id="modal-book">Check availability</a>
-          <a class="text-link" href="mailto:errolbest@bestevillas.com">Ask a question <svg><use href="#icon-arrow"></use></svg></a>
-        </div>
-      </div>
-    </dialog>
 
     <script src="script.js"></script>
   </body>

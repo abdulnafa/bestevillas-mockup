@@ -2,54 +2,142 @@ const body = document.body;
 const header = document.querySelector("#site-header");
 const menuToggle = document.querySelector(".menu-toggle");
 const menuIconUse = menuToggle?.querySelector("use");
-const mobileNavLinks = document.querySelectorAll(".mobile-nav a");
-const bookingForm = document.querySelector("#booking-form");
-const locationSelect = document.querySelector("#location");
-const checkInInput = document.querySelector("#check-in");
-const checkOutInput = document.querySelector("#check-out");
-const guestSelect = document.querySelector("#guests");
-const searchFeedback = document.querySelector("#search-feedback");
-const villaCards = [...document.querySelectorAll(".villa-card")];
-const modal = document.querySelector("#villa-modal");
 
-const villaDetails = {
+const villaData = {
   "prospect-three": {
     title: "Prospect — 3 Bedroom",
-    location: "Prospect · Platinum West Coast",
-    image: "assets/images/prospect-3-bedroom.jpg",
-    alt: "Prospect three-bedroom villa exterior",
+    location: "Prospect, St. James · West Coast",
+    shortLocation: "Prospect, St. James",
+    addressLocality: "Prospect",
+    addressRegion: "St. James",
+    bedrooms: 3,
+    bathrooms: 2,
+    seoDescription:
+      "Explore the three-bedroom Best E Villas vacation rental in Prospect, St. James, with two bathrooms, shared pool access and fibre Wi-Fi.",
     description:
-      "A spacious three-bedroom, two-bathroom base near West Coast beaches, Bridgetown and the University of the West Indies. Fully equipped for relaxed family stays.",
-    meta: ["3 bedrooms", "2 bathrooms", "Pool access", "Equipped kitchen", "Wi-Fi"],
-  },
-  providence: {
-    title: "Providence Terrace — 2 Bedroom",
-    location: "Providence · South Coast",
-    image: "assets/images/providence-terrace.jpg",
-    alt: "Providence Terrace villa exterior",
-    description:
-      "A comfortable two-bedroom retreat in a quiet neighbourhood near Miami Beach, Oistins, St. Lawrence Gap and Barbados Golf Club.",
-    meta: ["2 bedrooms", "1 bathroom", "Swimming pool", "Private balcony", "Wi-Fi"],
+      "A spacious three-bedroom base near West Coast beaches, Bridgetown and the University of the West Indies, with the everyday comforts families need for an easy Barbados stay.",
+    facts: ["3 bedrooms", "2 bathrooms", "Shared pool", "Fibre Wi-Fi"],
+    images: [
+      { src: "assets/images/properties/prospect-three/exterior.jpg", alt: "Guests relaxing beside the shared pool at Prospect", width: 1440, height: 1440 },
+      { src: "assets/images/properties/prospect-three/living.jpg", alt: "Living room in the three-bedroom Prospect villa", width: 2560, height: 1707 },
+      { src: "assets/images/properties/prospect-three/bedroom.jpg", alt: "Bedroom in the three-bedroom Prospect villa", width: 2560, height: 1707 },
+    ],
+    bookingUrl: "https://direct-book.com/properties/bestevillasprospctdirect",
   },
   "prospect-two": {
     title: "Prospect — 2 Bedroom",
-    location: "Prospect · Platinum West Coast",
-    image: "assets/images/prospect-2-bedroom.jpg",
-    alt: "Prospect two-bedroom villa exterior",
+    location: "Prospect, St. James · West Coast",
+    shortLocation: "Prospect, St. James",
+    addressLocality: "Prospect",
+    addressRegion: "St. James",
+    bedrooms: 2,
+    bathrooms: 1.5,
+    seoDescription:
+      "Explore the two-bedroom Best E Villas vacation rental in Prospect, St. James, with 1.5 bathrooms, shared pool access and fibre Wi-Fi.",
     description:
-      "An easygoing two-bedroom, one-and-a-half-bathroom stay with the everyday comforts families need and a convenient West Coast location.",
-    meta: ["2 bedrooms", "1.5 bathrooms", "Pool access", "Laundry", "Wi-Fi"],
+      "A comfortable two-bedroom apartment with the space and practical amenities needed for relaxed family time on Barbados’ West Coast.",
+    facts: ["2 bedrooms", "1.5 bathrooms", "Shared pool", "Fibre Wi-Fi"],
+    images: [
+      { src: "assets/images/properties/prospect-two/exterior.jpg", alt: "Exterior of the two-bedroom Prospect villa", width: 2560, height: 1707 },
+      { src: "assets/images/properties/prospect-two/living.jpg", alt: "Living room in the two-bedroom Prospect villa", width: 2560, height: 1707 },
+      { src: "assets/images/properties/prospect-two/bedroom.jpg", alt: "Bedroom in the two-bedroom Prospect villa", width: 2560, height: 1707 },
+    ],
+    bookingUrl: "https://direct-book.com/properties/bestevillasprospctdirect",
+  },
+  providence: {
+    title: "Providence Terrace — 2 Bedroom",
+    location: "Providence, Christ Church · South Coast",
+    shortLocation: "Providence, Christ Church",
+    addressLocality: "Providence",
+    addressRegion: "Christ Church",
+    bedrooms: 2,
+    bathrooms: 1,
+    seoDescription:
+      "Explore the two-bedroom Best E Villas vacation rental in Providence, Christ Church, with one bathroom, shared pool access and Wi-Fi.",
+    description:
+      "A peaceful two-bedroom South Coast base near Miami Beach, Oistins, St. Lawrence Gap and Barbados Golf Club.",
+    facts: ["2 bedrooms", "1 bathroom", "Shared pool", "Wi-Fi"],
+    images: [
+      { src: "assets/images/properties/providence/exterior.jpg", alt: "Exterior of Providence Terrace in Christ Church", width: 1024, height: 683 },
+      { src: "assets/images/properties/providence/living.jpg", alt: "Living room at Providence Terrace", width: 1024, height: 683 },
+      { src: "assets/images/properties/providence/bedroom.jpg", alt: "Bedroom at Providence Terrace", width: 1024, height: 683 },
+    ],
+    bookingUrl: "https://direct-book.com/properties/bestevillaprovidencedirect",
   },
   "st-silas": {
     title: "St. Silas — 3 Bedroom",
-    location: "St. Silas Heights · St. James",
-    image: "assets/images/st-silas.jpg",
-    alt: "St. Silas three-bedroom villa exterior",
+    location: "St. Silas Heights, St. James · West Coast",
+    shortLocation: "St. Silas Heights, St. James",
+    addressLocality: "St. Silas Heights",
+    addressRegion: "St. James",
+    bedrooms: 3,
+    bathrooms: 2.5,
+    seoDescription:
+      "Explore the three-bedroom Best E Villas vacation rental in St. Silas Heights, St. James, with 2.5 bathrooms, pool access and Wi-Fi.",
     description:
-      "A roomy three-bedroom, two-and-a-half-bathroom vacation rental close to Apes Hill, Royal Westmoreland, Warrens and West Coast beaches.",
-    meta: ["3 bedrooms", "2.5 bathrooms", "Private balcony", "Garden", "Wi-Fi"],
+      "A roomy three-bedroom retreat close to Apes Hill, Royal Westmoreland, Warrens and the beaches of Barbados’ West Coast.",
+    facts: ["3 bedrooms", "2.5 bathrooms", "Pool access", "Wi-Fi"],
+    images: [
+      { src: "assets/images/properties/st-silas/exterior.jpg", alt: "Exterior of the three-bedroom St. Silas villa", width: 2560, height: 1440 },
+      { src: "assets/images/properties/st-silas/living.jpg", alt: "Living room in the three-bedroom St. Silas villa", width: 2560, height: 1656 },
+      { src: "assets/images/properties/st-silas/bedroom.jpg", alt: "Bedroom in the three-bedroom St. Silas villa", width: 2560, height: 1707 },
+    ],
+    bookingUrl: "https://direct-book.com/properties/bestevillasstsilasstjames",
   },
 };
+
+function setMenuState(open) {
+  if (!header || !menuToggle) return;
+  header.classList.toggle("menu-active", open);
+  body.classList.toggle("menu-open", open);
+  menuToggle.setAttribute("aria-expanded", String(open));
+  menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  menuIconUse?.setAttribute("href", open ? "#icon-close" : "#icon-menu");
+  const menuLabel = menuToggle.querySelector(".menu-toggle-label");
+  if (menuLabel) menuLabel.textContent = open ? "Close" : "Menu";
+}
+
+menuToggle?.addEventListener("click", () => {
+  setMenuState(!header?.classList.contains("menu-active"));
+});
+
+document.querySelectorAll(".mobile-nav a").forEach((link) => {
+  link.addEventListener("click", () => setMenuState(false));
+});
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") setMenuState(false);
+});
+
+function initHeroCarousel() {
+  const carousel = document.querySelector(".hero-carousel");
+  if (!carousel) return;
+
+  const slides = [...carousel.querySelectorAll(".hero-slide")];
+  const previous = carousel.querySelector(".carousel-previous");
+  const next = carousel.querySelector(".carousel-next");
+  const count = carousel.querySelector(".carousel-count strong");
+  if (!slides.length || !previous || !next || !count) return;
+
+  let activeIndex = 0;
+
+  function showSlide(nextIndex) {
+    activeIndex = (nextIndex + slides.length) % slides.length;
+    slides.forEach((slide, index) => {
+      const active = index === activeIndex;
+      slide.classList.toggle("active", active);
+      slide.setAttribute("aria-hidden", String(!active));
+    });
+    count.textContent = String(activeIndex + 1).padStart(2, "0");
+  }
+
+  previous.addEventListener("click", () => showSlide(activeIndex - 1));
+  next.addEventListener("click", () => showSlide(activeIndex + 1));
+  carousel.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") showSlide(activeIndex - 1);
+    if (event.key === "ArrowRight") showSlide(activeIndex + 1);
+  });
+}
 
 function toDateInputValue(date) {
   const year = date.getFullYear();
@@ -64,194 +152,255 @@ function addDays(dateValue, days) {
   return toDateInputValue(date);
 }
 
-function formatDate(dateValue) {
-  return new Intl.DateTimeFormat("en", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  }).format(new Date(`${dateValue}T12:00:00`));
-}
-
-function setDateLimits() {
+function initDateForms() {
   const today = toDateInputValue(new Date());
-  checkInInput.min = today;
-  checkOutInput.min = today;
 
-  checkInInput.addEventListener("change", () => {
-    if (!checkInInput.value) return;
-    const nextDay = addDays(checkInInput.value, 1);
-    checkOutInput.min = nextDay;
-    if (!checkOutInput.value || checkOutInput.value <= checkInInput.value) {
-      checkOutInput.value = nextDay;
+  document.querySelectorAll("form").forEach((form) => {
+    const checkIn = form.querySelector('input[name="check-in"], input[data-check-in]');
+    const checkOut = form.querySelector('input[name="check-out"], input[data-check-out]');
+    if (!checkIn || !checkOut) return;
+
+    checkIn.min = today;
+    checkOut.min = today;
+
+    checkIn.addEventListener("change", () => {
+      if (!checkIn.value) return;
+      const nextDay = addDays(checkIn.value, 1);
+      checkOut.min = nextDay;
+      if (!checkOut.value || checkOut.value <= checkIn.value) checkOut.value = nextDay;
+    });
+
+    form.addEventListener("submit", (event) => {
+      if (checkIn.value && checkOut.value && checkOut.value <= checkIn.value) {
+        event.preventDefault();
+        checkOut.setCustomValidity("Choose a check-out date after your check-in date.");
+        checkOut.reportValidity();
+        checkOut.focus();
+      } else {
+        checkOut.setCustomValidity("");
+      }
+    });
+  });
+}
+
+function initVillaFilters() {
+  const form = document.querySelector("#villa-filter-form");
+  const cards = [...document.querySelectorAll("[data-villa-card]")];
+  const resultCount = document.querySelector("#villa-result-count");
+  if (!form || !cards.length || !resultCount) return;
+
+  const location = form.querySelector('[name="location"]');
+  const bedrooms = form.querySelector('[name="bedrooms"]');
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.has("location")) location.value = params.get("location");
+  if (params.has("bedrooms")) bedrooms.value = params.get("bedrooms");
+
+  function applyFilters(updateUrl = true) {
+    let visible = 0;
+    cards.forEach((card) => {
+      const locationMatch = location.value === "all" || card.dataset.location === location.value;
+      const bedroomMatch = bedrooms.value === "all" || Number(card.dataset.bedrooms) >= Number(bedrooms.value);
+      const matches = locationMatch && bedroomMatch;
+      card.hidden = !matches;
+      if (matches) visible += 1;
+    });
+
+    resultCount.textContent = `${visible} villa${visible === 1 ? "" : "s"}`;
+    document.querySelector("#villa-empty")?.toggleAttribute("hidden", visible !== 0);
+
+    if (updateUrl) {
+      const nextParams = new URLSearchParams();
+      if (location.value !== "all") nextParams.set("location", location.value);
+      if (bedrooms.value !== "all") nextParams.set("bedrooms", bedrooms.value);
+      const query = nextParams.toString();
+      history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}`);
     }
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    applyFilters();
+  });
+  form.addEventListener("reset", () => window.setTimeout(() => applyFilters(), 0));
+  applyFilters(false);
+}
+
+function setText(selector, value) {
+  document.querySelectorAll(selector).forEach((element) => {
+    element.textContent = value;
   });
 }
 
-function setMenuState(open) {
-  header.classList.toggle("menu-active", open);
-  body.classList.toggle("menu-open", open);
-  menuToggle.setAttribute("aria-expanded", String(open));
-  menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-  menuIconUse.setAttribute("href", open ? "#icon-close" : "#icon-menu");
+function setMetaContent(selector, value) {
+  document.querySelector(selector)?.setAttribute("content", value);
 }
 
-menuToggle?.addEventListener("click", () => {
-  setMenuState(!header.classList.contains("menu-active"));
-});
+function initVillaTemplate() {
+  const page = document.querySelector("[data-villa-template]");
+  if (!page) return;
 
-mobileNavLinks.forEach((link) => {
-  link.addEventListener("click", () => setMenuState(false));
-});
+  const params = new URLSearchParams(window.location.search);
+  const requestedKey = params.get("villa") || page.dataset.villaTemplate || "prospect-three";
+  const key = Object.prototype.hasOwnProperty.call(villaData, requestedKey) ? requestedKey : "prospect-three";
+  const villa = villaData[key];
+  const canonicalUrl = `https://bestevillas.com/villa.html?villa=${encodeURIComponent(key)}`;
+  const primaryImageUrl = new URL(villa.images[0].src, "https://bestevillas.com/").href;
 
-window.addEventListener(
-  "scroll",
-  () => {
-    header.classList.toggle("scrolled", window.scrollY > 30);
-  },
-  { passive: true },
-);
+  setText("[data-villa-title]", villa.title);
+  setText("[data-villa-location]", villa.location);
+  setText("[data-villa-short-location]", villa.shortLocation);
+  setText("[data-villa-description]", villa.description);
+  document.title = `${villa.title} | Best E Villas`;
 
-function filterVillas(location) {
-  let count = 0;
-  villaCards.forEach((card) => {
-    const matches = location === "all" || card.dataset.location === location;
-    card.classList.toggle("filtered-out", !matches);
-    if (matches) count += 1;
+  setMetaContent('meta[name="description"]', villa.seoDescription);
+  document.querySelector('link[rel="canonical"]')?.setAttribute("href", canonicalUrl);
+  setMetaContent('meta[property="og:title"]', `${villa.title} | Best E Villas`);
+  setMetaContent('meta[property="og:description"]', villa.seoDescription);
+  setMetaContent('meta[property="og:url"]', canonicalUrl);
+  setMetaContent('meta[property="og:image"]', primaryImageUrl);
+  setMetaContent('meta[property="og:image:alt"]', villa.images[0].alt);
+  setMetaContent('meta[property="og:image:width"]', String(villa.images[0].width));
+  setMetaContent('meta[property="og:image:height"]', String(villa.images[0].height));
+  setMetaContent('meta[name="twitter:title"]', `${villa.title} | Best E Villas`);
+  setMetaContent('meta[name="twitter:description"]', villa.seoDescription);
+  setMetaContent('meta[name="twitter:image"]', primaryImageUrl);
+  setMetaContent('meta[name="twitter:image:alt"]', villa.images[0].alt);
+
+  const structuredData = document.querySelector("#villa-structured-data");
+  if (structuredData) {
+    structuredData.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "VacationRental",
+      "@id": `${canonicalUrl}#villa`,
+      url: canonicalUrl,
+      name: villa.title,
+      description: villa.description,
+      image: villa.images.map((image) => new URL(image.src, "https://bestevillas.com/").href),
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: villa.addressLocality,
+        addressRegion: villa.addressRegion,
+        addressCountry: "BB",
+      },
+      numberOfBedrooms: villa.bedrooms,
+      numberOfBathroomsTotal: villa.bathrooms,
+      amenityFeature: villa.facts.slice(2).map((fact) => ({
+        "@type": "LocationFeatureSpecification",
+        name: fact,
+        value: true,
+      })),
+      provider: { "@id": "https://bestevillas.com/#business" },
+      potentialAction: { "@type": "ReserveAction", target: villa.bookingUrl },
+    });
+  }
+
+  const mainImage = document.querySelector("#villa-main-image");
+  if (mainImage) {
+    mainImage.src = villa.images[0].src;
+    mainImage.alt = villa.images[0].alt;
+    mainImage.width = villa.images[0].width;
+    mainImage.height = villa.images[0].height;
+  }
+
+  const galleryImages = [...document.querySelectorAll("[data-gallery-image]")];
+  galleryImages.forEach((image, index) => {
+    const source = villa.images[index] || villa.images[0];
+    image.src = source.src;
+    image.alt = source.alt;
+    image.width = source.width;
+    image.height = source.height;
   });
-  return count;
+
+  const factList = document.querySelector("#villa-facts");
+  if (factList) {
+    factList.replaceChildren();
+    villa.facts.forEach((fact) => {
+      const item = document.createElement("li");
+      item.textContent = fact;
+      factList.append(item);
+    });
+  }
+
+  document.querySelectorAll("[data-booking-link]").forEach((link) => {
+    link.href = villa.bookingUrl;
+  });
+
+  const externalForm = document.querySelector("#external-booking-form");
+  if (externalForm) externalForm.action = villa.bookingUrl;
+
+  document.querySelectorAll("[data-gallery-thumb]").forEach((button) => {
+    const imageIndex = Number(button.dataset.galleryIndex || 0);
+    const source = villa.images[imageIndex] || villa.images[0];
+    const thumbnail = button.querySelector("img");
+    if (thumbnail) {
+      thumbnail.src = source.src;
+      thumbnail.alt = source.alt;
+      thumbnail.width = source.width;
+      thumbnail.height = source.height;
+    }
+    button.setAttribute("aria-pressed", String(imageIndex === 0));
+    button.addEventListener("click", () => {
+      if (!mainImage) return;
+      mainImage.src = source.src;
+      mainImage.alt = source.alt;
+      mainImage.width = source.width;
+      mainImage.height = source.height;
+      document.querySelectorAll("[data-gallery-thumb]").forEach((item) => {
+        item.classList.remove("active");
+        item.setAttribute("aria-pressed", "false");
+      });
+      button.classList.add("active");
+      button.setAttribute("aria-pressed", "true");
+    });
+  });
 }
 
-bookingForm?.addEventListener("submit", (event) => {
-  event.preventDefault();
+function initFaqs() {
+  document.querySelectorAll(".faq-item button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const item = button.closest(".faq-item");
+      if (!item) return;
+      const willOpen = !item.classList.contains("open");
+      item.parentElement.querySelectorAll(".faq-item").forEach((faq) => {
+        faq.classList.remove("open");
+        faq.querySelector("button")?.setAttribute("aria-expanded", "false");
+      });
+      if (willOpen) {
+        item.classList.add("open");
+        button.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+}
 
-  if (!bookingForm.reportValidity()) return;
-
-  if (checkOutInput.value <= checkInInput.value) {
-    searchFeedback.className = "search-feedback container error";
-    searchFeedback.textContent = "Please select a check-out date after your check-in date.";
-    checkOutInput.focus();
+function initReveals() {
+  const elements = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) {
+    elements.forEach((element) => element.classList.add("visible"));
     return;
   }
 
-  const selectedLocation = locationSelect.value;
-  const count = filterVillas(selectedLocation);
-  const locationLabel = locationSelect.options[locationSelect.selectedIndex].text;
-  const guests = guestSelect.options[guestSelect.selectedIndex].text;
-
-  searchFeedback.className = "search-feedback container";
-  searchFeedback.textContent = `${count} villa${count === 1 ? "" : "s"} matched for ${guests}, ${formatDate(
-    checkInInput.value,
-  )}–${formatDate(checkOutInput.value)}. Live rates and availability will connect to the booking engine.`;
-
-  document.querySelector("#villas").scrollIntoView({ behavior: "smooth" });
-  document.querySelector("#villas .section-heading > p").textContent =
-    selectedLocation === "all"
-      ? "Four comfortable ways to experience the island, each with its own setting and character."
-      : `Showing stays on the ${locationLabel}. Adjust your search above to explore every location.`;
-});
-
-document.querySelectorAll(".location-filter").forEach((button) => {
-  button.addEventListener("click", () => {
-    const filter = button.dataset.filter;
-    locationSelect.value = filter;
-    const count = filterVillas(filter);
-    const label = filter === "west" ? "West Coast" : "South Coast";
-    searchFeedback.className = "search-feedback container";
-    searchFeedback.textContent = `${count} ${label} villa${count === 1 ? "" : "s"} shown below.`;
-    document.querySelector("#villas").scrollIntoView({ behavior: "smooth" });
-  });
-});
-
-document.querySelectorAll(".favorite-button").forEach((button) => {
-  button.addEventListener("click", () => {
-    const isActive = button.classList.toggle("active");
-    const label = button.getAttribute("aria-label").replace(/^Save |^Remove /, "");
-    button.setAttribute("aria-label", `${isActive ? "Remove" : "Save"} ${label}`);
-    button.title = isActive ? "Saved to your villa shortlist" : "Save to shortlist";
-  });
-});
-
-function openVillaModal(key) {
-  const villa = villaDetails[key];
-  if (!villa || !modal) return;
-
-  document.querySelector("#modal-image").src = villa.image;
-  document.querySelector("#modal-image").alt = villa.alt;
-  document.querySelector("#modal-location").textContent = villa.location;
-  document.querySelector("#modal-title").textContent = villa.title;
-  document.querySelector("#modal-description").textContent = villa.description;
-  document.querySelector("#modal-meta").innerHTML = villa.meta
-    .map((item) => `<span>${item}</span>`)
-    .join("");
-
-  if (typeof modal.showModal === "function") {
-    modal.showModal();
-  } else {
-    modal.setAttribute("open", "");
-  }
-  body.classList.add("modal-open");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.08 },
+  );
+  elements.forEach((element) => observer.observe(element));
 }
 
-function closeVillaModal() {
-  if (!modal) return;
-  if (typeof modal.close === "function") modal.close();
-  else modal.removeAttribute("open");
-  body.classList.remove("modal-open");
-}
-
-document.querySelectorAll(".quick-view").forEach((button) => {
-  button.addEventListener("click", () => {
-    openVillaModal(button.closest(".villa-card").dataset.villa);
-  });
+document.querySelectorAll("#current-year, [data-current-year]").forEach((element) => {
+  element.textContent = new Date().getFullYear();
 });
 
-document.querySelector(".modal-close")?.addEventListener("click", closeVillaModal);
-document.querySelector("#modal-book")?.addEventListener("click", closeVillaModal);
-
-modal?.addEventListener("click", (event) => {
-  const rect = modal.getBoundingClientRect();
-  const clickedBackdrop =
-    event.clientX < rect.left ||
-    event.clientX > rect.right ||
-    event.clientY < rect.top ||
-    event.clientY > rect.bottom;
-  if (clickedBackdrop) closeVillaModal();
-});
-
-modal?.addEventListener("close", () => body.classList.remove("modal-open"));
-
-document.querySelectorAll(".faq-item button").forEach((button) => {
-  button.addEventListener("click", () => {
-    const item = button.closest(".faq-item");
-    const willOpen = !item.classList.contains("open");
-
-    document.querySelectorAll(".faq-item").forEach((faq) => {
-      faq.classList.remove("open");
-      faq.querySelector("button").setAttribute("aria-expanded", "false");
-    });
-
-    if (willOpen) {
-      item.classList.add("open");
-      button.setAttribute("aria-expanded", "true");
-    }
-  });
-});
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    });
-  },
-  { threshold: 0.12 },
-);
-
-document.querySelectorAll(".reveal").forEach((element, index) => {
-  element.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
-  observer.observe(element);
-});
-
-document.querySelector("#current-year").textContent = new Date().getFullYear();
-setDateLimits();
+initHeroCarousel();
+initDateForms();
+initVillaFilters();
+initVillaTemplate();
+initFaqs();
+initReveals();

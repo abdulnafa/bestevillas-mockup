@@ -1,0 +1,2857 @@
+{
+  "passed": 475,
+  "total": 475,
+  "failed": [],
+  "results": [
+    {
+      "page": "index.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "found 1"
+    },
+    {
+      "page": "index.html",
+      "check": "unique ids",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "image alt text",
+      "passed": true,
+      "detail": "0 missing"
+    },
+    {
+      "page": "index.html",
+      "check": "safe new tabs",
+      "passed": true,
+      "detail": "0 missing noopener"
+    },
+    {
+      "page": "index.html",
+      "check": "title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "meta description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "preview noindex",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "no stale booking dates",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "no template copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: assets/fonts/dm-sans-latin.woff2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: assets/images/new/pixieset-hero-balcony.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: styles.css",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: analytics.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: assets/images/new/pixieset-hero-balcony.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: assets/images/new/pixieset-open-living-dining.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: assets/images/new/pixieset-garden-exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: assets/images/properties/prospect-three/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: assets/images/properties/providence/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: assets/images/properties/prospect-two/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: assets/images/properties/st-silas/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: assets/images/new/pixieset-wide-living-room.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: script.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "found 1"
+    },
+    {
+      "page": "villas.html",
+      "check": "unique ids",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "image alt text",
+      "passed": true,
+      "detail": "0 missing"
+    },
+    {
+      "page": "villas.html",
+      "check": "safe new tabs",
+      "passed": true,
+      "detail": "0 missing noopener"
+    },
+    {
+      "page": "villas.html",
+      "check": "title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "meta description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "preview noindex",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "no stale booking dates",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "no template copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: assets/fonts/dm-sans-latin.woff2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: assets/images/new/pixieset-garden-exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: styles.css",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: analytics.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: assets/images/new/pixieset-garden-exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: assets/images/properties/prospect-three/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: assets/images/properties/providence/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: assets/images/properties/prospect-two/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: assets/images/properties/st-silas/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villa.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: script.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "found 1"
+    },
+    {
+      "page": "villa.html",
+      "check": "unique ids",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "image alt text",
+      "passed": true,
+      "detail": "0 missing"
+    },
+    {
+      "page": "villa.html",
+      "check": "safe new tabs",
+      "passed": true,
+      "detail": "0 missing noopener"
+    },
+    {
+      "page": "villa.html",
+      "check": "title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "meta description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "preview noindex",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "no stale booking dates",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "no template copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: assets/fonts/dm-sans-latin.woff2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: assets/images/properties/prospect-three/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: styles.css",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: analytics.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: assets/images/properties/prospect-three/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: assets/images/properties/prospect-three/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: assets/images/properties/prospect-three/living.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: assets/images/properties/prospect-three/bedroom.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: assets/images/new/pixieset-terrace.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: script.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "found 1"
+    },
+    {
+      "page": "locations.html",
+      "check": "unique ids",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "image alt text",
+      "passed": true,
+      "detail": "0 missing"
+    },
+    {
+      "page": "locations.html",
+      "check": "safe new tabs",
+      "passed": true,
+      "detail": "0 missing noopener"
+    },
+    {
+      "page": "locations.html",
+      "check": "title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "meta description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "preview noindex",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "no stale booking dates",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "no template copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: assets/fonts/dm-sans-latin.woff2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: assets/images/villa-hero.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: internal-pages.css",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: analytics.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: assets/images/villa-hero.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: assets/images/properties/prospect-two/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: assets/images/properties/st-silas/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: assets/images/properties/providence/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "found 1"
+    },
+    {
+      "page": "about.html",
+      "check": "unique ids",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "image alt text",
+      "passed": true,
+      "detail": "0 missing"
+    },
+    {
+      "page": "about.html",
+      "check": "safe new tabs",
+      "passed": true,
+      "detail": "0 missing noopener"
+    },
+    {
+      "page": "about.html",
+      "check": "title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "meta description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "preview noindex",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "no stale booking dates",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "no template copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: assets/fonts/dm-sans-latin.woff2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: assets/images/barbados-life.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: internal-pages.css",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: analytics.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: assets/images/barbados-life.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: assets/images/villa-interior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: assets/images/villa-exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "found 1"
+    },
+    {
+      "page": "reviews.html",
+      "check": "unique ids",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "image alt text",
+      "passed": true,
+      "detail": "0 missing"
+    },
+    {
+      "page": "reviews.html",
+      "check": "safe new tabs",
+      "passed": true,
+      "detail": "0 missing noopener"
+    },
+    {
+      "page": "reviews.html",
+      "check": "title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "meta description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "preview noindex",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "no stale booking dates",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "no template copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: assets/fonts/dm-sans-latin.woff2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: assets/images/villa-exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: internal-pages.css",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: analytics.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: assets/images/villa-exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: assets/images/barbados-life.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "found 1"
+    },
+    {
+      "page": "guide.html",
+      "check": "unique ids",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "image alt text",
+      "passed": true,
+      "detail": "0 missing"
+    },
+    {
+      "page": "guide.html",
+      "check": "safe new tabs",
+      "passed": true,
+      "detail": "0 missing noopener"
+    },
+    {
+      "page": "guide.html",
+      "check": "title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "meta description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "preview noindex",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "no stale booking dates",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "no template copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: assets/fonts/dm-sans-latin.woff2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: assets/images/villa-hero.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: internal-pages.css",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: analytics.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: assets/images/villa-hero.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: assets/images/properties/prospect-two/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: assets/images/properties/st-silas/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: assets/images/properties/providence/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: assets/images/villa-interior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: assets/images/properties/providence/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "found 1"
+    },
+    {
+      "page": "faq.html",
+      "check": "unique ids",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "image alt text",
+      "passed": true,
+      "detail": "0 missing"
+    },
+    {
+      "page": "faq.html",
+      "check": "safe new tabs",
+      "passed": true,
+      "detail": "0 missing noopener"
+    },
+    {
+      "page": "faq.html",
+      "check": "title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "meta description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "preview noindex",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "no stale booking dates",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "no template copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: assets/fonts/dm-sans-latin.woff2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: assets/images/villa-pool.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: internal-pages.css",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: analytics.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: assets/images/villa-pool.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "found 1"
+    },
+    {
+      "page": "policies.html",
+      "check": "unique ids",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "image alt text",
+      "passed": true,
+      "detail": "0 missing"
+    },
+    {
+      "page": "policies.html",
+      "check": "safe new tabs",
+      "passed": true,
+      "detail": "0 missing noopener"
+    },
+    {
+      "page": "policies.html",
+      "check": "title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "meta description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "preview noindex",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "no stale booking dates",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "no template copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: assets/fonts/dm-sans-latin.woff2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: assets/images/villa-interior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: internal-pages.css",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: analytics.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: assets/images/villa-interior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "one h1",
+      "passed": true,
+      "detail": "found 1"
+    },
+    {
+      "page": "contact.html",
+      "check": "unique ids",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "image alt text",
+      "passed": true,
+      "detail": "0 missing"
+    },
+    {
+      "page": "contact.html",
+      "check": "safe new tabs",
+      "passed": true,
+      "detail": "0 missing noopener"
+    },
+    {
+      "page": "contact.html",
+      "check": "title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "meta description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "preview noindex",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "no stale booking dates",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "no template copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: assets/fonts/dm-sans-latin.woff2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: assets/images/villa-exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: internal-pages.css",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: analytics.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: assets/images/villa-exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: assets/images/properties/st-silas/exterior.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: assets/images/villa-hero.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: villas.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: locations.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: guide.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: reviews.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: about.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: faq.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: policies.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

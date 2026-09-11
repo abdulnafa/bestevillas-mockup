@@ -1,0 +1,18 @@
+site_name: Best E Villas
+brand_location: Barbados
+tagline: Comfortable vacation rentals on the West and South Coasts, with warm local service.
+production_url: https://bestevillas.com
+contact:
+  email: errolbest@bestevillas.com
+  phone_display: "+1 246 233 2814"
+  phone_link: "tel:+12462332814"
+address:
+  street: Lot 249, 2nd Avenue, Valencia Close North, St. Silas
+  locality: St. James
+  country_code: BB
+footer_summary: Cosy, comfortable and convenient vacation rentals on the West and South Coasts of Barbados.
+primary_markets:
+  - USA
+  - Canada
+  - UK
+social_links: []

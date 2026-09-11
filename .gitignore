@@ -6,3 +6,5 @@ node_modules/
 dist/
 *.log
 .codex-*.png
+.codex-chrome-profile*/
+.codex-qa-*/

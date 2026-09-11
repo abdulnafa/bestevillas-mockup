@@ -1,0 +1,1195 @@
+{
+  "passed": 198,
+  "total": 198,
+  "failed": [],
+  "results": [
+    {
+      "page": "index.html",
+      "check": "preview noindex retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/"
+    },
+    {
+      "page": "index.html",
+      "check": "og:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "og:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "og:url",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "og:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "og:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "og:type",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "og:site_name",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "og:locale",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "twitter:card",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "twitter:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "twitter:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "twitter:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "twitter:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "absolute social URL",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "analytics ready but inactive",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "JSON-LD present",
+      "passed": true,
+      "detail": "1 blocks"
+    },
+    {
+      "page": "index.html",
+      "check": "JSON-LD 1 parses",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "preview noindex retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/villas.html"
+    },
+    {
+      "page": "villas.html",
+      "check": "og:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "og:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "og:url",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "og:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "og:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "og:type",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "og:site_name",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "og:locale",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "twitter:card",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "twitter:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "twitter:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "twitter:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "twitter:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "absolute social URL",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "analytics ready but inactive",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "JSON-LD present",
+      "passed": true,
+      "detail": "1 blocks"
+    },
+    {
+      "page": "villas.html",
+      "check": "JSON-LD 1 parses",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "preview noindex retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/villa.html?villa=prospect-three"
+    },
+    {
+      "page": "villa.html",
+      "check": "og:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "og:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "og:url",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "og:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "og:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "og:type",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "og:site_name",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "og:locale",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "twitter:card",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "twitter:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "twitter:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "twitter:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "twitter:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "absolute social URL",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "analytics ready but inactive",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "JSON-LD present",
+      "passed": true,
+      "detail": "1 blocks"
+    },
+    {
+      "page": "villa.html",
+      "check": "JSON-LD 1 parses",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "preview noindex retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/locations.html"
+    },
+    {
+      "page": "locations.html",
+      "check": "og:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "og:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "og:url",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "og:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "og:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "og:type",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "og:site_name",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "og:locale",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "twitter:card",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "twitter:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "twitter:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "twitter:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "twitter:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "absolute social URL",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "analytics ready but inactive",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "JSON-LD present",
+      "passed": true,
+      "detail": "1 blocks"
+    },
+    {
+      "page": "locations.html",
+      "check": "JSON-LD 1 parses",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "preview noindex retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/about.html"
+    },
+    {
+      "page": "about.html",
+      "check": "og:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "og:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "og:url",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "og:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "og:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "og:type",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "og:site_name",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "og:locale",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "twitter:card",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "twitter:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "twitter:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "twitter:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "twitter:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "absolute social URL",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "analytics ready but inactive",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "JSON-LD present",
+      "passed": true,
+      "detail": "1 blocks"
+    },
+    {
+      "page": "about.html",
+      "check": "JSON-LD 1 parses",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "preview noindex retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/reviews.html"
+    },
+    {
+      "page": "reviews.html",
+      "check": "og:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "og:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "og:url",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "og:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "og:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "og:type",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "og:site_name",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "og:locale",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "twitter:card",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "twitter:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "twitter:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "twitter:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "twitter:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "absolute social URL",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "analytics ready but inactive",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "JSON-LD present",
+      "passed": true,
+      "detail": "1 blocks"
+    },
+    {
+      "page": "reviews.html",
+      "check": "JSON-LD 1 parses",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "preview noindex retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/guide.html"
+    },
+    {
+      "page": "guide.html",
+      "check": "og:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "og:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "og:url",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "og:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "og:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "og:type",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "og:site_name",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "og:locale",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "twitter:card",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "twitter:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "twitter:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "twitter:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "twitter:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "absolute social URL",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "analytics ready but inactive",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "JSON-LD present",
+      "passed": true,
+      "detail": "1 blocks"
+    },
+    {
+      "page": "guide.html",
+      "check": "JSON-LD 1 parses",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "preview noindex retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/faq.html"
+    },
+    {
+      "page": "faq.html",
+      "check": "og:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "og:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "og:url",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "og:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "og:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "og:type",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "og:site_name",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "og:locale",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "twitter:card",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "twitter:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "twitter:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "twitter:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "twitter:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "absolute social URL",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "analytics ready but inactive",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "JSON-LD present",
+      "passed": true,
+      "detail": "1 blocks"
+    },
+    {
+      "page": "faq.html",
+      "check": "JSON-LD 1 parses",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "preview noindex retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/policies.html"
+    },
+    {
+      "page": "policies.html",
+      "check": "og:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "og:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "og:url",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "og:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "og:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "og:type",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "og:site_name",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "og:locale",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "twitter:card",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "twitter:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "twitter:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "twitter:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "twitter:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "absolute social URL",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "analytics ready but inactive",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "JSON-LD present",
+      "passed": true,
+      "detail": "1 blocks"
+    },
+    {
+      "page": "policies.html",
+      "check": "JSON-LD 1 parses",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "preview noindex retained",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "canonical",
+      "passed": true,
+      "detail": "https://bestevillas.com/contact.html"
+    },
+    {
+      "page": "contact.html",
+      "check": "og:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "og:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "og:url",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "og:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "og:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "og:type",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "og:site_name",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "og:locale",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "twitter:card",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "twitter:title",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "twitter:description",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "twitter:image",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "twitter:image:alt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "absolute social URL",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "analytics ready but inactive",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "JSON-LD present",
+      "passed": true,
+      "detail": "1 blocks"
+    },
+    {
+      "page": "contact.html",
+      "check": "JSON-LD 1 parses",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "sitemap.xml",
+      "check": "13 production URLs",
+      "passed": true,
+      "detail": "13"
+    },
+    {
+      "page": "sitemap.xml",
+      "check": "single canonical origin",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "sitemap.xml",
+      "check": "four villa URLs",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "robots.txt",
+      "check": "production crawl allowed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "robots.txt",
+      "check": "production sitemap declared",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "analytics.js",
+      "check": "valid GA4 guard",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "analytics.js",
+      "check": "consent defaults denied",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "analytics.js",
+      "check": "booking event hook",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

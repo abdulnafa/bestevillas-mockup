@@ -1,0 +1,6 @@
+# Production crawler policy. The GitHub Pages preview remains protected by
+# page-level noindex metadata until launch.
+User-agent: *
+Allow: /
+
+Sitemap: https://bestevillas.com/sitemap.xml
