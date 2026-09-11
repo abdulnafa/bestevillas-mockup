@@ -6,9 +6,11 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "build:production": "node scripts/build.mjs --mode production --base-path /",
-    "test:cms": "node testing/cms-build-audit.mjs"
+    "test:cms": "node testing/cms-build-audit.mjs",
+    "test:ui": "node testing/ui-regression-audit.mjs"
   },
   "devDependencies": {
+    "sharp": "0.35.4",
     "yaml": "2.9.0"
   }
 }

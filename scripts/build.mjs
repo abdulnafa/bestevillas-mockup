@@ -1,6 +1,8 @@
-import { access, cp, mkdir, mkdtemp, readFile, readdir, rename, rm, writeFile } from "node:fs/promises";
+import { access, cp, mkdir, mkdtemp, readFile, readdir, rename, rm, stat, writeFile } from "node:fs/promises";
+import { existsSync, readFileSync } from "node:fs";
 import { basename, dirname, extname, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import sharp from "sharp";
 import { parseDocument } from "yaml";
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -17,6 +19,7 @@ const pageOutputs = {
   contact: "contact.html",
 };
 const sharedFiles = ["styles.css", "internal-pages.css", "script.js", "analytics.js"];
+const imageMetadataCache = new Map();
 
 function parseArguments(argv) {
   const options = {
@@ -82,6 +85,134 @@ function safeImageAlt(value) {
     .replace(/[<>"']/g, "")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function imageVariantPath(imagePath, width) {
+  const extension = extname(imagePath);
+  return `${imagePath.slice(0, -extension.length)}-${width}${extension}`;
+}
+
+export function readWebpDimensions(buffer) {
+  if (buffer.length < 30 || buffer.toString("ascii", 0, 4) !== "RIFF" || buffer.toString("ascii", 8, 12) !== "WEBP") return undefined;
+  let offset = 12;
+  while (offset + 8 <= buffer.length) {
+    const type = buffer.toString("ascii", offset, offset + 4);
+    const length = buffer.readUInt32LE(offset + 4);
+    const dataOffset = offset + 8;
+    if (dataOffset + length > buffer.length) break;
+    if (type === "VP8X" && length >= 10) {
+      return { width: buffer.readUIntLE(dataOffset + 4, 3) + 1, height: buffer.readUIntLE(dataOffset + 7, 3) + 1 };
+    }
+    if (type === "VP8L" && length >= 5 && buffer[dataOffset] === 0x2f) {
+      const bits = buffer.readUInt32LE(dataOffset + 1);
+      return { width: (bits & 0x3fff) + 1, height: ((bits >>> 14) & 0x3fff) + 1 };
+    }
+    if (type === "VP8 " && length >= 10 && buffer[dataOffset + 3] === 0x9d && buffer[dataOffset + 4] === 0x01 && buffer[dataOffset + 5] === 0x2a) {
+      return { width: buffer.readUInt16LE(dataOffset + 6) & 0x3fff, height: buffer.readUInt16LE(dataOffset + 8) & 0x3fff };
+    }
+    offset = dataOffset + length + (length % 2);
+  }
+  return undefined;
+}
+
+export function readAvifDimensions(buffer) {
+  if (buffer.length < 24 || buffer.toString("ascii", 4, 8) !== "ftyp") return undefined;
+  let offset = 0;
+  let largest;
+  while ((offset = buffer.indexOf("ispe", offset, "ascii")) >= 0) {
+    if (offset + 16 <= buffer.length) {
+      const width = buffer.readUInt32BE(offset + 8);
+      const height = buffer.readUInt32BE(offset + 12);
+      if (width > 0 && height > 0 && width <= 100000 && height <= 100000 && (!largest || width * height > largest.width * largest.height)) {
+        largest = { width, height };
+      }
+    }
+    offset += 4;
+  }
+  return largest;
+}
+
+function readImageDimensions(imagePath, imageRoot = projectRoot) {
+  const normalized = String(imagePath).replace(/^\/+/, "");
+  const absolute = resolve(imageRoot, normalized);
+  if (imageMetadataCache.has(absolute)) return imageMetadataCache.get(absolute);
+  const buffer = readFileSync(absolute);
+  let dimensions;
+
+  if (buffer.length >= 24 && buffer.toString("ascii", 1, 4) === "PNG") {
+    dimensions = { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+  } else if (buffer.length >= 4 && buffer[0] === 0xff && buffer[1] === 0xd8) {
+    const startOfFrameMarkers = new Set([0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf]);
+    let offset = 2;
+    while (offset + 8 < buffer.length) {
+      if (buffer[offset] !== 0xff) {
+        offset += 1;
+        continue;
+      }
+      const marker = buffer[offset + 1];
+      offset += 2;
+      if (marker === 0xd8 || marker === 0xd9 || marker === 0x01 || (marker >= 0xd0 && marker <= 0xd7)) continue;
+      if (offset + 2 > buffer.length) break;
+      const segmentLength = buffer.readUInt16BE(offset);
+      if (segmentLength < 2 || offset + segmentLength > buffer.length) break;
+      if (startOfFrameMarkers.has(marker)) {
+        dimensions = { width: buffer.readUInt16BE(offset + 5), height: buffer.readUInt16BE(offset + 3) };
+        break;
+      }
+      offset += segmentLength;
+    }
+  } else if (buffer.toString("ascii", 0, 4) === "RIFF" && buffer.toString("ascii", 8, 12) === "WEBP") {
+    dimensions = readWebpDimensions(buffer);
+  } else if (extname(normalized).toLowerCase() === ".avif") {
+    dimensions = readAvifDimensions(buffer);
+  }
+
+  if (!dimensions?.width || !dimensions?.height) throw new Error(`Could not read image dimensions: ${imagePath}.`);
+  imageMetadataCache.set(absolute, dimensions);
+  return dimensions;
+}
+
+function imageSourceData(imagePath, basePath, imageRoot = projectRoot) {
+  const dimensions = readImageDimensions(imagePath, imageRoot);
+  const candidates = [480, 960]
+    .map((width) => imageVariantPath(imagePath, width))
+    .filter((candidate) => existsSync(resolve(imageRoot, candidate.replace(/^\/+/, ""))))
+    .map((candidate) => ({ path: candidate, ...readImageDimensions(candidate, imageRoot) }));
+  candidates.push({ path: imagePath, ...dimensions });
+  candidates.sort((left, right) => left.width - right.width);
+  return {
+    src: publicUrl(imagePath, basePath),
+    width: dimensions.width,
+    height: dimensions.height,
+    srcset: candidates.map((candidate) => `${publicUrl(candidate.path, basePath)} ${candidate.width}w`).join(", "),
+    smallest: candidates[0],
+  };
+}
+
+function imageAttributes(imagePath, basePath, { sizes = "100vw", loading = "", fetchPriority = "", placeholder = false } = {}, imageRoot = projectRoot) {
+  const source = imageSourceData(imagePath, basePath, imageRoot);
+  const src = placeholder ? publicUrl(source.smallest.path, basePath) : source.src;
+  const attributes = [
+    `src="${escapeAttribute(src)}"`,
+    `width="${source.width}"`,
+    `height="${source.height}"`,
+    `decoding="async"`,
+  ];
+  if (placeholder) {
+    attributes.push(`data-responsive-src="${escapeAttribute(source.src)}"`);
+    attributes.push(`data-responsive-srcset="${escapeAttribute(source.srcset)}"`);
+  } else {
+    attributes.push(`srcset="${escapeAttribute(source.srcset)}"`);
+  }
+  attributes.push(`sizes="${escapeAttribute(sizes)}"`);
+  if (loading) attributes.push(`loading="${loading}"`);
+  if (fetchPriority) attributes.push(`fetchpriority="${fetchPriority}"`);
+  return attributes.join(" ");
+}
+
+function imagePreload(imagePath, basePath, sizes, imageRoot = projectRoot) {
+  const source = imageSourceData(imagePath, basePath, imageRoot);
+  return `<link rel="preload" href="${escapeAttribute(source.src)}" as="image" imagesrcset="${escapeAttribute(source.srcset)}" imagesizes="${escapeAttribute(sizes)}" fetchpriority="high" />`;
 }
 
 function safeJson(value) {
@@ -247,7 +378,7 @@ function validateSeo(record, expectedPath, label, canonicalPaths) {
   canonicalPaths.set(key, label);
 }
 
-async function validateImageFiles(models) {
+function collectImageReferences(models) {
   const references = [];
   const add = (value, label) => value && references.push([value, label]);
   for (const page of models.pages) {
@@ -260,10 +391,66 @@ async function validateImageFiles(models) {
     for (const item of villa.data.gallery || []) add(item.image, `${villa.source}.gallery.image`);
   }
   for (const post of models.guidePosts) add(post.data.hero_image, `${post.source}.hero_image`);
+  return references;
+}
+
+async function validateImageFiles(models) {
+  const references = collectImageReferences(models);
   for (const [image, label] of references) {
     const absolute = resolve(projectRoot, image.replace(/^\/+/, ""));
     const assetRoot = resolve(projectRoot, "assets", "images");
     if (!absolute.startsWith(`${assetRoot}${sep}`) || !(await exists(absolute))) throw new Error(`Missing image file for ${label}: ${image}.`);
+  }
+}
+
+function uniqueImagePaths(models) {
+  return [...new Set(collectImageReferences(models).map(([image]) => String(image).replace(/^\/+/, "")))];
+}
+
+async function prepareResponsiveImageVariants(imagePaths, outputRoot) {
+  const encode = (pipeline, extension, quality) => {
+    if ([".jpg", ".jpeg"].includes(extension)) return pipeline.jpeg({ quality, progressive: true, chromaSubsampling: "4:2:0", mozjpeg: true });
+    if (extension === ".png") return pipeline.png({ compressionLevel: 9, adaptiveFiltering: true, palette: true, quality: Math.min(quality + 8, 100) });
+    if (extension === ".webp") return pipeline.webp({ quality, effort: 4 });
+    if (extension === ".avif") return pipeline.avif({ quality: Math.max(quality - 20, 40), effort: 4 });
+    throw new Error(`Unsupported CMS image format for responsive output: ${extension}.`);
+  };
+
+  for (const imagePath of imagePaths) {
+    const input = resolve(projectRoot, imagePath);
+    const stagedBase = resolve(outputRoot, imagePath);
+    const extension = extname(imagePath).toLowerCase();
+    const metadata = await sharp(input, { failOn: "warning" }).metadata();
+    const oriented = metadata.autoOrient || metadata;
+    if (!oriented.width || !oriented.height) throw new Error(`Could not read image dimensions: ${imagePath}.`);
+    if (oriented.width < 1000) throw new Error(`Image must be at least 1000px wide for responsive output: ${imagePath}.`);
+    const inputBytes = (await stat(input)).size;
+    const hasMetadata = Boolean(metadata.orientation || metadata.exif || metadata.xmp || metadata.iptc);
+    if (oriented.width > 1600 || inputBytes > 550 * 1024 || hasMetadata) {
+      const basePipeline = sharp(input, { failOn: "warning" }).rotate().resize({ width: 1600, fit: "inside", withoutEnlargement: true });
+      const optimizedBase = await encode(basePipeline, extension, 76).toBuffer();
+      const mustReplace = hasMetadata || inputBytes > 550 * 1024 || optimizedBase.length < inputBytes;
+      if (mustReplace) {
+        await rm(stagedBase, { force: true });
+        await mkdir(dirname(stagedBase), { recursive: true });
+        await writeFile(stagedBase, optimizedBase);
+      }
+    }
+    const stagedBaseBytes = (await stat(stagedBase)).size;
+    if (stagedBaseBytes > 550 * 1024) throw new Error(`Optimized image exceeds the 550 KiB base-image budget: ${imagePath}.`);
+
+    for (const targetWidth of [480, 960]) {
+      const variantPath = imageVariantPath(imagePath, targetWidth);
+      const destination = resolve(outputRoot, variantPath);
+      if (!destination.startsWith(`${outputRoot}${sep}`)) throw new Error(`Unsafe image output path: ${variantPath}.`);
+      await mkdir(dirname(destination), { recursive: true });
+      await rm(destination, { force: true });
+      const pipeline = sharp(input, { failOn: "warning" }).rotate().resize({ width: targetWidth, withoutEnlargement: true });
+      await encode(pipeline, extension, 72).toFile(destination);
+      const variantBytes = (await stat(destination)).size;
+      const variantBudget = targetWidth === 480 ? 80 * 1024 : 180 * 1024;
+      if (variantBytes > variantBudget) throw new Error(`Responsive ${targetWidth}px image exceeds its ${variantBudget / 1024} KiB budget: ${variantPath}.`);
+    }
   }
 }
 
@@ -476,7 +663,7 @@ function schemaForRoute({ kind, record, canonical, site }) {
   };
 }
 
-function renderHead({ kind, record, outputPath, mode, basePath, site, canonicalOverride, noindexOverride }) {
+function renderHead({ kind, record, outputPath, mode, basePath, imageRoot = projectRoot, site, canonicalOverride, noindexOverride }) {
   const data = record.data;
   const canonical = canonicalOverride || recordCanonical(record, outputPath, kind);
   const title = data.seo?.meta_title || data.title;
@@ -486,6 +673,11 @@ function renderHead({ kind, record, outputPath, mode, basePath, site, canonicalO
   const noindex = noindexOverride ?? (mode === "preview" || Boolean(data.seo?.noindex));
   const schema = schemaForRoute({ kind, record, canonical, site });
   const stylesheet = kind === "guide" || (kind === "page" && !["index.html", "villas.html"].includes(outputPath)) ? "internal-pages.css" : "styles.css";
+  const heroSizes = kind === "villa"
+    ? "(max-width: 980px) calc(100vw - 36px), (max-width: 1320px) 70vw, 920px"
+    : stylesheet === "internal-pages.css"
+      ? "(max-width: 860px) calc(100vw - 48px), 50vw"
+      : "100vw";
   return `  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -507,10 +699,10 @@ function renderHead({ kind, record, outputPath, mode, basePath, site, canonicalO
     <meta name="twitter:image" content="${escapeAttribute(canonicalUrl(image))}" />
     <meta name="twitter:image:alt" content="${escapeAttribute(imageAlt)}" />
     <title>${escapeHtml(title)}</title>
+    <link rel="icon" href="${publicUrl("assets/favicon.svg", basePath)}" type="image/svg+xml" />
     <link rel="preload" href="${publicUrl("assets/fonts/dm-sans-latin.woff2", basePath)}" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="${publicUrl(image, basePath)}" as="image" fetchpriority="high" />
+    ${imagePreload(image, basePath, heroSizes, imageRoot)}
     <link rel="stylesheet" href="${publicUrl(stylesheet, basePath)}" />
-    <script src="${publicUrl("site-content.js", basePath)}" defer></script>
     <script src="${publicUrl("analytics.js", basePath)}" data-ga-measurement-id="" defer></script>
     <script type="application/ld+json">${safeJson(schema)}</script>
   </head>`;
@@ -601,14 +793,14 @@ function insertBeforeLastCtaOrMain(html, content) {
   return html.replace(main, renderedMain);
 }
 
-function renderVillaCards(villas, basePath) {
+function renderVillaCards(villas, basePath, imageRoot = projectRoot) {
   return villas
     .map((record) => {
       const villa = record.data;
       const coast = String(villa.location?.coast || "").toLowerCase().includes("south") ? "south" : "west";
       const detail = publicUrl(`villas/${villa.slug}.html`, basePath);
       return `<article class="villa-result" data-villa-card data-location="${coast}" data-bedrooms="${escapeAttribute(villa.bedrooms)}">
-              <a class="villa-result-image" href="${detail}"><img src="${publicUrl(villa.hero_image, basePath)}" alt="${escapeAttribute(villa.hero_image_alt)}" width="1600" height="1067" loading="lazy" /></a>
+              <a class="villa-result-image" href="${detail}"><img ${imageAttributes(villa.hero_image, basePath, { sizes: "(max-width: 760px) calc(100vw - 36px), (max-width: 1180px) 42vw, 280px", loading: "lazy", fetchPriority: "low" }, imageRoot)} alt="${escapeAttribute(villa.hero_image_alt)}" /></a>
               <div class="villa-result-body">
                 <p class="villa-result-location">${escapeHtml(villa.location?.neighbourhood)}, ${escapeHtml(villa.location?.parish)}</p>
                 <h3><a href="${detail}">${escapeHtml(villa.title)}</a></h3>
@@ -621,8 +813,8 @@ function renderVillaCards(villas, basePath) {
     .join("\n");
 }
 
-function replaceVillaCards(html, villas, basePath) {
-  const cards = renderVillaCards(villas, basePath);
+function replaceVillaCards(html, villas, basePath, imageRoot = projectRoot) {
+  const cards = renderVillaCards(villas, basePath, imageRoot);
   const gridPattern = /(<div class="villa-results-grid">)[\s\S]*?(\r?\n\s*<\/div>\r?\n\s*<div class="empty-state")/i;
   if (!gridPattern.test(html)) return insertBeforeClosingMain(html, `<section class="section"><div class="container villa-results-grid">${cards}</div></section>`);
   let output = html.replace(gridPattern, `$1\n${cards}$2`);
@@ -630,21 +822,21 @@ function replaceVillaCards(html, villas, basePath) {
   return output;
 }
 
-function replaceHomeGallery(html, page, basePath) {
+function replaceHomeGallery(html, page, basePath, imageRoot = projectRoot) {
   const gallery = page.data.hero_gallery || [];
   if (!gallery.length) return html;
   const slides = gallery
-    .map((item, index) => `<figure class="hero-slide${index === 0 ? " active" : ""}" data-slide="${index}"${index === 0 ? "" : ' aria-hidden="true"'}><img src="${publicUrl(item.image, basePath)}" alt="${escapeAttribute(item.alt)}" width="1600" height="1067"${index === 0 ? ' fetchpriority="high"' : ""} /></figure>`)
+    .map((item, index) => `<figure class="hero-slide${index === 0 ? " active" : ""}" data-slide="${index}"${index === 0 ? "" : ' aria-hidden="true"'}><img ${imageAttributes(item.image, basePath, { sizes: "100vw", loading: index === 0 ? "eager" : "lazy", fetchPriority: index === 0 ? "high" : "low", placeholder: index > 0 }, imageRoot)} alt="${escapeAttribute(item.alt)}" /></figure>`)
     .join("\n          ");
   let output = html.replace(/<div class="hero-slides"[^>]*>[\s\S]*?<\/div>/i, `<div class="hero-slides" aria-live="polite">\n          ${slides}\n        </div>`);
   output = output.replace(/<span class="carousel-count"[^>]*>[\s\S]*?<\/span>/i, `<span class="carousel-count" aria-live="polite"><strong>01</strong> / ${String(gallery.length).padStart(2, "0")}</span>`);
   return output;
 }
 
-function renderGuideCards(posts, basePath) {
+function renderGuideCards(posts, basePath, imageRoot = projectRoot) {
   if (!posts.length) return "";
   return `<section class="section cms-guide-list" aria-labelledby="guide-posts-title"><div class="container"><div class="section-heading"><div><p class="section-label">Latest stories</p><h2 id="guide-posts-title">From the Barbados Guide</h2></div></div><div class="guide-grid card-grid">${posts
-    .map((post) => `<article class="guide-card editorial-card"><a href="${publicUrl(`guide/${post.data.slug}.html`, basePath)}"><div class="guide-image"><img src="${publicUrl(post.data.hero_image, basePath)}" alt="${escapeAttribute(safeImageAlt(post.data.hero_image_alt))}" width="1600" height="1067" loading="lazy" /><span class="cms-image-description">${escapeHtml(post.data.hero_image_alt)}</span></div><div class="guide-card-body card-copy"><h3>${escapeHtml(post.data.title)}</h3><p>${escapeHtml(post.data.excerpt)}</p></div></a></article>`)
+    .map((post) => `<article class="guide-card editorial-card"><a href="${publicUrl(`guide/${post.data.slug}.html`, basePath)}"><div class="guide-image"><img ${imageAttributes(post.data.hero_image, basePath, { sizes: "(max-width: 760px) calc(100vw - 36px), (max-width: 1180px) 33vw, 370px", loading: "lazy", fetchPriority: "low" }, imageRoot)} alt="${escapeAttribute(safeImageAlt(post.data.hero_image_alt))}" /><span class="cms-image-description">${escapeHtml(post.data.hero_image_alt)}</span></div><div class="guide-card-body card-copy"><h3>${escapeHtml(post.data.title)}</h3><p>${escapeHtml(post.data.excerpt)}</p></div></a></article>`)
     .join("")}</div></div></section>`;
 }
 
@@ -713,7 +905,7 @@ function navMarkup(models, basePath, current = "", availabilityHref = "/villas.h
   ];
   const links = items.map(([label, url, slug]) => `<a href="${publicUrl(url, basePath)}"${current === slug ? ' aria-current="page"' : ""}>${label}</a>`).join("");
   const availabilityUrl = localReference(availabilityHref, basePath);
-  return `<header class="site-header solid-header" id="site-header"><div class="header-inner container-wide"><a class="brand" href="${publicUrl("index.html", basePath)}" aria-label="${escapeAttribute(site.site_name)} home"><span class="brand-mark">BE</span><span class="brand-copy"><strong>${escapeHtml(site.site_name)}</strong><small>${escapeHtml(site.brand_location)}</small></span></a><nav class="desktop-nav" aria-label="Primary navigation">${links}</nav><div class="header-actions"><a class="button button-light header-cta" href="${escapeAttribute(availabilityUrl)}">Check availability</a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button></div></div><nav class="mobile-nav" aria-label="Mobile navigation">${links}<a href="${publicUrl("faq.html", basePath)}">${escapeHtml(pageLabel(models, "faq", "FAQs"))}</a><a class="button button-coral" href="${escapeAttribute(availabilityUrl)}">Check availability</a></nav></header>`;
+  return `<header class="site-header solid-header" id="site-header"><div class="header-inner container-wide"><a class="brand" href="${publicUrl("index.html", basePath)}" aria-label="${escapeAttribute(site.site_name)} home"><span class="brand-mark">BE</span><span class="brand-copy"><strong>${escapeHtml(site.site_name)}</strong><small>${escapeHtml(site.brand_location)}</small></span></a><nav class="desktop-nav" aria-label="Primary navigation">${links}</nav><div class="header-actions"><a class="button button-light header-cta" href="${escapeAttribute(availabilityUrl)}">Check availability</a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-navigation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button></div></div><nav class="mobile-nav" id="mobile-navigation" aria-label="Mobile navigation" aria-hidden="true">${links}<a href="${publicUrl("faq.html", basePath)}">${escapeHtml(pageLabel(models, "faq", "FAQs"))}</a><a class="button button-coral" href="${escapeAttribute(availabilityUrl)}">Check availability</a></nav></header>`;
 }
 
 function footerMarkup(models, basePath) {
@@ -722,7 +914,7 @@ function footerMarkup(models, basePath) {
   return `<footer class="site-footer"><div class="container footer-main"><div class="footer-brand"><a class="brand brand-footer" href="${publicUrl("index.html", basePath)}"><span class="brand-mark">BE</span><span class="brand-copy"><strong>${escapeHtml(site.site_name)}</strong><small>${escapeHtml(site.brand_location)}</small></span></a><p>${escapeHtml(site.footer_summary)}</p><p>${escapeHtml(site.tagline)}</p></div><div class="footer-column"><h2>Explore</h2><a href="${publicUrl("villas.html", basePath)}">${escapeHtml(pageLabel(models, "villas", "Our Villas"))}</a><a href="${publicUrl("locations.html", basePath)}">${escapeHtml(pageLabel(models, "locations", "Locations"))}</a><a href="${publicUrl("guide.html", basePath)}">${escapeHtml(pageLabel(models, "guide", "Barbados Guide"))}</a><a href="${publicUrl("reviews.html", basePath)}">${escapeHtml(pageLabel(models, "reviews", "Guest Reviews"))}</a></div><div class="footer-column"><h2>About</h2><a href="${publicUrl("about.html", basePath)}">${escapeHtml(pageLabel(models, "about", "Our Story"))}</a><a href="${publicUrl("faq.html", basePath)}">${escapeHtml(pageLabel(models, "faq", "FAQs"))}</a><a href="${publicUrl("policies.html", basePath)}">${escapeHtml(pageLabel(models, "policies", "Policies"))}</a><a href="${publicUrl("contact.html", basePath)}">${escapeHtml(pageLabel(models, "contact", "Contact Us"))}</a>${social}</div><div class="footer-column footer-contact"><h2>Stay in touch</h2><a href="${escapeAttribute(site.contact.phone_link)}">${escapeHtml(site.contact.phone_display)}</a><a href="mailto:${escapeAttribute(site.contact.email)}">${escapeHtml(site.contact.email)}</a><p>${escapeHtml(site.address.street)}, ${escapeHtml(site.address.locality)}, ${escapeHtml(site.address.country_code)}</p></div></div><div class="container footer-bottom"><span>© <span data-current-year></span> ${escapeHtml(site.site_name)}.</span><span>Made for memorable Barbados stays.</span></div></footer>`;
 }
 
-function renderCmsSections(page, basePath) {
+function renderCmsSections(page, basePath, imageRoot = projectRoot) {
   const sections = page.data.sections || [];
   if (!sections.length) return "";
   if (page.data.slug === "faq") {
@@ -731,43 +923,43 @@ function renderCmsSections(page, basePath) {
   return sections
     .map((section, index) => {
       const image = section.image
-        ? `<figure class="split-media"><img src="${publicUrl(section.image, basePath)}" alt="${escapeAttribute(safeImageAlt(section.image_alt || section.heading))}" width="1600" height="1067" loading="lazy" />${section.image_alt ? `<span class="cms-image-description">${escapeHtml(section.image_alt)}</span>` : ""}</figure>`
+        ? `<figure class="framed-media split-media"><img ${imageAttributes(section.image, basePath, { sizes: "(max-width: 860px) calc(100vw - 48px), 50vw", loading: "lazy", fetchPriority: "low" }, imageRoot)} alt="${escapeAttribute(safeImageAlt(section.image_alt || section.heading))}" />${section.image_alt ? `<span class="cms-image-description">${escapeHtml(section.image_alt)}</span>` : ""}</figure>`
         : "";
       return `<section class="section${index % 2 === 0 ? " section-sand" : ""}"><div class="container ${image ? `split${index % 2 ? " split-reverse" : ""}` : "narrow-copy"}"><div class="split-copy"><h2>${escapeHtml(section.heading)}</h2><div class="rich-text">${renderMarkdown(section.text)}</div></div>${image}</div></section>`;
     })
     .join("\n");
 }
 
-function renderHomeVillaCards(villas, basePath) {
+function renderHomeVillaCards(villas, basePath, imageRoot = projectRoot) {
   return villas
     .map((record) => {
       const villa = record.data;
       const detail = publicUrl(`villas/${villa.slug}.html`, basePath);
       const firstAmenity = villa.amenities?.[0];
-      return `<article class="villa-card reveal" data-location="${String(villa.location?.coast || "").toLowerCase().includes("south") ? "south" : "west"}" data-villa="${escapeAttribute(villa.slug)}"><div class="villa-image-wrap"><img src="${publicUrl(villa.hero_image, basePath)}" alt="${escapeAttribute(safeImageAlt(villa.hero_image_alt))}" width="1600" height="1067" loading="lazy" /><span class="cms-image-description">${escapeHtml(villa.hero_image_alt)}</span><span class="villa-tag">${escapeHtml(villa.location?.coast)}</span></div><div class="villa-card-body"><div class="villa-location">${escapeHtml(villa.location?.neighbourhood)}, ${escapeHtml(villa.location?.parish)}</div><h3>${escapeHtml(villa.title)}</h3><p>${escapeHtml(villa.summary)}</p><div class="villa-meta"><span>${escapeHtml(villa.bedrooms)} bedrooms</span><span>${escapeHtml(villa.bathrooms)} bathrooms</span>${firstAmenity ? `<span>${escapeHtml(firstAmenity)}</span>` : ""}</div><div class="villa-card-footer"><a class="text-link" href="${detail}">View villa</a><a href="${escapeAttribute(villa.booking_url)}" target="_blank" rel="noopener">Check availability</a></div></div></article>`;
+      return `<article class="villa-card reveal" data-location="${String(villa.location?.coast || "").toLowerCase().includes("south") ? "south" : "west"}" data-villa="${escapeAttribute(villa.slug)}"><div class="villa-image-wrap"><img ${imageAttributes(villa.hero_image, basePath, { sizes: "(max-width: 760px) calc(100vw - 36px), (max-width: 1180px) 33vw, 370px", loading: "lazy", fetchPriority: "low" }, imageRoot)} alt="${escapeAttribute(safeImageAlt(villa.hero_image_alt))}" /><span class="cms-image-description">${escapeHtml(villa.hero_image_alt)}</span><span class="villa-tag">${escapeHtml(villa.location?.coast)}</span></div><div class="villa-card-body"><div class="villa-location">${escapeHtml(villa.location?.neighbourhood)}, ${escapeHtml(villa.location?.parish)}</div><h3>${escapeHtml(villa.title)}</h3><p>${escapeHtml(villa.summary)}</p><div class="villa-meta"><span>${escapeHtml(villa.bedrooms)} bedrooms</span><span>${escapeHtml(villa.bathrooms)} bathrooms</span>${firstAmenity ? `<span>${escapeHtml(firstAmenity)}</span>` : ""}</div><div class="villa-card-footer"><a class="text-link" href="${detail}">View villa</a><a href="${escapeAttribute(villa.booking_url)}" target="_blank" rel="noopener">Check availability</a></div></div></article>`;
     })
     .join("\n");
 }
 
-function renderPageHero(page, basePath) {
-  return `<section class="page-hero"><div class="container"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="${publicUrl("index.html", basePath)}">Home</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(page.data.nav_label)}</span></nav><div class="page-hero-grid"><div><h1>${escapeHtml(page.data.hero_heading)}</h1><p class="hero-copy">${escapeHtml(page.data.hero_intro)}</p></div><figure class="hero-media"><img src="${publicUrl(page.data.hero_image, basePath)}" alt="${escapeAttribute(safeImageAlt(page.data.hero_image_alt))}" width="1600" height="1067" fetchpriority="high" /><span class="cms-image-description">${escapeHtml(page.data.hero_image_alt)}</span></figure></div></div></section>`;
+function renderPageHero(page, basePath, imageRoot = projectRoot) {
+  return `<section class="page-hero"><div class="container"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="${publicUrl("index.html", basePath)}">Home</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(page.data.nav_label)}</span></nav><div class="page-hero-grid"><div><h1>${escapeHtml(page.data.hero_heading)}</h1><p class="hero-copy">${escapeHtml(page.data.hero_intro)}</p></div><figure class="hero-media"><img ${imageAttributes(page.data.hero_image, basePath, { sizes: "(max-width: 860px) calc(100vw - 48px), 50vw", loading: "eager", fetchPriority: "high" }, imageRoot)} alt="${escapeAttribute(safeImageAlt(page.data.hero_image_alt))}" /><span class="cms-image-description">${escapeHtml(page.data.hero_image_alt)}</span></figure></div></div></section>`;
 }
 
 function renderBasePageBody(page, models, options) {
   const body = `<section class="section cms-managed-content" data-cms-source="${escapeAttribute(page.source)}"><div class="container narrow-copy"><p class="section-label">${escapeHtml(page.data.nav_label)}</p><div class="rich-text">${renderMarkdown(page.body)}</div></div></section>`;
-  return `${renderPageHero(page, options.basePath)}${body}${renderCmsSections(page, options.basePath)}${page.data.slug === "guide" ? renderGuideCards(models.publishedGuidePosts, options.basePath) : ""}${renderCallToAction(page, options.basePath)}`;
+  return `${renderPageHero(page, options.basePath, options.imageRoot)}${body}${renderCmsSections(page, options.basePath, options.imageRoot)}${page.data.slug === "guide" ? renderGuideCards(models.publishedGuidePosts, options.basePath, options.imageRoot) : ""}${renderCallToAction(page, options.basePath)}`;
 }
 
 function renderHomeMain(page, models, options) {
   const gallery = page.data.hero_gallery?.length ? page.data.hero_gallery : [{ image: page.data.hero_image, alt: page.data.hero_image_alt }];
-  const slides = gallery.map((item, index) => `<figure class="hero-slide${index === 0 ? " active" : ""}" data-slide="${index}"${index ? ' aria-hidden="true"' : ""}><img src="${publicUrl(item.image, options.basePath)}" alt="${escapeAttribute(safeImageAlt(item.alt))}" width="1600" height="1067"${index === 0 ? ' fetchpriority="high"' : ""} /><span class="cms-image-description">${escapeHtml(item.alt)}</span></figure>`).join("");
+  const slides = gallery.map((item, index) => `<figure class="hero-slide${index === 0 ? " active" : ""}" data-slide="${index}"${index ? ' aria-hidden="true"' : ""}><img ${imageAttributes(item.image, options.basePath, { sizes: "100vw", loading: index === 0 ? "eager" : "lazy", fetchPriority: index === 0 ? "high" : "low", placeholder: index > 0 }, options.imageRoot)} alt="${escapeAttribute(safeImageAlt(item.alt))}" /><span class="cms-image-description">${escapeHtml(item.alt)}</span></figure>`).join("");
   const featured = models.publishedVillas.filter((record) => record.data.featured);
   const cards = featured.length ? featured : models.publishedVillas;
-  return `<main id="main-content" data-cms-source="${escapeAttribute(page.source)}"><section class="hero hero-carousel" id="top" aria-labelledby="hero-title" aria-roledescription="carousel"><div class="hero-slides" aria-live="polite">${slides}</div><div class="hero-content container"><h1 id="hero-title">${escapeHtml(page.data.hero_heading)}</h1><p class="hero-copy">${escapeHtml(page.data.hero_intro)}</p></div><div class="carousel-controls" aria-label="Villa gallery controls"><button class="carousel-button carousel-previous" type="button" aria-label="Previous image">←</button><span class="carousel-count" aria-live="polite"><strong>01</strong> / ${String(gallery.length).padStart(2, "0")}</span><button class="carousel-button carousel-next" type="button" aria-label="Next image">→</button></div></section><section class="booking-shell" id="booking" aria-label="Villa availability"><div class="booking-bar cms-booking-bar container"><div><strong>Find your Barbados villa</strong><p>Compare the collection, then use the existing booking partner for live dates and rates.</p></div><a class="button button-coral search-button" href="${publicUrl("villas.html", options.basePath)}">Check availability</a></div></section><section class="intro section-pad"><div class="container narrow-copy"><p class="eyebrow">${escapeHtml(page.data.nav_label)}</p><div class="rich-text">${renderMarkdown(page.body)}</div></div></section><section class="villas-section section-pad" id="villas"><div class="container"><div class="section-heading"><div><p class="eyebrow">Our collection</p><h2>Find your Barbados stay</h2></div><p>Four comfortable villas across Barbados’ West and South Coasts.</p></div><div class="villa-grid" id="villa-grid">${renderHomeVillaCards(cards, options.basePath)}</div></div></section>${renderCmsSections(page, options.basePath)}${renderCallToAction(page, options.basePath)}</main>`;
+  return `<main id="main-content" data-cms-source="${escapeAttribute(page.source)}"><section class="hero hero-carousel" id="top" aria-labelledby="hero-title" aria-roledescription="carousel"><div class="hero-slides" aria-live="polite">${slides}</div><div class="hero-content container"><h1 id="hero-title">${escapeHtml(page.data.hero_heading)}</h1><p class="hero-copy">${escapeHtml(page.data.hero_intro)}</p></div><div class="carousel-controls" aria-label="Villa gallery controls"><button class="carousel-button carousel-previous" type="button" aria-label="Previous image">←</button><span class="carousel-count" aria-live="polite"><strong>01</strong> / ${String(gallery.length).padStart(2, "0")}</span><button class="carousel-button carousel-next" type="button" aria-label="Next image">→</button></div></section><section class="booking-shell" id="booking" aria-label="Villa availability"><div class="booking-bar cms-booking-bar container"><div><strong>Find your Barbados villa</strong><p>Compare the collection, then use the existing booking partner for live dates and rates.</p></div><a class="button button-coral search-button" href="${publicUrl("villas.html", options.basePath)}">Check availability</a></div></section><section class="intro section-pad"><div class="container narrow-copy"><p class="eyebrow">${escapeHtml(page.data.nav_label)}</p><div class="rich-text">${renderMarkdown(page.body)}</div></div></section><section class="villas-section section-pad" id="villas"><div class="container"><div class="section-heading"><div><p class="eyebrow">Our collection</p><h2>Find your Barbados stay</h2></div><p>Four comfortable villas across Barbados’ West and South Coasts.</p></div><div class="villa-grid" id="villa-grid">${renderHomeVillaCards(cards, options.basePath, options.imageRoot)}</div></div></section>${renderCmsSections(page, options.basePath, options.imageRoot)}${renderCallToAction(page, options.basePath)}</main>`;
 }
 
 function renderListingMain(page, models, options) {
-  return `<main id="main-content" data-cms-source="${escapeAttribute(page.source)}"><section class="listing-hero" aria-labelledby="listing-title"><img src="${publicUrl(page.data.hero_image, options.basePath)}" alt="${escapeAttribute(safeImageAlt(page.data.hero_image_alt))}" width="1600" height="1067" fetchpriority="high" /><span class="cms-image-description">${escapeHtml(page.data.hero_image_alt)}</span><div class="listing-hero-copy container"><h1 id="listing-title">${escapeHtml(page.data.hero_heading)}</h1><p>${escapeHtml(page.data.hero_intro)}</p></div></section><section class="filter-section" aria-label="Filter villas"><form class="filter-bar container" id="villa-filter-form"><label><span>Location</span><select name="location"><option value="all">All locations</option><option value="west">West Coast</option><option value="south">South Coast</option></select></label><label><span>Bedrooms</span><select name="bedrooms"><option value="all">Any</option><option value="2">2+ bedrooms</option><option value="3">3+ bedrooms</option></select></label><button class="button button-coral" type="submit">Search villas</button><button class="filter-reset" type="reset">Reset</button></form></section><section class="villas-listing section-pad" id="villa-results" aria-labelledby="villa-results-title"><div class="container"><div class="listing-heading"><div><h2 id="villa-results-title">Our villas</h2><div class="rich-text">${renderMarkdown(page.body)}</div></div><strong id="villa-result-count" aria-live="polite">${models.publishedVillas.length} villas</strong></div><div class="villa-results-grid">${renderVillaCards(models.publishedVillas, options.basePath)}</div><div class="empty-state" id="villa-empty" hidden><h3>No villas match these filters.</h3><p>Reset the filters to see the complete collection.</p></div></div></section>${renderCmsSections(page, options.basePath)}${renderCallToAction(page, options.basePath)}</main>`;
+  return `<main id="main-content" data-cms-source="${escapeAttribute(page.source)}"><section class="listing-hero" aria-labelledby="listing-title"><img ${imageAttributes(page.data.hero_image, options.basePath, { sizes: "100vw", loading: "eager", fetchPriority: "high" }, options.imageRoot)} alt="${escapeAttribute(safeImageAlt(page.data.hero_image_alt))}" /><span class="cms-image-description">${escapeHtml(page.data.hero_image_alt)}</span><div class="listing-hero-copy container"><h1 id="listing-title">${escapeHtml(page.data.hero_heading)}</h1><p>${escapeHtml(page.data.hero_intro)}</p></div></section><section class="filter-section" aria-label="Filter villas"><form class="filter-bar container" id="villa-filter-form"><label><span>Location</span><select name="location"><option value="all">All locations</option><option value="west">West Coast</option><option value="south">South Coast</option></select></label><label><span>Bedrooms</span><select name="bedrooms"><option value="all">Any</option><option value="2">2+ bedrooms</option><option value="3">3+ bedrooms</option></select></label><button class="button button-coral" type="submit">Search villas</button><button class="filter-reset" type="reset">Reset</button></form></section><section class="villas-listing section-pad" id="villa-results" aria-labelledby="villa-results-title"><div class="container"><div class="listing-heading"><div><h2 id="villa-results-title">Our villas</h2><div class="rich-text">${renderMarkdown(page.body)}</div></div><strong id="villa-result-count" aria-live="polite">${models.publishedVillas.length} villas</strong></div><div class="villa-results-grid">${renderVillaCards(models.publishedVillas, options.basePath, options.imageRoot)}</div><div class="empty-state" id="villa-empty" hidden><h3>No villas match these filters.</h3><p>Reset the filters to see the complete collection.</p></div></div></section>${renderCmsSections(page, options.basePath, options.imageRoot)}${renderCallToAction(page, options.basePath)}</main>`;
 }
 
 function renderFixedPageDocument(page, models, options) {
@@ -778,17 +970,24 @@ function renderFixedPageDocument(page, models, options) {
   return `<!doctype html><html lang="en">\n${head}\n  <body${page.data.slug === "home" ? "" : ' class="inner-page"'}>\n    <a class="skip-link" href="#main-content">Skip to content</a>\n    ${navMarkup(models, options.basePath, page.data.slug, availabilityHref)}\n    ${main}\n    ${footerMarkup(models, options.basePath)}\n    <script src="${publicUrl("script.js", options.basePath)}"></script>\n  </body>\n</html>\n`;
 }
 
-function villaMain(record, basePath) {
+function villaMain(record, basePath, imageRoot = projectRoot) {
   const villa = record.data;
   const gallery = villa.gallery?.length ? villa.gallery : [{ image: villa.hero_image, alt: villa.hero_image_alt }];
   const location = [villa.location?.neighbourhood, villa.location?.parish, villa.location?.coast].filter(Boolean).join(" · ");
   const facts = [`${villa.bedrooms} bedrooms`, `${villa.bathrooms} bathrooms`, ...(villa.max_guests ? [`Up to ${villa.max_guests} guests`] : []), ...(villa.amenities || [])];
   const highlights = (villa.highlights || []).length ? `<section class="section section-sand"><div class="container"><div class="section-heading"><div><p class="section-label">Villa highlights</p><h2>What makes this stay special</h2></div></div><div class="simple-feature-grid">${villa.highlights.map((highlight) => `<article><h3>${escapeHtml(highlight.title)}</h3><p>${escapeHtml(highlight.description)}</p></article>`).join("")}</div></div></section>` : "";
+  const mainImage = imageAttributes(gallery[0].image, basePath, { sizes: "(max-width: 980px) calc(100vw - 36px), (max-width: 1320px) 70vw, 920px", loading: "eager", fetchPriority: "high" }, imageRoot);
+  const thumbnails = gallery.map((item, index) => {
+    const source = imageSourceData(item.image, basePath, imageRoot);
+    return `<button class="gallery-thumbnail${index === 0 ? " active" : ""}" type="button" data-gallery-thumb data-gallery-index="${index}" data-gallery-src="${escapeAttribute(source.src)}" data-gallery-srcset="${escapeAttribute(source.srcset)}" data-gallery-alt="${escapeAttribute(safeImageAlt(item.alt))}" aria-label="Show photo ${index + 1}" aria-pressed="${index === 0}"><img ${imageAttributes(item.image, basePath, { sizes: "240px", loading: "lazy", fetchPriority: "low", placeholder: true }, imageRoot)} alt="${escapeAttribute(safeImageAlt(item.alt))}" /></button><span class="visually-hidden cms-image-description">${escapeHtml(item.alt)}</span>`;
+  }).join("");
+  const secondaryIndex = Math.min(1, gallery.length - 1);
+  const secondaryImage = imageAttributes(gallery[secondaryIndex].image, basePath, { sizes: "(max-width: 980px) calc(100vw - 36px), 45vw", loading: "lazy", fetchPriority: "low" }, imageRoot);
   return `<main id="main-content" data-cms-villa-page="${escapeAttribute(villa.slug)}">
       <section class="property-intro section-pad-sm"><div class="container"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${publicUrl("villas.html", basePath)}">Villas</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(villa.title)}</span></nav><h1>${escapeHtml(villa.title)}</h1><p class="property-location">${escapeHtml(location)}</p></div></section>
-      <section class="property-gallery-section" aria-label="Villa photo gallery"><div class="container property-gallery"><div class="gallery-main-frame"><img id="villa-main-image" src="${publicUrl(gallery[0].image, basePath)}" alt="${escapeAttribute(safeImageAlt(gallery[0].alt))}" width="1600" height="1067" fetchpriority="high" /></div><div class="gallery-thumbnail-rail">${gallery.map((item, index) => `<button class="gallery-thumbnail${index === 0 ? " active" : ""}" type="button" data-gallery-thumb data-gallery-index="${index}" data-gallery-src="${publicUrl(item.image, basePath)}" data-gallery-alt="${escapeAttribute(safeImageAlt(item.alt))}" aria-label="Show photo ${index + 1}" aria-pressed="${index === 0}"><img src="${publicUrl(item.image, basePath)}" alt="${escapeAttribute(safeImageAlt(item.alt))}" width="480" height="320" /></button><span class="visually-hidden cms-image-description">${escapeHtml(item.alt)}</span>`).join("")}</div></div></section>
+      <section class="property-gallery-section" aria-label="Villa photo gallery"><div class="container property-gallery"><div class="gallery-main-frame"><img id="villa-main-image" ${mainImage} alt="${escapeAttribute(safeImageAlt(gallery[0].alt))}" /></div><div class="gallery-thumbnail-rail">${thumbnails}</div></div></section>
       <section class="property-summary section-pad-sm" id="availability"><div class="container property-summary-grid"><ul class="property-facts" aria-label="Villa facts">${facts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join("")}</ul><div class="property-booking"><h2>Check live dates and rates</h2><p>The existing booking partner shows current availability and completes your reservation securely.</p><a class="button button-coral" href="${escapeAttribute(villa.booking_url)}" target="_blank" rel="noopener">Check availability</a></div></div></section>
-      <section class="property-about section-pad"><div class="container property-about-grid"><div><p class="section-label">${escapeHtml(location)}</p><h2>About this villa</h2><p class="property-lead">${escapeHtml(villa.summary)}</p><div class="rich-text">${renderMarkdown(record.body)}</div><a class="text-link" href="${escapeAttribute(villa.booking_url)}" target="_blank" rel="noopener">View live availability</a></div><img src="${publicUrl(gallery[Math.min(1, gallery.length - 1)].image, basePath)}" alt="${escapeAttribute(safeImageAlt(gallery[Math.min(1, gallery.length - 1)].alt))}" width="1600" height="1067" loading="lazy" /></div></section>
+      <section class="property-about section-pad"><div class="container property-about-grid"><div><p class="section-label">${escapeHtml(location)}</p><h2>About this villa</h2><p class="property-lead">${escapeHtml(villa.summary)}</p><div class="rich-text">${renderMarkdown(record.body)}</div><a class="text-link" href="${escapeAttribute(villa.booking_url)}" target="_blank" rel="noopener">View live availability</a></div><img ${secondaryImage} alt="${escapeAttribute(safeImageAlt(gallery[secondaryIndex].alt))}" /></div></section>
       <section class="amenities-section section-pad"><div class="container"><div class="section-heading"><div><p class="section-label">Included features</p><h2>Comfort for an easy stay</h2></div><p>Confirm the latest property details with the booking partner before reserving.</p></div><div class="simple-feature-grid">${(villa.amenities || []).map((amenity) => `<article><h3>${escapeHtml(amenity)}</h3><p>Available for a comfortable Best E Villas stay.</p></article>`).join("")}</div></div></section>
       ${highlights}
       <section class="section-tight section-teal"><div class="container centered-copy"><h2>Ready to check your dates?</h2><p>Continue to the external booking platform for current availability and rates.</p><a class="button button-coral" href="${escapeAttribute(villa.booking_url)}" target="_blank" rel="noopener">Check availability</a></div></section>
@@ -810,19 +1009,19 @@ function renderVillaDocument(record, models, options, { legacy = false } = {}) {
   const legacyRedirect = legacy
     ? `<script>(() => { const routes = ${safeJson(Object.fromEntries(models.publishedVillas.map((villa) => [villa.data.slug, publicUrl(`villas/${villa.data.slug}.html`, options.basePath)])))}; const selected = new URLSearchParams(location.search).get("villa"); if (selected && routes[selected]) location.replace(routes[selected]); })();</script>`
     : "";
-  return `<!doctype html><html lang="en">\n${head}\n  <body class="inner-page">\n    <a class="skip-link" href="#main-content">Skip to content</a>\n    ${navMarkup(models, options.basePath, "villas", "#availability")}\n    ${villaMain(record, options.basePath)}\n    ${footerMarkup(models, options.basePath)}\n    ${legacyRedirect}\n    <script src="${publicUrl("script.js", options.basePath)}"></script>\n    <script src="${publicUrl("cms-runtime.js", options.basePath)}"></script>\n  </body>\n</html>\n`;
+  return `<!doctype html><html lang="en">\n${head}\n  <body class="inner-page">\n    <a class="skip-link" href="#main-content">Skip to content</a>\n    ${navMarkup(models, options.basePath, "villas", "#availability")}\n    ${villaMain(record, options.basePath, options.imageRoot)}\n    ${footerMarkup(models, options.basePath)}\n    ${legacyRedirect}\n    <script src="${publicUrl("script.js", options.basePath)}"></script>\n    <script src="${publicUrl("cms-runtime.js", options.basePath)}"></script>\n  </body>\n</html>\n`;
 }
 
-function guideMain(record, basePath) {
+function guideMain(record, basePath, imageRoot = projectRoot) {
   const post = record.data;
   const published = post.published_at ? new Date(`${post.published_at}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }) : "";
-  return `<main id="main-content"><article><header class="page-hero"><div class="container"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="${publicUrl("guide.html", basePath)}">Barbados Guide</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(post.title)}</span></nav><div class="page-hero-grid"><div><p class="section-label">${escapeHtml((post.categories || []).join(" · "))}</p><h1>${escapeHtml(post.title)}</h1><p class="hero-copy">${escapeHtml(post.excerpt)}</p><p>By ${escapeHtml(post.author)}${published ? ` · ${escapeHtml(published)}` : ""}</p></div><figure class="hero-media"><img src="${publicUrl(post.hero_image, basePath)}" alt="${escapeAttribute(safeImageAlt(post.hero_image_alt))}" width="1600" height="1067" fetchpriority="high" /><span class="visually-hidden cms-image-description">${escapeHtml(post.hero_image_alt)}</span></figure></div></div></header><section class="section"><div class="container article-copy rich-text">${renderMarkdown(record.body)}</div></section></article><section class="section-tight section-teal"><div class="container centered-copy"><h2>Find your place in Barbados</h2><p>Explore our villas and continue to the booking partner for live availability.</p><a class="button button-coral" href="${publicUrl("villas.html", basePath)}">Explore villas</a></div></section></main>`;
+  return `<main id="main-content"><article><header class="page-hero"><div class="container"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="${publicUrl("guide.html", basePath)}">Barbados Guide</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(post.title)}</span></nav><div class="page-hero-grid"><div><p class="section-label">${escapeHtml((post.categories || []).join(" · "))}</p><h1>${escapeHtml(post.title)}</h1><p class="hero-copy">${escapeHtml(post.excerpt)}</p><p>By ${escapeHtml(post.author)}${published ? ` · ${escapeHtml(published)}` : ""}</p></div><figure class="hero-media"><img ${imageAttributes(post.hero_image, basePath, { sizes: "(max-width: 860px) calc(100vw - 48px), 50vw", loading: "eager", fetchPriority: "high" }, imageRoot)} alt="${escapeAttribute(safeImageAlt(post.hero_image_alt))}" /><span class="visually-hidden cms-image-description">${escapeHtml(post.hero_image_alt)}</span></figure></div></div></header><section class="section"><div class="container article-copy rich-text">${renderMarkdown(record.body)}</div></section></article><section class="section-tight section-teal"><div class="container centered-copy"><h2>Find your place in Barbados</h2><p>Explore our villas and continue to the booking partner for live availability.</p><a class="button button-coral" href="${publicUrl("villas.html", basePath)}">Explore villas</a></div></section></main>`;
 }
 
 function renderGuideDocument(record, models, options) {
   const outputPath = `guide/${record.data.slug}.html`;
   const head = renderHead({ kind: "guide", record, outputPath, ...options, site: models.site });
-  return `<!doctype html><html lang="en">\n${head}\n  <body class="inner-page">\n    <a class="skip-link" href="#main-content">Skip to content</a>\n    ${navMarkup(models, options.basePath, "guide", "/villas.html")}\n    ${guideMain(record, options.basePath)}\n    ${footerMarkup(models, options.basePath)}\n    <script src="${publicUrl("script.js", options.basePath)}"></script>\n  </body>\n</html>\n`;
+  return `<!doctype html><html lang="en">\n${head}\n  <body class="inner-page">\n    <a class="skip-link" href="#main-content">Skip to content</a>\n    ${navMarkup(models, options.basePath, "guide", "/villas.html")}\n    ${guideMain(record, options.basePath, options.imageRoot)}\n    ${footerMarkup(models, options.basePath)}\n    <script src="${publicUrl("script.js", options.basePath)}"></script>\n  </body>\n</html>\n`;
 }
 
 function routeManifest(kind, record, outputPath, canonical, options, override = {}) {
@@ -852,17 +1051,56 @@ function runtimeScript() {
   const main = document.querySelector("[data-cms-villa-page]");
   if (!main) return;
   const image = document.querySelector("#villa-main-image");
+  let requestId = 0;
   document.querySelectorAll("[data-gallery-thumb]").forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
       if (!image) return;
-      image.src = button.dataset.gallerySrc || image.src;
-      image.alt = button.dataset.galleryAlt || image.alt;
+      const nextSource = button.dataset.gallerySrc;
+      const nextSourceSet = button.dataset.gallerySrcset;
+      const nextAlt = button.dataset.galleryAlt || image.alt;
+      if (!nextSource || button.getAttribute("aria-busy") === "true") return;
+      const currentRequest = ++requestId;
+
+      const thumbnail = button.querySelector("img");
+      const thumbnailReady = thumbnail?.complete && thumbnail.naturalWidth > 0;
+      if (thumbnailReady) {
+        image.removeAttribute("srcset");
+        image.src = thumbnail.currentSrc || thumbnail.src;
+        image.alt = nextAlt;
+      }
       document.querySelectorAll("[data-gallery-thumb]").forEach((item) => {
         item.classList.remove("active");
         item.setAttribute("aria-pressed", "false");
       });
       button.classList.add("active");
       button.setAttribute("aria-pressed", "true");
+
+      const preload = new Image();
+      button.setAttribute("aria-busy", "true");
+      preload.decoding = "async";
+      preload.sizes = image.sizes || "(max-width: 980px) calc(100vw - 36px), (max-width: 1320px) 70vw, 920px";
+      const loaded = await new Promise((resolveLoad) => {
+        let settled = false;
+        const finish = (value) => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timeout);
+          resolveLoad(value);
+        };
+        const timeout = setTimeout(() => finish(false), 8000);
+        preload.addEventListener("load", () => finish(true), { once: true });
+        preload.addEventListener("error", () => finish(false), { once: true });
+        if (nextSourceSet) preload.srcset = nextSourceSet;
+        preload.src = nextSource;
+        if (preload.complete && preload.naturalWidth > 0) finish(true);
+      });
+      if (loaded && currentRequest === requestId) {
+        try { await preload.decode(); } catch {}
+        image.removeAttribute("srcset");
+        image.src = preload.currentSrc || nextSource;
+        image.alt = nextAlt;
+      }
+      button.removeAttribute("aria-busy");
     });
   });
 })();\n`;
@@ -947,14 +1185,20 @@ export async function buildSite(providedOptions = {}) {
   models.publishedPages = models.pages.filter((record) => record.data.status === "published");
   models.publishedVillas = models.villas.filter((record) => record.data.status === "published").sort((a, b) => (a.data.sort_order || 0) - (b.data.sort_order || 0));
   models.publishedGuidePosts = models.guidePosts.filter((record) => record.data.status === "published").sort((a, b) => String(b.data.published_at || "").localeCompare(String(a.data.published_at || "")));
+  const publishedImageReferences = uniqueImagePaths({
+    pages: models.publishedPages,
+    villas: models.publishedVillas,
+    guidePosts: models.publishedGuidePosts,
+  });
   if (models.publishedPages.length !== Object.keys(pageOutputs).length) throw new Error("All nine fixed pages must be published for this build.");
   if (!models.publishedVillas.length) throw new Error("At least one published villa is required.");
   await assertReplaceableOutput(options.out);
   await mkdir(dirname(options.out), { recursive: true });
   let stagingRoot = await mkdtemp(resolve(dirname(options.out), `.${basename(options.out)}-build-`));
   try {
-    const renderOptions = { ...options, out: stagingRoot };
+    const renderOptions = { ...options, out: stagingRoot, imageRoot: stagingRoot };
     await copySharedFiles(stagingRoot);
+    await prepareResponsiveImageVariants(publishedImageReferences, stagingRoot);
     await writeOutput(stagingRoot, "cms-runtime.js", runtimeScript());
     await writeOutput(stagingRoot, "site-content.js", siteContentScript(models));
 

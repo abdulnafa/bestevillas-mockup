@@ -79,9 +79,8 @@ async function openPage(url) {
     await send("Page.navigate", { url: `${baseUrl}/${path.replace(/^\/+/, "")}` });
     await loaded;
     await evaluate(`(async () => {
-      Array.from(document.images).forEach((image) => image.loading = 'eager');
       await Promise.race([
-        Promise.all([document.fonts?.ready || Promise.resolve(), ...Array.from(document.images).map((image) => image.complete ? Promise.resolve() : new Promise((done) => { image.addEventListener('load', done, { once: true }); image.addEventListener('error', done, { once: true }); }))]),
+        Promise.all([document.fonts?.ready || Promise.resolve(), ...Array.from(document.images).filter((image) => image.loading !== 'lazy').map((image) => image.complete ? Promise.resolve() : new Promise((done) => { image.addEventListener('load', done, { once: true }); image.addEventListener('error', done, { once: true }); }))]),
         new Promise((done) => setTimeout(done, 5000))
       ]);
       await new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)));
@@ -139,19 +138,20 @@ try {
   const home = await page.evaluate(`({
     title: document.title,
     heading: document.querySelector('h1')?.textContent.trim(),
-    cmsPages: globalThis.bestEVillasContent?.pages?.length,
-    cmsVillas: globalThis.bestEVillasContent?.villas?.length,
+    cmsSource: document.querySelector('main')?.dataset.cmsSource,
+    villaCards: document.querySelectorAll('[data-villa]').length,
     slides: document.querySelectorAll('.hero-slide').length,
     activeSlides: document.querySelectorAll('.hero-slide.active').length,
-    missingImages: Array.from(document.images).filter((image) => !image.complete || image.naturalWidth === 0).map((image) => image.src),
+    deferredSlides: Array.from(document.querySelectorAll('.hero-slide:not(.active) img')).filter((image) => image.dataset.responsiveSrc && (image.currentSrc || image.src).includes('-480.jpg')).length,
+    missingImages: Array.from(document.images).filter((image) => image.complete && image.naturalWidth === 0).map((image) => image.src),
     overflow: document.documentElement.scrollWidth > innerWidth,
     analyticsRequests: performance.getEntriesByType('resource').filter((entry) => /googletagmanager|google-analytics/i.test(entry.name)).map((entry) => entry.name),
   })`);
-  record("Generated homepage renders CMS payload", home.title.includes("Best E Villas") && home.heading === "Beautiful Barbados villas." && home.cmsPages === 9 && home.cmsVillas === 4, JSON.stringify(home));
-  record("Generated homepage media and layout", home.slides === 3 && home.activeSlides === 1 && home.missingImages.length === 0 && !home.overflow, JSON.stringify(home));
+  record("Generated homepage renders CMS content", home.title.includes("Best E Villas") && home.heading === "Beautiful Barbados villas." && home.cmsSource === "pages/home.md" && home.villaCards === 4, JSON.stringify(home));
+  record("Generated homepage media and layout", home.slides === 3 && home.activeSlides === 1 && home.deferredSlides === 2 && home.missingImages.length === 0 && !home.overflow, JSON.stringify(home));
   record("Analytics remains inactive without ID", home.analyticsRequests.length === 0, JSON.stringify(home.analyticsRequests));
-  const carousel = await page.evaluate(`(() => { document.querySelector('.carousel-next')?.click(); return { active: document.querySelector('.hero-slide.active')?.dataset.slide, count: document.querySelector('.carousel-count strong')?.textContent }; })()`);
-  record("Generated carousel works", carousel.active === "1" && carousel.count === "02", JSON.stringify(carousel));
+  const carousel = await page.evaluate(`(async () => { document.querySelector('.carousel-next')?.click(); const deadline = Date.now() + 8000; let activeSlide = document.querySelector('.hero-slide.active'); let activeImage = activeSlide?.querySelector('img'); while ((activeSlide?.dataset.slide !== '1' || !activeImage?.complete || !activeImage?.naturalWidth || activeImage?.dataset.upgradePending === 'true' || (activeImage?.currentSrc || activeImage?.src || '').includes('-480.jpg')) && Date.now() < deadline) { await new Promise((done) => setTimeout(done, 25)); activeSlide = document.querySelector('.hero-slide.active'); activeImage = activeSlide?.querySelector('img'); } return { active: activeSlide?.dataset.slide, count: document.querySelector('.carousel-count strong')?.textContent, imageReady: Boolean(activeImage?.complete && activeImage?.naturalWidth), upgradePending: activeImage?.dataset.upgradePending === 'true', imageSource: activeImage?.currentSrc || activeImage?.src }; })()`);
+  record("Generated carousel works without a blank slide", carousel.active === "1" && carousel.count === "02" && carousel.imageReady && !carousel.upgradePending && !carousel.imageSource.includes("-480.jpg"), JSON.stringify(carousel));
   await page.screenshot("cms-home-desktop.png");
 
   await page.navigate("villas.html");
@@ -160,7 +160,7 @@ try {
     count: document.querySelector('#villa-result-count')?.textContent,
     bookingLinks: document.querySelectorAll('a[href^="https://direct-book.com/"]').length,
     prettyLinks: Array.from(document.querySelectorAll('[data-villa-card] h3 a')).map((link) => link.pathname),
-    missingImages: Array.from(document.images).filter((image) => !image.complete || image.naturalWidth === 0).length,
+    missingImages: Array.from(document.images).filter((image) => image.complete && image.naturalWidth === 0).length,
   })`);
   record("CMS villa listing renders four records", listing.cards === 4 && listing.count === "4 villas" && listing.bookingLinks === 4 && listing.prettyLinks.every((path) => /\/villas\/[a-z0-9-]+\.html$/.test(path)) && listing.missingImages === 0, JSON.stringify(listing));
   const filtered = await page.evaluate(`(() => { const form = document.querySelector('#villa-filter-form'); form.querySelector('[name="location"]').value = 'south'; form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true })); return { visible: Array.from(document.querySelectorAll('[data-villa-card]')).filter((card) => !card.hidden).length, count: document.querySelector('#villa-result-count')?.textContent }; })()`);
@@ -174,22 +174,31 @@ try {
   ];
   for (const [slug, heading, booking] of villas) {
     await page.navigate(`villas/${slug}.html`);
-    const detail = await page.evaluate(`(() => {
+    const detail = await page.evaluate(`(async () => {
       const schemas = Array.from(document.querySelectorAll('script[type="application/ld+json"]')).map((node) => JSON.parse(node.textContent));
       const before = document.querySelector('#villa-main-image')?.src;
-      document.querySelector('[data-gallery-index="1"]')?.click();
+      const selectedButton = document.querySelector('[data-gallery-index="1"]');
+      selectedButton?.click();
+      const deadline = Date.now() + 5000;
+      let galleryImage = document.querySelector('#villa-main-image');
+      while ((galleryImage?.src === before || !galleryImage?.complete || !galleryImage?.naturalWidth || selectedButton?.hasAttribute('aria-busy')) && Date.now() < deadline) {
+        await new Promise((done) => setTimeout(done, 25));
+        galleryImage = document.querySelector('#villa-main-image');
+      }
       return {
         title: document.title,
         heading: document.querySelector('h1')?.textContent.trim(),
         canonical: document.querySelector('link[rel="canonical"]')?.href,
         booking: document.querySelector('.property-booking a[href^="https://direct-book.com/"]')?.href,
         schema: JSON.stringify(schemas),
-        galleryChanged: before !== document.querySelector('#villa-main-image')?.src,
-        missingImages: Array.from(document.images).filter((image) => !image.complete || image.naturalWidth === 0).length,
+        galleryChanged: before !== galleryImage?.src,
+        galleryReady: Boolean(galleryImage?.complete && galleryImage?.naturalWidth),
+        galleryBusy: selectedButton?.hasAttribute('aria-busy'),
+        missingImages: Array.from(document.images).filter((image) => image.complete && image.naturalWidth === 0).length,
         overflow: document.documentElement.scrollWidth > innerWidth,
       };
     })()`);
-    record(`Pretty villa route ${slug}`, detail.heading.includes(heading) && detail.title.includes("Best E Villas") && detail.canonical === `https://bestevillas.com/villas/${slug}.html` && detail.booking === booking && detail.schema.includes("VacationRental") && detail.galleryChanged && detail.missingImages === 0 && !detail.overflow, JSON.stringify(detail));
+    record(`Pretty villa route ${slug}`, detail.heading.includes(heading) && detail.title.includes("Best E Villas") && detail.canonical === `https://bestevillas.com/villas/${slug}.html` && detail.booking === booking && detail.schema.includes("VacationRental") && detail.galleryChanged && detail.galleryReady && !detail.galleryBusy && detail.missingImages === 0 && !detail.overflow, JSON.stringify(detail));
   }
   await page.screenshot("cms-villa-desktop.png");
 
@@ -200,9 +209,26 @@ try {
   const fixedPages = ["locations.html", "about.html", "reviews.html", "guide.html", "faq.html", "policies.html", "contact.html"];
   for (const route of fixedPages) {
     await page.navigate(route);
-    const state = await page.evaluate(`({ heading: document.querySelector('h1')?.textContent.trim(), cmsBlock: Boolean(document.querySelector('[data-cms-source]')), missingImages: Array.from(document.images).filter((image) => !image.complete || image.naturalWidth === 0).length, overflow: document.documentElement.scrollWidth > innerWidth, viewport: innerWidth, scrollWidth: document.documentElement.scrollWidth, offenders: Array.from(document.querySelectorAll('body *')).map((element) => ({ tag: element.tagName, className: String(element.className || ''), left: element.getBoundingClientRect().left, right: element.getBoundingClientRect().right })).filter((item) => item.left < -1 || item.right > innerWidth + 1).slice(0, 8) })`);
-    record(`CMS fixed page ${route}`, Boolean(state.heading) && state.cmsBlock && state.missingImages === 0 && !state.overflow, JSON.stringify(state));
+    const state = await page.evaluate(`(() => { const nav = document.querySelector('.site-header > .mobile-nav'); const toggle = document.querySelector('.menu-toggle'); const header = document.querySelector('.header-inner'); const media = Array.from(document.querySelectorAll('.split-media')); return { heading: document.querySelector('h1')?.textContent.trim(), cmsBlock: Boolean(document.querySelector('[data-cms-source]')), brokenImages: Array.from(document.images).filter((image) => image.complete && image.naturalWidth === 0).length, overflow: document.documentElement.scrollWidth > innerWidth, navDisplay: nav ? getComputedStyle(nav).display : null, navHidden: nav?.getAttribute('aria-hidden'), toggleDisplay: toggle ? getComputedStyle(toggle).display : null, headerLeft: header?.getBoundingClientRect().left, headerRight: header?.getBoundingClientRect().right, mediaRatios: media.map((item) => { const rect = item.getBoundingClientRect(); return rect.height ? rect.width / rect.height : 0; }), responsiveImages: Array.from(document.images).every((image) => image.hasAttribute('decoding') && image.hasAttribute('sizes') && (image.hasAttribute('srcset') || image.hasAttribute('data-responsive-srcset'))) }; })()`);
+    record(`CMS fixed page ${route}`, Boolean(state.heading) && state.cmsBlock && state.brokenImages === 0 && !state.overflow && state.navDisplay === "none" && state.navHidden === "true" && state.toggleDisplay === "none" && state.headerLeft >= -1 && state.headerRight <= 1441 && state.mediaRatios.every((ratio) => Math.abs(ratio - 4 / 3) < 0.04) && state.responsiveImages, JSON.stringify(state));
+    if (route === "locations.html") {
+      await page.screenshot("cms-locations-desktop.png");
+      await page.evaluate(`(async () => { const target = document.querySelectorAll('.split')[1]; if (target) window.scrollTo({ top: target.offsetTop - 120, behavior: 'instant' }); await new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))); return scrollY; })()`);
+      await page.screenshot("cms-locations-sections-desktop.png");
+    }
   }
+
+  for (const width of [1080, 900, 861]) {
+    await page.viewport(width, 900);
+    await page.navigate("locations.html");
+    const intermediate = await page.evaluate(`(() => { const nav = document.querySelector('.site-header > .mobile-nav'); const toggle = document.querySelector('.menu-toggle'); const header = document.querySelector('.header-inner'); return { navDisplay: getComputedStyle(nav).display, toggleDisplay: getComputedStyle(toggle).display, overflow: document.documentElement.scrollWidth > innerWidth, headerLeft: header.getBoundingClientRect().left, headerRight: header.getBoundingClientRect().right, viewport: innerWidth }; })()`);
+    record(`Locations shell at ${width}px`, intermediate.navDisplay === "none" && intermediate.toggleDisplay === "none" && !intermediate.overflow && intermediate.headerLeft >= -1 && intermediate.headerRight <= intermediate.viewport + 1, JSON.stringify(intermediate));
+  }
+
+  await page.viewport(860, 900);
+  await page.navigate("locations.html");
+  const internalMobileMenu = await page.evaluate(`(() => { const toggle = document.querySelector('.menu-toggle'); const nav = document.querySelector('.site-header > .mobile-nav'); const before = getComputedStyle(nav).display; toggle.click(); const open = getComputedStyle(nav).display; const expanded = toggle.getAttribute('aria-expanded'); toggle.click(); return { before, open, after: getComputedStyle(nav).display, expanded, closedExpanded: toggle.getAttribute('aria-expanded'), overflow: document.documentElement.scrollWidth > innerWidth }; })()`);
+  record("Internal-page mobile menu opens and closes", internalMobileMenu.before === "none" && internalMobileMenu.open !== "none" && internalMobileMenu.after === "none" && internalMobileMenu.expanded === "true" && internalMobileMenu.closedExpanded === "false" && !internalMobileMenu.overflow, JSON.stringify(internalMobileMenu));
 
   await page.viewport(390, 844, true);
   await page.navigate("index.html?mobile=1");

@@ -583,6 +583,7 @@ async function prepareFixture(contentDirectory) {
     title: "QA Draft Guide Must Stay Private",
     slug: "qa-draft-guide",
     status: "draft",
+    hero_image: "/assets/images/st-silas.jpg",
     seo: {
       ...publishedGuide.seo,
       meta_title: "QA Draft Guide Must Stay Private | Best E Villas",
@@ -635,9 +636,12 @@ try {
   record("precondition", "scripts/build.mjs", "renderer exists", buildPresent);
   record("precondition", relative(root, distDir).replaceAll("\\", "/"), "dist build exists", distPresent);
   const packageData = JSON.parse(await readFile(resolve(root, "package.json"), "utf8"));
+  const packageLockData = JSON.parse(await readFile(resolve(root, "package-lock.json"), "utf8"));
   record("release-contract", "package.json", "production script builds at domain root", /--mode\s+production\b/.test(packageData.scripts?.["build:production"] || "") && /--base-path\s+\//.test(packageData.scripts?.["build:production"] || ""), packageData.scripts?.["build:production"] || "missing");
+  record("release-contract", "package.json", "Sharp image processor is exactly pinned and locked", packageData.devDependencies?.sharp === "0.35.4" && packageLockData.packages?.[""]?.devDependencies?.sharp === "0.35.4", `package=${packageData.devDependencies?.sharp || "missing"}, lock=${packageLockData.packages?.[""]?.devDependencies?.sharp || "missing"}`);
   const workflow = await readFile(resolve(root, ".github", "workflows", "deploy-pages.yml"), "utf8");
   record("release-contract", "deploy-pages.yml", "CMS audit runs before artifact upload", workflow.indexOf("npm run test:cms") > workflow.indexOf("Build preview site") && workflow.indexOf("npm run test:cms") < workflow.indexOf("actions/upload-pages-artifact"));
+  record("release-contract", "deploy-pages.yml", "UI regression audit runs before artifact upload", workflow.indexOf("npm run test:ui") > workflow.indexOf("npm run test:cms") && workflow.indexOf("npm run test:ui") < workflow.indexOf("actions/upload-pages-artifact"));
 
   if (distPresent) {
     const currentModels = await loadModels(resolve(root, "content"));

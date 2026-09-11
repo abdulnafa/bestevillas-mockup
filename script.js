@@ -2,6 +2,7 @@ const body = document.body;
 const header = document.querySelector("#site-header");
 const menuToggle = document.querySelector(".menu-toggle");
 const menuIconUse = menuToggle?.querySelector("use");
+const mobileNav = document.querySelector(".mobile-nav");
 
 const villaData = {
   "prospect-three": {
@@ -88,14 +89,19 @@ const villaData = {
 
 function setMenuState(open) {
   if (!header || !menuToggle) return;
-  header.classList.toggle("menu-active", open);
-  body.classList.toggle("menu-open", open);
-  menuToggle.setAttribute("aria-expanded", String(open));
-  menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-  menuIconUse?.setAttribute("href", open ? "#icon-close" : "#icon-menu");
+  const nextOpen = Boolean(open);
+  header.classList.toggle("menu-active", nextOpen);
+  body.classList.toggle("menu-open", nextOpen);
+  menuToggle.setAttribute("aria-expanded", String(nextOpen));
+  menuToggle.setAttribute("aria-label", nextOpen ? "Close menu" : "Open menu");
+  mobileNav?.setAttribute("aria-hidden", String(!nextOpen));
+  if (mobileNav && "inert" in mobileNav) mobileNav.inert = !nextOpen;
+  menuIconUse?.setAttribute("href", nextOpen ? "#icon-close" : "#icon-menu");
   const menuLabel = menuToggle.querySelector(".menu-toggle-label");
-  if (menuLabel) menuLabel.textContent = open ? "Close" : "Menu";
+  if (menuLabel) menuLabel.textContent = nextOpen ? "Close" : "Menu";
 }
+
+setMenuState(false);
 
 menuToggle?.addEventListener("click", () => {
   setMenuState(!header?.classList.contains("menu-active"));
@@ -109,6 +115,10 @@ window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") setMenuState(false);
 });
 
+window.addEventListener("resize", () => {
+  if (menuToggle && getComputedStyle(menuToggle).display === "none") setMenuState(false);
+});
+
 function initHeroCarousel() {
   const carousel = document.querySelector(".hero-carousel");
   if (!carousel) return;
@@ -120,22 +130,83 @@ function initHeroCarousel() {
   if (!slides.length || !previous || !next || !count) return;
 
   let activeIndex = 0;
+  let navigationRequest = 0;
 
-  function showSlide(nextIndex) {
-    activeIndex = (nextIndex + slides.length) % slides.length;
+  async function loadPreview(slide) {
+    const image = slide?.querySelector("img");
+    if (!image) return false;
+    if (image.complete && image.naturalWidth > 0) return true;
+    const preview = new Image();
+    preview.decoding = "async";
+    const loaded = await new Promise((resolveLoad) => {
+      const timeout = setTimeout(() => resolveLoad(false), 8000);
+      preview.addEventListener("load", () => { clearTimeout(timeout); resolveLoad(true); }, { once: true });
+      preview.addEventListener("error", () => { clearTimeout(timeout); resolveLoad(false); }, { once: true });
+      preview.src = image.src;
+      if (preview.complete && preview.naturalWidth > 0) {
+        clearTimeout(timeout);
+        resolveLoad(true);
+      }
+    });
+    if (!loaded) return false;
+    image.loading = "eager";
+    image.src = preview.src;
+    return true;
+  }
+
+  function upgradeSlide(slide) {
+    const image = slide?.querySelector("img[data-responsive-src]");
+    if (!image || image.dataset.upgradePending === "true") return;
+    const source = image.dataset.responsiveSrc;
+    const sourceSet = image.dataset.responsiveSrcset;
+    const preload = new Image();
+    let settled = false;
+    image.dataset.upgradePending = "true";
+    preload.decoding = "async";
+    preload.sizes = image.sizes || "100vw";
+
+    const applyUpgrade = async () => {
+      if (settled) return;
+      settled = true;
+      try { await preload.decode(); } catch {}
+      image.removeAttribute("srcset");
+      image.src = preload.currentSrc || source;
+      try { await image.decode(); } catch {}
+      delete image.dataset.responsiveSrc;
+      delete image.dataset.responsiveSrcset;
+      delete image.dataset.upgradePending;
+    };
+    const cancelUpgrade = () => {
+      if (settled) return;
+      settled = true;
+      delete image.dataset.upgradePending;
+    };
+    preload.addEventListener("load", () => void applyUpgrade(), { once: true });
+    preload.addEventListener("error", cancelUpgrade, { once: true });
+    if (sourceSet) preload.srcset = sourceSet;
+    preload.src = source;
+    if (preload.complete && preload.naturalWidth > 0) void applyUpgrade();
+  }
+
+  async function showSlide(nextIndex) {
+    const targetIndex = (nextIndex + slides.length) % slides.length;
+    const currentRequest = ++navigationRequest;
+    if (!(await loadPreview(slides[targetIndex])) || currentRequest !== navigationRequest) return;
+    activeIndex = targetIndex;
     slides.forEach((slide, index) => {
       const active = index === activeIndex;
       slide.classList.toggle("active", active);
       slide.setAttribute("aria-hidden", String(!active));
     });
+    upgradeSlide(slides[activeIndex]);
     count.textContent = String(activeIndex + 1).padStart(2, "0");
   }
 
-  previous.addEventListener("click", () => showSlide(activeIndex - 1));
-  next.addEventListener("click", () => showSlide(activeIndex + 1));
+  previous.addEventListener("click", () => void showSlide(activeIndex - 1));
+  next.addEventListener("click", () => void showSlide(activeIndex + 1));
   carousel.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") showSlide(activeIndex - 1);
-    if (event.key === "ArrowRight") showSlide(activeIndex + 1);
+    if (event.key === "ArrowLeft") void showSlide(activeIndex - 1);
+    if (event.key === "ArrowRight") void showSlide(activeIndex + 1);
   });
 }
 

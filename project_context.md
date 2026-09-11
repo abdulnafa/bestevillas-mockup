@@ -40,6 +40,9 @@
 - [x] Keep analytics inactive until the client supplies the real GA4 Measurement ID and the consent flow is activated.
 - [x] Treat `content/` as the editable CMS source and generate deployable static HTML from it; preserve preview noindex and enable production indexing only for approved records.
 - [x] Keep the Policies page excluded from production indexing until the client approves the final policy copy.
+- [x] Desktop navigation drawer must remain closed by default and must never cover page content unless the user explicitly opens the mobile menu.
+- [x] Content and location imagery must use controlled, consistent display dimensions rather than excessively tall image panels.
+- [x] The published preview must load promptly; non-critical imagery should not block the first screen and image payloads should be optimized for their rendered size.
 
 ### Assumptions awaiting confirmation
 
@@ -82,6 +85,8 @@
 - [x] Production-ready SEO/AEO/GEO, canonical/social metadata, structured data, analytics-ready hooks, accessibility refinements, intrinsic image sizing, crawler files, and responsive QA implemented across all routes — 2026-09-11.
 - [x] Technical CMS-to-static migration completed: editable content now renders into deployable pages, including four pre-rendered villa routes and future Guide posts; safe validation, legacy URL compatibility, and the GitHub Pages build/deployment workflow are in place — 2026-09-11.
 
+- [x] Client-reported preview regressions corrected locally: the desktop navigation drawer stays closed, headers no longer clip, internal-page images use controlled 4:3 frames, responsive/lazy image delivery is in place, and future CMS uploads are automatically optimized during the staged build — 2026-09-11.
+
 ## Client communication log
 
 | Date | Type | Summary | Status |
@@ -95,6 +100,7 @@
 | 2026-09-11 | Implementation | CMS content was connected to the deployable static build, all current pages and four individual villa routes were generated, and the delivery workflow was verified. | Completed locally; updated review build still needs to be pushed/published |
 | 2026-09-11 | Client update | A concise progress message was prepared covering the completed pages, villa booking hand-offs, content-management setup, responsive checks, and remaining client inputs. | Ready for the project owner to send; no external message was sent by the assistant |
 | 2026-09-11 | Publishing handoff | The project owner requested manual Git push commands and a post-publication client update. | Commands and message prepared; push/deployment not executed by the assistant |
+| 2026-09-11 | Regression report | After publication, the client reported excessively tall images on multiple pages, a navigation panel visibly open on the right, clipped page content, and slow loading; screenshots show the Locations page affected on desktop. | Corrected and independently re-verified locally; push and GitHub Pages deployment are required before asking the client to refresh |
 
 ## Key technical notes
 
@@ -111,8 +117,9 @@
 - Do not reproduce proprietary hotel branding or typefaces; interpret the approved qualities through the Best E Villas brand and appropriately licensed assets.
 - Pages CMS is configured through `.pages.yml`; editable records are under `content/`, with activation/handover steps in `docs/CMS_SETUP.md`. The repository owner must authorize the Pages CMS GitHub App after these files are pushed.
 - `scripts/build.mjs` validates the CMS records before safely generating `dist/`. It supports preview and production modes, base-path deployment, draft exclusion, safe Markdown/URL handling, asset validation, page/villa/Guide rendering, canonical/schema/sitemap generation, and preservation of the last valid build if a rebuild fails.
+- The staged build uses pinned Sharp image processing to auto-orient and optimize published imagery, generate 480px and 960px responsive candidates, strip unnecessary metadata where re-encoding is needed, enforce byte budgets, and leave original CMS/source files untouched. The current 20 referenced source images generate 40 responsive derivatives only inside the deployable build; unpublished drafts are excluded from optimization so they cannot block a public deployment on size grounds.
 - The four villa pages have crawlable pre-rendered URLs under `villas/`. Known legacy `villa.html?villa=...` links redirect to the matching new route and the legacy page remains noindex.
-- `.github/workflows/deploy-pages.yml` installs pinned dependencies, runs the CMS audit before upload, builds for the GitHub Pages preview path, and deploys with job-scoped permissions. No push or deployment was performed in this task.
+- `.github/workflows/deploy-pages.yml` installs pinned dependencies, builds for the GitHub Pages preview path, runs both CMS and UI regression gates before artifact upload, and deploys with job-scoped permissions. No push or deployment was performed in this task.
 - All ten routes now include unique production canonicals, social-sharing metadata, and route-appropriate JSON-LD. `robots.txt` and `sitemap.xml` use the verified non-www canonical origin.
 - `analytics.js` makes no analytics request without a valid GA4 Measurement ID. Production still needs the real ID and consent activation.
 - All local HTML images reserve intrinsic space with verified width/height values to reduce layout shift.
@@ -144,3 +151,9 @@
 - [x] 2026-09-11: Updated task count after separating client approval from the completed technical migration: 21 tracked work items total — 0 in progress, 2 pending, 5 blocked/client-waiting, and 14 completed; 7 remain open.
 - [x] 2026-09-11: Final QA evidence was retained under `testing/`; the isolated server/browser processes were stopped, ports 4173/9223 were confirmed closed, and the three assistant-created `.codex-qa-*` folders plus all build staging/backup folders were confirmed removed.
 - [x] 2026-09-11: Before preparing push instructions, verified branch `main` tracks `origin/main`, remote is `https://github.com/abdulnafa/bestevillas-mockup.git`, no project file outside ignored dependency/generated folders exceeds 10 MB, and no common private-key, GitHub-token, Google-key, or OpenAI-key signatures were found. No commit, push, or deployment was performed.
+- [x] 2026-09-11: Reproduced the live Locations regression and traced it to mismatched generated navigation markup/internal CSS plus undefined split-media sizing; live image payloads were also confirmed as the main loading bottleneck rather than server response time.
+- [x] 2026-09-11: Corrected the internal navigation and 4:3 media contracts, added deferred responsive carousel/gallery behavior without blank-frame swaps, compressed the current base photography, and added automatic staged responsive-image generation for future published CMS uploads.
+- [x] 2026-09-11: Final GitHub Pages-path build passed CMS/safety 5074/5074 and enhanced image/UI regression 1537/1537. Source audits passed static 475/475, SEO 198/198, and production-readiness 309/309 with zero advisories. Rendered Chrome passed 39/39 across all 14 routes, desktop/intermediate/mobile breakpoints, internal nav state, image ratios, carousel/gallery loading, legacy routing, and console health.
+- [x] 2026-09-11: Visual evidence confirms Locations navigation is closed, St. Silas/Providence images render in normal 4:3 frames, and carousel/villa gallery frames remain populated after interaction. Independent base-path QA also found 58/58 images responsive, below-fold location images deferred until scroll, and no missing resources, HTTP failures, overflow, or console errors.
+- [x] 2026-09-11: A production-mode root build generated all 14 routes and 40 responsive derivatives successfully. A source-integrity check rebuilt all 30 source images with zero hash changes; no generated 480px/960px variants remain in the source tree.
+- [x] 2026-09-11: Current task inventory is 22 tracked items — 0 in progress, 2 pending, 5 blocked/client-waiting, and 15 completed; 7 remain open. The regression fix is complete locally but is not live until the project owner commits and pushes it and GitHub Pages finishes deploying.
