@@ -83,6 +83,7 @@ The rendered browser suite also requires headless Chrome running with a DevTools
 ```powershell
 node testing/browser-smoke.mjs
 node testing/cms-browser-smoke.mjs
+npm run test:browser:header
 ```
 
 Reusable reports and screenshots are saved under `testing/evidence/`.

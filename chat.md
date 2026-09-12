@@ -69,11 +69,15 @@
 - The apparent remaining slowness/old layout on the public URL is also a publishing problem: GitHub Pages is serving repository source files with original images, while the generated responsive-image artifact is being overwritten. The live pretty Prospect Three route returned 404 and both the custom artifact workflow and automatic branch Pages workflow had published the same commit.
 - A workflow safeguard now republishes the exact generated commit after a successful automatic Pages job. The repository owner still needs to set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**, commit/push this hotfix, wait for the custom deployment, and verify the public pretty route before telling the client it is fixed.
 - Do not send a completion message to the client yet. After publication, verify the public layout and responsive asset delivery first; then send one short client-facing WhatsApp update.
+- The client supplied a white Best E Villas logo JPEG and requested that it replace the temporary header branding in a professional way. Preserve the brand artwork; prefer the white logo on the dark teal header and create only a faithful transparent/colour treatment if needed for legibility.
+- The client requested a polished sticky header on every page, fully responsive desktop/mobile navigation, smooth in-page scrolling, and restrained lightweight animations across all pages. Motion must remain subtle and respect reduced-motion accessibility settings.
+- The exact client logo is now integrated as a lightweight transparent white PNG on the dark-teal header/footer. A generated reinterpretation was rejected because it changed the artwork; the site uses the faithfully extracted client mark.
+- Sticky headers, responsive navigation, header-aware smooth anchors, subtle progressive reveals, and reduced-motion fallbacks are complete locally across generated and tracked source pages. Final rendered QA passed, but the update must still be committed/pushed and the GitHub Pages run verified before telling the client it is live.
 
 ## Open questions / assumptions
 
 - Interpret the channel response as properties being listed on major channels but not requiring calendar sync; confirm only if this interpretation is incorrect.
-- Obtain downloadable full-resolution Pixieset originals, the final logo, and website/hosting/domain/analytics access.
+- Obtain downloadable full-resolution Pixieset originals and website/hosting/domain/analytics access; the final logo has now been supplied and integrated.
 - Confirm maximum occupancy, bed configurations, taxes/fees, check-in/out times, final house rules, and final booking/cancellation policy before production publishing.
 - After the implementation is pushed, authorize Pages CMS for the repository; the structured content is already connected to the build workflow.
 - Agree final price, payment milestones, revision rounds, development timeline, and any hard launch date before full production delivery.

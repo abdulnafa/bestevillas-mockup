@@ -1,5 +1,5 @@
 const body = document.body;
-const header = document.querySelector("#site-header");
+const header = document.querySelector("#site-header, .site-header");
 const menuToggle = document.querySelector(".menu-toggle");
 const menuIconUse = menuToggle?.querySelector("use");
 const mobileNav = document.querySelector(".mobile-nav");
@@ -118,6 +118,23 @@ window.addEventListener("keydown", (event) => {
 window.addEventListener("resize", () => {
   if (menuToggle && getComputedStyle(menuToggle).display === "none") setMenuState(false);
 });
+
+function initStickyHeader() {
+  if (!header) return;
+  let frameRequested = false;
+
+  const syncHeaderState = () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 8);
+    frameRequested = false;
+  };
+
+  syncHeaderState();
+  window.addEventListener("scroll", () => {
+    if (frameRequested) return;
+    frameRequested = true;
+    window.requestAnimationFrame(syncHeaderState);
+  }, { passive: true });
+}
 
 function initHeroCarousel() {
   const carousel = document.querySelector(".hero-carousel");
@@ -446,11 +463,45 @@ function initFaqs() {
 }
 
 function initReveals() {
-  const elements = document.querySelectorAll(".reveal");
-  if (!("IntersectionObserver" in window)) {
+  const candidates = document.querySelectorAll([
+    ".page-hero-grid > *",
+    ".section-heading",
+    ".split > *",
+    ".card-grid > *",
+    ".guide-feature > *",
+    ".planning-list > *",
+    ".review-card",
+    ".faq-item",
+    ".policy-copy > section",
+    ".contact-layout > *",
+    ".cta-band > *",
+    "[data-villa-card]",
+    ".property-heading",
+    ".property-gallery",
+    ".property-summary-grid > *",
+    ".property-about-grid > *",
+    ".simple-feature-grid > *",
+  ].join(","));
+
+  candidates.forEach((element) => {
+    if (element.classList.contains("reveal") || element.parentElement?.closest(".reveal")) return;
+    element.classList.add("reveal");
+  });
+
+  const elements = [...document.querySelectorAll(".reveal")];
+  if (!elements.length) return;
+
+  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+  if (reducedMotion || !("IntersectionObserver" in window)) {
     elements.forEach((element) => element.classList.add("visible"));
     return;
   }
+
+  elements.forEach((element) => {
+    const bounds = element.getBoundingClientRect();
+    if (bounds.bottom > 0 && bounds.top < window.innerHeight * 0.94) element.classList.add("visible");
+  });
+  document.documentElement.classList.add("motion-ready");
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -460,9 +511,18 @@ function initReveals() {
         observer.unobserve(entry.target);
       });
     },
-    { threshold: 0.08 },
+    { threshold: 0.08, rootMargin: "0px 0px -7% 0px" },
   );
-  elements.forEach((element) => observer.observe(element));
+  elements.forEach((element) => {
+    if (!element.classList.contains("visible")) observer.observe(element);
+  });
+
+  document.addEventListener("focusin", (event) => {
+    const target = event.target instanceof Element ? event.target.closest(".reveal") : null;
+    if (!target) return;
+    target.classList.add("visible");
+    observer.unobserve(target);
+  });
 }
 
 document.querySelectorAll("#current-year, [data-current-year]").forEach((element) => {
@@ -474,4 +534,5 @@ initDateForms();
 initVillaFilters();
 initVillaTemplate();
 initFaqs();
+initStickyHeader();
 initReveals();

@@ -44,6 +44,9 @@
 - [x] Content and location imagery must use controlled, consistent display dimensions rather than excessively tall image panels.
 - [x] The published preview must load promptly; non-critical imagery should not block the first screen and image payloads should be optimized for their rendered size.
 - [x] Villa gallery, property facts, and availability controls must remain in separate, readable layout regions with no overlap or clipped controls at any supported viewport.
+- [x] Replace the temporary text/monogram branding with the client-supplied Best E Villas logo, preserving the original mark and using a professional high-contrast treatment appropriate to the header.
+- [x] Keep the site header professionally sticky across all pages, with correct responsive desktop/mobile behaviour and no content obstruction.
+- [x] Provide smooth in-page scrolling and subtle, lightweight entrance/interaction motion across all pages; respect reduced-motion preferences and avoid distracting effects.
 
 ### Assumptions awaiting confirmation
 
@@ -64,7 +67,6 @@
 ### Blocked / waiting on client
 
 - [ ] Downloadable high-resolution versions of the Pixieset images, including a download PIN if required.
-- [ ] Final new logo and any replacement brand assets.
 - [ ] Website/CMS, hosting, domain, and repository authorization; the GA4 Measurement ID, consent decision, Google Analytics, and Search Console access will be provided for production activation. Do not store credentials in project files.
 - [ ] Exact ASAP launch deadline, if the client has a hard date.
 - [ ] Final client approval for policies, occupancy details, and production copy; the Policies page remains noindex until approved.
@@ -89,6 +91,7 @@
 
 - [x] Client-reported preview regressions corrected locally: the desktop navigation drawer stays closed, headers no longer clip, internal-page images use controlled 4:3 frames, responsive/lazy image delivery is in place, and future CMS uploads are automatically optimized during the staged build — 2026-09-11.
 - [x] Client-reported villa-page overlap corrected locally: square and landscape gallery images are contained within bounded grid tracks, facts and availability controls stay separate, both generated and legacy/source villa layouts pass collision-focused desktop/mobile QA, and a follow-up deployment safeguard prevents the branch Pages job from remaining the last publisher — 2026-09-12.
+- [x] Client-supplied logo integrated across generated and source-fallback headers/footers; sticky responsive headers, header-aware smooth scrolling, subtle progressive entrance motion, mobile-menu refinements, and reduced-motion support completed and rendered across all routes — 2026-09-12.
 
 ## Client communication log
 
@@ -105,6 +108,7 @@
 | 2026-09-11 | Publishing handoff | The project owner requested manual Git push commands and a post-publication client update. | Commands and message prepared; push/deployment not executed by the assistant |
 | 2026-09-11 | Regression report | After publication, the client reported excessively tall images on multiple pages, a navigation panel visibly open on the right, clipped page content, and slow loading; screenshots show the Locations page affected on desktop. | Corrected and independently re-verified locally; push and GitHub Pages deployment are required before asking the client to refresh |
 | 2026-09-12 | Regression report | Client screenshot of `villa.html?villa=prospect-three` shows the availability card and villa facts covering the gallery, with the availability action clipped on desktop. | Corrected and visually verified locally; repository push, Pages Source change, generated deployment, and live verification are still required before sending a completion update |
+| 2026-09-12 | Design enhancement | Client supplied the white Best E Villas logo and requested professional logo placement, a polished responsive sticky header, smooth page scrolling, and light animations throughout the site. | Completed and verified locally; ready to publish, then share after the GitHub Pages deployment is confirmed |
 
 ## Key technical notes
 
@@ -130,7 +134,10 @@
 - All ten routes now include unique production canonicals, social-sharing metadata, and route-appropriate JSON-LD. `robots.txt` and `sitemap.xml` use the verified non-www canonical origin.
 - `analytics.js` makes no analytics request without a valid GA4 Measurement ID. Production still needs the real ID and consent activation.
 - All local HTML images reserve intrinsic space with verified width/height values to reduce layout shift.
-- Commit `de7c577` is present on `origin/main`; the 2026-09-12 overlap/deployment hotfix in the current working tree has not been committed, pushed, or deployed by the assistant.
+- The supplied white JPEG logo was converted deterministically to `assets/images/brand/best-e-villas-logo-white.png` (1015×245 transparent PNG, 21,777 bytes), retaining all high-confidence artwork pixels. A generative background-removal result was rejected because it altered the brand artwork; it is not used by the site.
+- Header/footer branding uses the exact transparent white logo on the approved dark-teal surface. The header remains the same height while scrolling, gains only a restrained shadow state, and uses a passive requestAnimationFrame-throttled scroll update.
+- Entrance motion is progressively enhanced with opacity/transform only, so content stays visible without JavaScript. Native smooth scrolling uses one header-aware offset, while `prefers-reduced-motion` disables both smooth and entrance motion.
+- Commit `f24b0b8` contains the 2026-09-12 overlap/deployment hotfix. The subsequent logo/header/motion work in the current working tree has not been committed, pushed, or deployed by the assistant.
 
 ## Latest validation
 
@@ -169,3 +176,8 @@
 - [x] 2026-09-12: Final GitHub Pages-path build generated 14 routes and passed CMS/safety 5078/5078, UI/image regression 1542/1542, static 475/475, SEO 198/198, and production-readiness 309/309 with zero advisories.
 - [x] 2026-09-12: Temporary local servers, isolated Chrome processes, browser profiles, and logs created for this regression test were stopped and removed; reusable JSON and screenshot evidence remains under `testing/evidence/`.
 - [x] 2026-09-12: Current task inventory is 24 tracked items — 0 in progress, 2 pending, 6 blocked/client-waiting, and 16 completed; 8 remain open. The code fix is complete locally, while repository publication/source selection and final live verification remain waiting on the project owner.
+- [x] 2026-09-12: Exact logo extraction passed fidelity validation: 1015×245 RGBA PNG, 21,777 bytes, all 64,654 high-confidence foreground pixels retained, 0.029637/255 composite mean absolute error, and no high-confidence crop loss. The dark-teal proof was visually inspected.
+- [x] 2026-09-12: Final GitHub Pages-path build generated 14 routes. CMS/safety passed 5224/5224, UI/image regression 1669/1669, source static audit 532/532, SEO 198/198, and production-readiness 309/309 with zero advisories.
+- [x] 2026-09-12: Existing generated-site browser QA passed 56/56. New header/motion browser QA passed 27/27 across all 14 routes plus 981/980, 861/860, 740, and 390px responsive boundaries, confirming logo loading/containment, sticky position and stable height, mobile drawer containment/Escape close, anchor clearance, subtle reveal completion, reduced-motion fallback, no overflow, and no relevant console errors.
+- [x] 2026-09-12: QA screenshots/JSON are retained under `testing/evidence/`; temporary local server and isolated Chrome processes were stopped, temporary browser profiles were removed, and ports 4173/9223 were confirmed closed.
+- [x] 2026-09-12: Current task inventory is 24 tracked items — 0 in progress, 2 pending, 5 blocked/client-waiting, and 17 completed; 7 remain open. This enhancement is complete locally but is not live until the project owner commits/pushes it and confirms the GitHub Pages deployment.

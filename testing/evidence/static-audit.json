@@ -1,6 +1,6 @@
 {
-  "passed": 475,
-  "total": 475,
+  "passed": 532,
+  "total": 532,
   "failed": [],
   "results": [
     {
@@ -20,6 +20,24 @@
       "check": "image alt text",
       "passed": true,
       "detail": "0 missing"
+    },
+    {
+      "page": "index.html",
+      "check": "approved logo in header and footer",
+      "passed": true,
+      "detail": "2 logo images"
+    },
+    {
+      "page": "index.html",
+      "check": "legacy placeholder branding removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "shared interaction script",
+      "passed": true,
+      "detail": ""
     },
     {
       "page": "index.html",
@@ -84,6 +102,12 @@
     {
       "page": "index.html",
       "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
       "passed": true,
       "detail": ""
     },
@@ -311,6 +335,12 @@
     },
     {
       "page": "index.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "index.html",
       "check": "local reference: villas.html",
       "passed": true,
       "detail": ""
@@ -389,6 +419,24 @@
     },
     {
       "page": "villas.html",
+      "check": "approved logo in header and footer",
+      "passed": true,
+      "detail": "2 logo images"
+    },
+    {
+      "page": "villas.html",
+      "check": "legacy placeholder branding removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "shared interaction script",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
       "check": "safe new tabs",
       "passed": true,
       "detail": "0 missing noopener"
@@ -450,6 +498,12 @@
     {
       "page": "villas.html",
       "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
       "passed": true,
       "detail": ""
     },
@@ -629,6 +683,12 @@
     },
     {
       "page": "villas.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villas.html",
       "check": "local reference: villas.html",
       "passed": true,
       "detail": ""
@@ -701,6 +761,24 @@
     },
     {
       "page": "villa.html",
+      "check": "approved logo in header and footer",
+      "passed": true,
+      "detail": "2 logo images"
+    },
+    {
+      "page": "villa.html",
+      "check": "legacy placeholder branding removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "shared interaction script",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
       "check": "safe new tabs",
       "passed": true,
       "detail": "0 missing noopener"
@@ -762,6 +840,12 @@
     {
       "page": "villa.html",
       "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
       "passed": true,
       "detail": ""
     },
@@ -875,6 +959,12 @@
     },
     {
       "page": "villa.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
       "check": "local reference: villas.html",
       "passed": true,
       "detail": ""
@@ -947,6 +1037,24 @@
     },
     {
       "page": "locations.html",
+      "check": "approved logo in header and footer",
+      "passed": true,
+      "detail": "2 logo images"
+    },
+    {
+      "page": "locations.html",
+      "check": "legacy placeholder branding removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "shared interaction script",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
       "check": "safe new tabs",
       "passed": true,
       "detail": "0 missing noopener"
@@ -1008,6 +1116,12 @@
     {
       "page": "locations.html",
       "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
       "passed": true,
       "detail": ""
     },
@@ -1169,6 +1283,12 @@
     },
     {
       "page": "locations.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "locations.html",
       "check": "local reference: villas.html",
       "passed": true,
       "detail": ""
@@ -1216,6 +1336,12 @@
       "detail": ""
     },
     {
+      "page": "locations.html",
+      "check": "local reference: script.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "page": "about.html",
       "check": "one h1",
       "passed": true,
@@ -1232,6 +1358,24 @@
       "check": "image alt text",
       "passed": true,
       "detail": "0 missing"
+    },
+    {
+      "page": "about.html",
+      "check": "approved logo in header and footer",
+      "passed": true,
+      "detail": "2 logo images"
+    },
+    {
+      "page": "about.html",
+      "check": "legacy placeholder branding removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "shared interaction script",
+      "passed": true,
+      "detail": ""
     },
     {
       "page": "about.html",
@@ -1296,6 +1440,12 @@
     {
       "page": "about.html",
       "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
       "passed": true,
       "detail": ""
     },
@@ -1451,6 +1601,12 @@
     },
     {
       "page": "about.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "about.html",
       "check": "local reference: villas.html",
       "passed": true,
       "detail": ""
@@ -1498,6 +1654,12 @@
       "detail": ""
     },
     {
+      "page": "about.html",
+      "check": "local reference: script.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "page": "reviews.html",
       "check": "one h1",
       "passed": true,
@@ -1514,6 +1676,24 @@
       "check": "image alt text",
       "passed": true,
       "detail": "0 missing"
+    },
+    {
+      "page": "reviews.html",
+      "check": "approved logo in header and footer",
+      "passed": true,
+      "detail": "2 logo images"
+    },
+    {
+      "page": "reviews.html",
+      "check": "legacy placeholder branding removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "shared interaction script",
+      "passed": true,
+      "detail": ""
     },
     {
       "page": "reviews.html",
@@ -1578,6 +1758,12 @@
     {
       "page": "reviews.html",
       "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
       "passed": true,
       "detail": ""
     },
@@ -1715,6 +1901,12 @@
     },
     {
       "page": "reviews.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "reviews.html",
       "check": "local reference: villas.html",
       "passed": true,
       "detail": ""
@@ -1762,6 +1954,12 @@
       "detail": ""
     },
     {
+      "page": "reviews.html",
+      "check": "local reference: script.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "page": "guide.html",
       "check": "one h1",
       "passed": true,
@@ -1778,6 +1976,24 @@
       "check": "image alt text",
       "passed": true,
       "detail": "0 missing"
+    },
+    {
+      "page": "guide.html",
+      "check": "approved logo in header and footer",
+      "passed": true,
+      "detail": "2 logo images"
+    },
+    {
+      "page": "guide.html",
+      "check": "legacy placeholder branding removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "shared interaction script",
+      "passed": true,
+      "detail": ""
     },
     {
       "page": "guide.html",
@@ -1842,6 +2058,12 @@
     {
       "page": "guide.html",
       "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
       "passed": true,
       "detail": ""
     },
@@ -2021,6 +2243,12 @@
     },
     {
       "page": "guide.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "guide.html",
       "check": "local reference: villas.html",
       "passed": true,
       "detail": ""
@@ -2068,6 +2296,12 @@
       "detail": ""
     },
     {
+      "page": "guide.html",
+      "check": "local reference: script.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "page": "faq.html",
       "check": "one h1",
       "passed": true,
@@ -2084,6 +2318,24 @@
       "check": "image alt text",
       "passed": true,
       "detail": "0 missing"
+    },
+    {
+      "page": "faq.html",
+      "check": "approved logo in header and footer",
+      "passed": true,
+      "detail": "2 logo images"
+    },
+    {
+      "page": "faq.html",
+      "check": "legacy placeholder branding removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
+      "check": "shared interaction script",
+      "passed": true,
+      "detail": ""
     },
     {
       "page": "faq.html",
@@ -2153,6 +2405,12 @@
     },
     {
       "page": "faq.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
       "check": "local reference: villas.html",
       "passed": true,
       "detail": ""
@@ -2285,6 +2543,12 @@
     },
     {
       "page": "faq.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "faq.html",
       "check": "local reference: villas.html",
       "passed": true,
       "detail": ""
@@ -2332,6 +2596,12 @@
       "detail": ""
     },
     {
+      "page": "faq.html",
+      "check": "local reference: script.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "page": "policies.html",
       "check": "one h1",
       "passed": true,
@@ -2348,6 +2618,24 @@
       "check": "image alt text",
       "passed": true,
       "detail": "0 missing"
+    },
+    {
+      "page": "policies.html",
+      "check": "approved logo in header and footer",
+      "passed": true,
+      "detail": "2 logo images"
+    },
+    {
+      "page": "policies.html",
+      "check": "legacy placeholder branding removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
+      "check": "shared interaction script",
+      "passed": true,
+      "detail": ""
     },
     {
       "page": "policies.html",
@@ -2417,6 +2705,12 @@
     },
     {
       "page": "policies.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
       "check": "local reference: villas.html",
       "passed": true,
       "detail": ""
@@ -2543,6 +2837,12 @@
     },
     {
       "page": "policies.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "policies.html",
       "check": "local reference: villas.html",
       "passed": true,
       "detail": ""
@@ -2590,6 +2890,12 @@
       "detail": ""
     },
     {
+      "page": "policies.html",
+      "check": "local reference: script.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "page": "contact.html",
       "check": "one h1",
       "passed": true,
@@ -2606,6 +2912,24 @@
       "check": "image alt text",
       "passed": true,
       "detail": "0 missing"
+    },
+    {
+      "page": "contact.html",
+      "check": "approved logo in header and footer",
+      "passed": true,
+      "detail": "2 logo images"
+    },
+    {
+      "page": "contact.html",
+      "check": "legacy placeholder branding removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "shared interaction script",
+      "passed": true,
+      "detail": ""
     },
     {
       "page": "contact.html",
@@ -2670,6 +2994,12 @@
     {
       "page": "contact.html",
       "check": "local reference: index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
       "passed": true,
       "detail": ""
     },
@@ -2807,6 +3137,12 @@
     },
     {
       "page": "contact.html",
+      "check": "local reference: assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
       "check": "local reference: villas.html",
       "passed": true,
       "detail": ""
@@ -2850,6 +3186,12 @@
     {
       "page": "contact.html",
       "check": "local reference: contact.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "contact.html",
+      "check": "local reference: script.js",
       "passed": true,
       "detail": ""
     }

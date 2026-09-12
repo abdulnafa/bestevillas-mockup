@@ -177,7 +177,7 @@
       "target": "index.html",
       "check": "images reserve intrinsic space",
       "passed": true,
-      "detail": "0 of 8 lack width/height",
+      "detail": "0 of 10 lack width/height",
       "severity": "advisory"
     },
     {
@@ -353,7 +353,7 @@
       "target": "villas.html",
       "check": "images reserve intrinsic space",
       "passed": true,
-      "detail": "0 of 5 lack width/height",
+      "detail": "0 of 7 lack width/height",
       "severity": "advisory"
     },
     {
@@ -529,7 +529,7 @@
       "target": "villa.html",
       "check": "images reserve intrinsic space",
       "passed": true,
-      "detail": "0 of 5 lack width/height",
+      "detail": "0 of 7 lack width/height",
       "severity": "advisory"
     },
     {
@@ -705,7 +705,7 @@
       "target": "locations.html",
       "check": "images reserve intrinsic space",
       "passed": true,
-      "detail": "0 of 4 lack width/height",
+      "detail": "0 of 6 lack width/height",
       "severity": "advisory"
     },
     {
@@ -881,7 +881,7 @@
       "target": "about.html",
       "check": "images reserve intrinsic space",
       "passed": true,
-      "detail": "0 of 3 lack width/height",
+      "detail": "0 of 5 lack width/height",
       "severity": "advisory"
     },
     {
@@ -1057,7 +1057,7 @@
       "target": "reviews.html",
       "check": "images reserve intrinsic space",
       "passed": true,
-      "detail": "0 of 2 lack width/height",
+      "detail": "0 of 4 lack width/height",
       "severity": "advisory"
     },
     {
@@ -1233,7 +1233,7 @@
       "target": "guide.html",
       "check": "images reserve intrinsic space",
       "passed": true,
-      "detail": "0 of 6 lack width/height",
+      "detail": "0 of 8 lack width/height",
       "severity": "advisory"
     },
     {
@@ -1409,7 +1409,7 @@
       "target": "faq.html",
       "check": "images reserve intrinsic space",
       "passed": true,
-      "detail": "0 of 1 lack width/height",
+      "detail": "0 of 3 lack width/height",
       "severity": "advisory"
     },
     {
@@ -1585,7 +1585,7 @@
       "target": "policies.html",
       "check": "images reserve intrinsic space",
       "passed": true,
-      "detail": "0 of 1 lack width/height",
+      "detail": "0 of 3 lack width/height",
       "severity": "advisory"
     },
     {
@@ -1761,7 +1761,7 @@
       "target": "contact.html",
       "check": "images reserve intrinsic space",
       "passed": true,
-      "detail": "0 of 3 lack width/height",
+      "detail": "0 of 5 lack width/height",
       "severity": "advisory"
     },
     {

@@ -213,6 +213,16 @@ async function auditGeneratedImages(html, outputPath, basePath) {
     const target = `${outputPath} image ${index + 1}`;
     const width = Number(attrs.width);
     const height = Number(attrs.height);
+    const isBrandLogo = classList(tag).has("brand-logo");
+
+    if (isBrandLogo) {
+      record("brand-logo", target, "uses the approved transparent logo asset", /assets\/images\/brand\/best-e-villas-logo-white\.png$/i.test(attrs.src || ""), attrs.src || "missing");
+      record("brand-logo", target, "declares the validated intrinsic logo dimensions", width === 1015 && height === 245, `${attrs.width || "missing"}x${attrs.height || "missing"}`);
+      record("brand-logo", target, "is decorative inside an accessible brand link", attrs.alt === "" && attrs["aria-hidden"] === "true", `alt=${JSON.stringify(attrs.alt)}, aria-hidden=${attrs["aria-hidden"] || "missing"}`);
+      record("brand-logo", target, "uses asynchronous decoding and an explicit load strategy", attrs.decoding === "async" && ["eager", "lazy"].includes(attrs.loading), `${attrs.decoding || "missing"}/${attrs.loading || "missing"}`);
+      continue;
+    }
+
     const responsiveSrcset = attrs.srcset || attrs["data-responsive-srcset"] || "";
     const candidateEntries = responsiveSrcset.split(",").map((item) => {
       const [url, descriptor] = item.trim().split(/\s+/, 2);

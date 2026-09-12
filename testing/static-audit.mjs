@@ -36,12 +36,16 @@ for (const page of pages) {
   const h1Count = (html.match(/<h1\b/gi) || []).length;
   const images = [...html.matchAll(/<img\b[^>]*>/gi)].map((match) => match[0]);
   const imagesWithoutAlt = images.filter((image) => !/\balt=["'][^"']*["']/i.test(image));
+  const brandLogos = images.filter((image) => /\bclass=["'][^"']*\bbrand-logo\b[^"']*["']/i.test(image));
   const blankTargetLinks = [...html.matchAll(/<a\b[^>]*target=["']_blank["'][^>]*>/gi)].map((match) => match[0]);
   const unsafeBlankLinks = blankTargetLinks.filter((link) => !/\brel=["'][^"']*noopener[^"']*["']/i.test(link));
 
   record(page, "one h1", h1Count === 1, `found ${h1Count}`);
   record(page, "unique ids", duplicateIds.length === 0, duplicateIds.join(", "));
   record(page, "image alt text", imagesWithoutAlt.length === 0, `${imagesWithoutAlt.length} missing`);
+  record(page, "approved logo in header and footer", brandLogos.length === 2 && brandLogos.every((image) => /assets\/images\/brand\/best-e-villas-logo-white\.png/i.test(image)), `${brandLogos.length} logo images`);
+  record(page, "legacy placeholder branding removed", !/\bbrand-(?:mark|copy)\b/i.test(html));
+  record(page, "shared interaction script", /<script\s+src=["']script\.js["']><\/script>/i.test(html));
   record(page, "safe new tabs", unsafeBlankLinks.length === 0, `${unsafeBlankLinks.length} missing noopener`);
   record(page, "title", /<title>[^<]+<\/title>/i.test(html));
   record(page, "meta description", /<meta\s+name=["']description["']/i.test(html) || /<meta[\s\S]*?name=["']description["']/i.test(html));

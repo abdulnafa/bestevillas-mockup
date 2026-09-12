@@ -1,0 +1,143 @@
+{
+  "generatedAt": "2026-09-12T15:58:43.918Z",
+  "passed": 27,
+  "total": 27,
+  "failed": [],
+  "results": [
+    {
+      "name": "Desktop sticky shell and logo: index.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":84,\"scrolledHeight\":84,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":9,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Desktop sticky shell and logo: villas.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":84,\"scrolledHeight\":84,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":6,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Desktop sticky shell and logo: villa.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":84,\"scrolledHeight\":84,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":10,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Desktop sticky shell and logo: locations.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":87,\"scrolledHeight\":87,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":8,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Desktop sticky shell and logo: about.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":87,\"scrolledHeight\":87,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":6,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Desktop sticky shell and logo: reviews.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":87,\"scrolledHeight\":87,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":4,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Desktop sticky shell and logo: guide.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":87,\"scrolledHeight\":87,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":8,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Desktop sticky shell and logo: faq.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":87,\"scrolledHeight\":87,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":4,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Desktop sticky shell and logo: policies.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":87,\"scrolledHeight\":87,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":2,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Desktop sticky shell and logo: contact.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":87,\"scrolledHeight\":87,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":6,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Desktop sticky shell and logo: villas/prospect-three.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":84,\"scrolledHeight\":84,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":10,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Desktop sticky shell and logo: villas/prospect-two.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":84,\"scrolledHeight\":84,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":10,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Desktop sticky shell and logo: villas/providence.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":84,\"scrolledHeight\":84,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":10,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Desktop sticky shell and logo: villas/st-silas.html",
+      "passed": true,
+      "detail": "{\"missing\":false,\"position\":\"sticky\",\"initialTop\":0,\"scrolledTop\":0,\"initialHeight\":84,\"scrolledHeight\":84,\"scrolledClass\":true,\"logoReady\":true,\"logoWidth\":220,\"logoHeight\":52,\"logoContained\":true,\"revealCount\":10,\"hiddenAboveFold\":0,\"overflow\":false,\"smooth\":\"smooth\",\"viewport\":{\"width\":1440,\"height\":1000}}"
+    },
+    {
+      "name": "Responsive header breakpoint: index.html at 981px",
+      "passed": true,
+      "detail": "{\"sticky\":\"sticky\",\"logoReady\":true,\"logoContained\":true,\"toggleVisible\":false,\"togglePosition\":\"static\",\"navVisible\":true,\"overflow\":false}"
+    },
+    {
+      "name": "Responsive header breakpoint: index.html at 980px",
+      "passed": true,
+      "detail": "{\"sticky\":\"sticky\",\"logoReady\":true,\"logoContained\":true,\"toggleVisible\":true,\"togglePosition\":\"static\",\"navVisible\":false,\"overflow\":false}"
+    },
+    {
+      "name": "Responsive header breakpoint: locations.html at 861px",
+      "passed": true,
+      "detail": "{\"sticky\":\"sticky\",\"logoReady\":true,\"logoContained\":true,\"toggleVisible\":false,\"togglePosition\":\"static\",\"navVisible\":true,\"overflow\":false}"
+    },
+    {
+      "name": "Responsive header breakpoint: locations.html at 860px",
+      "passed": true,
+      "detail": "{\"sticky\":\"sticky\",\"logoReady\":true,\"logoContained\":true,\"toggleVisible\":true,\"togglePosition\":\"static\",\"navVisible\":false,\"overflow\":false}"
+    },
+    {
+      "name": "Responsive header breakpoint: locations.html at 740px",
+      "passed": true,
+      "detail": "{\"sticky\":\"sticky\",\"logoReady\":true,\"logoContained\":true,\"toggleVisible\":true,\"togglePosition\":\"static\",\"navVisible\":false,\"overflow\":false}"
+    },
+    {
+      "name": "Responsive header breakpoint: locations.html at 390px",
+      "passed": true,
+      "detail": "{\"sticky\":\"sticky\",\"logoReady\":true,\"logoContained\":true,\"toggleVisible\":true,\"togglePosition\":\"static\",\"navVisible\":false,\"overflow\":false}"
+    },
+    {
+      "name": "Mobile sticky drawer remains contained and closes with Escape",
+      "passed": true,
+      "detail": "{\"opened\":{\"headerTop\":0,\"expanded\":\"true\",\"hidden\":\"false\",\"display\":\"flex\",\"bodyLocked\":true,\"navContained\":true,\"overflow\":false},\"closedExpanded\":\"false\",\"closedDisplay\":\"none\"}"
+    },
+    {
+      "name": "Sticky-header anchor clearance: index.html#booking",
+      "passed": true,
+      "detail": "{\"headerBottom\":84,\"targetTop\":100,\"delta\":16,\"hash\":\"#booking\"}"
+    },
+    {
+      "name": "Sticky-header anchor clearance: villas.html#villa-results",
+      "passed": true,
+      "detail": "{\"headerBottom\":84,\"targetTop\":100,\"delta\":16,\"hash\":\"#villa-results\"}"
+    },
+    {
+      "name": "Sticky-header anchor clearance: villas/prospect-three.html#availability",
+      "passed": true,
+      "detail": "{\"headerBottom\":84,\"targetTop\":100.03125,\"delta\":16.03125,\"hash\":\"#availability\"}"
+    },
+    {
+      "name": "Subtle reveal motion is progressive and completes on entry",
+      "passed": true,
+      "detail": "{\"missing\":false,\"count\":8,\"hiddenAboveFold\":0,\"before\":{\"opacity\":\"0\",\"transform\":\"matrix(1, 0, 0, 1, 0, 16)\",\"visible\":false},\"after\":{\"opacity\":\"1\",\"transform\":\"none\",\"visible\":true}}"
+    },
+    {
+      "name": "Reduced-motion preference disables smooth/reveal motion",
+      "passed": true,
+      "detail": "{\"media\":true,\"scrollBehavior\":\"auto\",\"motionReady\":false,\"count\":8,\"allVisible\":true,\"maxTransitionMs\":0.01}"
+    },
+    {
+      "name": "Header and motion browser console health",
+      "passed": true,
+      "detail": "[]"
+    }
+  ]
+}

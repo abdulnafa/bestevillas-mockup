@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-12T05:39:26.164Z",
-  "passed": 5078,
-  "total": 5078,
+  "generatedAt": "2026-09-12T16:00:55.499Z",
+  "passed": 5224,
+  "total": 5224,
   "failed": [],
   "results": [
     {
@@ -2786,6 +2786,20 @@
     {
       "suite": "base-path",
       "target": "dist/about.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/about.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/about.html",
       "check": "/bestevillas-mockup/villas.html",
       "passed": true,
       "detail": "expected prefix /bestevillas-mockup/"
@@ -3048,6 +3062,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/about.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/about.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -3388,6 +3416,20 @@
     {
       "suite": "base-path",
       "target": "dist/contact.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/contact.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/contact.html",
       "check": "/bestevillas-mockup/villas.html",
       "passed": true,
       "detail": "expected prefix /bestevillas-mockup/"
@@ -3650,6 +3692,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/contact.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/contact.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -3990,6 +4046,20 @@
     {
       "suite": "base-path",
       "target": "dist/faq.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/faq.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/faq.html",
       "check": "/bestevillas-mockup/villas.html",
       "passed": true,
       "detail": "expected prefix /bestevillas-mockup/"
@@ -4224,6 +4294,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/faq.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/faq.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -4476,6 +4560,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/guide.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/guide.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -4756,6 +4854,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/guide.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/guide.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -5134,6 +5246,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/index.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/index.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -5540,6 +5666,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/index.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/index.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -6132,6 +6272,20 @@
     {
       "suite": "base-path",
       "target": "dist/locations.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/locations.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/locations.html",
       "check": "/bestevillas-mockup/villas.html",
       "passed": true,
       "detail": "expected prefix /bestevillas-mockup/"
@@ -6408,6 +6562,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/locations.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/locations.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -6790,6 +6958,20 @@
     {
       "suite": "base-path",
       "target": "dist/policies.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/policies.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/policies.html",
       "check": "/bestevillas-mockup/villas.html",
       "passed": true,
       "detail": "expected prefix /bestevillas-mockup/"
@@ -7024,6 +7206,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/policies.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/policies.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -7280,6 +7476,20 @@
     {
       "suite": "base-path",
       "target": "dist/reviews.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/reviews.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/reviews.html",
       "check": "/bestevillas-mockup/villas.html",
       "passed": true,
       "detail": "expected prefix /bestevillas-mockup/"
@@ -7528,6 +7738,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/reviews.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/reviews.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -7822,6 +8046,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/villa.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/villa.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -8158,6 +8396,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/villa.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/villa.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -8722,6 +8974,20 @@
     {
       "suite": "base-path",
       "target": "dist/villas.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/villas.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/villas.html",
       "check": "/bestevillas-mockup/villas.html",
       "passed": true,
       "detail": "expected prefix /bestevillas-mockup/"
@@ -9152,6 +9418,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/villas.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/villas.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -9618,6 +9898,20 @@
     {
       "suite": "base-path",
       "target": "dist/villas/prospect-three.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/villas/prospect-three.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/villas/prospect-three.html",
       "check": "/bestevillas-mockup/villas.html",
       "passed": true,
       "detail": "expected prefix /bestevillas-mockup/"
@@ -9950,6 +10244,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/villas/prospect-three.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/villas/prospect-three.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -10514,6 +10822,20 @@
     {
       "suite": "base-path",
       "target": "dist/villas/prospect-two.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/villas/prospect-two.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/villas/prospect-two.html",
       "check": "/bestevillas-mockup/villas.html",
       "passed": true,
       "detail": "expected prefix /bestevillas-mockup/"
@@ -10846,6 +11168,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/villas/prospect-two.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/villas/prospect-two.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -11406,6 +11742,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/villas/providence.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/villas/providence.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -11742,6 +12092,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/villas/providence.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/villas/providence.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -12302,6 +12666,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/villas/st-silas.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/villas/st-silas.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -12638,6 +13016,20 @@
       "check": "/bestevillas-mockup/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "dist/villas/st-silas.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /bestevillas-mockup/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "dist/villas/st-silas.html",
+      "check": "/bestevillas-mockup/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -16023,6 +16415,20 @@
     {
       "suite": "base-path",
       "target": "isolated-preview/about.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/about.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/about.html",
       "check": "/qa-preview/villas.html",
       "passed": true,
       "detail": "expected prefix /qa-preview/"
@@ -16285,6 +16691,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/about.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/about.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -16625,6 +17045,20 @@
     {
       "suite": "base-path",
       "target": "isolated-preview/contact.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/contact.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/contact.html",
       "check": "/qa-preview/villas.html",
       "passed": true,
       "detail": "expected prefix /qa-preview/"
@@ -16887,6 +17321,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/contact.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/contact.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -17227,6 +17675,20 @@
     {
       "suite": "base-path",
       "target": "isolated-preview/faq.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/faq.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/faq.html",
       "check": "/qa-preview/villas.html",
       "passed": true,
       "detail": "expected prefix /qa-preview/"
@@ -17461,6 +17923,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/faq.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/faq.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -17713,6 +18189,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/guide.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/guide.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -18021,6 +18511,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/guide.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/guide.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -18445,6 +18949,20 @@
     {
       "suite": "base-path",
       "target": "isolated-preview/guide/qa-escaping-guide.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/guide/qa-escaping-guide.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/guide/qa-escaping-guide.html",
       "check": "/qa-preview/villas.html",
       "passed": true,
       "detail": "expected prefix /qa-preview/"
@@ -18679,6 +19197,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/guide/qa-escaping-guide.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/guide/qa-escaping-guide.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -18931,6 +19463,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/index.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/index.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -19337,6 +19883,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/index.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/index.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -19929,6 +20489,20 @@
     {
       "suite": "base-path",
       "target": "isolated-preview/locations.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/locations.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/locations.html",
       "check": "/qa-preview/villas.html",
       "passed": true,
       "detail": "expected prefix /qa-preview/"
@@ -20205,6 +20779,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/locations.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/locations.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -20587,6 +21175,20 @@
     {
       "suite": "base-path",
       "target": "isolated-preview/policies.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/policies.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/policies.html",
       "check": "/qa-preview/villas.html",
       "passed": true,
       "detail": "expected prefix /qa-preview/"
@@ -20821,6 +21423,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/policies.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/policies.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -21077,6 +21693,20 @@
     {
       "suite": "base-path",
       "target": "isolated-preview/reviews.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/reviews.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/reviews.html",
       "check": "/qa-preview/villas.html",
       "passed": true,
       "detail": "expected prefix /qa-preview/"
@@ -21325,6 +21955,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/reviews.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/reviews.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -21619,6 +22263,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/villa.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/villa.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -21955,6 +22613,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/villa.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/villa.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -22519,6 +23191,20 @@
     {
       "suite": "base-path",
       "target": "isolated-preview/villas.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/villas.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/villas.html",
       "check": "/qa-preview/villas.html",
       "passed": true,
       "detail": "expected prefix /qa-preview/"
@@ -22949,6 +23635,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/villas.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/villas.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -23415,6 +24115,20 @@
     {
       "suite": "base-path",
       "target": "isolated-preview/villas/prospect-three.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/villas/prospect-three.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/villas/prospect-three.html",
       "check": "/qa-preview/villas.html",
       "passed": true,
       "detail": "expected prefix /qa-preview/"
@@ -23747,6 +24461,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/villas/prospect-three.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/villas/prospect-three.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -24311,6 +25039,20 @@
     {
       "suite": "base-path",
       "target": "isolated-preview/villas/prospect-two.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/villas/prospect-two.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/villas/prospect-two.html",
       "check": "/qa-preview/villas.html",
       "passed": true,
       "detail": "expected prefix /qa-preview/"
@@ -24643,6 +25385,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/villas/prospect-two.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/villas/prospect-two.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -25203,6 +25959,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/villas/providence.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/villas/providence.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -25539,6 +26309,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/villas/providence.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/villas/providence.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -26099,6 +26883,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/villas/st-silas.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/villas/st-silas.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -26435,6 +27233,20 @@
       "check": "/qa-preview/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "base-path",
+      "target": "isolated-preview/villas/st-silas.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "expected prefix /qa-preview/"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-preview/villas/st-silas.html",
+      "check": "/qa-preview/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "base-path",
@@ -26917,84 +27729,84 @@
       "target": "isolated-preview/internal-pages.css",
       "check": "assets/fonts/dm-sans-latin.woff2",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\fonts\\dm-sans-latin.woff2"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\preview\\assets\\fonts\\dm-sans-latin.woff2"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/fonts/dm-sans-latin.woff2",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\fonts\\dm-sans-latin.woff2"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\preview\\assets\\fonts\\dm-sans-latin.woff2"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/villa-interior.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\villa-interior.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\preview\\assets\\images\\villa-interior.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/villa-hero.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\villa-hero.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\preview\\assets\\images\\villa-hero.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/providence-terrace.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\providence-terrace.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\preview\\assets\\images\\providence-terrace.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/villa-pool.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\villa-pool.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\preview\\assets\\images\\villa-pool.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/villa-hero.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\villa-hero.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\preview\\assets\\images\\villa-hero.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/villa-interior.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\villa-interior.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\preview\\assets\\images\\villa-interior.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/barbados-life.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\barbados-life.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\preview\\assets\\images\\barbados-life.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/villa-hero.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\villa-hero.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\preview\\assets\\images\\villa-hero.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/new/pixieset-terrace.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\new\\pixieset-terrace.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\preview\\assets\\images\\new\\pixieset-terrace.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/new/pixieset-garden-exterior.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\new\\pixieset-garden-exterior.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\preview\\assets\\images\\new\\pixieset-garden-exterior.jpg"
     },
     {
       "suite": "escaping",
@@ -29883,6 +30695,13 @@
     {
       "suite": "local-refs",
       "target": "isolated-production/about.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/about.html",
       "check": "/villas.html",
       "passed": true,
       "detail": "villas.html"
@@ -30012,6 +30831,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/about.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -30184,6 +31010,13 @@
     {
       "suite": "local-refs",
       "target": "isolated-production/contact.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/contact.html",
       "check": "/villas.html",
       "passed": true,
       "detail": "villas.html"
@@ -30313,6 +31146,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/contact.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -30485,6 +31325,13 @@
     {
       "suite": "local-refs",
       "target": "isolated-production/faq.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/faq.html",
       "check": "/villas.html",
       "passed": true,
       "detail": "villas.html"
@@ -30600,6 +31447,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/faq.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -30726,6 +31580,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/guide.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -30880,6 +31741,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/guide.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -31094,6 +31962,13 @@
     {
       "suite": "local-refs",
       "target": "isolated-production/guide/qa-escaping-guide.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/guide/qa-escaping-guide.html",
       "check": "/villas.html",
       "passed": true,
       "detail": "villas.html"
@@ -31209,6 +32084,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/guide/qa-escaping-guide.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -31335,6 +32217,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/index.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -31538,6 +32427,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/index.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -31836,6 +32732,13 @@
     {
       "suite": "local-refs",
       "target": "isolated-production/locations.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/locations.html",
       "check": "/villas.html",
       "passed": true,
       "detail": "villas.html"
@@ -31972,6 +32875,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/locations.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -32165,6 +33075,13 @@
     {
       "suite": "local-refs",
       "target": "isolated-production/policies.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/policies.html",
       "check": "/villas.html",
       "passed": true,
       "detail": "villas.html"
@@ -32280,6 +33197,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/policies.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -32410,6 +33334,13 @@
     {
       "suite": "local-refs",
       "target": "isolated-production/reviews.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/reviews.html",
       "check": "/villas.html",
       "passed": true,
       "detail": "villas.html"
@@ -32532,6 +33463,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/reviews.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -32679,6 +33617,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/villa.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -32847,6 +33792,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/villa.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -33131,6 +34083,13 @@
     {
       "suite": "local-refs",
       "target": "isolated-production/villas.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/villas.html",
       "check": "/villas.html",
       "passed": true,
       "detail": "villas.html"
@@ -33344,6 +34303,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/villas.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -33579,6 +34545,13 @@
     {
       "suite": "local-refs",
       "target": "isolated-production/villas/prospect-three.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/villas/prospect-three.html",
       "check": "/villas.html",
       "passed": true,
       "detail": "villas.html"
@@ -33743,6 +34716,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/villas/prospect-three.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -34027,6 +35007,13 @@
     {
       "suite": "local-refs",
       "target": "isolated-production/villas/prospect-two.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/villas/prospect-two.html",
       "check": "/villas.html",
       "passed": true,
       "detail": "villas.html"
@@ -34191,6 +35178,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/villas/prospect-two.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -34471,6 +35465,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/villas/providence.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -34639,6 +35640,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/villas/providence.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -34919,6 +35927,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/villas/st-silas.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -35087,6 +36102,13 @@
       "check": "/index.html",
       "passed": true,
       "detail": "index.html"
+    },
+    {
+      "suite": "local-refs",
+      "target": "isolated-production/villas/st-silas.html",
+      "check": "/assets/images/brand/best-e-villas-logo-white.png",
+      "passed": true,
+      "detail": "assets\\images\\brand\\best-e-villas-logo-white.png"
     },
     {
       "suite": "local-refs",
@@ -35331,84 +36353,84 @@
       "target": "isolated-production/internal-pages.css",
       "check": "assets/fonts/dm-sans-latin.woff2",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\fonts\\dm-sans-latin.woff2"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\production\\assets\\fonts\\dm-sans-latin.woff2"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/fonts/dm-sans-latin.woff2",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\fonts\\dm-sans-latin.woff2"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\production\\assets\\fonts\\dm-sans-latin.woff2"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/villa-interior.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\villa-interior.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\production\\assets\\images\\villa-interior.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/villa-hero.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\villa-hero.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\production\\assets\\images\\villa-hero.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/providence-terrace.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\providence-terrace.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\production\\assets\\images\\providence-terrace.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/villa-pool.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\villa-pool.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\production\\assets\\images\\villa-pool.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/villa-hero.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\villa-hero.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\production\\assets\\images\\villa-hero.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/villa-interior.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\villa-interior.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\production\\assets\\images\\villa-interior.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/barbados-life.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\barbados-life.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\production\\assets\\images\\barbados-life.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/villa-hero.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\villa-hero.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\production\\assets\\images\\villa-hero.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/new/pixieset-terrace.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\new\\pixieset-terrace.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\production\\assets\\images\\new\\pixieset-terrace.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/new/pixieset-garden-exterior.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\new\\pixieset-garden-exterior.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\production\\assets\\images\\new\\pixieset-garden-exterior.jpg"
     },
     {
       "suite": "escaping",
@@ -35520,7 +36542,7 @@
       "target": "foreign directory",
       "check": "unrecognized output directory is refused",
       "passed": true,
-      "detail": "Build failed: Refusing to replace C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\foreign-output: it is not a recognized Best E Villas build directory. Command failed: C:\\Program Files\\nodejs\\node.exe D:\\Programming languages\\Ninja Tech Sol\\2026\\bestevillas\\project\\scripts\\build.mjs --content C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\content --out C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\foreign-output --mode"
+      "detail": "Build failed: Refusing to replace C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\foreign-output: it is not a recognized Best E Villas build directory. Command failed: C:\\Program Files\\nodejs\\node.exe D:\\Programming languages\\Ninja Tech Sol\\2026\\bestevillas\\project\\scripts\\build.mjs --content C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\content --out C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\foreign-output --mode"
     },
     {
       "suite": "output-safety",
@@ -35534,7 +36556,7 @@
       "target": "duplicate slug",
       "check": "build rejects duplicate content slug",
       "passed": true,
-      "detail": "Build failed: Duplicate slug \"prospect-two\" in villas/qa-duplicate-villa.md; already used by villas/prospect-two.md. Command failed: C:\\Program Files\\nodejs\\node.exe D:\\Programming languages\\Ninja Tech Sol\\2026\\bestevillas\\project\\scripts\\build.mjs --content C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\content --out C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\duplicate --mode production --base-path / Build failed: Duplicate slug \"prospect-"
+      "detail": "Build failed: Duplicate slug \"prospect-two\" in villas/qa-duplicate-villa.md; already used by villas/prospect-two.md. Command failed: C:\\Program Files\\nodejs\\node.exe D:\\Programming languages\\Ninja Tech Sol\\2026\\bestevillas\\project\\scripts\\build.mjs --content C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\content --out C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-jR3giE\\duplicate --mode production --base-path / Build failed: Duplicate slug \"prospect-"
     },
     {
       "suite": "output-safety",
