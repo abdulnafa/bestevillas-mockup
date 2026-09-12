@@ -43,6 +43,7 @@
 - [x] Desktop navigation drawer must remain closed by default and must never cover page content unless the user explicitly opens the mobile menu.
 - [x] Content and location imagery must use controlled, consistent display dimensions rather than excessively tall image panels.
 - [x] The published preview must load promptly; non-critical imagery should not block the first screen and image payloads should be optimized for their rendered size.
+- [x] Villa gallery, property facts, and availability controls must remain in separate, readable layout regions with no overlap or clipped controls at any supported viewport.
 
 ### Assumptions awaiting confirmation
 
@@ -67,6 +68,7 @@
 - [ ] Website/CMS, hosting, domain, and repository authorization; the GA4 Measurement ID, consent decision, Google Analytics, and Search Console access will be provided for production activation. Do not store credentials in project files.
 - [ ] Exact ASAP launch deadline, if the client has a hard date.
 - [ ] Final client approval for policies, occupancy details, and production copy; the Policies page remains noindex until approved.
+- [ ] Repository owner must change GitHub **Settings → Pages → Build and deployment → Source** to **GitHub Actions**, then publish this hotfix and verify the generated live marker/pretty villa route before the client is told the issue is fixed.
 
 ### Completed
 
@@ -86,6 +88,7 @@
 - [x] Technical CMS-to-static migration completed: editable content now renders into deployable pages, including four pre-rendered villa routes and future Guide posts; safe validation, legacy URL compatibility, and the GitHub Pages build/deployment workflow are in place — 2026-09-11.
 
 - [x] Client-reported preview regressions corrected locally: the desktop navigation drawer stays closed, headers no longer clip, internal-page images use controlled 4:3 frames, responsive/lazy image delivery is in place, and future CMS uploads are automatically optimized during the staged build — 2026-09-11.
+- [x] Client-reported villa-page overlap corrected locally: square and landscape gallery images are contained within bounded grid tracks, facts and availability controls stay separate, both generated and legacy/source villa layouts pass collision-focused desktop/mobile QA, and a follow-up deployment safeguard prevents the branch Pages job from remaining the last publisher — 2026-09-12.
 
 ## Client communication log
 
@@ -101,6 +104,7 @@
 | 2026-09-11 | Client update | A concise progress message was prepared covering the completed pages, villa booking hand-offs, content-management setup, responsive checks, and remaining client inputs. | Ready for the project owner to send; no external message was sent by the assistant |
 | 2026-09-11 | Publishing handoff | The project owner requested manual Git push commands and a post-publication client update. | Commands and message prepared; push/deployment not executed by the assistant |
 | 2026-09-11 | Regression report | After publication, the client reported excessively tall images on multiple pages, a navigation panel visibly open on the right, clipped page content, and slow loading; screenshots show the Locations page affected on desktop. | Corrected and independently re-verified locally; push and GitHub Pages deployment are required before asking the client to refresh |
+| 2026-09-12 | Regression report | Client screenshot of `villa.html?villa=prospect-three` shows the availability card and villa facts covering the gallery, with the availability action clipped on desktop. | Corrected and visually verified locally; repository push, Pages Source change, generated deployment, and live verification are still required before sending a completion update |
 
 ## Key technical notes
 
@@ -120,10 +124,13 @@
 - The staged build uses pinned Sharp image processing to auto-orient and optimize published imagery, generate 480px and 960px responsive candidates, strip unnecessary metadata where re-encoding is needed, enforce byte budgets, and leave original CMS/source files untouched. The current 20 referenced source images generate 40 responsive derivatives only inside the deployable build; unpublished drafts are excluded from optimization so they cannot block a public deployment on size grounds.
 - The four villa pages have crawlable pre-rendered URLs under `villas/`. Known legacy `villa.html?villa=...` links redirect to the matching new route and the legacy page remains noindex.
 - `.github/workflows/deploy-pages.yml` installs pinned dependencies, builds for the GitHub Pages preview path, runs both CMS and UI regression gates before artifact upload, and deploys with job-scoped permissions. No push or deployment was performed in this task.
+- Public inspection on 2026-09-12 confirmed that GitHub Pages was serving the tracked root/source `villa.html` rather than generated `dist/villa.html`: the live pretty villa route returned 404, and both the custom artifact workflow and GitHub's automatic `pages build and deployment` workflow succeeded for commit `de7c577`. The branch-source deployment overwrote the generated artifact. The custom workflow now safely follows a successful automatic Pages run and checks out its exact SHA so the generated artifact publishes last, but the repository owner must still select **GitHub Actions** as the sole Pages source.
+- The Prospect Three overlap was caused by CSS Grid intrinsic sizing: its square 1440×1440 lead photo could force gallery children beyond the gallery's declared desktop height. The gallery now uses a bounded row, zero minimum child sizes, explicitly contained media, and content-driven mobile resets.
+- Collision-focused rendered QA now checks gallery/main/thumbnail/summary/facts/booking/button rectangles, button hit targets and label clipping, every gallery selection, all four villas at desktop size, Prospect Three around the 1180px/980px/740px breakpoints down to 390px, and the legacy source fallback separately.
 - All ten routes now include unique production canonicals, social-sharing metadata, and route-appropriate JSON-LD. `robots.txt` and `sitemap.xml` use the verified non-www canonical origin.
 - `analytics.js` makes no analytics request without a valid GA4 Measurement ID. Production still needs the real ID and consent activation.
 - All local HTML images reserve intrinsic space with verified width/height values to reduce layout shift.
-- The 2026-09-11 implementation is local and has not been committed, pushed, or deployed in this task.
+- Commit `de7c577` is present on `origin/main`; the 2026-09-12 overlap/deployment hotfix in the current working tree has not been committed, pushed, or deployed by the assistant.
 
 ## Latest validation
 
@@ -157,3 +164,8 @@
 - [x] 2026-09-11: Visual evidence confirms Locations navigation is closed, St. Silas/Providence images render in normal 4:3 frames, and carousel/villa gallery frames remain populated after interaction. Independent base-path QA also found 58/58 images responsive, below-fold location images deferred until scroll, and no missing resources, HTTP failures, overflow, or console errors.
 - [x] 2026-09-11: A production-mode root build generated all 14 routes and 40 responsive derivatives successfully. A source-integrity check rebuilt all 30 source images with zero hash changes; no generated 480px/960px variants remain in the source tree.
 - [x] 2026-09-11: Current task inventory is 22 tracked items — 0 in progress, 2 pending, 5 blocked/client-waiting, and 15 completed; 7 remain open. The regression fix is complete locally but is not live until the project owner commits and pushes it and GitHub Pages finishes deploying.
+- [x] 2026-09-12: Live HTTP and public Actions inspection proved the deployment mismatch: legacy `/villa.html?villa=prospect-three` returned the 13,030-byte tracked source page, generated `/villas/prospect-three.html` returned 404, and two Pages workflows had deployed the same `de7c577` commit.
+- [x] 2026-09-12: Rendered collision QA passed 66/66 checks. It verified all four generated villa pages, every thumbnail state, Prospect Three at 1920, 1536, 1440, 1366, 1181/1180, 981/980, 741/740, and 390px widths, all four legacy-query redirects, and the currently served source fallback at nine desktop/mobile sizes. Visual evidence shows at least 24px separation between the gallery and availability card with no clipping or overlap.
+- [x] 2026-09-12: Final GitHub Pages-path build generated 14 routes and passed CMS/safety 5078/5078, UI/image regression 1542/1542, static 475/475, SEO 198/198, and production-readiness 309/309 with zero advisories.
+- [x] 2026-09-12: Temporary local servers, isolated Chrome processes, browser profiles, and logs created for this regression test were stopped and removed; reusable JSON and screenshot evidence remains under `testing/evidence/`.
+- [x] 2026-09-12: Current task inventory is 24 tracked items — 0 in progress, 2 pending, 6 blocked/client-waiting, and 16 completed; 8 remain open. The code fix is complete locally, while repository publication/source selection and final live verification remain waiting on the project owner.

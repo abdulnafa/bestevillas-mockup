@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-11T17:34:47.563Z",
-  "passed": 1537,
-  "total": 1537,
+  "generatedAt": "2026-09-12T05:39:13.515Z",
+  "passed": 1542,
+  "total": 1542,
   "budgetsKiB": {
     "base": 550,
     "width480": 80,
@@ -21,7 +21,7 @@
       "target": ".github/workflows/deploy-pages.yml",
       "check": "UI regression audit runs after build/CMS checks and before upload",
       "passed": true,
-      "detail": "build=712, cms=831, ui=907, upload=974"
+      "detail": "build=1048, cms=1167, ui=1243, upload=1310"
     },
     {
       "suite": "media-parser",
@@ -10704,6 +10704,41 @@
       "check": "local target exists inside dist",
       "passed": true,
       "detail": "assets/images/new/pixieset-garden-exterior.jpg"
+    },
+    {
+      "suite": "css-contract",
+      "target": "styles.css",
+      "check": "desktop villa gallery uses a bounded grid row",
+      "passed": true,
+      "detail": "{\"boundedRow\":true,\"boundedHeight\":true,\"declarations\":\"display: grid;\\n  gap: 16px;\\n  grid-template-columns: minmax(0, 1.55fr) minmax(250px, 0.55fr);\\n  grid-template-rows: minmax(0, 1fr);\\n  height: clamp(520px, 55vw, 720px);\"}"
+    },
+    {
+      "suite": "css-contract",
+      "target": "styles.css",
+      "check": "villa gallery items may shrink inside the fixed track",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "css-contract",
+      "target": "styles.css",
+      "check": "main frame and thumbnail rail stay within the gallery height",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "css-contract",
+      "target": "styles.css",
+      "check": "villa gallery images fill without forcing intrinsic track growth",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "css-contract",
+      "target": "styles.css",
+      "check": "mobile villa gallery restores content-driven rows and heights",
+      "passed": true,
+      "detail": ""
     },
     {
       "suite": "routes",

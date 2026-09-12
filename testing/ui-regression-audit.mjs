@@ -325,6 +325,28 @@ function auditInternalCss(css) {
   record("css-contract", "internal-pages.css", "split media images fill the frame without distortion", hasDeclaration(frameImageBody, "width", "100%") && hasDeclaration(frameImageBody, "height", "100%") && hasDeclaration(frameImageBody, "object-fit", "cover"));
 }
 
+function auditVillaGalleryCss(css) {
+  const clean = css.replace(/\/\*[\s\S]*?\*\//g, "");
+  const galleryStart = clean.indexOf(".property-gallery");
+  const galleryScope = galleryStart >= 0 ? clean.slice(galleryStart) : "";
+  const galleryBody = ruleBody(galleryScope, "\\.property-gallery");
+  const boundedItemsBody = ruleBody(galleryScope, "\\.gallery-main-frame\\s*,\\s*\\.gallery-thumbnail");
+  const boundedTracksBody = ruleBody(galleryScope, "\\.gallery-main-frame\\s*,\\s*\\.gallery-thumbnail-rail");
+  const imageBody = ruleBody(galleryScope, "\\.gallery-main-frame\\s+img\\s*,\\s*\\.gallery-thumbnail\\s+img");
+  const mobile = extractAtRuleBlock(galleryScope, /@media\s*\(\s*max-width\s*:\s*980px\s*\)/i);
+  const mobileGalleryBody = ruleBody(mobile, "\\.property-gallery");
+  const mobileMainBody = ruleBody(mobile, "\\.gallery-main-frame");
+  const mobileRailBody = ruleBody(mobile, "\\.gallery-thumbnail-rail");
+  const boundedRow = hasDeclaration(galleryBody, "grid-template-rows", "minmax\\(\\s*0\\s*,\\s*1fr\\s*\\)");
+  const boundedHeight = hasDeclaration(galleryBody, "height", "clamp\\([^;]+\\)");
+
+  record("css-contract", "styles.css", "desktop villa gallery uses a bounded grid row", boundedRow && boundedHeight, JSON.stringify({ boundedRow, boundedHeight, declarations: galleryBody.trim() }));
+  record("css-contract", "styles.css", "villa gallery items may shrink inside the fixed track", hasDeclaration(boundedItemsBody, "min-height", "0") && hasDeclaration(boundedItemsBody, "min-width", "0") && hasDeclaration(boundedItemsBody, "overflow", "hidden"));
+  record("css-contract", "styles.css", "main frame and thumbnail rail stay within the gallery height", hasDeclaration(boundedTracksBody, "height", "100%") && hasDeclaration(boundedTracksBody, "min-height", "0") && hasDeclaration(boundedTracksBody, "min-width", "0"));
+  record("css-contract", "styles.css", "villa gallery images fill without forcing intrinsic track growth", hasDeclaration(imageBody, "display", "block") && hasDeclaration(imageBody, "height", "100%") && hasDeclaration(imageBody, "max-height", "100%") && hasDeclaration(imageBody, "object-fit", "cover") && hasDeclaration(imageBody, "width", "100%"));
+  record("css-contract", "styles.css", "mobile villa gallery restores content-driven rows and heights", hasDeclaration(mobileGalleryBody, "height", "auto") && hasDeclaration(mobileGalleryBody, "grid-template-rows", "auto") && hasDeclaration(mobileMainBody, "height", "auto") && hasDeclaration(mobileRailBody, "height", "auto") && hasDeclaration(mobileRailBody, "grid-template-rows", "auto"));
+}
+
 function auditMediaParserContract(pagesConfig, rendererSource) {
   const mediaBlock = /^media:\s*\n([\s\S]*?)(?=^[a-z][\w-]*\s*:)/im.exec(pagesConfig)?.[1] || "";
   const extensionList = /extensions\s*:\s*\[([^\]]+)\]/i.exec(mediaBlock)?.[1] || "";
@@ -448,6 +470,7 @@ try {
     const css = await readFile(absolute, "utf8");
     await auditCssReferences(css, stylesheet, basePath);
     if (stylesheet === "internal-pages.css") auditInternalCss(css);
+    if (stylesheet === "styles.css") auditVillaGalleryCss(css);
   }
 } catch (error) {
   record("runtime", "ui-regression-audit", "audit completes without uncaught error", false, error.stack || error.message);

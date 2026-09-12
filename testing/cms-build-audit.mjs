@@ -640,8 +640,50 @@ try {
   record("release-contract", "package.json", "production script builds at domain root", /--mode\s+production\b/.test(packageData.scripts?.["build:production"] || "") && /--base-path\s+\//.test(packageData.scripts?.["build:production"] || ""), packageData.scripts?.["build:production"] || "missing");
   record("release-contract", "package.json", "Sharp image processor is exactly pinned and locked", packageData.devDependencies?.sharp === "0.35.4" && packageLockData.packages?.[""]?.devDependencies?.sharp === "0.35.4", `package=${packageData.devDependencies?.sharp || "missing"}, lock=${packageLockData.packages?.[""]?.devDependencies?.sharp || "missing"}`);
   const workflow = await readFile(resolve(root, ".github", "workflows", "deploy-pages.yml"), "utf8");
+  const workflowConfig = parseYaml(workflow);
+  const workflowTriggers = workflowConfig?.on || {};
+  const workflowRunTrigger = workflowTriggers.workflow_run || {};
+  const buildJob = workflowConfig?.jobs?.build || {};
+  const checkoutStep = buildJob.steps?.find((step) => step?.uses === "actions/checkout@v7");
   record("release-contract", "deploy-pages.yml", "CMS audit runs before artifact upload", workflow.indexOf("npm run test:cms") > workflow.indexOf("Build preview site") && workflow.indexOf("npm run test:cms") < workflow.indexOf("actions/upload-pages-artifact"));
   record("release-contract", "deploy-pages.yml", "UI regression audit runs before artifact upload", workflow.indexOf("npm run test:ui") > workflow.indexOf("npm run test:cms") && workflow.indexOf("npm run test:ui") < workflow.indexOf("actions/upload-pages-artifact"));
+  record(
+    "release-contract",
+    "deploy-pages.yml",
+    "push and manual generated-site deployments remain enabled",
+    Array.isArray(workflowTriggers.push?.branches)
+      && workflowTriggers.push.branches.includes("main")
+      && Object.hasOwn(workflowTriggers, "workflow_dispatch"),
+  );
+  record(
+    "release-contract",
+    "deploy-pages.yml",
+    "generated Pages deployment follows the automatic Pages workflow without self-recursion",
+    workflowConfig?.name === "Deploy preview to GitHub Pages"
+      && Array.isArray(workflowRunTrigger.workflows)
+      && workflowRunTrigger.workflows.length === 1
+      && workflowRunTrigger.workflows[0] === "pages build and deployment"
+      && Array.isArray(workflowRunTrigger.types)
+      && workflowRunTrigger.types.includes("completed")
+      && Array.isArray(workflowRunTrigger.branches)
+      && workflowRunTrigger.branches.includes("main"),
+  );
+  record(
+    "release-contract",
+    "deploy-pages.yml",
+    "failed automatic Pages runs cannot start a generated deployment",
+    /github\.event_name\s*!=\s*['"]workflow_run['"]/.test(String(buildJob.if || ""))
+      && /github\.event\.workflow_run\.conclusion\s*==\s*['"]success['"]/.test(String(buildJob.if || "")),
+    String(buildJob.if || "missing"),
+  );
+  record(
+    "release-contract",
+    "deploy-pages.yml",
+    "workflow-run deployments check out the exact triggering commit",
+    /github\.event\.workflow_run\.head_sha/.test(String(checkoutStep?.with?.ref || ""))
+      && /github\.sha/.test(String(checkoutStep?.with?.ref || "")),
+    String(checkoutStep?.with?.ref || "missing"),
+  );
 
   if (distPresent) {
     const currentModels = await loadModels(resolve(root, "content"));

@@ -2983,6 +2983,7 @@ textarea:focus-visible {
   display: grid;
   gap: 16px;
   grid-template-columns: minmax(0, 1.55fr) minmax(250px, 0.55fr);
+  grid-template-rows: minmax(0, 1fr);
   height: clamp(520px, 55vw, 720px);
 }
 
@@ -2991,12 +2992,23 @@ textarea:focus-visible {
   background: var(--sand);
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  min-height: 0;
+  min-width: 0;
   overflow: hidden;
+}
+
+.gallery-main-frame,
+.gallery-thumbnail-rail {
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
 }
 
 .gallery-main-frame img,
 .gallery-thumbnail img {
+  display: block;
   height: 100%;
+  max-height: 100%;
   object-fit: cover;
   width: 100%;
 }
@@ -3302,15 +3314,18 @@ textarea:focus-visible {
   .property-gallery {
     height: auto;
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
 
   .gallery-main-frame {
     aspect-ratio: 4 / 3;
+    height: auto;
   }
 
   .gallery-thumbnail-rail {
+    height: auto;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: none;
+    grid-template-rows: auto;
   }
 
   .gallery-thumbnail {

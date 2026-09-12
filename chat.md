@@ -61,6 +61,15 @@
 - Current and future published CMS imagery is optimized in an isolated build stage: 480px and 960px candidates are generated automatically, originals remain unchanged, drafts do not block deployment on image-size constraints, and CI checks actual candidate dimensions, ratios, budgets, navigation state, and media contracts before upload.
 - Final verification passed 5,074 CMS/safety checks, 1,537 enhanced image/UI checks, 39 rendered-browser checks, and the existing 475 static, 198 SEO, and 309 production-readiness checks. Independent base-path QA found no missing resources, HTTP failures, overflow, or console errors. These fixes remain local until the project owner pushes them and GitHub Pages completes deployment; send the client completion message only after the updated URL is verified.
 
+### 2026-09-12
+
+- The client supplied another desktop screenshot from `villa.html?villa=prospect-three`: the square pool image overflowed its gallery and covered the facts/availability area, clipping the Check Availability controls.
+- The layout root cause was CSS Grid intrinsic sizing, not malformed HTML or client browser behaviour. The fixed-height desktop gallery now has a bounded row and shrinkable children; media stays clipped to its frame, while the 980px mobile layout returns to content-driven rows and heights.
+- The exact source fallback and generated build were both rendered and inspected. Collision/hit-target QA passed 66/66 across every gallery image, all four villas, wide desktop, breakpoint-adjacent, tablet, and 390px mobile sizes, with at least 24px separation between the gallery and availability card.
+- The apparent remaining slowness/old layout on the public URL is also a publishing problem: GitHub Pages is serving repository source files with original images, while the generated responsive-image artifact is being overwritten. The live pretty Prospect Three route returned 404 and both the custom artifact workflow and automatic branch Pages workflow had published the same commit.
+- A workflow safeguard now republishes the exact generated commit after a successful automatic Pages job. The repository owner still needs to set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**, commit/push this hotfix, wait for the custom deployment, and verify the public pretty route before telling the client it is fixed.
+- Do not send a completion message to the client yet. After publication, verify the public layout and responsive asset delivery first; then send one short client-facing WhatsApp update.
+
 ## Open questions / assumptions
 
 - Interpret the channel response as properties being listed on major channels but not requiring calendar sync; confirm only if this interpretation is incorrect.

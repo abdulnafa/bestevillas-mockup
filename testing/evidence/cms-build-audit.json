@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-11T17:34:45.912Z",
-  "passed": 5074,
-  "total": 5074,
+  "generatedAt": "2026-09-12T05:39:26.164Z",
+  "passed": 5078,
+  "total": 5078,
   "failed": [],
   "results": [
     {
@@ -45,6 +45,34 @@
       "check": "UI regression audit runs before artifact upload",
       "passed": true,
       "detail": ""
+    },
+    {
+      "suite": "release-contract",
+      "target": "deploy-pages.yml",
+      "check": "push and manual generated-site deployments remain enabled",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "release-contract",
+      "target": "deploy-pages.yml",
+      "check": "generated Pages deployment follows the automatic Pages workflow without self-recursion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "release-contract",
+      "target": "deploy-pages.yml",
+      "check": "failed automatic Pages runs cannot start a generated deployment",
+      "passed": true,
+      "detail": "${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}"
+    },
+    {
+      "suite": "release-contract",
+      "target": "deploy-pages.yml",
+      "check": "workflow-run deployments check out the exact triggering commit",
+      "passed": true,
+      "detail": "${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}"
     },
     {
       "suite": "manifest",
@@ -26889,84 +26917,84 @@
       "target": "isolated-preview/internal-pages.css",
       "check": "assets/fonts/dm-sans-latin.woff2",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\preview\\assets\\fonts\\dm-sans-latin.woff2"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\fonts\\dm-sans-latin.woff2"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/fonts/dm-sans-latin.woff2",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\preview\\assets\\fonts\\dm-sans-latin.woff2"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\fonts\\dm-sans-latin.woff2"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/villa-interior.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\preview\\assets\\images\\villa-interior.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\villa-interior.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/villa-hero.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\preview\\assets\\images\\villa-hero.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\villa-hero.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/providence-terrace.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\preview\\assets\\images\\providence-terrace.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\providence-terrace.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/villa-pool.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\preview\\assets\\images\\villa-pool.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\villa-pool.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/villa-hero.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\preview\\assets\\images\\villa-hero.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\villa-hero.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/villa-interior.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\preview\\assets\\images\\villa-interior.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\villa-interior.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/barbados-life.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\preview\\assets\\images\\barbados-life.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\barbados-life.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/villa-hero.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\preview\\assets\\images\\villa-hero.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\villa-hero.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/new/pixieset-terrace.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\preview\\assets\\images\\new\\pixieset-terrace.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\new\\pixieset-terrace.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-preview/styles.css",
       "check": "assets/images/new/pixieset-garden-exterior.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\preview\\assets\\images\\new\\pixieset-garden-exterior.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\preview\\assets\\images\\new\\pixieset-garden-exterior.jpg"
     },
     {
       "suite": "escaping",
@@ -35303,84 +35331,84 @@
       "target": "isolated-production/internal-pages.css",
       "check": "assets/fonts/dm-sans-latin.woff2",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\production\\assets\\fonts\\dm-sans-latin.woff2"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\fonts\\dm-sans-latin.woff2"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/fonts/dm-sans-latin.woff2",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\production\\assets\\fonts\\dm-sans-latin.woff2"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\fonts\\dm-sans-latin.woff2"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/villa-interior.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\production\\assets\\images\\villa-interior.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\villa-interior.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/villa-hero.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\production\\assets\\images\\villa-hero.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\villa-hero.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/providence-terrace.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\production\\assets\\images\\providence-terrace.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\providence-terrace.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/villa-pool.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\production\\assets\\images\\villa-pool.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\villa-pool.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/villa-hero.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\production\\assets\\images\\villa-hero.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\villa-hero.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/villa-interior.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\production\\assets\\images\\villa-interior.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\villa-interior.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/barbados-life.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\production\\assets\\images\\barbados-life.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\barbados-life.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/villa-hero.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\production\\assets\\images\\villa-hero.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\villa-hero.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/new/pixieset-terrace.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\production\\assets\\images\\new\\pixieset-terrace.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\new\\pixieset-terrace.jpg"
     },
     {
       "suite": "local-refs",
       "target": "isolated-production/styles.css",
       "check": "assets/images/new/pixieset-garden-exterior.jpg",
       "passed": true,
-      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\production\\assets\\images\\new\\pixieset-garden-exterior.jpg"
+      "detail": "C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\production\\assets\\images\\new\\pixieset-garden-exterior.jpg"
     },
     {
       "suite": "escaping",
@@ -35492,7 +35520,7 @@
       "target": "foreign directory",
       "check": "unrecognized output directory is refused",
       "passed": true,
-      "detail": "Build failed: Refusing to replace C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\foreign-output: it is not a recognized Best E Villas build directory. Command failed: C:\\Program Files\\nodejs\\node.exe D:\\Programming languages\\Ninja Tech Sol\\2026\\bestevillas\\project\\scripts\\build.mjs --content C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\content --out C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\foreign-output --mode"
+      "detail": "Build failed: Refusing to replace C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\foreign-output: it is not a recognized Best E Villas build directory. Command failed: C:\\Program Files\\nodejs\\node.exe D:\\Programming languages\\Ninja Tech Sol\\2026\\bestevillas\\project\\scripts\\build.mjs --content C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\content --out C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\foreign-output --mode"
     },
     {
       "suite": "output-safety",
@@ -35506,7 +35534,7 @@
       "target": "duplicate slug",
       "check": "build rejects duplicate content slug",
       "passed": true,
-      "detail": "Build failed: Duplicate slug \"prospect-two\" in villas/qa-duplicate-villa.md; already used by villas/prospect-two.md. Command failed: C:\\Program Files\\nodejs\\node.exe D:\\Programming languages\\Ninja Tech Sol\\2026\\bestevillas\\project\\scripts\\build.mjs --content C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\content --out C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-FGaP57\\duplicate --mode production --base-path / Build failed: Duplicate slug \"prospect-"
+      "detail": "Build failed: Duplicate slug \"prospect-two\" in villas/qa-duplicate-villa.md; already used by villas/prospect-two.md. Command failed: C:\\Program Files\\nodejs\\node.exe D:\\Programming languages\\Ninja Tech Sol\\2026\\bestevillas\\project\\scripts\\build.mjs --content C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\content --out C:\\Users\\ASIFCO~1\\AppData\\Local\\Temp\\bestevillas-cms-render-audit-MZr50f\\duplicate --mode production --base-path / Build failed: Duplicate slug \"prospect-"
     },
     {
       "suite": "output-safety",
