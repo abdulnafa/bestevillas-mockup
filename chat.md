@@ -74,10 +74,19 @@
 - The exact client logo is now integrated as a lightweight transparent white PNG on the dark-teal header/footer. A generated reinterpretation was rejected because it changed the artwork; the site uses the faithfully extracted client mark.
 - Sticky headers, responsive navigation, header-aware smooth anchors, subtle progressive reveals, and reduced-motion fallbacks are complete locally across generated and tracked source pages. Final rendered QA passed, but the update must still be committed/pushed and the GitHub Pages run verified before telling the client it is live.
 
+### 2026-09-15
+
+- The client supplied 43 full-resolution landscape JPGs in the local `bestevillas new images/` folder plus two aerial property photographs. Preserve all supplied originals; use curated, descriptively named copies and let the existing build create responsive derivatives.
+- Independent visual and metadata audits support that the set covers the two Prospect villas and their shared exterior/pool: the purple-kitchen/open-plan interior group matches Prospect Three, the blue-lounge/wood-kitchen group matches Prospect Two, and the final pool/exterior views are shared. Because filenames/metadata do not name the property, the client should confirm these labels before production publication.
+- Both aerial images show the same green Prospect complex, pool, neighbourhood, and nearby sea. The centred aerial is used for Prospect Three and the oblique pool-focused aerial for Prospect Two; wording must not imply that the villas are beachfront.
+- Each Prospect record now has an eight-photo curated gallery with unique accessible descriptions. Web copies are 1600px sRGB and metadata-free, while 480px/960px deployable versions keep full-gallery interaction under roughly 0.71 MB in rendered testing. The 159.41 MiB original folder remains untouched and is ignored by Git.
+- The extended gallery rail is contained on desktop and horizontally scrollable on tablet/mobile. Generated and source-fallback browser suites verified every image switch, responsive boundaries, booking-card separation, and console/resource health; the update remains local until committed, pushed, and deployed.
+- The project owner approved proceeding with the current evidence-based Prospect Two/Prospect Three image grouping for the client preview. After publication, the client should confirm that the two interior sets are assigned to the correct villa before production launch.
+
 ## Open questions / assumptions
 
 - Interpret the channel response as properties being listed on major channels but not requiring calendar sync; confirm only if this interpretation is incorrect.
-- Obtain downloadable full-resolution Pixieset originals and website/hosting/domain/analytics access; the final logo has now been supplied and integrated.
+- Obtain website/hosting/domain/analytics access; the final logo and full-resolution Prospect photography have now been supplied and integrated locally.
 - Confirm maximum occupancy, bed configurations, taxes/fees, check-in/out times, final house rules, and final booking/cancellation policy before production publishing.
 - After the implementation is pushed, authorize Pages CMS for the repository; the structured content is already connected to the build workflow.
 - Agree final price, payment milestones, revision rounds, development timeline, and any hard launch date before full production delivery.

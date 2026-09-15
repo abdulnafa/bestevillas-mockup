@@ -3050,9 +3050,16 @@ textarea:focus-visible {
 }
 
 .gallery-thumbnail-rail {
+  align-content: start;
   display: grid;
-  gap: 16px;
-  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  grid-auto-rows: minmax(112px, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+  scrollbar-color: var(--teal) var(--sand);
+  scrollbar-width: thin;
 }
 
 .gallery-thumbnail {
@@ -3364,13 +3371,22 @@ textarea:focus-visible {
   }
 
   .gallery-thumbnail-rail {
+    align-content: stretch;
+    grid-auto-columns: clamp(118px, 24vw, 170px);
+    grid-auto-flow: column;
+    grid-auto-rows: auto;
     height: auto;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: auto;
+    grid-template-columns: none;
+    grid-template-rows: 1fr;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 0 8px;
+    scroll-snap-type: x proximity;
   }
 
   .gallery-thumbnail {
     aspect-ratio: 4 / 3;
+    scroll-snap-align: start;
   }
 
   .property-about-grid {
@@ -3570,7 +3586,7 @@ textarea:focus-visible {
   }
 
   .gallery-main-frame {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 4 / 3;
   }
 
   .gallery-thumbnail-rail {

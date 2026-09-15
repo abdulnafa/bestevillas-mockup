@@ -343,6 +343,7 @@ function auditVillaGalleryCss(css) {
   const boundedItemsBody = ruleBody(galleryScope, "\\.gallery-main-frame\\s*,\\s*\\.gallery-thumbnail");
   const boundedTracksBody = ruleBody(galleryScope, "\\.gallery-main-frame\\s*,\\s*\\.gallery-thumbnail-rail");
   const imageBody = ruleBody(galleryScope, "\\.gallery-main-frame\\s+img\\s*,\\s*\\.gallery-thumbnail\\s+img");
+  const desktopRailBody = ruleBody(galleryScope, "\\.gallery-thumbnail-rail");
   const mobile = extractAtRuleBlock(galleryScope, /@media\s*\(\s*max-width\s*:\s*980px\s*\)/i);
   const mobileGalleryBody = ruleBody(mobile, "\\.property-gallery");
   const mobileMainBody = ruleBody(mobile, "\\.gallery-main-frame");
@@ -354,7 +355,8 @@ function auditVillaGalleryCss(css) {
   record("css-contract", "styles.css", "villa gallery items may shrink inside the fixed track", hasDeclaration(boundedItemsBody, "min-height", "0") && hasDeclaration(boundedItemsBody, "min-width", "0") && hasDeclaration(boundedItemsBody, "overflow", "hidden"));
   record("css-contract", "styles.css", "main frame and thumbnail rail stay within the gallery height", hasDeclaration(boundedTracksBody, "height", "100%") && hasDeclaration(boundedTracksBody, "min-height", "0") && hasDeclaration(boundedTracksBody, "min-width", "0"));
   record("css-contract", "styles.css", "villa gallery images fill without forcing intrinsic track growth", hasDeclaration(imageBody, "display", "block") && hasDeclaration(imageBody, "height", "100%") && hasDeclaration(imageBody, "max-height", "100%") && hasDeclaration(imageBody, "object-fit", "cover") && hasDeclaration(imageBody, "width", "100%"));
-  record("css-contract", "styles.css", "mobile villa gallery restores content-driven rows and heights", hasDeclaration(mobileGalleryBody, "height", "auto") && hasDeclaration(mobileGalleryBody, "grid-template-rows", "auto") && hasDeclaration(mobileMainBody, "height", "auto") && hasDeclaration(mobileRailBody, "height", "auto") && hasDeclaration(mobileRailBody, "grid-template-rows", "auto"));
+  record("css-contract", "styles.css", "desktop thumbnail rail supports extended galleries without overflow", hasDeclaration(desktopRailBody, "grid-template-columns", "repeat\\(\\s*2\\s*,[^;]+\\)") && hasDeclaration(desktopRailBody, "grid-auto-rows", "minmax\\([^;]+\\)") && hasDeclaration(desktopRailBody, "overflow-y", "auto"));
+  record("css-contract", "styles.css", "mobile villa gallery restores content-driven layout with a horizontal thumbnail rail", hasDeclaration(mobileGalleryBody, "height", "auto") && hasDeclaration(mobileGalleryBody, "grid-template-rows", "auto") && hasDeclaration(mobileMainBody, "height", "auto") && hasDeclaration(mobileRailBody, "height", "auto") && hasDeclaration(mobileRailBody, "grid-auto-flow", "column") && hasDeclaration(mobileRailBody, "grid-template-rows", "1fr") && hasDeclaration(mobileRailBody, "overflow-x", "auto") && hasDeclaration(mobileRailBody, "overflow-y", "hidden"));
 }
 
 function auditMediaParserContract(pagesConfig, rendererSource) {

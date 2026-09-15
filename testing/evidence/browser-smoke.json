@@ -110,7 +110,7 @@
     {
       "name": "Villa location filter",
       "passed": true,
-      "detail": "{\"visible\":1,\"count\":\"1 villa\",\"url\":\"http://127.0.0.1:4173/villas.html?location=south\"}"
+      "detail": "{\"visible\":1,\"count\":\"1 villa\",\"url\":\"http://127.0.0.1:4174/villas.html?location=south\"}"
     },
     {
       "name": "Villa template selects requested villa",
@@ -165,7 +165,7 @@
     {
       "name": "Villa gallery interaction",
       "passed": true,
-      "detail": "{\"before\":\"http://127.0.0.1:4173/assets/images/properties/providence/exterior.jpg\",\"after\":\"http://127.0.0.1:4173/assets/images/properties/providence/living.jpg\",\"active\":\"1\"}"
+      "detail": "{\"before\":\"http://127.0.0.1:4174/assets/images/properties/providence/exterior.jpg\",\"after\":\"http://127.0.0.1:4174/assets/images/properties/providence/living.jpg\",\"active\":\"1\"}"
     },
     {
       "name": "Mobile menu interaction",

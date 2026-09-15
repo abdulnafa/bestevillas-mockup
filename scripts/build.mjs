@@ -528,6 +528,7 @@ function validateModels(models) {
     validateNumber(villa.data.sort_order, `${villa.source}.sort_order`, { min: 0, max: 999 });
     if (typeof villa.data.featured !== "boolean") throw new Error(`Invalid featured flag in ${villa.source}.`);
     if (!Array.isArray(villa.data.gallery) || !villa.data.gallery.length) throw new Error(`At least one gallery image is required in ${villa.source}.`);
+    if (villa.data.gallery.length > 20) throw new Error(`No more than 20 gallery images are allowed in ${villa.source}.`);
     for (const [index, image] of villa.data.gallery.entries()) {
       validateImage(image.image, `${villa.source}.gallery[${index}].image`);
       assertString(image.alt, `${villa.source}.gallery[${index}].alt`);
@@ -979,7 +980,7 @@ function villaMain(record, basePath, imageRoot = projectRoot) {
   const mainImage = imageAttributes(gallery[0].image, basePath, { sizes: "(max-width: 980px) calc(100vw - 36px), (max-width: 1320px) 70vw, 920px", loading: "eager", fetchPriority: "high" }, imageRoot);
   const thumbnails = gallery.map((item, index) => {
     const source = imageSourceData(item.image, basePath, imageRoot);
-    return `<button class="gallery-thumbnail${index === 0 ? " active" : ""}" type="button" data-gallery-thumb data-gallery-index="${index}" data-gallery-src="${escapeAttribute(source.src)}" data-gallery-srcset="${escapeAttribute(source.srcset)}" data-gallery-alt="${escapeAttribute(safeImageAlt(item.alt))}" aria-label="Show photo ${index + 1}" aria-pressed="${index === 0}"><img ${imageAttributes(item.image, basePath, { sizes: "240px", loading: "lazy", fetchPriority: "low", placeholder: true }, imageRoot)} alt="${escapeAttribute(safeImageAlt(item.alt))}" /></button><span class="visually-hidden cms-image-description">${escapeHtml(item.alt)}</span>`;
+    return `<button class="gallery-thumbnail${index === 0 ? " active" : ""}" type="button" data-gallery-thumb data-gallery-index="${index}" data-gallery-src="${escapeAttribute(source.src)}" data-gallery-srcset="${escapeAttribute(source.srcset)}" data-gallery-alt="${escapeAttribute(safeImageAlt(item.alt))}" aria-label="Show photo ${index + 1} of ${gallery.length}" aria-pressed="${index === 0}"><img ${imageAttributes(item.image, basePath, { sizes: "240px", loading: "lazy", fetchPriority: "low", placeholder: true }, imageRoot)} alt="${escapeAttribute(safeImageAlt(item.alt))}" /></button><span class="visually-hidden cms-image-description">${escapeHtml(item.alt)}</span>`;
   }).join("");
   const secondaryIndex = Math.min(1, gallery.length - 1);
   const secondaryImage = imageAttributes(gallery[secondaryIndex].image, basePath, { sizes: "(max-width: 980px) calc(100vw - 36px), 45vw", loading: "lazy", fetchPriority: "low" }, imageRoot);

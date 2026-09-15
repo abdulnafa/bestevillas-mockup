@@ -1,6 +1,6 @@
 {
-  "passed": 532,
-  "total": 532,
+  "passed": 537,
+  "total": 537,
   "failed": [],
   "results": [
     {
@@ -209,7 +209,7 @@
     },
     {
       "page": "index.html",
-      "check": "local reference: assets/images/properties/prospect-three/exterior.jpg",
+      "check": "local reference: assets/images/properties/prospect-three/aerial-sea-view.jpg",
       "passed": true,
       "detail": ""
     },
@@ -233,7 +233,7 @@
     },
     {
       "page": "index.html",
-      "check": "local reference: assets/images/properties/prospect-two/exterior.jpg",
+      "check": "local reference: assets/images/properties/prospect-two/aerial-pool-sea-view.jpg",
       "passed": true,
       "detail": ""
     },
@@ -587,7 +587,7 @@
     },
     {
       "page": "villas.html",
-      "check": "local reference: assets/images/properties/prospect-three/exterior.jpg",
+      "check": "local reference: assets/images/properties/prospect-three/aerial-sea-view.jpg",
       "passed": true,
       "detail": ""
     },
@@ -635,7 +635,7 @@
     },
     {
       "page": "villas.html",
-      "check": "local reference: assets/images/properties/prospect-two/exterior.jpg",
+      "check": "local reference: assets/images/properties/prospect-two/aerial-pool-sea-view.jpg",
       "passed": true,
       "detail": ""
     },
@@ -821,7 +821,7 @@
     },
     {
       "page": "villa.html",
-      "check": "local reference: assets/images/properties/prospect-three/exterior.jpg",
+      "check": "local reference: assets/images/properties/prospect-three/aerial-sea-view.jpg",
       "passed": true,
       "detail": ""
     },
@@ -923,25 +923,55 @@
     },
     {
       "page": "villa.html",
-      "check": "local reference: assets/images/properties/prospect-three/exterior.jpg",
+      "check": "local reference: assets/images/properties/prospect-three/aerial-sea-view.jpg",
       "passed": true,
       "detail": ""
     },
     {
       "page": "villa.html",
-      "check": "local reference: assets/images/properties/prospect-three/exterior.jpg",
+      "check": "local reference: assets/images/properties/prospect-three/aerial-sea-view.jpg",
       "passed": true,
       "detail": ""
     },
     {
       "page": "villa.html",
-      "check": "local reference: assets/images/properties/prospect-three/living.jpg",
+      "check": "local reference: assets/images/properties/prospect-three/living-room.jpg",
       "passed": true,
       "detail": ""
     },
     {
       "page": "villa.html",
-      "check": "local reference: assets/images/properties/prospect-three/bedroom.jpg",
+      "check": "local reference: assets/images/properties/prospect-three/kitchen.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: assets/images/properties/prospect-three/twin-bedroom.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: assets/images/properties/prospect-three/blue-bedroom.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: assets/images/properties/prospect-three/purple-bedroom.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: assets/images/properties/prospect-three/bathroom.jpg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "page": "villa.html",
+      "check": "local reference: assets/images/properties/prospect-three/shared-pool.jpg",
       "passed": true,
       "detail": ""
     },

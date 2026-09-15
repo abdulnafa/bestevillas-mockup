@@ -37,6 +37,7 @@ function villaLayoutProbeExpression() {
     ]);
     cta.scrollIntoView({ block: 'center', behavior: 'instant' });
     await waitForFrames();
+    await new Promise((done) => setTimeout(done, 700));
 
     const cleanRect = (element) => {
       const rect = element.getBoundingClientRect();
@@ -88,6 +89,27 @@ function villaLayoutProbeExpression() {
     for (const button of order) {
       const expected = new URL(button.dataset.gallerySrc || button.querySelector('img')?.getAttribute('src') || '', location.href).href;
       const expectedAlt = button.dataset.galleryAlt || button.querySelector('img')?.alt || '';
+      thumbnailRail.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'instant' });
+      thumbnailRail.scrollTo({
+        left: Math.max(0, Math.min(thumbnailRail.scrollWidth - thumbnailRail.clientWidth, button.offsetLeft - (thumbnailRail.clientWidth - button.offsetWidth) / 2)),
+        top: Math.max(0, Math.min(thumbnailRail.scrollHeight - thumbnailRail.clientHeight, button.offsetTop - (thumbnailRail.clientHeight - button.offsetHeight) / 2)),
+        behavior: 'instant',
+      });
+      await waitForFrames();
+      const buttonRect = button.getBoundingClientRect();
+      const railRect = thumbnailRail.getBoundingClientRect();
+      const controlCenterX = buttonRect.left + buttonRect.width / 2;
+      const controlCenterY = buttonRect.top + buttonRect.height / 2;
+      const controlVisible = controlCenterX >= railRect.left - 1.5
+        && controlCenterX <= railRect.right + 1.5
+        && controlCenterY >= railRect.top - 1.5
+        && controlCenterY <= railRect.bottom + 1.5
+        && controlCenterX >= 0
+        && controlCenterX <= innerWidth
+        && controlCenterY >= 0
+        && controlCenterY <= innerHeight;
+      const controlHitTarget = document.elementFromPoint(controlCenterX, controlCenterY);
+      const controlHit = Boolean(controlHitTarget && (controlHitTarget === button || button.contains(controlHitTarget)));
       button.click();
       const deadline = Date.now() + 5000;
       while ((mainImage.alt !== expectedAlt || !mainImage.complete || !mainImage.naturalWidth || button.hasAttribute('aria-busy') || button.getAttribute('aria-pressed') !== 'true') && Date.now() < deadline) {
@@ -96,7 +118,7 @@ function villaLayoutProbeExpression() {
       cta.scrollIntoView({ block: 'center', behavior: 'instant' });
       await waitForFrames();
       const ready = mainImage.alt === expectedAlt && mainImage.complete && mainImage.naturalWidth > 0 && !button.hasAttribute('aria-busy') && button.getAttribute('aria-pressed') === 'true';
-      transitions.push({ index: button.dataset.galleryIndex, ready, expected, expectedAlt, actual: mainImage.src, actualAlt: mainImage.alt });
+      transitions.push({ index: button.dataset.galleryIndex, ready, controlVisible, controlHit, expected, expectedAlt, actual: mainImage.src, actualAlt: mainImage.alt });
       states.push(snapshot('thumbnail-' + button.dataset.galleryIndex));
     }
     return { missing, states, transitions };
@@ -106,7 +128,7 @@ function villaLayoutProbeExpression() {
 function villaLayoutHealthy(probe) {
   return probe.missing.length === 0
     && probe.states.length >= 4
-    && probe.transitions.every((transition) => transition.ready)
+    && probe.transitions.every((transition) => transition.ready && transition.controlVisible && transition.controlHit)
     && probe.states.every((state) => state.galleryChildrenContained
       && state.gallerySeparatedFromSummary
       && state.summaryChildrenContained
@@ -211,6 +233,8 @@ async function openPage(url, navigationBaseUrl = baseUrl) {
   await send("Page.enable");
   await send("Runtime.enable");
   await send("Log.enable");
+  await send("Network.enable");
+  await send("Network.setCacheDisabled", { cacheDisabled: true });
   return { close, evaluate, messages, navigate, screenshot, viewport };
 }
 
@@ -290,13 +314,21 @@ try {
         booking: document.querySelector('.property-booking a[href^="https://direct-book.com/"]')?.href,
         schema: JSON.stringify(schemas),
         galleryReady: Boolean(galleryImage?.complete && galleryImage?.naturalWidth),
+        galleryCount: document.querySelectorAll('[data-gallery-thumb]').length,
         missingImages: Array.from(document.images).filter((image) => image.complete && image.naturalWidth === 0).length,
         overflow: document.documentElement.scrollWidth > innerWidth,
       };
     })()`);
-    record(`Pretty villa route ${slug}`, detail.heading.includes(heading) && detail.title.includes("Best E Villas") && detail.canonical === `https://bestevillas.com/villas/${slug}.html` && detail.booking === booking && detail.schema.includes("VacationRental") && detail.galleryReady && detail.missingImages === 0 && !detail.overflow, JSON.stringify(detail));
+    const expectedGalleryCount = slug.startsWith("prospect-") ? 8 : 3;
+    record(`Pretty villa route ${slug}`, detail.heading.includes(heading) && detail.title.includes("Best E Villas") && detail.canonical === `https://bestevillas.com/villas/${slug}.html` && detail.booking === booking && detail.schema.includes("VacationRental") && detail.galleryReady && detail.galleryCount === expectedGalleryCount && detail.missingImages === 0 && !detail.overflow, JSON.stringify(detail));
     const layout = await page.evaluate(villaLayoutProbeExpression());
     record(`Villa gallery and availability layout ${slug} at 1440px`, villaLayoutHealthy(layout), JSON.stringify(layout));
+    if (slug.startsWith("prospect-")) {
+      const delivery = await page.evaluate(`(() => { const resources = performance.getEntriesByType('resource').filter((entry) => entry.initiatorType === 'img' && entry.name.includes('/assets/images/properties/${slug}/')); return { count: resources.length, encodedBytes: resources.reduce((sum, entry) => sum + (entry.encodedBodySize || 0), 0), originals: resources.map((entry) => entry.name).filter((name) => { const clean = name.split('?')[0].toLowerCase(); return !clean.endsWith('-480.jpg') && !clean.endsWith('-960.jpg'); }), resources: resources.map((entry) => ({ name: entry.name, encodedBodySize: entry.encodedBodySize || 0 })) }; })()`);
+      record(`Prospect responsive gallery delivery ${slug}`, delivery.count >= 8 && delivery.originals.length === 0 && delivery.encodedBytes <= 1500000, JSON.stringify(delivery));
+      await page.evaluate(`(async () => { const gallery = document.querySelector('.property-gallery-section'); if (gallery) window.scrollTo({ top: gallery.offsetTop - 96, behavior: 'instant' }); await new Promise((done) => setTimeout(done, 250)); return scrollY; })()`);
+      await page.screenshot(`cms-villa-${slug}-gallery-desktop.png`);
+    }
   }
 
   const prospectViewports = [
@@ -317,7 +349,18 @@ try {
     const layout = await page.evaluate(villaLayoutProbeExpression());
     record(`Prospect Three layout at ${width}x${height}`, villaLayoutHealthy(layout), JSON.stringify(layout));
     if (width === 1366 || width === 390) await page.screenshot(`cms-villa-prospect-three-availability-${width}.png`);
+    if (width === 390) {
+      await page.evaluate(`(async () => { const gallery = document.querySelector('.property-gallery-section'); if (gallery) window.scrollTo({ top: gallery.offsetTop - 84, behavior: 'instant' }); await new Promise((done) => setTimeout(done, 250)); return scrollY; })()`);
+      await page.screenshot("cms-villa-prospect-three-gallery-mobile.png");
+    }
   }
+
+  await page.viewport(390, 844, true);
+  await page.navigate("villas/prospect-two.html?gallery-mobile=1");
+  const prospectTwoMobileLayout = await page.evaluate(villaLayoutProbeExpression());
+  record("Prospect Two gallery layout at 390x844", villaLayoutHealthy(prospectTwoMobileLayout), JSON.stringify(prospectTwoMobileLayout));
+  await page.evaluate(`(async () => { const gallery = document.querySelector('.property-gallery-section'); if (gallery) window.scrollTo({ top: gallery.offsetTop - 84, behavior: 'instant' }); await new Promise((done) => setTimeout(done, 250)); return scrollY; })()`);
+  await page.screenshot("cms-villa-prospect-two-gallery-mobile.png");
 
   await page.viewport(1440, 1000);
   for (const [slug, heading] of villas) {

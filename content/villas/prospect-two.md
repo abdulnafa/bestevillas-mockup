@@ -12,15 +12,25 @@ bedrooms: 2
 bathrooms: 1.5
 summary: A comfortable two-bedroom apartment with the space and practical amenities needed for relaxed family time on Barbados' West Coast.
 booking_url: https://direct-book.com/properties/bestevillasprospctdirect
-hero_image: /assets/images/properties/prospect-two/exterior.jpg
-hero_image_alt: Exterior of the two-bedroom Prospect villa in Barbados
+hero_image: /assets/images/properties/prospect-two/aerial-pool-sea-view.jpg
+hero_image_alt: Aerial view of the Prospect villas, shared pool and nearby Caribbean Sea
 gallery:
-  - image: /assets/images/properties/prospect-two/exterior.jpg
-    alt: Exterior of the two-bedroom Prospect villa in Barbados
-  - image: /assets/images/properties/prospect-two/living.jpg
-    alt: Living room in the two-bedroom Prospect villa
-  - image: /assets/images/properties/prospect-two/bedroom.jpg
-    alt: Bedroom in the two-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-two/aerial-pool-sea-view.jpg
+    alt: Aerial view of the Prospect villas, shared pool and nearby Caribbean Sea
+  - image: /assets/images/properties/prospect-two/living-dining-room.jpg
+    alt: Open-plan living and dining room in the two-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-two/kitchen.jpg
+    alt: Spacious equipped kitchen with wood cabinetry in the two-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-two/green-bedroom.jpg
+    alt: Double bedroom with green feature wall in the two-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-two/balcony.jpg
+    alt: Private balcony overlooking the tropical garden at the two-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-two/second-bedroom.jpg
+    alt: Second double bedroom in the two-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-two/bathroom.jpg
+    alt: Walk-in shower bathroom in the two-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-two/shared-pool.jpg
+    alt: Shared swimming pool beside the Prospect villas
 amenities:
   - Shared pool
   - Fibre Wi-Fi
@@ -36,4 +46,3 @@ seo:
 A comfortable two-bedroom apartment with the space and practical amenities needed for relaxed family time on Barbados' West Coast.
 
 Exact amenities, live rates and availability should always be confirmed on the external booking platform before reserving.
-

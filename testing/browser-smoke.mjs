@@ -209,16 +209,24 @@ try {
   record("Analytics stays idle without Measurement ID", analyticsIdle.externalRequests.length === 0 && !analyticsIdle.apiPresent, JSON.stringify(analyticsIdle));
   await page.screenshot("home-desktop.png");
 
-  const carouselState = await page.evaluate(`(() => {
+  const carouselState = await page.evaluate(`(async () => {
     document.querySelector('.carousel-next').click();
+    const deadline = Date.now() + 8000;
+    while ((document.querySelector('.hero-slide.active')?.dataset.slide !== '1' || document.querySelector('.carousel-count strong')?.textContent !== '02') && Date.now() < deadline) {
+      await new Promise((done) => setTimeout(done, 25));
+    }
     return {
       slide: document.querySelector('.hero-slide.active')?.dataset.slide,
       count: document.querySelector('.carousel-count strong')?.textContent,
     };
   })()`);
   record("Carousel interaction", carouselState.slide === "1" && carouselState.count === "02", JSON.stringify(carouselState));
-  const carouselKeyboardState = await page.evaluate(`(() => {
+  const carouselKeyboardState = await page.evaluate(`(async () => {
     document.querySelector('.hero-carousel').dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    const deadline = Date.now() + 8000;
+    while ((document.querySelector('.hero-slide.active')?.dataset.slide !== '2' || document.querySelector('.carousel-count strong')?.textContent !== '03') && Date.now() < deadline) {
+      await new Promise((done) => setTimeout(done, 25));
+    }
     return {
       slide: document.querySelector('.hero-slide.active')?.dataset.slide,
       count: document.querySelector('.carousel-count strong')?.textContent,

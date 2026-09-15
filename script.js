@@ -19,9 +19,14 @@ const villaData = {
       "A spacious three-bedroom base near West Coast beaches, Bridgetown and the University of the West Indies, with the everyday comforts families need for an easy Barbados stay.",
     facts: ["3 bedrooms", "2 bathrooms", "Shared pool", "Fibre Wi-Fi"],
     images: [
-      { src: "assets/images/properties/prospect-three/exterior.jpg", alt: "Guests relaxing beside the shared pool at Prospect", width: 1440, height: 1440 },
-      { src: "assets/images/properties/prospect-three/living.jpg", alt: "Living room in the three-bedroom Prospect villa", width: 2560, height: 1707 },
-      { src: "assets/images/properties/prospect-three/bedroom.jpg", alt: "Bedroom in the three-bedroom Prospect villa", width: 2560, height: 1707 },
+      { src: "assets/images/properties/prospect-three/aerial-sea-view.jpg", alt: "Aerial view of the Prospect villas and shared pool near the Caribbean Sea", width: 1600, height: 1200 },
+      { src: "assets/images/properties/prospect-three/living-room.jpg", alt: "Open-plan living and dining room in the three-bedroom Prospect villa", width: 1600, height: 1067 },
+      { src: "assets/images/properties/prospect-three/kitchen.jpg", alt: "Purple and white equipped kitchen in the three-bedroom Prospect villa", width: 1600, height: 1067 },
+      { src: "assets/images/properties/prospect-three/twin-bedroom.jpg", alt: "Twin bedroom with blue feature wall in the three-bedroom Prospect villa", width: 1600, height: 1067 },
+      { src: "assets/images/properties/prospect-three/blue-bedroom.jpg", alt: "Double bedroom with blue feature wall in the three-bedroom Prospect villa", width: 1600, height: 1067 },
+      { src: "assets/images/properties/prospect-three/purple-bedroom.jpg", alt: "Double bedroom opening onto a terrace in the three-bedroom Prospect villa", width: 1600, height: 1067 },
+      { src: "assets/images/properties/prospect-three/bathroom.jpg", alt: "Walk-in shower bathroom in the three-bedroom Prospect villa", width: 1600, height: 1067 },
+      { src: "assets/images/properties/prospect-three/shared-pool.jpg", alt: "Shared swimming pool and sun terrace at the Prospect villas", width: 1600, height: 1065 },
     ],
     bookingUrl: "https://direct-book.com/properties/bestevillasprospctdirect",
   },
@@ -39,9 +44,14 @@ const villaData = {
       "A comfortable two-bedroom apartment with the space and practical amenities needed for relaxed family time on Barbados’ West Coast.",
     facts: ["2 bedrooms", "1.5 bathrooms", "Shared pool", "Fibre Wi-Fi"],
     images: [
-      { src: "assets/images/properties/prospect-two/exterior.jpg", alt: "Exterior of the two-bedroom Prospect villa", width: 2560, height: 1707 },
-      { src: "assets/images/properties/prospect-two/living.jpg", alt: "Living room in the two-bedroom Prospect villa", width: 2560, height: 1707 },
-      { src: "assets/images/properties/prospect-two/bedroom.jpg", alt: "Bedroom in the two-bedroom Prospect villa", width: 2560, height: 1707 },
+      { src: "assets/images/properties/prospect-two/aerial-pool-sea-view.jpg", alt: "Aerial view of the Prospect villas, shared pool and nearby Caribbean Sea", width: 1600, height: 1200 },
+      { src: "assets/images/properties/prospect-two/living-dining-room.jpg", alt: "Open-plan living and dining room in the two-bedroom Prospect villa", width: 1600, height: 1067 },
+      { src: "assets/images/properties/prospect-two/kitchen.jpg", alt: "Spacious equipped kitchen with wood cabinetry in the two-bedroom Prospect villa", width: 1600, height: 1067 },
+      { src: "assets/images/properties/prospect-two/green-bedroom.jpg", alt: "Double bedroom with green feature wall in the two-bedroom Prospect villa", width: 1600, height: 1067 },
+      { src: "assets/images/properties/prospect-two/balcony.jpg", alt: "Private balcony overlooking the tropical garden at the two-bedroom Prospect villa", width: 1600, height: 1067 },
+      { src: "assets/images/properties/prospect-two/second-bedroom.jpg", alt: "Second double bedroom in the two-bedroom Prospect villa", width: 1600, height: 1067 },
+      { src: "assets/images/properties/prospect-two/bathroom.jpg", alt: "Walk-in shower bathroom in the two-bedroom Prospect villa", width: 1600, height: 1067 },
+      { src: "assets/images/properties/prospect-two/shared-pool.jpg", alt: "Shared swimming pool beside the Prospect villas", width: 1600, height: 1065 },
     ],
     bookingUrl: "https://direct-book.com/properties/bestevillasprospctdirect",
   },
@@ -391,14 +401,30 @@ function initVillaTemplate() {
     mainImage.height = villa.images[0].height;
   }
 
-  const galleryImages = [...document.querySelectorAll("[data-gallery-image]")];
-  galleryImages.forEach((image, index) => {
-    const source = villa.images[index] || villa.images[0];
-    image.src = source.src;
-    image.alt = source.alt;
-    image.width = source.width;
-    image.height = source.height;
-  });
+  const thumbnailRail = document.querySelector(".gallery-thumbnail-rail");
+  if (thumbnailRail) {
+    thumbnailRail.replaceChildren();
+    villa.images.forEach((source, index) => {
+      const button = document.createElement("button");
+      button.className = `gallery-thumbnail${index === 0 ? " active" : ""}`;
+      button.type = "button";
+      button.dataset.galleryThumb = "";
+      button.dataset.galleryIndex = String(index);
+      button.setAttribute("aria-label", `Show photo ${index + 1} of ${villa.images.length}`);
+      button.setAttribute("aria-pressed", String(index === 0));
+
+      const image = document.createElement("img");
+      image.dataset.galleryImage = "";
+      image.src = source.src;
+      image.alt = source.alt;
+      image.width = source.width;
+      image.height = source.height;
+      image.loading = "lazy";
+      image.decoding = "async";
+      button.append(image);
+      thumbnailRail.append(button);
+    });
+  }
 
   const factList = document.querySelector("#villa-facts");
   if (factList) {

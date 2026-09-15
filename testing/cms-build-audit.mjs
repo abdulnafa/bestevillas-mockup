@@ -628,6 +628,26 @@ async function duplicateSlugMustFail(contentDirectory, outputDirectory, preserve
   }
 }
 
+async function galleryLimitMustFail(contentDirectory, outputDirectory) {
+  const source = resolve(contentDirectory, "villas", "prospect-two.md");
+  const original = await readFile(source, "utf8");
+  const parsed = parseFrontmatter(original, source);
+  parsed.data.gallery = Array.from({ length: 21 }, (_, index) => ({
+    image: parsed.data.gallery[0].image,
+    alt: `QA gallery image ${index + 1} must remain within the CMS limit`,
+  }));
+  await writeFrontmatter(source, parsed.data, parsed.body);
+  try {
+    await runBuild(contentDirectory, outputDirectory, "preview", "/");
+    record("validation", "gallery limit", "build rejects more than 20 villa gallery images", false, "build unexpectedly succeeded");
+  } catch (error) {
+    const output = `${error.stdout || ""}\n${error.stderr || ""}\n${error.message || ""}`;
+    record("validation", "gallery limit", "build rejects more than 20 villa gallery images", /20|gallery images|allowed/i.test(output), normalizeText(output).slice(0, 500));
+  } finally {
+    await writeFile(source, original, "utf8");
+  }
+}
+
 await mkdir(dirname(evidencePath), { recursive: true });
 
 try {
@@ -697,6 +717,7 @@ try {
     const previewOutput = resolve(temporaryRoot, "preview");
     const productionOutput = resolve(temporaryRoot, "production");
     const duplicateOutput = resolve(temporaryRoot, "duplicate");
+    const galleryLimitOutput = resolve(temporaryRoot, "gallery-limit");
     await cp(resolve(root, "content"), fixtureContent, { recursive: true });
     await prepareFixture(fixtureContent);
     const fixtureModels = await loadModels(fixtureContent);
@@ -718,6 +739,7 @@ try {
     }
 
     await foreignOutputMustBeRefused(fixtureContent, resolve(temporaryRoot, "foreign-output"));
+    await galleryLimitMustFail(fixtureContent, galleryLimitOutput);
     await duplicateSlugMustFail(fixtureContent, duplicateOutput, productionOutput);
   }
 } catch (error) {

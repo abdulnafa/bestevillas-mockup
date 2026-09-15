@@ -12,15 +12,25 @@ bedrooms: 3
 bathrooms: 2
 summary: A spacious three-bedroom base near West Coast beaches, Bridgetown and the University of the West Indies, with practical comforts for an easy Barbados stay.
 booking_url: https://direct-book.com/properties/bestevillasprospctdirect
-hero_image: /assets/images/properties/prospect-three/exterior.jpg
-hero_image_alt: Guests relaxing beside the shared pool at Prospect in Barbados
+hero_image: /assets/images/properties/prospect-three/aerial-sea-view.jpg
+hero_image_alt: Aerial view of the Prospect villas and shared pool near the Caribbean Sea
 gallery:
-  - image: /assets/images/properties/prospect-three/exterior.jpg
-    alt: Guests relaxing beside the shared pool at Prospect in Barbados
-  - image: /assets/images/properties/prospect-three/living.jpg
-    alt: Living room in the three-bedroom Prospect villa
-  - image: /assets/images/properties/prospect-three/bedroom.jpg
-    alt: Bedroom in the three-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-three/aerial-sea-view.jpg
+    alt: Aerial view of the Prospect villas and shared pool near the Caribbean Sea
+  - image: /assets/images/properties/prospect-three/living-room.jpg
+    alt: Open-plan living and dining room in the three-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-three/kitchen.jpg
+    alt: Purple and white equipped kitchen in the three-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-three/twin-bedroom.jpg
+    alt: Twin bedroom with blue feature wall in the three-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-three/blue-bedroom.jpg
+    alt: Double bedroom with blue feature wall in the three-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-three/purple-bedroom.jpg
+    alt: Double bedroom opening onto a terrace in the three-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-three/bathroom.jpg
+    alt: Walk-in shower bathroom in the three-bedroom Prospect villa
+  - image: /assets/images/properties/prospect-three/shared-pool.jpg
+    alt: Shared swimming pool and sun terrace at the Prospect villas
 amenities:
   - Shared pool
   - Fibre Wi-Fi
@@ -36,4 +46,3 @@ seo:
 A spacious three-bedroom base near West Coast beaches, Bridgetown and the University of the West Indies, with the everyday comforts families need for an easy Barbados stay.
 
 Exact amenities, live rates and availability should always be confirmed on the external booking platform before reserving.
-

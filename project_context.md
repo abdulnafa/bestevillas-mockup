@@ -47,6 +47,7 @@
 - [x] Replace the temporary text/monogram branding with the client-supplied Best E Villas logo, preserving the original mark and using a professional high-contrast treatment appropriate to the header.
 - [x] Keep the site header professionally sticky across all pages, with correct responsive desktop/mobile behaviour and no content obstruction.
 - [x] Provide smooth in-page scrolling and subtle, lightweight entrance/interaction motion across all pages; respect reduced-motion preferences and avoid distracting effects.
+- [x] Preserve the client-supplied full-resolution property photographs as source material, curate only the strongest non-repetitive images for each relevant villa, and publish responsive optimized derivatives so the galleries remain fast.
 
 ### Assumptions awaiting confirmation
 
@@ -66,7 +67,6 @@
 
 ### Blocked / waiting on client
 
-- [ ] Downloadable high-resolution versions of the Pixieset images, including a download PIN if required.
 - [ ] Website/CMS, hosting, domain, and repository authorization; the GA4 Measurement ID, consent decision, Google Analytics, and Search Console access will be provided for production activation. Do not store credentials in project files.
 - [ ] Exact ASAP launch deadline, if the client has a hard date.
 - [ ] Final client approval for policies, occupancy details, and production copy; the Policies page remains noindex until approved.
@@ -92,6 +92,8 @@
 - [x] Client-reported preview regressions corrected locally: the desktop navigation drawer stays closed, headers no longer clip, internal-page images use controlled 4:3 frames, responsive/lazy image delivery is in place, and future CMS uploads are automatically optimized during the staged build — 2026-09-11.
 - [x] Client-reported villa-page overlap corrected locally: square and landscape gallery images are contained within bounded grid tracks, facts and availability controls stay separate, both generated and legacy/source villa layouts pass collision-focused desktop/mobile QA, and a follow-up deployment safeguard prevents the branch Pages job from remaining the last publisher — 2026-09-12.
 - [x] Client-supplied logo integrated across generated and source-fallback headers/footers; sticky responsive headers, header-aware smooth scrolling, subtle progressive entrance motion, mobile-menu refinements, and reduced-motion support completed and rendered across all routes — 2026-09-12.
+- [x] Downloadable high-resolution Prospect photography received: 43 original property photographs plus two aerial views are available locally, resolving the previous production-image dependency for the two Prospect villas — 2026-09-15.
+- [x] New Prospect photography audited, mapped to the two villa layouts, curated into two eight-photo galleries, converted to lightweight colour-managed web assets, connected to generated and source-fallback routes, and verified across desktop/mobile — 2026-09-15.
 
 ## Client communication log
 
@@ -109,6 +111,8 @@
 | 2026-09-11 | Regression report | After publication, the client reported excessively tall images on multiple pages, a navigation panel visibly open on the right, clipped page content, and slow loading; screenshots show the Locations page affected on desktop. | Corrected and independently re-verified locally; push and GitHub Pages deployment are required before asking the client to refresh |
 | 2026-09-12 | Regression report | Client screenshot of `villa.html?villa=prospect-three` shows the availability card and villa facts covering the gallery, with the availability action clipped on desktop. | Corrected and visually verified locally; repository push, Pages Source change, generated deployment, and live verification are still required before sending a completion update |
 | 2026-09-12 | Design enhancement | Client supplied the white Best E Villas logo and requested professional logo placement, a polished responsive sticky header, smooth page scrolling, and light animations throughout the site. | Completed and verified locally; ready to publish, then share after the GitHub Pages deployment is confirmed |
+| 2026-09-15 | Asset update | Client supplied 43 full-resolution property photographs and two additional aerial views for review and integration. | Completed locally: two curated eight-photo Prospect galleries are optimized and verified; originals remain untouched; villa-group labels should be confirmed by the client |
+| 2026-09-15 | Preview decision | Project owner approved proceeding with the current Prospect Two/Prospect Three photo grouping so the updated galleries can be shown to the client. | Implemented and tested locally; repository publication and live verification remain pending; client confirmation remains authoritative before production |
 
 ## Key technical notes
 
@@ -125,7 +129,7 @@
 - Do not reproduce proprietary hotel branding or typefaces; interpret the approved qualities through the Best E Villas brand and appropriately licensed assets.
 - Pages CMS is configured through `.pages.yml`; editable records are under `content/`, with activation/handover steps in `docs/CMS_SETUP.md`. The repository owner must authorize the Pages CMS GitHub App after these files are pushed.
 - `scripts/build.mjs` validates the CMS records before safely generating `dist/`. It supports preview and production modes, base-path deployment, draft exclusion, safe Markdown/URL handling, asset validation, page/villa/Guide rendering, canonical/schema/sitemap generation, and preservation of the last valid build if a rebuild fails.
-- The staged build uses pinned Sharp image processing to auto-orient and optimize published imagery, generate 480px and 960px responsive candidates, strip unnecessary metadata where re-encoding is needed, enforce byte budgets, and leave original CMS/source files untouched. The current 20 referenced source images generate 40 responsive derivatives only inside the deployable build; unpublished drafts are excluded from optimization so they cannot block a public deployment on size grounds.
+- The staged build uses pinned Sharp image processing to auto-orient and optimize published imagery, generate 480px and 960px responsive candidates, strip unnecessary metadata where re-encoding is needed, enforce byte budgets, and leave original CMS/source files untouched. The current 31 referenced source images generate 62 responsive derivatives only inside the deployable build; unpublished drafts are excluded from optimization so they cannot block a public deployment on size grounds.
 - The four villa pages have crawlable pre-rendered URLs under `villas/`. Known legacy `villa.html?villa=...` links redirect to the matching new route and the legacy page remains noindex.
 - `.github/workflows/deploy-pages.yml` installs pinned dependencies, builds for the GitHub Pages preview path, runs both CMS and UI regression gates before artifact upload, and deploys with job-scoped permissions. No push or deployment was performed in this task.
 - Public inspection on 2026-09-12 confirmed that GitHub Pages was serving the tracked root/source `villa.html` rather than generated `dist/villa.html`: the live pretty villa route returned 404, and both the custom artifact workflow and GitHub's automatic `pages build and deployment` workflow succeeded for commit `de7c577`. The branch-source deployment overwrote the generated artifact. The custom workflow now safely follows a successful automatic Pages run and checks out its exact SHA so the generated artifact publishes last, but the repository owner must still select **GitHub Actions** as the sole Pages source.
@@ -137,7 +141,11 @@
 - The supplied white JPEG logo was converted deterministically to `assets/images/brand/best-e-villas-logo-white.png` (1015×245 transparent PNG, 21,777 bytes), retaining all high-confidence artwork pixels. A generative background-removal result was rejected because it altered the brand artwork; it is not used by the site.
 - Header/footer branding uses the exact transparent white logo on the approved dark-teal surface. The header remains the same height while scrolling, gains only a restrained shadow state, and uses a passive requestAnimationFrame-throttled scroll update.
 - Entrance motion is progressively enhanced with opacity/transform only, so content stays visible without JavaScript. Native smooth scrolling uses one header-aware offset, while `prefers-reduced-motion` disables both smooth and entrance motion.
-- Commit `f24b0b8` contains the 2026-09-12 overlap/deployment hotfix. The subsequent logo/header/motion work in the current working tree has not been committed, pushed, or deployed by the assistant.
+- Commit `1c44c89` is the current committed baseline and contains the official-logo/sticky-navigation work. The 2026-09-15 photo/gallery update remains uncommitted, unpushed, and undeployed by the assistant.
+- Visual comparison with the existing Prospect imagery and room counts maps the purple-kitchen/open-plan set to Prospect Three, the blue-lounge/wood-kitchen set to Prospect Two, and the final pool/exterior set to shared Prospect amenities. Filenames and metadata contain no property name, so client confirmation remains the authoritative check before production publication.
+- The project owner approved using this evidence-based mapping in the client preview on 2026-09-15. This approval allows publication for review but does not replace the client's final property-label confirmation before production launch.
+- The 159.41 MiB master-photo folder is preserved locally and explicitly excluded from Git/deployment. Only 16 curated web copies are under `assets/`: eight per Prospect villa, each 1600px wide, sRGB, metadata-stripped, and below the 550 KiB source budget; the staged build adds 480px/960px candidates.
+- Both Prospect galleries now contain eight purposeful views (aerial, living space, kitchen, bedrooms, bathroom, balcony where applicable, and pool). The desktop rail safely contains a 2×4 thumbnail set and can vertically scroll up to the CMS limit of 20; tablet/mobile uses a horizontal snap rail.
 
 ## Latest validation
 
@@ -181,3 +189,10 @@
 - [x] 2026-09-12: Existing generated-site browser QA passed 56/56. New header/motion browser QA passed 27/27 across all 14 routes plus 981/980, 861/860, 740, and 390px responsive boundaries, confirming logo loading/containment, sticky position and stable height, mobile drawer containment/Escape close, anchor clearance, subtle reveal completion, reduced-motion fallback, no overflow, and no relevant console errors.
 - [x] 2026-09-12: QA screenshots/JSON are retained under `testing/evidence/`; temporary local server and isolated Chrome processes were stopped, temporary browser profiles were removed, and ports 4173/9223 were confirmed closed.
 - [x] 2026-09-12: Current task inventory is 24 tracked items — 0 in progress, 2 pending, 5 blocked/client-waiting, and 17 completed; 7 remain open. This enhancement is complete locally but is not live until the project owner commits/pushes it and confirms the GitHub Pages deployment.
+- [x] 2026-09-15: Audited all 43 supplied 25-megapixel property originals plus both 1600×1200 aerial images. No corrupt or exact duplicate files were found; repeated angles were excluded from the published selection, and source filenames/metadata were confirmed not to identify the villa name.
+- [x] 2026-09-15: Verified all 16 curated source assets are 1600px wide, sRGB, metadata-free, below 550 KiB each, and 3,476,480 bytes combined. The 159.41 MiB master folder remains unchanged and excluded from Git/deployment.
+- [x] 2026-09-15: Final GitHub Pages-path build generated all 14 routes. CMS/safety passed 5930/5930, UI/image regression passed 2033/2033, source static audit passed 537/537, SEO passed 198/198, and production-readiness passed 309/309 with zero advisories.
+- [x] 2026-09-15: Chromium rendered QA passed 69/69 generated-site checks, 47/47 source-fallback checks, and 27/27 sticky-header/motion checks. Both eight-photo Prospect galleries, every thumbnail state, 1920px through 390px boundaries, booking separation, image readiness, missing resources, overflow, and console health passed. Headless Edge 153 was used after local Chrome could not start in the test sandbox; no Playwright dependency is configured.
+- [x] 2026-09-15: With cache disabled, a complete interaction through all eight responsive images transferred 669,289 bytes for Prospect Three and 700,817 bytes for Prospect Two, with zero 1600px base-original requests. Desktop/mobile gallery evidence was visually inspected and retained under `testing/evidence/`.
+- [x] 2026-09-15: Temporary contact sheets, optimizer script, browser profiles, local servers, and isolated browser processes were removed; ports 4173, 4174, and 9223 were confirmed closed.
+- [x] 2026-09-15: Current task inventory is 25 tracked items — 0 in progress, 2 pending, 4 blocked/client-waiting, and 19 completed; 6 remain open. The gallery update is complete locally but is not live until the project owner commits/pushes it and verifies the GitHub Pages deployment.

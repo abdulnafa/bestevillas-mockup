@@ -529,7 +529,7 @@
       "target": "villa.html",
       "check": "images reserve intrinsic space",
       "passed": true,
-      "detail": "0 of 7 lack width/height",
+      "detail": "0 of 12 lack width/height",
       "severity": "advisory"
     },
     {
