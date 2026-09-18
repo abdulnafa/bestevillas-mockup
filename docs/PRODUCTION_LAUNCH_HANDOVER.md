@@ -5,9 +5,9 @@ Status date: 2026-09-18
 ## Current review baseline
 
 - Public review URL: https://abdulnafa.github.io/bestevillas-mockup/
-- Deployed source: commit `000e8fd` through GitHub Actions on 2026-09-17.
+- Deployment source: the `main` branch through GitHub Actions; confirm the current SHA in the latest successful Pages workflow before sign-off.
 - Generated preview: 14 routes, four pre-rendered villa pages, legacy redirects, responsive assets, and preview `noindex` protection.
-- Retained live QA baseline: 59/59 full-site browser checks and 27/27 sticky-header/motion checks passed from 1920px through 390px.
+- Retained live QA baseline: 59/59 full-site browser checks and 27/27 sticky-header/motion checks passed from 1920px through 390px on 2026-09-18.
 - The GitHub Pages preview is for review only. It is not the live `bestevillas.com` production deployment.
 
 ## Go-live gates
