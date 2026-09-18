@@ -94,7 +94,7 @@ The current GitHub Pages URL is:
 
 https://abdulnafa.github.io/bestevillas-mockup/
 
-The repository includes `.github/workflows/deploy-pages.yml`. Once the repository owner selects **GitHub Actions** under **Settings → Pages → Build and deployment → Source**, every push to `main` builds the preview and deploys the generated `dist/` artifact. The workflow can also be started manually from the Actions tab.
+The repository includes `.github/workflows/deploy-pages.yml`, and **GitHub Actions** is now the selected Pages source. Every approved push to `main` builds the preview and deploys the generated `dist/` artifact; the workflow can also be started manually from the Actions tab.
 
 No deployment secret is stored in this project. GitHub supplies a short-lived Pages identity to the official deployment action. Only an authorized repository owner or maintainer can enable Pages, approve the workflow environment when required, authorize Pages CMS, or grant access to a client-owned production repository. The current preview workflow does not publish to the client's live domain.
 
@@ -102,7 +102,9 @@ No deployment secret is stored in this project. GitHub supplies a short-lived Pa
 
 - The preview intentionally uses `noindex, nofollow`; remove it only when the replacement site is ready for the live domain.
 - Guests compare properties on this website and complete reservations on the existing external booking platform. This site does not process payments.
-- Pixieset preview renditions are used in the current design. Download and self-host the approved full-resolution originals before production launch.
+- The client logo and curated full-resolution Prospect photography are integrated as optimized local assets. Approved Providence and St. Silas production photography is still required.
 - Pages CMS is configured in `.pages.yml`; repository authorization, rendering, and deployment are described in `docs/CMS_SETUP.md`.
-- Final logo files, policies, occupancy details, the GA4 Measurement ID/consent activation, Search Console, and hosting/domain access still require client confirmation or access.
+- Final policies, occupancy/bed details, rate-season dates, the GA4 Measurement ID/consent activation, Search Console, and hosting/domain access still require client confirmation or access.
 - Current prices were intentionally omitted because the external booking platform is the source of live rates.
+
+The final production scope and dependency-based schedule are in `docs/PROJECT_SCOPE_AND_DELIVERY.md`. The stakeholder gates, cutover checks, rollback rule, and post-launch handover are in `docs/PRODUCTION_LAUNCH_HANDOVER.md`.

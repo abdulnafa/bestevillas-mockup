@@ -69,7 +69,7 @@ Every build validates the CMS schema, route and canonical uniqueness, booking de
 
 The workflow at `.github/workflows/deploy-pages.yml` installs dependencies, creates a preview-mode `dist/`, uploads that folder as the Pages artifact, and deploys it with GitHub's official Pages actions. It runs after a push to `main` and can also be started manually.
 
-One repository-owner action is required before the first workflow deployment:
+The repository owner selected **GitHub Actions** as the Pages source, and the generated preview was successfully deployed and verified on 2026-09-17. For a new repository or a replacement preview environment, use the same activation sequence:
 
 1. Open the GitHub repository's **Settings**.
 2. Select **Pages**.
@@ -79,7 +79,9 @@ One repository-owner action is required before the first workflow deployment:
 
 The workflow requests only repository read access, Pages deployment access, and GitHub's short-lived identity token. It contains no passwords, personal access tokens, CMS credentials, or client secrets.
 
-Repository authorization remains an owner boundary. The owner of `abdulnafa/bestevillas-mockup` must enable Pages and authorize the Pages CMS GitHub App for this preview repository. A client-owned production repository, live-domain configuration, protected environment approval, or collaborator access must be authorized separately by the client or its repository administrator. Do not request or share account passwords or personal access tokens.
+Repository authorization remains an owner boundary. Pages deployment is active for `abdulnafa/bestevillas-mockup`; the owner must still authorize the Pages CMS GitHub App for the required repository. A client-owned production repository, live-domain configuration, protected environment approval, or collaborator access must be authorized separately by the client or its repository administrator. Do not request or share account passwords or personal access tokens.
+
+Use `docs/PROJECT_SCOPE_AND_DELIVERY.md` for the approved production boundary and delivery sequence. Use `docs/PRODUCTION_LAUNCH_HANDOVER.md` for the client gates, stakeholder sign-off, production cutover, rollback, and post-launch verification.
 
 No secret, token, password, or private credential is required or stored by this configuration.
 
