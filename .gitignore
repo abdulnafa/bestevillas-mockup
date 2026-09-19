@@ -8,5 +8,27 @@ dist/
 .codex-*.png
 .codex-chrome-profile*/
 .codex-qa-*/
+.private/
+*.private.csv
+*.private.tsv
+*.private.xlsx
+*.private.xls
+*.private.json
+*siteminder*.csv
+*siteminder*.tsv
+*siteminder*.xls*
+*little*hotelier*.csv
+*little*hotelier*.tsv
+*little*hotelier*.xls*
+*innboss*.csv
+*innboss*.tsv
+*innboss*.xls*
+*reservation*.csv
+*reservation*.tsv
+*reservation*.xls*
+!testing/fixtures/reservations/siteminder-dummy.csv
+!testing/fixtures/reservations/expected/prospect-innboss.csv
+!testing/fixtures/reservations/expected/providence-innboss.csv
+!testing/fixtures/reservations/expected/st-silas-innboss.csv
 bestevillas new images/
 Best evillas new images 2/

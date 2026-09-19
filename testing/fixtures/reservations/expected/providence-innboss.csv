@@ -1,0 +1,2 @@
+guest_name,guest_email,guest_phone,room_type,check_in,check_out,adults,children,total_amount,reference
+"Jordan ""Example""",jordan@example.invalid,+1 202 555 0103,Providence Two Bedroom Apartment,2026-11-05,2026-11-08,2,0,435.00,DEMO-003

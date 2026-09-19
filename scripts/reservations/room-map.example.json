@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "innboss_schema": {
+    "verified": false,
+    "delimiter": ",",
+    "date_format": "YYYY-MM-DD",
+    "columns": [
+      "guest_name",
+      "guest_email",
+      "guest_phone",
+      "room_type",
+      "check_in",
+      "check_out",
+      "adults",
+      "children",
+      "total_amount",
+      "reference"
+    ]
+  },
+  "targets": {
+    "prospect": {
+      "label": "Prospect",
+      "property_aliases": ["Prospect", "Best E Villas Prospect"],
+      "rooms": [
+        {
+          "target": "Two Bedroom Apartment",
+          "inventory": 3,
+          "aliases": ["Prospect Two Bedroom", "Prospect Two Bedroom Apartment", "Two Bedroom Apartment"]
+        },
+        {
+          "target": "Three Bedroom Apartment",
+          "inventory": 2,
+          "aliases": ["Prospect Three Bedroom", "Prospect Three Bedroom Apartment", "Three Bedroom Apartment"]
+        }
+      ]
+    },
+    "providence": {
+      "label": "Providence",
+      "property_aliases": ["Providence", "Best E Villas Providence"],
+      "rooms": [
+        {
+          "target": "Providence Two Bedroom Apartment",
+          "inventory": 4,
+          "aliases": ["Providence Two Bedroom", "Providence Two Bedroom Apartment"]
+        }
+      ]
+    },
+    "st-silas": {
+      "label": "St. Silas",
+      "property_aliases": ["St Silas", "St. Silas", "Best E Villas St Silas", "Best E Villas St. Silas"],
+      "rooms": [
+        {
+          "target": "Three Bedroom Unit",
+          "inventory": 2,
+          "aliases": ["St Silas Three Bedroom", "St. Silas Three Bedroom", "Three Bedroom Unit"]
+        }
+      ]
+    }
+  }
+}

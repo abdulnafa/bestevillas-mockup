@@ -1,0 +1,7 @@
+Booking Status,Property,Room Type,Guest Name,Guest Email,Guest Phone,Arrival Date,Departure Date,Adults,Children,Booking Total,Currency,Reservation Reference,Notes
+Confirmed,Prospect,Prospect Two Bedroom,Alice Example,alice@example.invalid,+1 202 555 0101,01/10/2026,05/10/2026,2,0,620.00,USD,DEMO-001,Synthetic fixture only
+Confirmed,Prospect,Prospect Three Bedroom,"Taylor, Example",taylor@example.invalid,+1 202 555 0102,10/10/2026,14/10/2026,4,1,800.00,USD,DEMO-002,"Parser fixture line one
+Parser fixture line two"
+Confirmed,Providence,Providence Two Bedroom,"Jordan ""Example""",jordan@example.invalid,+1 202 555 0103,05/11/2026,08/11/2026,2,0,435.00,USD,DEMO-003,Synthetic fixture only
+Confirmed,St. Silas,St. Silas Three Bedroom,Morgan Example,morgan@example.invalid,+1 202 555 0104,20/12/2026,23/12/2026,5,0,825.00,USD,DEMO-004,Synthetic fixture only
+Checked-in,Prospect,Prospect Two Bedroom,Casey Example,casey@example.invalid,+1 202 555 0105,18/09/2026,22/09/2026,2,0,620.00,USD,DEMO-005,Synthetic active-stay fixture

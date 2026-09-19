@@ -1,0 +1,2 @@
+guest_name,guest_email,guest_phone,room_type,check_in,check_out,adults,children,total_amount,reference
+Morgan Example,morgan@example.invalid,+1 202 555 0104,Three Bedroom Unit,2026-12-20,2026-12-23,5,0,825.00,DEMO-004

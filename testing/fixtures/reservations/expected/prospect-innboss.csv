@@ -1,0 +1,4 @@
+guest_name,guest_email,guest_phone,room_type,check_in,check_out,adults,children,total_amount,reference
+Alice Example,alice@example.invalid,+1 202 555 0101,Two Bedroom Apartment,2026-10-01,2026-10-05,2,0,620.00,DEMO-001
+"Taylor, Example",taylor@example.invalid,+1 202 555 0102,Three Bedroom Apartment,2026-10-10,2026-10-14,4,1,800.00,DEMO-002
+Casey Example,casey@example.invalid,+1 202 555 0105,Two Bedroom Apartment,2026-09-18,2026-09-22,2,0,620.00,DEMO-005

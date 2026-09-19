@@ -1,0 +1,218 @@
+{
+  "generatedAt": "2026-09-19T05:11:12.155Z",
+  "passed": 35,
+  "total": 35,
+  "failed": [],
+  "results": [
+    {
+      "suite": "conversion",
+      "check": "synthetic fixture passes validation",
+      "passed": true,
+      "detail": "{\"accepted\":5}"
+    },
+    {
+      "suite": "conversion",
+      "check": "multiline quoted field does not disturb row parsing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "conversion",
+      "check": "rows split across all three private properties",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "safety",
+      "check": "mapping target IDs cannot traverse outside the output directory",
+      "passed": true,
+      "detail": "MAPPING_TARGET_ID_INVALID"
+    },
+    {
+      "suite": "safety",
+      "check": "formula-leading room targets cannot reach generated CSV",
+      "passed": true,
+      "detail": "MAPPING_ROOM_INVALID"
+    },
+    {
+      "suite": "files",
+      "check": "three property CSV files plus one redacted report are written",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "files",
+      "check": "prospect-innboss.csv matches approved synthetic output",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "files",
+      "check": "providence-innboss.csv matches approved synthetic output",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "files",
+      "check": "st-silas-innboss.csv matches approved synthetic output",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "privacy",
+      "check": "written report contains aggregates only",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "safety",
+      "check": "existing outputs cannot be overwritten",
+      "passed": true,
+      "detail": "OUTPUT_ALREADY_EXISTS"
+    },
+    {
+      "suite": "privacy",
+      "check": "repository fixture is refused as a real guest input",
+      "passed": true,
+      "detail": "INPUT_PATH_NOT_PRIVATE"
+    },
+    {
+      "suite": "privacy",
+      "check": "output junctions cannot redirect private files into the public repository",
+      "passed": true,
+      "detail": "OUTPUT_PATH_NOT_PRIVATE"
+    },
+    {
+      "suite": "privacy",
+      "check": "fixture mode cannot be used with an external or real input",
+      "passed": true,
+      "detail": "FIXTURE_INPUT_REQUIRED"
+    },
+    {
+      "suite": "safety",
+      "check": "unverified InnBoss example schema blocks real conversion",
+      "passed": true,
+      "detail": "TARGET_SCHEMA_UNVERIFIED"
+    },
+    {
+      "suite": "privacy",
+      "check": "non-UTF-8 source bytes are rejected instead of corrupting guest text",
+      "passed": true,
+      "detail": "INPUT_ENCODING_NOT_UTF8"
+    },
+    {
+      "suite": "scope",
+      "check": "cancelled reservation fails closed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "mapping",
+      "check": "unknown room fails closed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "mapping",
+      "check": "blank property cannot be silently inferred from the room name",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "mapping",
+      "check": "property hint cannot override a contradictory source property",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "parsing",
+      "check": "unescaped CSV quotes fail closed",
+      "passed": true,
+      "detail": "CSV_UNEXPECTED_QUOTE"
+    },
+    {
+      "suite": "dates",
+      "check": "non-ISO source dates require explicit date order",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "dates",
+      "check": "timestamp input fails until timezone handling is explicitly reviewed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "amounts",
+      "check": "decimal-comma amount is rejected instead of being inflated",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "inventory",
+      "check": "one-row multi-room booking is blocked until explicit expansion is supported",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "duplicates",
+      "check": "duplicate reservation reference blocks conversion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "duplicates",
+      "check": "same stay and contact under a new reference requires manual review",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "inventory",
+      "check": "overlapping reservations above configured inventory block conversion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "privacy",
+      "check": "CLI output contains no guest values or local file paths",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "privacy",
+      "check": "only the exact allowlisted synthetic tabular fixtures exist in the repository tree",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "privacy",
+      "check": "every allowlisted CSV carries synthetic-only markers",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "privacy",
+      "check": "Git index contains no forced private or unapproved tabular file",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "privacy",
+      "check": "public Pages artifact contains no tabular reservation file",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "privacy",
+      "check": "public Pages artifact contains no reservation CSV signature",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "suite": "cleanup",
+      "check": "temporary private conversion files removed",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

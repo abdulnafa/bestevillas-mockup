@@ -54,6 +54,9 @@ jobs:
       - name: Verify UI regression contracts
         run: npm run test:ui
 
+      - name: Verify reservation CSV privacy and conversion contracts
+        run: npm run test:reservations
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
