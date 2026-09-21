@@ -140,7 +140,7 @@ function villaLayoutHealthy(probe) {
 }
 
 function closingLayoutProbeExpression() {
-  return `(() => {
+  return `(async () => {
     const cta = document.querySelector('.cms-call-to-action');
     const copy = cta?.querySelector('.centered-copy');
     const heading = copy?.querySelector('h2');
@@ -174,6 +174,7 @@ function closingLayoutProbeExpression() {
     const headingBox = heading.getBoundingClientRect();
     const buttonBox = button.getBoundingClientRect();
     cta.scrollIntoView({ block: 'center', behavior: 'instant' });
+    await new Promise((done) => setTimeout(done, 650));
     return {
       missing: false,
       viewport: innerWidth,
@@ -185,7 +186,11 @@ function closingLayoutProbeExpression() {
       ctaHeadingSize: parseFloat(headingStyle.fontSize),
       ctaHeadingContrast: contrast(headingStyle.color, ctaStyle.backgroundColor),
       ctaCopyCentered: copyStyle.textAlign === 'center' && Math.abs((copyBox.left + copyBox.right) / 2 - (ctaBox.left + ctaBox.right) / 2) <= 20,
-      ctaContentContained: headingBox.left >= ctaBox.left - 1 && headingBox.right <= ctaBox.right + 1 && buttonBox.left >= ctaBox.left - 1 && buttonBox.right <= ctaBox.right + 1 && buttonBox.bottom <= ctaBox.bottom + 1,
+      ctaContentContained: headingBox.left >= ctaBox.left - 1 && headingBox.right <= ctaBox.right + 1 && headingBox.top >= ctaBox.top - 1 && buttonBox.left >= ctaBox.left - 1 && buttonBox.right <= ctaBox.right + 1 && buttonBox.bottom <= ctaBox.bottom + 1 && button.scrollWidth <= button.clientWidth + 1,
+      ctaButtonHref: button.href,
+      ctaButtonLabel: button.textContent.trim(),
+      ctaButtonTarget: button.target,
+      ctaButtonRel: button.rel,
       footerBackground: footerStyle.backgroundColor,
       footerHeadingSizes: footerHeadings.map((node) => parseFloat(getComputedStyle(node).fontSize)),
       footerHeadingContrasts: footerHeadings.map((node) => contrast(getComputedStyle(node).color, footerStyle.backgroundColor)),
@@ -200,11 +205,12 @@ function closingLayoutProbeExpression() {
   })()`;
 }
 
-function recordClosingVisual(probe, label, mobile = false) {
+function recordClosingVisual(probe, label, mobile = false, { cmsSections = true, bookingHref = "" } = {}) {
   const details = JSON.stringify(probe);
   record(`${label} closing CTA style and alignment`, !probe.missing && probe.ctaBackgroundOpaque && probe.ctaBackgroundLuminance < 0.2 && probe.ctaHeadingContrast >= 4.5 && probe.ctaCopyCentered && probe.ctaContentContained && probe.ctaHeight >= 180 && probe.ctaHeight <= (mobile ? 540 : 550) && probe.ctaHeadingSize >= 28 && probe.ctaHeadingSize <= (mobile ? 56 : 76) && !probe.overflow, details);
   record(`${label} footer heading size and contrast`, !probe.missing && probe.footerHeadings.join('|') === 'Explore|About|Stay in touch' && probe.footerHeadingSizes.every((size) => size >= 11 && size <= 24) && probe.footerHeadingContrasts.every((contrast) => contrast >= 4.5), details);
-  record(`${label} CMS section spacing and media bounds`, !probe.missing && probe.contentSectionCount >= 2 && probe.contentSectionPadding.every((padding) => padding >= (mobile ? 48 : 60)) && probe.splitColumns === (mobile ? 1 : 2) && Math.abs(probe.mediaRatio - 4 / 3) < 0.05 && probe.mediaObjectFit === 'cover' && probe.narrowWidth > 0 && probe.narrowWidth <= 900 && !probe.overflow, details);
+  if (cmsSections) record(`${label} CMS section spacing and media bounds`, !probe.missing && probe.contentSectionCount >= 2 && probe.contentSectionPadding.every((padding) => padding >= (mobile ? 48 : 60)) && probe.splitColumns === (mobile ? 1 : 2) && Math.abs(probe.mediaRatio - 4 / 3) < 0.05 && probe.mediaObjectFit === 'cover' && probe.narrowWidth > 0 && probe.narrowWidth <= 900 && !probe.overflow, details);
+  if (bookingHref) record(`${label} external booking hand-off`, !probe.missing && probe.ctaButtonHref === bookingHref && probe.ctaButtonLabel === "Check availability" && probe.ctaButtonTarget === "_blank" && probe.ctaButtonRel.split(/\s+/).includes("noopener"), details);
 }
 
 async function openPage(url, navigationBaseUrl = baseUrl) {
@@ -402,6 +408,9 @@ try {
     record(`Pretty villa route ${slug}`, detail.heading.includes(heading) && detail.title.includes("Best E Villas") && detail.canonical === `https://bestevillas.com/villas/${slug}.html` && detail.booking === booking && detail.schema.includes("VacationRental") && detail.galleryReady && detail.galleryCount === expectedGalleryCount && detail.missingImages === 0 && !detail.overflow, JSON.stringify(detail));
     const layout = await page.evaluate(villaLayoutProbeExpression());
     record(`Villa gallery and availability layout ${slug} at 1440px`, villaLayoutHealthy(layout), JSON.stringify(layout));
+    const villaClosing = await page.evaluate(closingLayoutProbeExpression());
+    recordClosingVisual(villaClosing, `Villa ${slug} desktop`, false, { cmsSections: false, bookingHref: booking });
+    if (slug === "st-silas") await page.screenshot("cms-villa-st-silas-closing-desktop.png");
     if (slug.startsWith("prospect-")) {
       const delivery = await page.evaluate(`(() => { const resources = performance.getEntriesByType('resource').filter((entry) => entry.initiatorType === 'img' && entry.name.includes('/assets/images/properties/${slug}/')); return { count: resources.length, encodedBytes: resources.reduce((sum, entry) => sum + (entry.encodedBodySize || 0), 0), originals: resources.map((entry) => entry.name).filter((name) => { const clean = name.split('?')[0].toLowerCase(); return !clean.endsWith('-480.jpg') && !clean.endsWith('-960.jpg'); }), resources: resources.map((entry) => ({ name: entry.name, encodedBodySize: entry.encodedBodySize || 0 })) }; })()`);
       record(`Prospect responsive gallery delivery ${slug}`, delivery.count >= 8 && delivery.originals.length === 0 && delivery.encodedBytes <= 1500000, JSON.stringify(delivery));
@@ -494,6 +503,13 @@ try {
   await page.navigate("villas/st-silas.html");
   const villaMobile = await page.evaluate(`(() => { const toggle = document.querySelector('.menu-toggle'); toggle?.click(); return { expanded: toggle?.getAttribute('aria-expanded'), navDisplay: getComputedStyle(document.querySelector('.mobile-nav')).display, overflow: document.documentElement.scrollWidth > innerWidth }; })()`);
   record("Generated villa mobile menu works", villaMobile.expanded === "true" && villaMobile.navDisplay !== "none" && !villaMobile.overflow, JSON.stringify(villaMobile));
+  await page.evaluate(`document.querySelector('.menu-toggle')?.click()`);
+  for (const [slug, , booking] of villas) {
+    await page.navigate(`villas/${slug}.html?closing-mobile=1`);
+    const villaClosing = await page.evaluate(closingLayoutProbeExpression());
+    recordClosingVisual(villaClosing, `Villa ${slug} mobile`, true, { cmsSections: false, bookingHref: booking });
+    if (slug === "st-silas") await page.screenshot("cms-villa-st-silas-closing-mobile.png");
+  }
 
   const relevantMessages = page.messages.filter((message) => ["error", "warning"].includes(message.level) && !/favicon\.ico/i.test(`${message.text} ${message.url || ""}`));
   record("Generated-site browser console health", relevantMessages.length === 0, JSON.stringify(relevantMessages));

@@ -350,6 +350,23 @@ function auditGeneratedClosingLayout(html, css, outputPath) {
   record("closing-layout", "styles.css", "footer h2 headings match the generated markup and remain light", hasDeclaration(footerHeadingBody, "color", "var\\(--white\\)") && hasDeclaration(footerHeadingBody, "font-size", "[^;]+"));
 }
 
+function auditGeneratedVillaClosingLayout(html, outputPath) {
+  const bookingUrls = {
+    "villas/prospect-three.html": "https://direct-book.com/properties/bestevillasprospctdirect",
+    "villas/prospect-two.html": "https://direct-book.com/properties/bestevillasprospctdirect",
+    "villas/providence.html": "https://direct-book.com/properties/bestevillaprovidencedirect",
+    "villas/st-silas.html": "https://direct-book.com/properties/bestevillasstsilasstjames",
+  };
+  const closingBlock = (html.match(/<section\b[^>]*class="[^"]*\bcms-call-to-action\b[^"]*"[^>]*>[\s\S]*?<\/section>/i) || [""])[0];
+  const openingTag = (closingBlock.match(/^<section\b[^>]*>/i) || [""])[0];
+  const anchorBlock = (closingBlock.match(/<a\b[^>]*>[\s\S]*?<\/a>/i) || [""])[0];
+  const anchor = attributes((anchorBlock.match(/^<a\b[^>]*>/i) || [""])[0]);
+  const expectedBooking = bookingUrls[outputPath];
+
+  record("closing-layout", outputPath, "villa closing CTA uses the shared styled component", Boolean(expectedBooking) && classList(openingTag).has("cms-call-to-action") && /<div\b[^>]*class="[^"]*\bcentered-copy\b/i.test(closingBlock) && /<h2\b[^>]*>Ready to check your dates\?<\/h2>/i.test(closingBlock) && html.includes("styles.css"));
+  record("closing-layout", outputPath, "villa closing action leads to its verified external booking page", anchor.href === expectedBooking && anchor.target === "_blank" && (anchor.rel || "").split(/\s+/).includes("noopener") && />\s*Check availability\s*<\/a>$/i.test(anchorBlock));
+}
+
 function auditVillaGalleryCss(css) {
   const clean = css.replace(/\/\*[\s\S]*?\*\//g, "");
   const galleryStart = clean.indexOf(".property-gallery");
@@ -476,6 +493,9 @@ try {
   for (const route of manifest.routes || []) {
     if (["villa", "legacy-villa"].includes(route.kind) && htmlByRoute.has(route.outputPath)) {
       auditDeferredVillaGallery(htmlByRoute.get(route.outputPath), route.outputPath);
+    }
+    if (route.kind === "villa" && htmlByRoute.has(route.outputPath)) {
+      auditGeneratedVillaClosingLayout(htmlByRoute.get(route.outputPath), route.outputPath);
     }
   }
 
