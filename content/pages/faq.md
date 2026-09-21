@@ -7,7 +7,7 @@ status: published
 hero_heading: Questions, answered simply.
 hero_intro: Find practical information about choosing a villa, checking availability and preparing for your Best E Villas stay.
 hero_image: /assets/images/villa-pool.jpg
-hero_image_alt: Equipped kitchen at a Best E Villas property in Barbados
+hero_image_alt: Equipped red kitchen at a Best E Villas property in St. Silas
 sections:
   - heading: Planning and reserving your stay.
     text: |

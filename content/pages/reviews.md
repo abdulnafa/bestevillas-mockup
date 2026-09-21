@@ -23,8 +23,8 @@ sections:
       The villa layouts give families and friends space to relax together, prepare meals and plan each day at their own pace.
 
       Facilities differ between locations, so the individual villa pages and booking partner provide the best place to confirm what is included for a particular stay.
-    image: /assets/images/barbados-life.jpg
-    image_alt: Comfortable living space with a large sofa and warm wooden tables
+    image: /assets/images/properties/providence/2026-09-18-living-room.jpg
+    image_alt: Living room with blue feature wall and sofas at Providence Terrace
 call_to_action:
   heading: Make your own Barbados memories.
   text: Find a comfortable villa and check live availability.

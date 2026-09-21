@@ -12,8 +12,8 @@ sections:
   - heading: Choose the setting that suits your stay.
     text: |
       Compare the villa collection by coast, neighbourhood and bedroom count. Properties are available in Prospect and St. Silas on the West Coast and Providence on the South Coast.
-    image: /assets/images/new/pixieset-garden-exterior.jpg
-    image_alt: Best E Villas property beside a landscaped tropical garden
+    image: /assets/images/properties/prospect-three/shared-pool.jpg
+    image_alt: Shared pool and outdoor seating at the Prospect apartments
   - heading: Check live availability with the booking partner.
     text: |
       Each villa page links to the existing external booking platform, where current dates, rates and final reservation terms are shown before booking.

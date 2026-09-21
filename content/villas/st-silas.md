@@ -14,6 +14,8 @@ summary: A roomy three-bedroom retreat close to Apes Hill, Royal Westmoreland, W
 booking_url: https://direct-book.com/properties/bestevillasstsilasstjames
 hero_image: /assets/images/properties/st-silas/2026-09-18-blue-exterior-aerial.jpg
 hero_image_alt: Aerial view of the blue St. Silas villas in Barbados
+about_image: /assets/images/properties/st-silas/about-living-room.webp
+about_image_alt: Alternate living-room view with sofas and French doors at St. Silas
 gallery:
   - image: /assets/images/properties/st-silas/2026-09-18-blue-exterior-aerial.jpg
     alt: Aerial view of the blue St. Silas villas in Barbados

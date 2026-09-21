@@ -20,6 +20,7 @@ const pageOutputs = {
 };
 const sharedFiles = ["styles.css", "internal-pages.css", "script.js", "analytics.js"];
 const imageMetadataCache = new Map();
+const sourceDisplayWidths = new Map();
 
 function parseArguments(argv) {
   const options = {
@@ -90,6 +91,15 @@ function safeImageAlt(value) {
 function imageVariantPath(imagePath, width) {
   const extension = extname(imagePath);
   return `${imagePath.slice(0, -extension.length)}-${width}${extension}`;
+}
+
+function webpVariantPath(imagePath, width) {
+  const extension = extname(imagePath);
+  return `${imagePath.slice(0, -extension.length)}-${width}.webp`;
+}
+
+function webpWidths(sourceWidth) {
+  return [...new Set([480, 960, 1600, 2400].filter((width) => width < sourceWidth).concat(Math.min(sourceWidth, 2400)))];
 }
 
 export function readWebpDimensions(buffer) {
@@ -174,18 +184,26 @@ function readImageDimensions(imagePath, imageRoot = projectRoot) {
 
 function imageSourceData(imagePath, basePath, imageRoot = projectRoot) {
   const dimensions = readImageDimensions(imagePath, imageRoot);
-  const candidates = [480, 960]
+  const fallbackCandidates = [480, 960]
     .map((width) => imageVariantPath(imagePath, width))
     .filter((candidate) => existsSync(resolve(imageRoot, candidate.replace(/^\/+/, ""))))
     .map((candidate) => ({ path: candidate, ...readImageDimensions(candidate, imageRoot) }));
-  candidates.push({ path: imagePath, ...dimensions });
+  fallbackCandidates.push({ path: imagePath, ...dimensions });
+  fallbackCandidates.sort((left, right) => left.width - right.width);
+  const normalizedImagePath = String(imagePath).replace(/^\/+/, "");
+  const sourceWidth = sourceDisplayWidths.get(normalizedImagePath) || readImageDimensions(imagePath, projectRoot).width;
+  const webpCandidates = webpWidths(sourceWidth)
+    .map((width) => webpVariantPath(imagePath, width))
+    .filter((candidate) => existsSync(resolve(imageRoot, candidate.replace(/^\/+/, ""))))
+    .map((candidate) => ({ path: candidate, ...readImageDimensions(candidate, imageRoot) }));
+  const candidates = webpCandidates.length ? webpCandidates : fallbackCandidates;
   candidates.sort((left, right) => left.width - right.width);
   return {
     src: publicUrl(imagePath, basePath),
     width: dimensions.width,
     height: dimensions.height,
     srcset: candidates.map((candidate) => `${publicUrl(candidate.path, basePath)} ${candidate.width}w`).join(", "),
-    smallest: candidates[0],
+    smallest: webpCandidates[0] || fallbackCandidates[0],
   };
 }
 
@@ -388,6 +406,7 @@ function collectImageReferences(models) {
   }
   for (const villa of models.villas) {
     add(villa.data.hero_image, `${villa.source}.hero_image`);
+    add(villa.data.about_image, `${villa.source}.about_image`);
     for (const item of villa.data.gallery || []) add(item.image, `${villa.source}.gallery.image`);
   }
   for (const post of models.guidePosts) add(post.data.hero_image, `${post.source}.hero_image`);
@@ -424,6 +443,7 @@ async function prepareResponsiveImageVariants(imagePaths, outputRoot) {
     const oriented = metadata.autoOrient || metadata;
     if (!oriented.width || !oriented.height) throw new Error(`Could not read image dimensions: ${imagePath}.`);
     if (oriented.width < 1000) throw new Error(`Image must be at least 1000px wide for responsive output: ${imagePath}.`);
+    sourceDisplayWidths.set(imagePath, oriented.width);
     const inputBytes = (await stat(input)).size;
     const hasMetadata = Boolean(metadata.orientation || metadata.exif || metadata.xmp || metadata.iptc);
     if (oriented.width > 1600 || inputBytes > 550 * 1024 || hasMetadata) {
@@ -450,6 +470,23 @@ async function prepareResponsiveImageVariants(imagePaths, outputRoot) {
       const variantBytes = (await stat(destination)).size;
       const variantBudget = targetWidth === 480 ? 80 * 1024 : 180 * 1024;
       if (variantBytes > variantBudget) throw new Error(`Responsive ${targetWidth}px image exceeds its ${variantBudget / 1024} KiB budget: ${variantPath}.`);
+    }
+
+    for (const targetWidth of webpWidths(oriented.width)) {
+      const variantPath = webpVariantPath(imagePath, targetWidth);
+      const destination = resolve(outputRoot, variantPath);
+      if (!destination.startsWith(`${outputRoot}${sep}`)) throw new Error(`Unsafe WebP output path: ${variantPath}.`);
+      await mkdir(dirname(destination), { recursive: true });
+      const variantBudget = targetWidth <= 480 ? 80 * 1024 : targetWidth <= 960 ? 180 * 1024 : targetWidth <= 1600 ? 550 * 1024 : 1200 * 1024;
+      let encoded;
+      for (const quality of [84, 82, 80, 78, 76, 74, 72, 70, 68]) {
+        encoded = await sharp(input, { failOn: "warning" }).rotate()
+          .resize({ width: targetWidth, fit: "inside", withoutEnlargement: true })
+          .webp({ quality, effort: 4 }).toBuffer();
+        if (encoded.length <= variantBudget) break;
+      }
+      if (encoded.length > variantBudget) throw new Error(`Responsive WebP exceeds its ${variantBudget / 1024} KiB budget: ${variantPath}.`);
+      await writeFile(destination, encoded);
     }
   }
 }
@@ -515,10 +552,11 @@ function validateModels(models) {
   for (const villa of models.villas) {
     registerSlug("villas", villa);
     validateStatus(villa.data.status, `${villa.source}.status`);
-    for (const key of ["title", "summary", "booking_url", "hero_image", "hero_image_alt"]) {
+    for (const key of ["title", "summary", "booking_url", "hero_image", "hero_image_alt", "about_image", "about_image_alt"]) {
       assertString(villa.data[key], `${villa.source}.${key}`);
     }
     validateImage(villa.data.hero_image, `${villa.source}.hero_image`);
+    validateImage(villa.data.about_image, `${villa.source}.about_image`);
     assertString(villa.data.location?.neighbourhood, `${villa.source}.location.neighbourhood`);
     assertString(villa.data.location?.parish, `${villa.source}.location.parish`);
     if (!["West Coast", "South Coast"].includes(villa.data.location?.coast)) throw new Error(`Invalid coast in ${villa.source}.`);
@@ -533,6 +571,7 @@ function validateModels(models) {
       validateImage(image.image, `${villa.source}.gallery[${index}].image`);
       assertString(image.alt, `${villa.source}.gallery[${index}].alt`);
     }
+    if (villa.data.gallery.some((image) => image.image === villa.data.about_image)) throw new Error(`About image must be distinct from gallery photos in ${villa.source}.`);
     if (!Array.isArray(villa.data.amenities) || !villa.data.amenities.length) throw new Error(`At least one amenity is required in ${villa.source}.`);
     villa.data.amenities.forEach((amenity, index) => assertString(amenity, `${villa.source}.amenities[${index}]`));
     for (const [index, highlight] of (villa.data.highlights || []).entries()) {
@@ -937,7 +976,7 @@ function renderHomeVillaCards(villas, basePath, imageRoot = projectRoot) {
       const villa = record.data;
       const detail = publicUrl(`villas/${villa.slug}.html`, basePath);
       const firstAmenity = villa.amenities?.[0];
-      return `<article class="villa-card reveal" data-location="${String(villa.location?.coast || "").toLowerCase().includes("south") ? "south" : "west"}" data-villa="${escapeAttribute(villa.slug)}"><div class="villa-image-wrap"><img ${imageAttributes(villa.hero_image, basePath, { sizes: "(max-width: 760px) calc(100vw - 36px), (max-width: 1180px) 33vw, 370px", loading: "lazy", fetchPriority: "low" }, imageRoot)} alt="${escapeAttribute(safeImageAlt(villa.hero_image_alt))}" /><span class="cms-image-description">${escapeHtml(villa.hero_image_alt)}</span><span class="villa-tag">${escapeHtml(villa.location?.coast)}</span></div><div class="villa-card-body"><div class="villa-location">${escapeHtml(villa.location?.neighbourhood)}, ${escapeHtml(villa.location?.parish)}</div><h3>${escapeHtml(villa.title)}</h3><p>${escapeHtml(villa.summary)}</p><div class="villa-meta"><span>${escapeHtml(villa.bedrooms)} bedrooms</span><span>${escapeHtml(villa.bathrooms)} bathrooms</span>${firstAmenity ? `<span>${escapeHtml(firstAmenity)}</span>` : ""}</div><div class="villa-card-footer"><a class="text-link" href="${detail}">View villa</a><a href="${escapeAttribute(villa.booking_url)}" target="_blank" rel="noopener">Check availability</a></div></div></article>`;
+      return `<article class="villa-card reveal" data-location="${String(villa.location?.coast || "").toLowerCase().includes("south") ? "south" : "west"}" data-villa="${escapeAttribute(villa.slug)}"><div class="villa-image-wrap"><img ${imageAttributes(villa.hero_image, basePath, { sizes: "(max-width: 740px) calc(100vw - 32px), (max-width: 980px) calc(50vw - 32px), (max-width: 1288px) calc(50vw - 38px), 606px", loading: "lazy", fetchPriority: "low" }, imageRoot)} alt="${escapeAttribute(safeImageAlt(villa.hero_image_alt))}" /><span class="cms-image-description">${escapeHtml(villa.hero_image_alt)}</span><span class="villa-tag">${escapeHtml(villa.location?.coast)}</span></div><div class="villa-card-body"><div class="villa-location">${escapeHtml(villa.location?.neighbourhood)}, ${escapeHtml(villa.location?.parish)}</div><h3>${escapeHtml(villa.title)}</h3><p>${escapeHtml(villa.summary)}</p><div class="villa-meta"><span>${escapeHtml(villa.bedrooms)} bedrooms</span><span>${escapeHtml(villa.bathrooms)} bathrooms</span>${firstAmenity ? `<span>${escapeHtml(firstAmenity)}</span>` : ""}</div><div class="villa-card-footer"><a class="text-link" href="${detail}">View villa</a><a href="${escapeAttribute(villa.booking_url)}" target="_blank" rel="noopener">Check availability</a></div></div></article>`;
     })
     .join("\n");
 }
@@ -982,13 +1021,12 @@ function villaMain(record, basePath, imageRoot = projectRoot) {
     const source = imageSourceData(item.image, basePath, imageRoot);
     return `<button class="gallery-thumbnail${index === 0 ? " active" : ""}" type="button" data-gallery-thumb data-gallery-index="${index}" data-gallery-src="${escapeAttribute(source.src)}" data-gallery-srcset="${escapeAttribute(source.srcset)}" data-gallery-alt="${escapeAttribute(safeImageAlt(item.alt))}" aria-label="Show photo ${index + 1} of ${gallery.length}" aria-pressed="${index === 0}"><img ${imageAttributes(item.image, basePath, { sizes: "240px", loading: "lazy", fetchPriority: "low", placeholder: true }, imageRoot)} alt="${escapeAttribute(safeImageAlt(item.alt))}" /></button><span class="visually-hidden cms-image-description">${escapeHtml(item.alt)}</span>`;
   }).join("");
-  const secondaryIndex = Math.min(1, gallery.length - 1);
-  const secondaryImage = imageAttributes(gallery[secondaryIndex].image, basePath, { sizes: "(max-width: 980px) calc(100vw - 36px), 45vw", loading: "lazy", fetchPriority: "low" }, imageRoot);
+  const aboutImage = imageAttributes(villa.about_image, basePath, { sizes: "(max-width: 980px) calc(100vw - 36px), 45vw", loading: "lazy", fetchPriority: "low" }, imageRoot);
   return `<main id="main-content" data-cms-villa-page="${escapeAttribute(villa.slug)}">
       <section class="property-intro section-pad-sm"><div class="container"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="${publicUrl("villas.html", basePath)}">Villas</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(villa.title)}</span></nav><h1>${escapeHtml(villa.title)}</h1><p class="property-location">${escapeHtml(location)}</p></div></section>
       <section class="property-gallery-section" aria-label="Villa photo gallery"><div class="container property-gallery"><div class="gallery-main-frame"><img id="villa-main-image" ${mainImage} alt="${escapeAttribute(safeImageAlt(gallery[0].alt))}" /></div><div class="gallery-thumbnail-rail">${thumbnails}</div></div></section>
       <section class="property-summary section-pad-sm" id="availability"><div class="container property-summary-grid"><ul class="property-facts" aria-label="Villa facts">${facts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join("")}</ul><div class="property-booking"><h2>Check live dates and rates</h2><p>The existing booking partner shows current availability and completes your reservation securely.</p><a class="button button-coral" href="${escapeAttribute(villa.booking_url)}" target="_blank" rel="noopener">Check availability</a></div></div></section>
-      <section class="property-about section-pad"><div class="container property-about-grid"><div><p class="section-label">${escapeHtml(location)}</p><h2>About this villa</h2><p class="property-lead">${escapeHtml(villa.summary)}</p><div class="rich-text">${renderMarkdown(record.body)}</div><a class="text-link" href="${escapeAttribute(villa.booking_url)}" target="_blank" rel="noopener">View live availability</a></div><img ${secondaryImage} alt="${escapeAttribute(safeImageAlt(gallery[secondaryIndex].alt))}" /></div></section>
+      <section class="property-about section-pad"><div class="container property-about-grid"><div><p class="section-label">${escapeHtml(location)}</p><h2>About this villa</h2><p class="property-lead">${escapeHtml(villa.summary)}</p><div class="rich-text">${renderMarkdown(record.body)}</div><a class="text-link" href="${escapeAttribute(villa.booking_url)}" target="_blank" rel="noopener">View live availability</a></div><img ${aboutImage} alt="${escapeAttribute(safeImageAlt(villa.about_image_alt))}" /></div></section>
       <section class="amenities-section section-pad"><div class="container"><div class="section-heading"><div><p class="section-label">Included features</p><h2>Comfort for an easy stay</h2></div><p>Confirm the latest property details with the booking partner before reserving.</p></div><div class="simple-feature-grid">${(villa.amenities || []).map((amenity) => `<article><h3>${escapeHtml(amenity)}</h3><p>Available for a comfortable Best E Villas stay.</p></article>`).join("")}</div></div></section>
       ${highlights}
       <section class="section-tight section-teal cms-call-to-action"><div class="container centered-copy"><h2>Ready to check your dates?</h2><p>Continue to the external booking platform for current availability and rates.</p><a class="button button-coral" href="${escapeAttribute(villa.booking_url)}" target="_blank" rel="noopener">Check availability</a></div></section>
@@ -1062,20 +1100,6 @@ function runtimeScript() {
       if (!nextSource || button.getAttribute("aria-busy") === "true") return;
       const currentRequest = ++requestId;
 
-      const thumbnail = button.querySelector("img");
-      const thumbnailReady = thumbnail?.complete && thumbnail.naturalWidth > 0;
-      if (thumbnailReady) {
-        image.removeAttribute("srcset");
-        image.src = thumbnail.currentSrc || thumbnail.src;
-        image.alt = nextAlt;
-      }
-      document.querySelectorAll("[data-gallery-thumb]").forEach((item) => {
-        item.classList.remove("active");
-        item.setAttribute("aria-pressed", "false");
-      });
-      button.classList.add("active");
-      button.setAttribute("aria-pressed", "true");
-
       const preload = new Image();
       button.setAttribute("aria-busy", "true");
       preload.decoding = "async";
@@ -1096,10 +1120,22 @@ function runtimeScript() {
         if (preload.complete && preload.naturalWidth > 0) finish(true);
       });
       if (loaded && currentRequest === requestId) {
-        try { await preload.decode(); } catch {}
-        image.removeAttribute("srcset");
-        image.src = preload.currentSrc || nextSource;
-        image.alt = nextAlt;
+        try { await preload.decode(); } catch {
+          button.removeAttribute("aria-busy");
+          return;
+        }
+        if (currentRequest === requestId) {
+          if (nextSourceSet) image.srcset = nextSourceSet;
+          else image.removeAttribute("srcset");
+          image.src = nextSource;
+          image.alt = nextAlt;
+          document.querySelectorAll("[data-gallery-thumb]").forEach((item) => {
+            item.classList.remove("active");
+            item.setAttribute("aria-pressed", "false");
+          });
+          button.classList.add("active");
+          button.setAttribute("aria-pressed", "true");
+        }
       }
       button.removeAttribute("aria-busy");
     });

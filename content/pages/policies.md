@@ -6,8 +6,8 @@ template: standard
 status: published
 hero_heading: Booking policies, made clear.
 hero_intro: Review the current booking and cancellation summary, then confirm the final terms shown by the external booking partner before reserving.
-hero_image: /assets/images/villa-interior.jpg
-hero_image_alt: Best E Villas property surrounded by tropical plants in Barbados
+hero_image: /assets/images/new/pixieset-kitchen.jpg
+hero_image_alt: Purple kitchen with white countertops at a Prospect villa
 sections:
   - heading: Confirming a booking
     text: |

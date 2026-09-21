@@ -11,6 +11,8 @@ const imageBudgets = {
   base: 550 * 1024,
   width480: 80 * 1024,
   width960: 180 * 1024,
+  width1600: 550 * 1024,
+  width2400: 1200 * 1024,
 };
 const results = [];
 const budgetedImages = new Set();
@@ -162,7 +164,11 @@ async function auditImageBudget(reference, ownerOutputPath, basePath) {
     ? imageBudgets.width480
     : /-960\.(?:jpe?g|png|webp|avif)$/i.test(file)
       ? imageBudgets.width960
-      : imageBudgets.base;
+      : /-(?:1[0-5]\d{2}|1600)\.webp$/i.test(file)
+        ? imageBudgets.width1600
+        : /-(?:1[6-9]\d{2}|2[0-3]\d{2}|2400)\.webp$/i.test(file)
+          ? imageBudgets.width2400
+          : imageBudgets.base;
   record(
     "image-budget",
     local.outputPath,
@@ -238,6 +244,17 @@ async function auditGeneratedImages(html, outputPath, basePath) {
     record("responsive-images", target, "declares responsive display sizes", Boolean(attrs.sizes), attrs.sizes || "missing");
     record("responsive-images", target, "declares responsive source candidates", candidates.length >= 3, `${candidates.length} candidates`);
     record("responsive-images", target, "includes 480w and 960w variants", descriptors.includes("480w") && descriptors.includes("960w"), descriptors.join(", "));
+    record("responsive-images", target, "uses WebP responsive candidates", candidates.length > 0 && candidates.every((candidate) => /\.webp(?:[?#]|$)/i.test(candidate)), candidates.join(", "));
+    const originalReference = attrs["data-responsive-src"] || attrs.src;
+    const sourceLocal = localOutputPath(originalReference, outputPath, basePath);
+    const originalAbsolute = sourceLocal && !sourceLocal.outside && !sourceLocal.baseMismatch
+      ? resolve(root, ...sourceLocal.outputPath.split("/")) : "";
+    const sourcePresent = Boolean(originalAbsolute) && (await exists(originalAbsolute));
+    const originalMetadata = sourcePresent ? await dimensions(originalAbsolute) : null;
+    const sourceWidth = originalMetadata?.autoOrient?.width || originalMetadata?.width || 0;
+    const candidateWidths = descriptors.map((descriptor) => Number.parseInt(descriptor, 10));
+    record("responsive-images", target, "source-limited without image upscaling", sourceWidth > 0 && candidateWidths.every((candidateWidth) => candidateWidth <= Math.min(sourceWidth, 2400)), `source=${sourceWidth}px, candidates=${candidateWidths.join(", ")}`);
+    record("responsive-images", target, "includes largest useful WebP width", sourceWidth > 0 && candidateWidths.at(-1) === Math.min(sourceWidth, 2400), `source=${sourceWidth}px, largest=${candidateWidths.at(-1) || "missing"}px`);
     record("responsive-images", target, "uses an explicit loading strategy", ["eager", "lazy"].includes(attrs.loading), attrs.loading || "missing");
     record("responsive-images", target, "uses a matching fetch priority", (attrs.loading === "eager" && attrs.fetchpriority === "high") || (attrs.loading === "lazy" && attrs.fetchpriority === "low"), `${attrs.loading || "missing"}/${attrs.fetchpriority || "missing"}`);
 

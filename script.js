@@ -169,73 +169,56 @@ function initHeroCarousel() {
   let activeIndex = 0;
   let navigationRequest = 0;
 
-  async function loadPreview(slide) {
+  async function prepareSlide(slide) {
     const image = slide?.querySelector("img");
     if (!image) return false;
-    if (image.complete && image.naturalWidth > 0) return true;
-    const preview = new Image();
-    preview.decoding = "async";
+    const source = image.dataset.responsiveSrc;
+    const sourceSet = image.dataset.responsiveSrcset;
+    if (!source) {
+      if (image.complete && image.naturalWidth > 0) return true;
+      const loaded = await new Promise((resolveLoad) => {
+        const timeout = setTimeout(() => resolveLoad(false), 8000);
+        image.addEventListener("load", () => { clearTimeout(timeout); resolveLoad(true); }, { once: true });
+        image.addEventListener("error", () => { clearTimeout(timeout); resolveLoad(false); }, { once: true });
+      });
+      return loaded && image.naturalWidth > 0;
+    }
+
+    const preload = new Image();
+    preload.decoding = "async";
+    preload.sizes = image.sizes || "100vw";
     const loaded = await new Promise((resolveLoad) => {
       const timeout = setTimeout(() => resolveLoad(false), 8000);
-      preview.addEventListener("load", () => { clearTimeout(timeout); resolveLoad(true); }, { once: true });
-      preview.addEventListener("error", () => { clearTimeout(timeout); resolveLoad(false); }, { once: true });
-      preview.src = image.src;
-      if (preview.complete && preview.naturalWidth > 0) {
+      preload.addEventListener("load", () => { clearTimeout(timeout); resolveLoad(true); }, { once: true });
+      preload.addEventListener("error", () => { clearTimeout(timeout); resolveLoad(false); }, { once: true });
+      if (sourceSet) preload.srcset = sourceSet;
+      preload.src = source;
+      if (preload.complete && preload.naturalWidth > 0) {
         clearTimeout(timeout);
         resolveLoad(true);
       }
     });
     if (!loaded) return false;
+    try { await preload.decode(); } catch { return false; }
     image.loading = "eager";
-    image.src = preview.src;
-    return true;
-  }
-
-  function upgradeSlide(slide) {
-    const image = slide?.querySelector("img[data-responsive-src]");
-    if (!image || image.dataset.upgradePending === "true") return;
-    const source = image.dataset.responsiveSrc;
-    const sourceSet = image.dataset.responsiveSrcset;
-    const preload = new Image();
-    let settled = false;
-    image.dataset.upgradePending = "true";
-    preload.decoding = "async";
-    preload.sizes = image.sizes || "100vw";
-
-    const applyUpgrade = async () => {
-      if (settled) return;
-      settled = true;
-      try { await preload.decode(); } catch {}
-      image.removeAttribute("srcset");
-      image.src = preload.currentSrc || source;
-      try { await image.decode(); } catch {}
-      delete image.dataset.responsiveSrc;
-      delete image.dataset.responsiveSrcset;
-      delete image.dataset.upgradePending;
-    };
-    const cancelUpgrade = () => {
-      if (settled) return;
-      settled = true;
-      delete image.dataset.upgradePending;
-    };
-    preload.addEventListener("load", () => void applyUpgrade(), { once: true });
-    preload.addEventListener("error", cancelUpgrade, { once: true });
-    if (sourceSet) preload.srcset = sourceSet;
-    preload.src = source;
-    if (preload.complete && preload.naturalWidth > 0) void applyUpgrade();
+    if (sourceSet) image.srcset = sourceSet;
+    image.src = source;
+    try { await image.decode(); } catch { return false; }
+    delete image.dataset.responsiveSrc;
+    delete image.dataset.responsiveSrcset;
+    return image.naturalWidth > 0;
   }
 
   async function showSlide(nextIndex) {
     const targetIndex = (nextIndex + slides.length) % slides.length;
     const currentRequest = ++navigationRequest;
-    if (!(await loadPreview(slides[targetIndex])) || currentRequest !== navigationRequest) return;
+    if (!(await prepareSlide(slides[targetIndex])) || currentRequest !== navigationRequest) return;
     activeIndex = targetIndex;
     slides.forEach((slide, index) => {
       const active = index === activeIndex;
       slide.classList.toggle("active", active);
       slide.setAttribute("aria-hidden", String(!active));
     });
-    upgradeSlide(slides[activeIndex]);
     count.textContent = String(activeIndex + 1).padStart(2, "0");
   }
 

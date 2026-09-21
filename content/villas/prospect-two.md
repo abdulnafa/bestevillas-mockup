@@ -14,6 +14,8 @@ summary: A comfortable two-bedroom apartment with the space and practical amenit
 booking_url: https://direct-book.com/properties/bestevillasprospctdirect
 hero_image: /assets/images/properties/prospect-two/aerial-pool-sea-view.jpg
 hero_image_alt: Aerial view of the Prospect villas, shared pool and nearby Caribbean Sea
+about_image: /assets/images/properties/prospect-two/living.jpg
+about_image_alt: Blue-sofa living area in the two-bedroom Prospect villa
 gallery:
   - image: /assets/images/properties/prospect-two/aerial-pool-sea-view.jpg
     alt: Aerial view of the Prospect villas, shared pool and nearby Caribbean Sea

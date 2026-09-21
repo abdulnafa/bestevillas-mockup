@@ -110,7 +110,9 @@ function villaLayoutProbeExpression() {
         && controlCenterY <= innerHeight;
       const controlHitTarget = document.elementFromPoint(controlCenterX, controlCenterY);
       const controlHit = Boolean(controlHitTarget && (controlHitTarget === button || button.contains(controlHitTarget)));
+      const previous = { src: mainImage.currentSrc || mainImage.src, alt: mainImage.alt };
       button.click();
+      const previousFullPhotoHeld = (mainImage.currentSrc || mainImage.src) === previous.src && mainImage.alt === previous.alt;
       const deadline = Date.now() + 5000;
       while ((mainImage.alt !== expectedAlt || !mainImage.complete || !mainImage.naturalWidth || button.hasAttribute('aria-busy') || button.getAttribute('aria-pressed') !== 'true') && Date.now() < deadline) {
         await new Promise((done) => setTimeout(done, 25));
@@ -118,17 +120,22 @@ function villaLayoutProbeExpression() {
       cta.scrollIntoView({ block: 'center', behavior: 'instant' });
       await waitForFrames();
       const ready = mainImage.alt === expectedAlt && mainImage.complete && mainImage.naturalWidth > 0 && !button.hasAttribute('aria-busy') && button.getAttribute('aria-pressed') === 'true';
-      transitions.push({ index: button.dataset.galleryIndex, ready, controlVisible, controlHit, expected, expectedAlt, actual: mainImage.src, actualAlt: mainImage.alt });
+      const selected = mainImage.currentSrc || mainImage.src;
+      const selectedWidth = Number(selected.match(/-([0-9]+)[.]webp(?:[?]|$)/i)?.[1] || 0);
+      const availableWidths = Array.from(mainImage.srcset.matchAll(/[ \t]([0-9]+)w(?:,|$)/g), (match) => Number(match[1]));
+      const requiredWidth = Math.min(mainImage.getBoundingClientRect().width * devicePixelRatio, Math.max(...availableWidths, 0));
+      const adequateWebp = selectedWidth > 0 && selectedWidth + 1 >= requiredWidth;
+      transitions.push({ index: button.dataset.galleryIndex, ready, controlVisible, controlHit, previousFullPhotoHeld, adequateWebp, selectedWidth, requiredWidth, expected, expectedAlt, actual: selected, actualAlt: mainImage.alt });
       states.push(snapshot('thumbnail-' + button.dataset.galleryIndex));
     }
     return { missing, states, transitions };
   })()`;
 }
 
-function villaLayoutHealthy(probe) {
+function villaLayoutHealthy(probe, { generatedMedia = true } = {}) {
   return probe.missing.length === 0
     && probe.states.length >= 4
-    && probe.transitions.every((transition) => transition.ready && transition.controlVisible && transition.controlHit)
+    && probe.transitions.every((transition) => transition.ready && transition.controlVisible && transition.controlHit && (!generatedMedia || (transition.previousFullPhotoHeld && transition.adequateWebp)))
     && probe.states.every((state) => state.galleryChildrenContained
       && state.gallerySeparatedFromSummary
       && state.summaryChildrenContained
@@ -137,6 +144,31 @@ function villaLayoutHealthy(probe) {
       && state.ctaVisible
       && state.ctaLabelUnclipped
       && state.ctaHitTargets);
+}
+
+function contentImageDeliveryProbeExpression() {
+  return `(async () => {
+    const images = Array.from(document.querySelectorAll('main img'));
+    for (const image of images) image.loading = 'eager';
+    await Promise.all(images.map((image) => Promise.race([
+      image.complete ? Promise.resolve() : new Promise((done) => {
+        image.addEventListener('load', done, { once: true });
+        image.addEventListener('error', done, { once: true });
+      }),
+      new Promise((done) => setTimeout(done, 10000)),
+    ])));
+    const failures = images.map((image) => ({
+      alt: image.alt,
+      selected: image.currentSrc || image.src,
+      ready: image.complete && image.naturalWidth > 0,
+    })).filter((image) => !image.ready || !new URL(image.selected, location.href).pathname.toLowerCase().endsWith('.webp'));
+    return { count: images.length, failures };
+  })()`;
+}
+
+async function recordContentImageDelivery(page, label) {
+  const delivery = await page.evaluate(contentImageDeliveryProbeExpression());
+  record(`${label} loaded content images use WebP`, delivery.count > 0 && delivery.failures.length === 0, JSON.stringify(delivery));
 }
 
 function closingLayoutProbeExpression() {
@@ -339,6 +371,7 @@ const page = await openPage(`${baseUrl}/index.html`);
 try {
   await page.viewport(1440, 1000);
   await page.navigate("index.html");
+  await recordContentImageDelivery(page, "Home desktop");
   const home = await page.evaluate(`({
     title: document.title,
     heading: document.querySelector('h1')?.textContent.trim(),
@@ -346,13 +379,24 @@ try {
     villaCards: document.querySelectorAll('[data-villa]').length,
     slides: document.querySelectorAll('.hero-slide').length,
     activeSlides: document.querySelectorAll('.hero-slide.active').length,
-    deferredSlides: Array.from(document.querySelectorAll('.hero-slide:not(.active) img')).filter((image) => image.dataset.responsiveSrc && (image.currentSrc || image.src).includes('-480.jpg')).length,
+    deferredSlides: Array.from(document.querySelectorAll('.hero-slide:not(.active) img')).filter((image) => image.dataset.responsiveSrc && /-480[.]webp(?:[?]|$)/i.test(image.currentSrc || image.src)).length,
     missingImages: Array.from(document.images).filter((image) => image.complete && image.naturalWidth === 0).map((image) => image.src),
     overflow: document.documentElement.scrollWidth > innerWidth,
     analyticsRequests: performance.getEntriesByType('resource').filter((entry) => /googletagmanager|google-analytics/i.test(entry.name)).map((entry) => entry.name),
   })`);
   record("Generated homepage renders CMS content", home.title.includes("Best E Villas") && home.heading === "Beautiful Barbados villas." && home.cmsSource === "pages/home.md" && home.villaCards === 4, JSON.stringify(home));
   record("Generated homepage media and layout", home.slides >= 3 && home.activeSlides === 1 && home.deferredSlides === home.slides - 1 && home.missingImages.length === 0 && !home.overflow, JSON.stringify(home));
+  const homeCards = await page.evaluate(`(() => {
+    const cards = Array.from(document.querySelectorAll('.villa-card .villa-image-wrap img'));
+    return cards.map((image) => {
+      const selected = image.currentSrc || image.src;
+      const selectedWidth = Number(selected.match(/-([0-9]+)[.]webp(?:[?]|$)/i)?.[1] || 0);
+      const availableWidths = Array.from(image.srcset.matchAll(/[ \t]([0-9]+)w(?:,|$)/g), (match) => Number(match[1]));
+      const renderedWidth = image.getBoundingClientRect().width;
+      return { selected, selectedWidth, renderedWidth, requiredWidth: Math.min(renderedWidth * devicePixelRatio, Math.max(...availableWidths, 0)) };
+    });
+  })()`);
+  record("Home desktop villa cards receive sharp WebP candidates", homeCards.length === 4 && homeCards.every((card) => card.renderedWidth > 0 && card.selectedWidth + 1 >= card.requiredWidth), JSON.stringify(homeCards));
   record("Analytics remains inactive without ID", home.analyticsRequests.length === 0, JSON.stringify(home.analyticsRequests));
   const desktopClosing = await page.evaluate(closingLayoutProbeExpression());
   recordClosingVisual(desktopClosing, "Generated desktop");
@@ -360,11 +404,33 @@ try {
   await page.evaluate(`document.querySelector('.site-footer')?.scrollIntoView({ block: 'start', behavior: 'instant' })`);
   await page.screenshot("cms-home-footer-desktop.png");
   await page.evaluate(`window.scrollTo({ top: 0, behavior: 'instant' })`);
-  const carousel = await page.evaluate(`(async () => { document.querySelector('.carousel-next')?.click(); const deadline = Date.now() + 8000; let activeSlide = document.querySelector('.hero-slide.active'); let activeImage = activeSlide?.querySelector('img'); while ((activeSlide?.dataset.slide !== '1' || !activeImage?.complete || !activeImage?.naturalWidth || activeImage?.dataset.upgradePending === 'true' || (activeImage?.currentSrc || activeImage?.src || '').includes('-480.jpg')) && Date.now() < deadline) { await new Promise((done) => setTimeout(done, 25)); activeSlide = document.querySelector('.hero-slide.active'); activeImage = activeSlide?.querySelector('img'); } return { active: activeSlide?.dataset.slide, count: document.querySelector('.carousel-count strong')?.textContent, imageReady: Boolean(activeImage?.complete && activeImage?.naturalWidth), upgradePending: activeImage?.dataset.upgradePending === 'true', imageSource: activeImage?.currentSrc || activeImage?.src }; })()`);
-  record("Generated carousel works without a blank slide", carousel.active === "1" && carousel.count === "02" && carousel.imageReady && !carousel.upgradePending && !carousel.imageSource.includes("-480.jpg"), JSON.stringify(carousel));
+  const carousel = await page.evaluate(`(async () => {
+    const current = document.querySelector('.hero-slide.active');
+    const sourceBefore = current?.querySelector('img')?.currentSrc;
+    document.querySelector('.carousel-next')?.click();
+    const previousFullPhotoHeld = document.querySelector('.hero-slide.active') === current && current?.querySelector('img')?.currentSrc === sourceBefore;
+    const samples = [];
+    const deadline = Date.now() + 8000;
+    let activeSlide = document.querySelector('.hero-slide.active');
+    let activeImage = activeSlide?.querySelector('img');
+    while ((activeSlide?.dataset.slide !== '1' || !activeImage?.complete || !activeImage?.naturalWidth) && Date.now() < deadline) {
+      if (activeSlide?.dataset.slide === '1') samples.push(activeImage?.currentSrc || activeImage?.src);
+      await new Promise((done) => setTimeout(done, 25));
+      activeSlide = document.querySelector('.hero-slide.active');
+      activeImage = activeSlide?.querySelector('img');
+    }
+    const selected = activeImage?.currentSrc || activeImage?.src || '';
+    const selectedWidth = Number(selected.match(/-([0-9]+)[.]webp(?:[?]|$)/i)?.[1] || 0);
+    const availableWidths = Array.from((activeImage?.srcset || '').matchAll(/[ \t]([0-9]+)w(?:,|$)/g), (match) => Number(match[1]));
+    const requiredWidth = Math.min(activeImage?.getBoundingClientRect().width * devicePixelRatio || 0, Math.max(...availableWidths, 0));
+    const thumbnailFlash = samples.some((source) => /-480[.]webp(?:[?]|$)/i.test(source) && requiredWidth > 481);
+    return { active: activeSlide?.dataset.slide, count: document.querySelector('.carousel-count strong')?.textContent, imageReady: Boolean(activeImage?.complete && activeImage?.naturalWidth), previousFullPhotoHeld, thumbnailFlash, imageSource: selected, selectedWidth, requiredWidth };
+  })()`);
+  record("Generated carousel keeps previous photo until sharp WebP is ready", carousel.active === "1" && carousel.count === "02" && carousel.imageReady && carousel.previousFullPhotoHeld && !carousel.thumbnailFlash && carousel.selectedWidth + 1 >= carousel.requiredWidth, JSON.stringify(carousel));
   await page.screenshot("cms-home-desktop.png");
 
   await page.navigate("villas.html");
+  await recordContentImageDelivery(page, "Villas listing desktop");
   const listing = await page.evaluate(`({
     cards: document.querySelectorAll('[data-villa-card]').length,
     count: document.querySelector('#villa-result-count')?.textContent,
@@ -389,6 +455,7 @@ try {
   ];
   for (const [slug, heading, booking] of villas) {
     await page.navigate(`villas/${slug}.html`);
+    await recordContentImageDelivery(page, `Villa ${slug} desktop`);
     const detail = await page.evaluate(`(() => {
       const schemas = Array.from(document.querySelectorAll('script[type="application/ld+json"]')).map((node) => JSON.parse(node.textContent));
       const galleryImage = document.querySelector('#villa-main-image');
@@ -406,13 +473,20 @@ try {
     })()`);
     const expectedGalleryCount = 8;
     record(`Pretty villa route ${slug}`, detail.heading.includes(heading) && detail.title.includes("Best E Villas") && detail.canonical === `https://bestevillas.com/villas/${slug}.html` && detail.booking === booking && detail.schema.includes("VacationRental") && detail.galleryReady && detail.galleryCount === expectedGalleryCount && detail.missingImages === 0 && !detail.overflow, JSON.stringify(detail));
+    const aboutDistinct = await page.evaluate(`(() => {
+      const about = document.querySelector('.property-about-grid > img');
+      const aboutPath = about ? new URL(about.getAttribute('src'), location.href).pathname : '';
+      const galleryPaths = Array.from(document.querySelectorAll('[data-gallery-thumb]'), (button) => new URL(button.dataset.gallerySrc, location.href).pathname);
+      return { aboutPath, galleryPaths, distinct: Boolean(aboutPath) && galleryPaths.length >= 4 && !galleryPaths.includes(aboutPath) };
+    })()`);
+    record(`Villa ${slug} About photo differs from every gallery photo`, aboutDistinct.distinct, JSON.stringify(aboutDistinct));
     const layout = await page.evaluate(villaLayoutProbeExpression());
     record(`Villa gallery and availability layout ${slug} at 1440px`, villaLayoutHealthy(layout), JSON.stringify(layout));
     const villaClosing = await page.evaluate(closingLayoutProbeExpression());
     recordClosingVisual(villaClosing, `Villa ${slug} desktop`, false, { cmsSections: false, bookingHref: booking });
     if (slug === "st-silas") await page.screenshot("cms-villa-st-silas-closing-desktop.png");
     if (slug.startsWith("prospect-")) {
-      const delivery = await page.evaluate(`(() => { const resources = performance.getEntriesByType('resource').filter((entry) => entry.initiatorType === 'img' && entry.name.includes('/assets/images/properties/${slug}/')); return { count: resources.length, encodedBytes: resources.reduce((sum, entry) => sum + (entry.encodedBodySize || 0), 0), originals: resources.map((entry) => entry.name).filter((name) => { const clean = name.split('?')[0].toLowerCase(); return !clean.endsWith('-480.jpg') && !clean.endsWith('-960.jpg'); }), resources: resources.map((entry) => ({ name: entry.name, encodedBodySize: entry.encodedBodySize || 0 })) }; })()`);
+      const delivery = await page.evaluate(`(() => { const resources = performance.getEntriesByType('resource').filter((entry) => entry.initiatorType === 'img' && entry.name.includes('/assets/images/properties/${slug}/')); return { count: resources.length, encodedBytes: resources.reduce((sum, entry) => sum + (entry.encodedBodySize || 0), 0), originals: resources.map((entry) => entry.name).filter((name) => !/-[0-9]+[.]webp(?:[?]|$)/i.test(name)), resources: resources.map((entry) => ({ name: entry.name, encodedBodySize: entry.encodedBodySize || 0 })) }; })()`);
       record(`Prospect responsive gallery delivery ${slug}`, delivery.count >= 8 && delivery.originals.length === 0 && delivery.encodedBytes <= 1500000, JSON.stringify(delivery));
       await page.evaluate(`(async () => { const gallery = document.querySelector('.property-gallery-section'); if (gallery) window.scrollTo({ top: gallery.offsetTop - 96, behavior: 'instant' }); await new Promise((done) => setTimeout(done, 250)); return scrollY; })()`);
       await page.screenshot(`cms-villa-${slug}-gallery-desktop.png`);
@@ -458,8 +532,13 @@ try {
   }
 
   const fixedPages = ["locations.html", "about.html", "reviews.html", "guide.html", "faq.html", "policies.html", "contact.html"];
+  const fixedHeroPaths = {};
   for (const route of fixedPages) {
     await page.navigate(route);
+    await recordContentImageDelivery(page, `${route} desktop`);
+    if (route === "locations.html" || route === "guide.html") {
+      fixedHeroPaths[route] = await page.evaluate(`document.querySelector('.page-hero .hero-media img') ? new URL(document.querySelector('.page-hero .hero-media img').getAttribute('src'), location.href).pathname : ''`);
+    }
     const state = await page.evaluate(`(() => { const nav = document.querySelector('.site-header > .mobile-nav'); const toggle = document.querySelector('.menu-toggle'); const header = document.querySelector('.header-inner'); const media = Array.from(document.querySelectorAll('.split-media')); return { heading: document.querySelector('h1')?.textContent.trim(), cmsBlock: Boolean(document.querySelector('[data-cms-source]')), brokenImages: Array.from(document.images).filter((image) => image.complete && image.naturalWidth === 0).length, overflow: document.documentElement.scrollWidth > innerWidth, navDisplay: nav ? getComputedStyle(nav).display : null, navHidden: nav?.getAttribute('aria-hidden'), toggleDisplay: toggle ? getComputedStyle(toggle).display : null, headerLeft: header?.getBoundingClientRect().left, headerRight: header?.getBoundingClientRect().right, mediaRatios: media.map((item) => { const rect = item.getBoundingClientRect(); return rect.height ? rect.width / rect.height : 0; }), responsiveImages: Array.from(document.images).filter((image) => !image.classList.contains('brand-logo')).every((image) => image.hasAttribute('decoding') && image.hasAttribute('sizes') && (image.hasAttribute('srcset') || image.hasAttribute('data-responsive-srcset'))) }; })()`);
     record(`CMS fixed page ${route}`, Boolean(state.heading) && state.cmsBlock && state.brokenImages === 0 && !state.overflow && state.navDisplay === "none" && state.navHidden === "true" && state.toggleDisplay === "none" && state.headerLeft >= -1 && state.headerRight <= 1441 && state.mediaRatios.every((ratio) => Math.abs(ratio - 4 / 3) < 0.04) && state.responsiveImages, JSON.stringify(state));
     if (route === "locations.html") {
@@ -468,6 +547,7 @@ try {
       await page.screenshot("cms-locations-sections-desktop.png");
     }
   }
+  record("Locations and Barbados Guide use different hero photographs", Boolean(fixedHeroPaths["locations.html"]) && Boolean(fixedHeroPaths["guide.html"]) && fixedHeroPaths["locations.html"] !== fixedHeroPaths["guide.html"], JSON.stringify(fixedHeroPaths));
 
   for (const width of [1080, 900, 861]) {
     await page.viewport(width, 900);
@@ -483,6 +563,14 @@ try {
 
   await page.viewport(390, 844, true);
   await page.navigate("index.html?mobile=1");
+  await recordContentImageDelivery(page, "Home mobile");
+  const mobileHomeCards = await page.evaluate(`Array.from(document.querySelectorAll('.villa-card .villa-image-wrap img'), (image) => {
+    const selected = image.currentSrc || image.src;
+    const selectedWidth = Number(selected.match(/-([0-9]+)[.]webp(?:[?]|$)/i)?.[1] || 0);
+    const availableWidths = Array.from(image.srcset.matchAll(/[ \t]([0-9]+)w(?:,|$)/g), (match) => Number(match[1]));
+    return { selectedWidth, requiredWidth: Math.min(image.getBoundingClientRect().width * devicePixelRatio, Math.max(...availableWidths, 0)) };
+  })`);
+  record("Home mobile villa cards receive adequate WebP candidates", mobileHomeCards.length === 4 && mobileHomeCards.every((card) => card.selectedWidth + 1 >= card.requiredWidth), JSON.stringify(mobileHomeCards));
   const mobile = await page.evaluate(`(() => { const toggle = document.querySelector('.menu-toggle'); const ctaBottom = document.querySelector('.booking-bar .search-button')?.getBoundingClientRect().bottom; toggle?.click(); return { expanded: toggle?.getAttribute('aria-expanded'), navDisplay: getComputedStyle(document.querySelector('.mobile-nav')).display, overflow: document.documentElement.scrollWidth > innerWidth, headingHeight: document.querySelector('h1')?.getBoundingClientRect().height, ctaBottom, viewportHeight: innerHeight }; })()`);
   record("Generated mobile navigation and layout", mobile.expanded === "true" && mobile.navDisplay !== "none" && !mobile.overflow && mobile.headingHeight > 0 && mobile.ctaBottom <= mobile.viewportHeight, JSON.stringify(mobile));
   await page.screenshot("cms-home-mobile.png");
@@ -506,9 +594,15 @@ try {
   await page.evaluate(`document.querySelector('.menu-toggle')?.click()`);
   for (const [slug, , booking] of villas) {
     await page.navigate(`villas/${slug}.html?closing-mobile=1`);
+    await recordContentImageDelivery(page, `Villa ${slug} mobile`);
     const villaClosing = await page.evaluate(closingLayoutProbeExpression());
     recordClosingVisual(villaClosing, `Villa ${slug} mobile`, true, { cmsSections: false, bookingHref: booking });
     if (slug === "st-silas") await page.screenshot("cms-villa-st-silas-closing-mobile.png");
+  }
+
+  for (const route of ["locations.html", "guide.html"]) {
+    await page.navigate(`${route}?mobile-images=1`);
+    await recordContentImageDelivery(page, `${route} mobile`);
   }
 
   const relevantMessages = page.messages.filter((message) => ["error", "warning"].includes(message.level) && !/favicon\.ico/i.test(`${message.text} ${message.url || ""}`));
@@ -540,7 +634,7 @@ if (sourceBaseUrl) {
         generatedTemplate: document.querySelector('main')?.hasAttribute('data-cms-villa-page'),
       })`);
       const layout = await sourcePage.evaluate(villaLayoutProbeExpression());
-      record(`Source villa fallback layout at ${width}x${height}`, sourceIdentity.heading?.includes("Prospect") && sourceIdentity.legacyTemplate && !sourceIdentity.generatedTemplate && villaLayoutHealthy(layout), JSON.stringify({ sourceIdentity, layout }));
+      record(`Source villa fallback layout at ${width}x${height}`, sourceIdentity.heading?.includes("Prospect") && sourceIdentity.legacyTemplate && !sourceIdentity.generatedTemplate && villaLayoutHealthy(layout, { generatedMedia: false }), JSON.stringify({ sourceIdentity, layout }));
       if (width === 1366) await sourcePage.screenshot("source-villa-prospect-three-availability-1366.png");
     }
     const sourceMessages = sourcePage.messages.filter((message) => ["error", "warning"].includes(message.level) && !/favicon\.ico/i.test(`${message.text} ${message.url || ""}`));

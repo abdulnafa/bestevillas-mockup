@@ -14,6 +14,8 @@ summary: A spacious three-bedroom base near West Coast beaches, Bridgetown and t
 booking_url: https://direct-book.com/properties/bestevillasprospctdirect
 hero_image: /assets/images/properties/prospect-three/aerial-sea-view.jpg
 hero_image_alt: Aerial view of the Prospect villas and shared pool near the Caribbean Sea
+about_image: /assets/images/properties/prospect-three/bedroom.jpg
+about_image_alt: Alternate view of the three-bedroom Prospect living space and purple kitchen
 gallery:
   - image: /assets/images/properties/prospect-three/aerial-sea-view.jpg
     alt: Aerial view of the Prospect villas and shared pool near the Caribbean Sea

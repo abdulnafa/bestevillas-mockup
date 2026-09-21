@@ -16,13 +16,13 @@ sections:
       - **Prospect:** A West Coast base near beaches, restaurants and the University of the West Indies at Cave Hill.
       - **St. Silas:** A quieter West Coast-area setting within reach of Warrens, golf courses and beaches.
       - **Providence:** A South Coast base for Miami Beach, Oistins, St. Lawrence Gap and Barbados Golf Club.
-    image: /assets/images/properties/prospect-two/exterior.jpg
-    image_alt: Green Best E Villas building in the Prospect neighbourhood
+    image: /assets/images/properties/prospect-two/guide-garden-veranda.webp
+    image_alt: Ground-floor veranda opening onto a tropical garden at the Prospect villas
   - heading: Beaches, dining and room to explore.
     text: |
       Prospect is positioned above the West Coast, while St. Silas provides access towards Warrens and the inland golf areas. Choose between them based on the size of villa you need and the places you plan to visit most often.
-    image: /assets/images/villa-interior.jpg
-    image_alt: Best E Villas property set among tropical planting beneath a clear blue sky
+    image: /assets/images/new/pixieset-terrace.jpg
+    image_alt: Outdoor dining terrace at a Best E Villas apartment in Prospect
   - heading: Providence puts varied outings within reach.
     text: |
       From Providence, guests can plan time at Miami Beach, visit Oistins, head towards St. Lawrence Gap or arrange a round at Barbados Golf Club. Travel times depend on traffic and transport.

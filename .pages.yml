@@ -269,6 +269,18 @@ content:
         options:
           minlength: 10
           maxlength: 160
+      - name: about_image
+        label: About-section image
+        type: image
+        required: true
+        description: Choose a photo of this villa that is not already in its gallery.
+      - name: about_image_alt
+        label: About image description
+        type: string
+        required: true
+        options:
+          minlength: 10
+          maxlength: 160
       - name: gallery
         type: object
         required: true

@@ -6,8 +6,8 @@ template: standard
 status: published
 hero_heading: A local welcome and a comfortable place to stay.
 hero_intro: Best E Villas is a family-run collection of vacation rentals created for relaxed stays on Barbados' West and South Coasts.
-hero_image: /assets/images/barbados-life.jpg
-hero_image_alt: Comfortable living room at a Best E Villas property in Barbados
+hero_image: /assets/images/properties/prospect-three/exterior.jpg
+hero_image_alt: Guests relaxing beside the shared pool at Best E Villas in Prospect
 sections:
   - heading: Family-run in Barbados
     text: |
@@ -28,8 +28,8 @@ sections:
       Current villa amenities include combinations of air-conditioning, Wi-Fi, laundry facilities, private balconies and equipped kitchens. Some locations also include shared outdoor facilities.
 
       Always check the individual villa details and the booking partner listing for the exact facilities included with your selected stay.
-    image: /assets/images/villa-exterior.jpg
-    image_alt: Bright Best E Villas living room with blue sofas
+    image: /assets/images/properties/st-silas/2026-09-18-dining-kitchen.jpg
+    image_alt: Dining area and red kitchen at the St. Silas villas
 call_to_action:
   heading: Find your comfortable Barbados stay.
   text: Explore the villa collection and choose the location that suits you.

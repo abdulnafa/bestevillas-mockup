@@ -14,6 +14,8 @@ summary: A peaceful two-bedroom South Coast base near Miami Beach, Oistins, St. 
 booking_url: https://direct-book.com/properties/bestevillaprovidencedirect
 hero_image: /assets/images/properties/providence/2026-09-18-exterior-pool.jpg
 hero_image_alt: Entrance and pool at Providence Terrace in Christ Church, Barbados
+about_image: /assets/images/properties/providence/exterior.jpg
+about_image_alt: Providence Terrace building and Best E Villas sign in Christ Church
 gallery:
   - image: /assets/images/properties/providence/2026-09-18-exterior-pool.jpg
     alt: Entrance and pool at Providence Terrace in Christ Church, Barbados

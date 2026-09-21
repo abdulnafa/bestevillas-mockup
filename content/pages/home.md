@@ -6,10 +6,10 @@ template: home
 status: published
 hero_heading: Beautiful Barbados villas.
 hero_intro: Comfortable stays on the West and South Coasts, with warm local service.
-hero_image: /assets/images/new/pixieset-hero-balcony.jpg
+hero_image: /assets/images/new/pixieset-hero-balcony-hd.webp
 hero_image_alt: Private balcony looking over tropical palms at Best E Villas
 hero_gallery:
-  - image: /assets/images/new/pixieset-hero-balcony.jpg
+  - image: /assets/images/new/pixieset-hero-balcony-hd.webp
     alt: Private balcony looking over tropical palms at Best E Villas
   - image: /assets/images/new/pixieset-open-living-dining.jpg
     alt: Open-plan living and dining space at Best E Villas
@@ -25,13 +25,13 @@ sections:
       Best E Villas offers cosy, comfortable and convenient self-contained accommodation, supported by a family-run team.
 
       Choose from properties on the West and South Coasts, settle into practical living spaces and use the external booking partner for current dates and rates.
-    image: /assets/images/new/pixieset-open-living-dining.jpg
-    image_alt: Open-plan living and dining space at Best E Villas
+    image: /assets/images/new/pixieset-second-unit-living.jpg
+    image_alt: Blue-accented living and dining space at a Prospect apartment
   - heading: Two coasts. One unforgettable Barbados.
     text: |
       Choose your pace, from calm West Coast mornings to lively South Coast evenings. Prospect and St. Silas provide West Coast bases, while Providence places South Coast outings within reach.
-    image: /assets/images/villa-hero.jpg
-    image_alt: View over a Barbados neighbourhood towards the Caribbean Sea
+    image: /assets/images/properties/prospect-three/aerial-sea-view.jpg
+    image_alt: Aerial view over Prospect villas towards the Caribbean Sea
   - heading: The comforts that make a stay feel simple.
     text: |
       - **Swimming pool:** Available at selected properties; confirm facilities for your chosen villa.
