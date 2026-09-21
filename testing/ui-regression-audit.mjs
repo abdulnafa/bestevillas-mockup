@@ -5,7 +5,7 @@ import { readAvifDimensions, readWebpDimensions } from "../scripts/build.mjs";
 
 const root = resolve(".");
 const distDir = resolve(root, process.env.UI_AUDIT_DIST || "dist");
-const evidencePath = resolve(root, "testing", "evidence", "ui-regression-audit.json");
+const evidencePath = resolve(root, process.env.TEST_EVIDENCE_DIR || "testing/evidence", "ui-regression-audit.json");
 const rasterExtensions = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
 const imageBudgets = {
   base: 550 * 1024,

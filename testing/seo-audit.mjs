@@ -68,6 +68,6 @@ record("analytics.js", "booking event hook", analytics.includes('"booking_partne
 
 const failed = results.filter((result) => !result.passed);
 const report = { passed: results.length - failed.length, total: results.length, failed, results };
-await writeFile(resolve("testing", "evidence", "seo-audit.json"), `${JSON.stringify(report, null, 2)}\n`);
+await writeFile(resolve(process.env.TEST_EVIDENCE_DIR || "testing/evidence", "seo-audit.json"), `${JSON.stringify(report, null, 2)}\n`);
 console.log(JSON.stringify({ passed: report.passed, total: report.total, failed }, null, 2));
 if (failed.length) process.exitCode = 1;

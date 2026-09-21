@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 const baseUrl = process.env.TEST_BASE_URL || "http://127.0.0.1:4173";
 const debugUrl = process.env.CHROME_DEBUG_URL || "http://127.0.0.1:9223";
 const sourceBaseUrl = process.env.SOURCE_BASE_URL || "";
-const evidenceDir = resolve("testing", "evidence");
+const evidenceDir = resolve(process.env.TEST_EVIDENCE_DIR || "testing/evidence");
 const results = [];
 
 function record(name, passed, detail = "") {
@@ -319,7 +319,7 @@ try {
         overflow: document.documentElement.scrollWidth > innerWidth,
       };
     })()`);
-    const expectedGalleryCount = slug.startsWith("prospect-") ? 8 : 3;
+    const expectedGalleryCount = 8;
     record(`Pretty villa route ${slug}`, detail.heading.includes(heading) && detail.title.includes("Best E Villas") && detail.canonical === `https://bestevillas.com/villas/${slug}.html` && detail.booking === booking && detail.schema.includes("VacationRental") && detail.galleryReady && detail.galleryCount === expectedGalleryCount && detail.missingImages === 0 && !detail.overflow, JSON.stringify(detail));
     const layout = await page.evaluate(villaLayoutProbeExpression());
     record(`Villa gallery and availability layout ${slug} at 1440px`, villaLayoutHealthy(layout), JSON.stringify(layout));

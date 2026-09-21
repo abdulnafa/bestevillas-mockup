@@ -12,15 +12,25 @@ bedrooms: 2
 bathrooms: 1
 summary: A peaceful two-bedroom South Coast base near Miami Beach, Oistins, St. Lawrence Gap and Barbados Golf Club.
 booking_url: https://direct-book.com/properties/bestevillaprovidencedirect
-hero_image: /assets/images/properties/providence/exterior.jpg
-hero_image_alt: Exterior of Providence Terrace in Christ Church, Barbados
+hero_image: /assets/images/properties/providence/2026-09-18-exterior-pool.jpg
+hero_image_alt: Entrance and pool at Providence Terrace in Christ Church, Barbados
 gallery:
-  - image: /assets/images/properties/providence/exterior.jpg
-    alt: Exterior of Providence Terrace in Christ Church, Barbados
-  - image: /assets/images/properties/providence/living.jpg
-    alt: Living room at Providence Terrace in Barbados
-  - image: /assets/images/properties/providence/bedroom.jpg
-    alt: Bedroom at Providence Terrace in Barbados
+  - image: /assets/images/properties/providence/2026-09-18-exterior-pool.jpg
+    alt: Entrance and pool at Providence Terrace in Christ Church, Barbados
+  - image: /assets/images/properties/providence/2026-09-18-living-room.jpg
+    alt: Open-plan living room at Providence Terrace
+  - image: /assets/images/properties/providence/2026-09-18-turquoise-kitchen.jpg
+    alt: Turquoise kitchen at Providence Terrace
+  - image: /assets/images/properties/providence/2026-09-18-blue-bedroom-window.jpg
+    alt: Blue bedroom with window at Providence Terrace
+  - image: /assets/images/properties/providence/2026-09-18-blue-bedroom-wardrobe.jpg
+    alt: Bedroom with wardrobe at Providence Terrace
+  - image: /assets/images/properties/providence/2026-09-18-bathroom.jpg
+    alt: Bathroom with shower at Providence Terrace
+  - image: /assets/images/properties/providence/2026-09-18-balcony.jpg
+    alt: Shaded balcony at Providence Terrace
+  - image: /assets/images/properties/providence/2026-09-18-pool.jpg
+    alt: Outdoor swimming pool at Providence Terrace
 amenities:
   - Shared pool
   - Wi-Fi
@@ -36,4 +46,3 @@ seo:
 A peaceful two-bedroom South Coast base near Miami Beach, Oistins, St. Lawrence Gap and Barbados Golf Club.
 
 Exact amenities, live rates and availability should always be confirmed on the external booking platform before reserving.
-

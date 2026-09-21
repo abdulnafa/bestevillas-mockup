@@ -2,7 +2,7 @@ import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, extname, resolve } from "node:path";
 
 const root = resolve(".");
-const evidencePath = resolve("testing", "evidence", "static-audit.json");
+const evidencePath = resolve(process.env.TEST_EVIDENCE_DIR || "testing/evidence", "static-audit.json");
 const pages = [
   "index.html",
   "villas.html",

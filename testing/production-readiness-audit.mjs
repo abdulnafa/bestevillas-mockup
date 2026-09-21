@@ -3,7 +3,7 @@ import { dirname, extname, resolve } from "node:path";
 import vm from "node:vm";
 
 const root = resolve(".");
-const evidencePath = resolve("testing", "evidence", "production-readiness-audit.json");
+const evidencePath = resolve(process.env.TEST_EVIDENCE_DIR || "testing/evidence", "production-readiness-audit.json");
 const productionOrigin = "https://bestevillas.com";
 const results = [];
 

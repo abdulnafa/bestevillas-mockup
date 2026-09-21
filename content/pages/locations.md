@@ -25,8 +25,8 @@ sections:
       - **Stay option:** Three-bedroom units
       - **Setting:** Quiet, established neighbourhood
       - **Nearby:** Warrens, golf courses and West Coast beaches
-    image: /assets/images/properties/st-silas/exterior.jpg
-    image_alt: Blue Best E Villas building surrounded by tropical gardens in St. Silas, Barbados
+    image: /assets/images/properties/st-silas/2026-09-18-blue-exterior-front.jpg
+    image_alt: Blue Best E Villas building and garden in St. Silas, Barbados
   - heading: Providence
     text: |
       Providence is set in a quiet neighbourhood on a ridge above the South Coast. Barbados Golf Club, Miami Beach, Oistins and St. Lawrence Gap are all within the wider area for days by the sea and evenings out.
@@ -34,8 +34,8 @@ sections:
       - **Stay option:** Two-bedroom units
       - **Setting:** Residential ridge above the South Coast
       - **Nearby:** Golf, beaches, Oistins and St. Lawrence Gap
-    image: /assets/images/properties/providence/exterior.jpg
-    image_alt: Providence Terrace villa building beneath a blue Barbados sky
+    image: /assets/images/properties/providence/2026-09-18-exterior-pool.jpg
+    image_alt: Peach Providence Terrace building and swimming pool
 call_to_action:
   heading: Choose your Barbados base.
   text: Compare villas across the West and South Coasts.

@@ -18,7 +18,7 @@ const execFileAsync = promisify(execFile);
 const root = resolve(".");
 const buildScript = resolve(root, "scripts", "build.mjs");
 const distDir = resolve(root, process.env.CMS_AUDIT_DIST || "dist");
-const evidencePath = resolve(root, "testing", "evidence", "cms-build-audit.json");
+const evidencePath = resolve(root, process.env.TEST_EVIDENCE_DIR || "testing/evidence", "cms-build-audit.json");
 const productionOrigin = "https://bestevillas.com";
 const baseRoutes = [
   "index.html",

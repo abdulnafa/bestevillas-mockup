@@ -6,8 +6,8 @@ template: villa-listing
 status: published
 hero_heading: Find your Barbados villa
 hero_intro: Comfortable stays across the West and South Coasts.
-hero_image: /assets/images/new/pixieset-garden-exterior.jpg
-hero_image_alt: Best E Villas property beside a tropical garden in Barbados
+hero_image: /assets/images/properties/st-silas/2026-09-18-blue-exterior-aerial.jpg
+hero_image_alt: Aerial view of the blue St. Silas villas in Barbados
 sections:
   - heading: Choose the setting that suits your stay.
     text: |

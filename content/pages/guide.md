@@ -26,8 +26,8 @@ sections:
   - heading: Providence puts varied outings within reach.
     text: |
       From Providence, guests can plan time at Miami Beach, visit Oistins, head towards St. Lawrence Gap or arrange a round at Barbados Golf Club. Travel times depend on traffic and transport.
-    image: /assets/images/properties/providence/exterior.jpg
-    image_alt: Providence Terrace villa exterior on a sunny Barbados day
+    image: /assets/images/properties/providence/2026-09-18-balcony.jpg
+    image_alt: Shaded balcony at Providence Terrace in Barbados
   - heading: Three simple planning notes.
     text: |
       1. **Confirm your villa:** Review the property details and live booking terms before completing your reservation with the external partner.

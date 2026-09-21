@@ -15,6 +15,10 @@ hero_gallery:
     alt: Open-plan living and dining space at Best E Villas
   - image: /assets/images/new/pixieset-garden-exterior.jpg
     alt: Best E Villas property beside a landscaped tropical garden
+  - image: /assets/images/properties/st-silas/2026-09-18-blue-exterior-aerial.jpg
+    alt: Aerial view of the blue St. Silas villas in Barbados
+  - image: /assets/images/properties/providence/2026-09-18-exterior-pool.jpg
+    alt: Peach Providence Terrace building and swimming pool
 sections:
   - heading: Come for Barbados. Feel at home.
     text: |

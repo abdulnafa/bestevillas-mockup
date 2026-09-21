@@ -12,15 +12,25 @@ bedrooms: 3
 bathrooms: 2.5
 summary: A roomy three-bedroom retreat close to Apes Hill, Royal Westmoreland, Warrens and the beaches of Barbados' West Coast.
 booking_url: https://direct-book.com/properties/bestevillasstsilasstjames
-hero_image: /assets/images/properties/st-silas/exterior.jpg
-hero_image_alt: Exterior of the three-bedroom St. Silas villa in Barbados
+hero_image: /assets/images/properties/st-silas/2026-09-18-blue-exterior-aerial.jpg
+hero_image_alt: Aerial view of the blue St. Silas villas in Barbados
 gallery:
-  - image: /assets/images/properties/st-silas/exterior.jpg
-    alt: Exterior of the three-bedroom St. Silas villa in Barbados
-  - image: /assets/images/properties/st-silas/living.jpg
-    alt: Living room in the three-bedroom St. Silas villa
-  - image: /assets/images/properties/st-silas/bedroom.jpg
-    alt: Bedroom in the three-bedroom St. Silas villa
+  - image: /assets/images/properties/st-silas/2026-09-18-blue-exterior-aerial.jpg
+    alt: Aerial view of the blue St. Silas villas in Barbados
+  - image: /assets/images/properties/st-silas/2026-09-18-living-room.jpg
+    alt: Bright living room at the St. Silas villa
+  - image: /assets/images/properties/st-silas/2026-09-18-dining-kitchen.jpg
+    alt: Dining area beside the red kitchen at St. Silas
+  - image: /assets/images/properties/st-silas/2026-09-18-red-kitchen.jpg
+    alt: Red fitted kitchen at the St. Silas villa
+  - image: /assets/images/properties/st-silas/2026-09-18-bedroom-chair.jpg
+    alt: Bedroom with chair at the St. Silas villa
+  - image: /assets/images/properties/st-silas/2026-09-18-bedroom-orange-cushion.jpg
+    alt: Bedroom with orange cushion at the St. Silas villa
+  - image: /assets/images/properties/st-silas/2026-09-18-bathroom.jpg
+    alt: White bathroom with shower at the St. Silas villa
+  - image: /assets/images/properties/st-silas/2026-09-18-blue-exterior-front.jpg
+    alt: Front view of the blue St. Silas villas and garden
 amenities:
   - Pool access
   - Wi-Fi
@@ -36,4 +46,3 @@ seo:
 A roomy three-bedroom retreat close to Apes Hill, Royal Westmoreland, Warrens and the beaches of Barbados' West Coast.
 
 Exact amenities, live rates and availability should always be confirmed on the external booking platform before reserving.
-
