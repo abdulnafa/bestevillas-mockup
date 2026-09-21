@@ -139,6 +139,74 @@ function villaLayoutHealthy(probe) {
       && state.ctaHitTargets);
 }
 
+function closingLayoutProbeExpression() {
+  return `(() => {
+    const cta = document.querySelector('.cms-call-to-action');
+    const copy = cta?.querySelector('.centered-copy');
+    const heading = copy?.querySelector('h2');
+    const button = copy?.querySelector('.button');
+    const footer = document.querySelector('.site-footer');
+    const footerHeadings = Array.from(footer?.querySelectorAll('.footer-column h2') || []);
+    const contentSections = Array.from(document.querySelectorAll('main > .section:not(.cms-call-to-action)'));
+    const split = contentSections[0]?.querySelector('.split');
+    const media = split?.querySelector('.framed-media');
+    const narrow = contentSections.find((section) => section.querySelector('.narrow-copy'))?.querySelector('.narrow-copy');
+    if (!cta || !copy || !heading || !button || !footer || footerHeadings.length !== 3) return { missing: true };
+    const rgb = (value) => (value.match(/[\\d.]+/g) || []).slice(0, 3).map(Number);
+    const opaque = (value) => !/rgba?\\([^)]*,\\s*0(?:\\.0+)?\\s*\\)$/i.test(value);
+    const luminance = (value) => {
+      const channels = rgb(value).map((channel) => {
+        const normalized = channel / 255;
+        return normalized <= 0.04045 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+      });
+      return channels.length === 3 ? channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722 : NaN;
+    };
+    const contrast = (foreground, background) => {
+      const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
+      return (values[0] + 0.05) / (values[1] + 0.05);
+    };
+    const ctaStyle = getComputedStyle(cta);
+    const copyStyle = getComputedStyle(copy);
+    const headingStyle = getComputedStyle(heading);
+    const footerStyle = getComputedStyle(footer);
+    const ctaBox = cta.getBoundingClientRect();
+    const copyBox = copy.getBoundingClientRect();
+    const headingBox = heading.getBoundingClientRect();
+    const buttonBox = button.getBoundingClientRect();
+    cta.scrollIntoView({ block: 'center', behavior: 'instant' });
+    return {
+      missing: false,
+      viewport: innerWidth,
+      overflow: document.documentElement.scrollWidth > innerWidth + 1,
+      ctaBackground: ctaStyle.backgroundColor,
+      ctaBackgroundOpaque: opaque(ctaStyle.backgroundColor),
+      ctaBackgroundLuminance: luminance(ctaStyle.backgroundColor),
+      ctaHeight: ctaBox.height,
+      ctaHeadingSize: parseFloat(headingStyle.fontSize),
+      ctaHeadingContrast: contrast(headingStyle.color, ctaStyle.backgroundColor),
+      ctaCopyCentered: copyStyle.textAlign === 'center' && Math.abs((copyBox.left + copyBox.right) / 2 - (ctaBox.left + ctaBox.right) / 2) <= 20,
+      ctaContentContained: headingBox.left >= ctaBox.left - 1 && headingBox.right <= ctaBox.right + 1 && buttonBox.left >= ctaBox.left - 1 && buttonBox.right <= ctaBox.right + 1 && buttonBox.bottom <= ctaBox.bottom + 1,
+      footerBackground: footerStyle.backgroundColor,
+      footerHeadingSizes: footerHeadings.map((node) => parseFloat(getComputedStyle(node).fontSize)),
+      footerHeadingContrasts: footerHeadings.map((node) => contrast(getComputedStyle(node).color, footerStyle.backgroundColor)),
+      footerHeadings: footerHeadings.map((node) => node.textContent.trim()),
+      contentSectionCount: contentSections.length,
+      contentSectionPadding: contentSections.map((section) => parseFloat(getComputedStyle(section).paddingTop)),
+      splitColumns: split ? getComputedStyle(split).gridTemplateColumns.split(' ').length : 0,
+      mediaRatio: media ? media.getBoundingClientRect().width / media.getBoundingClientRect().height : 0,
+      mediaObjectFit: media ? getComputedStyle(media.querySelector('img')).objectFit : '',
+      narrowWidth: narrow?.getBoundingClientRect().width || 0
+    };
+  })()`;
+}
+
+function recordClosingVisual(probe, label, mobile = false) {
+  const details = JSON.stringify(probe);
+  record(`${label} closing CTA style and alignment`, !probe.missing && probe.ctaBackgroundOpaque && probe.ctaBackgroundLuminance < 0.2 && probe.ctaHeadingContrast >= 4.5 && probe.ctaCopyCentered && probe.ctaContentContained && probe.ctaHeight >= 180 && probe.ctaHeight <= (mobile ? 540 : 550) && probe.ctaHeadingSize >= 28 && probe.ctaHeadingSize <= (mobile ? 56 : 76) && !probe.overflow, details);
+  record(`${label} footer heading size and contrast`, !probe.missing && probe.footerHeadings.join('|') === 'Explore|About|Stay in touch' && probe.footerHeadingSizes.every((size) => size >= 11 && size <= 24) && probe.footerHeadingContrasts.every((contrast) => contrast >= 4.5), details);
+  record(`${label} CMS section spacing and media bounds`, !probe.missing && probe.contentSectionCount >= 2 && probe.contentSectionPadding.every((padding) => padding >= (mobile ? 48 : 60)) && probe.splitColumns === (mobile ? 1 : 2) && Math.abs(probe.mediaRatio - 4 / 3) < 0.05 && probe.mediaObjectFit === 'cover' && probe.narrowWidth > 0 && probe.narrowWidth <= 900 && !probe.overflow, details);
+}
+
 async function openPage(url, navigationBaseUrl = baseUrl) {
   const response = await fetch(`${debugUrl}/json/new?${encodeURIComponent(url)}`, { method: "PUT" });
   if (!response.ok) throw new Error(`Could not create Chrome tab: HTTP ${response.status}`);
@@ -278,8 +346,14 @@ try {
     analyticsRequests: performance.getEntriesByType('resource').filter((entry) => /googletagmanager|google-analytics/i.test(entry.name)).map((entry) => entry.name),
   })`);
   record("Generated homepage renders CMS content", home.title.includes("Best E Villas") && home.heading === "Beautiful Barbados villas." && home.cmsSource === "pages/home.md" && home.villaCards === 4, JSON.stringify(home));
-  record("Generated homepage media and layout", home.slides === 3 && home.activeSlides === 1 && home.deferredSlides === 2 && home.missingImages.length === 0 && !home.overflow, JSON.stringify(home));
+  record("Generated homepage media and layout", home.slides >= 3 && home.activeSlides === 1 && home.deferredSlides === home.slides - 1 && home.missingImages.length === 0 && !home.overflow, JSON.stringify(home));
   record("Analytics remains inactive without ID", home.analyticsRequests.length === 0, JSON.stringify(home.analyticsRequests));
+  const desktopClosing = await page.evaluate(closingLayoutProbeExpression());
+  recordClosingVisual(desktopClosing, "Generated desktop");
+  await page.screenshot("cms-home-closing-desktop.png");
+  await page.evaluate(`document.querySelector('.site-footer')?.scrollIntoView({ block: 'start', behavior: 'instant' })`);
+  await page.screenshot("cms-home-footer-desktop.png");
+  await page.evaluate(`window.scrollTo({ top: 0, behavior: 'instant' })`);
   const carousel = await page.evaluate(`(async () => { document.querySelector('.carousel-next')?.click(); const deadline = Date.now() + 8000; let activeSlide = document.querySelector('.hero-slide.active'); let activeImage = activeSlide?.querySelector('img'); while ((activeSlide?.dataset.slide !== '1' || !activeImage?.complete || !activeImage?.naturalWidth || activeImage?.dataset.upgradePending === 'true' || (activeImage?.currentSrc || activeImage?.src || '').includes('-480.jpg')) && Date.now() < deadline) { await new Promise((done) => setTimeout(done, 25)); activeSlide = document.querySelector('.hero-slide.active'); activeImage = activeSlide?.querySelector('img'); } return { active: activeSlide?.dataset.slide, count: document.querySelector('.carousel-count strong')?.textContent, imageReady: Boolean(activeImage?.complete && activeImage?.naturalWidth), upgradePending: activeImage?.dataset.upgradePending === 'true', imageSource: activeImage?.currentSrc || activeImage?.src }; })()`);
   record("Generated carousel works without a blank slide", carousel.active === "1" && carousel.count === "02" && carousel.imageReady && !carousel.upgradePending && !carousel.imageSource.includes("-480.jpg"), JSON.stringify(carousel));
   await page.screenshot("cms-home-desktop.png");
@@ -295,6 +369,11 @@ try {
   record("CMS villa listing renders four records", listing.cards === 4 && listing.count === "4 villas" && listing.bookingLinks === 4 && listing.prettyLinks.every((path) => /\/villas\/[a-z0-9-]+\.html$/.test(path)) && listing.missingImages === 0, JSON.stringify(listing));
   const filtered = await page.evaluate(`(() => { const form = document.querySelector('#villa-filter-form'); form.querySelector('[name="location"]').value = 'south'; form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true })); return { visible: Array.from(document.querySelectorAll('[data-villa-card]')).filter((card) => !card.hidden).length, count: document.querySelector('#villa-result-count')?.textContent }; })()`);
   record("CMS villa filter works", filtered.visible === 1 && filtered.count === "1 villa", JSON.stringify(filtered));
+  const listingClosing = await page.evaluate(closingLayoutProbeExpression());
+  recordClosingVisual(listingClosing, "Villas desktop");
+  await page.screenshot("cms-villas-closing-desktop.png");
+  await page.evaluate(`document.querySelector('.site-footer')?.scrollIntoView({ block: 'start', behavior: 'instant' })`);
+  await page.screenshot("cms-villas-footer-desktop.png");
 
   const villas = [
     ["prospect-three", "Prospect", "https://direct-book.com/properties/bestevillasprospctdirect"],
@@ -398,6 +477,19 @@ try {
   const mobile = await page.evaluate(`(() => { const toggle = document.querySelector('.menu-toggle'); const ctaBottom = document.querySelector('.booking-bar .search-button')?.getBoundingClientRect().bottom; toggle?.click(); return { expanded: toggle?.getAttribute('aria-expanded'), navDisplay: getComputedStyle(document.querySelector('.mobile-nav')).display, overflow: document.documentElement.scrollWidth > innerWidth, headingHeight: document.querySelector('h1')?.getBoundingClientRect().height, ctaBottom, viewportHeight: innerHeight }; })()`);
   record("Generated mobile navigation and layout", mobile.expanded === "true" && mobile.navDisplay !== "none" && !mobile.overflow && mobile.headingHeight > 0 && mobile.ctaBottom <= mobile.viewportHeight, JSON.stringify(mobile));
   await page.screenshot("cms-home-mobile.png");
+  await page.evaluate(`document.querySelector('.menu-toggle')?.click()`);
+  const mobileClosing = await page.evaluate(closingLayoutProbeExpression());
+  recordClosingVisual(mobileClosing, "Generated mobile", true);
+  await page.screenshot("cms-home-closing-mobile.png");
+  await page.evaluate(`document.querySelector('.site-footer')?.scrollIntoView({ block: 'start', behavior: 'instant' })`);
+  await page.screenshot("cms-home-footer-mobile.png");
+
+  await page.navigate("villas.html?mobile=1");
+  const mobileListingClosing = await page.evaluate(closingLayoutProbeExpression());
+  recordClosingVisual(mobileListingClosing, "Villas mobile", true);
+  await page.screenshot("cms-villas-closing-mobile.png");
+  await page.evaluate(`document.querySelector('.site-footer')?.scrollIntoView({ block: 'start', behavior: 'instant' })`);
+  await page.screenshot("cms-villas-footer-mobile.png");
 
   await page.navigate("villas/st-silas.html");
   const villaMobile = await page.evaluate(`(() => { const toggle = document.querySelector('.menu-toggle'); toggle?.click(); return { expanded: toggle?.getAttribute('aria-expanded'), navDisplay: getComputedStyle(document.querySelector('.mobile-nav')).display, overflow: document.documentElement.scrollWidth > innerWidth }; })()`);

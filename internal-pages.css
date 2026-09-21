@@ -519,6 +519,23 @@ html.motion-ready .reveal.visible {
   color: var(--white);
 }
 
+.cms-call-to-action {
+  text-align: center;
+}
+
+.cms-call-to-action .centered-copy {
+  max-width: 820px;
+}
+
+.cms-call-to-action h2 {
+  margin-bottom: 20px;
+}
+
+.cms-call-to-action p {
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 28px;
+}
+
 .section-intro {
   max-width: 720px;
   margin-bottom: 48px;

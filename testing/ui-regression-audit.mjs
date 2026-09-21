@@ -335,6 +335,21 @@ function auditInternalCss(css) {
   record("css-contract", "internal-pages.css", "split media images fill the frame without distortion", hasDeclaration(frameImageBody, "width", "100%") && hasDeclaration(frameImageBody, "height", "100%") && hasDeclaration(frameImageBody, "object-fit", "cover"));
 }
 
+function auditGeneratedClosingLayout(html, css, outputPath) {
+  const clean = css.replace(/\/\*[\s\S]*?\*\//g, "");
+  const ctaTag = (html.match(/<section\b[^>]*class="[^"]*\bcms-call-to-action\b[^"]*"[^>]*>/i) || [""])[0];
+  const ctaBlock = (html.match(/<section\b[^>]*class="[^"]*\bcms-call-to-action\b[^"]*"[^>]*>[\s\S]*?<\/section>/i) || [""])[0];
+  const footerBlock = (html.match(/<footer\b[^>]*class="[^"]*\bsite-footer\b[^"]*"[^>]*>[\s\S]*?<\/footer>/i) || [""])[0];
+  const footerHeadings = footerBlock.match(/<div\b[^>]*class="[^"]*\bfooter-column\b[^"]*"[^>]*>\s*<h2\b/gi) || [];
+  const ctaBody = ruleBody(clean, "(?:main\\s*>\\s*)?\\.cms-call-to-action");
+  const footerHeadingBody = ruleBody(clean, "(?:\\.site-footer\\s+)?\\.footer-column\\s+h2(?:\\s*,\\s*\\.footer-column\\s+h3)?");
+
+  record("closing-layout", outputPath, "generated closing CTA uses its styled component class", Boolean(ctaTag) && /<div\b[^>]*class="[^"]*\bcentered-copy\b/.test(ctaBlock) && /<h2\b/.test(ctaBlock));
+  record("closing-layout", outputPath, "all three generated footer columns use the styled heading level", footerHeadings.length === 3, `${footerHeadings.length} headings`);
+  record("closing-layout", "styles.css", "closing CTA has centered, padded, coloured component styling", hasDeclaration(ctaBody, "background(?:-color)?", "[^;]+") && hasDeclaration(ctaBody, "padding(?:-block)?", "[^;]+") && hasDeclaration(ctaBody, "text-align", "center"));
+  record("closing-layout", "styles.css", "footer h2 headings match the generated markup and remain light", hasDeclaration(footerHeadingBody, "color", "var\\(--white\\)") && hasDeclaration(footerHeadingBody, "font-size", "[^;]+"));
+}
+
 function auditVillaGalleryCss(css) {
   const clean = css.replace(/\/\*[\s\S]*?\*\//g, "");
   const galleryStart = clean.indexOf(".property-gallery");
@@ -482,7 +497,10 @@ try {
     const css = await readFile(absolute, "utf8");
     await auditCssReferences(css, stylesheet, basePath);
     if (stylesheet === "internal-pages.css") auditInternalCss(css);
-    if (stylesheet === "styles.css") auditVillaGalleryCss(css);
+    if (stylesheet === "styles.css") {
+      auditVillaGalleryCss(css);
+      auditGeneratedClosingLayout(indexHtml, css, "index.html");
+    }
   }
 } catch (error) {
   record("runtime", "ui-regression-audit", "audit completes without uncaught error", false, error.stack || error.message);
