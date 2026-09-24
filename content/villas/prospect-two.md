@@ -45,6 +45,4 @@ seo:
   noindex: false
 ---
 
-A comfortable two-bedroom apartment with the space and practical amenities needed for relaxed family time on Barbados' West Coast.
-
 Exact amenities, live rates and availability should always be confirmed on the external booking platform before reserving.

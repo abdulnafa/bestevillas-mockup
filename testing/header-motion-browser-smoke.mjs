@@ -178,6 +178,7 @@ try {
     "guide.html",
     "faq.html",
     "policies.html",
+    "privacy.html",
     "contact.html",
     "villas/prospect-three.html",
     "villas/prospect-two.html",

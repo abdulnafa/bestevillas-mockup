@@ -10,6 +10,7 @@ location:
   coast: South Coast
 bedrooms: 2
 bathrooms: 1
+max_guests: 4
 summary: A peaceful two-bedroom South Coast base near Miami Beach, Oistins, St. Lawrence Gap and Barbados Golf Club.
 booking_url: https://direct-book.com/properties/bestevillaprovidencedirect
 hero_image: /assets/images/properties/providence/2026-09-18-exterior-pool.jpg
@@ -45,6 +46,6 @@ seo:
   noindex: false
 ---
 
-A peaceful two-bedroom South Coast base near Miami Beach, Oistins, St. Lawrence Gap and Barbados Golf Club.
+The apartment accommodates up to four guests in two double beds.
 
 Exact amenities, live rates and availability should always be confirmed on the external booking platform before reserving.

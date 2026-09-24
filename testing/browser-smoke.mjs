@@ -243,7 +243,7 @@ try {
     missingImages: Array.from(document.images).filter((image) => !image.complete || image.naturalWidth === 0).length,
     directLinks: Array.from(document.querySelectorAll('a[href*="direct-book.com"]')).length,
   })`);
-  record("Villa listing rendered", listingInitial.title.includes("Villas") && listingInitial.cards === 4 && listingInitial.count === "4 villas", JSON.stringify(listingInitial));
+  record("Villa listing rendered", listingInitial.title.includes("Villas") && listingInitial.cards === 4 && listingInitial.count === "4 accommodation options", JSON.stringify(listingInitial));
   record("Villa listing images load", listingInitial.missingImages === 0, `${listingInitial.missingImages} missing`);
   record("External booking links present", listingInitial.directLinks === 4, `${listingInitial.directLinks} links`);
   await page.screenshot("villas-desktop.png");
@@ -258,7 +258,7 @@ try {
       url: location.href,
     };
   })()`);
-  record("Villa location filter", filtered.visible === 1 && filtered.count === "1 villa" && filtered.url.includes("location=south"), JSON.stringify(filtered));
+  record("Villa location filter", filtered.visible === 1 && filtered.count === "1 accommodation option" && filtered.url.includes("location=south"), JSON.stringify(filtered));
   await page.screenshot("villas-filtered-desktop.png");
 
   await page.navigate(`${baseUrl}/villa.html?villa=providence`);

@@ -30,6 +30,7 @@ const baseRoutes = [
   "guide.html",
   "faq.html",
   "policies.html",
+  "privacy.html",
   "contact.html",
 ];
 const pageOutputs = {
@@ -41,6 +42,7 @@ const pageOutputs = {
   guide: "guide.html",
   faq: "faq.html",
   policies: "policies.html",
+  privacy: "privacy.html",
   contact: "contact.html",
 };
 const expectedVillaSlugs = ["prospect-three", "prospect-two", "providence", "st-silas"];
@@ -491,6 +493,75 @@ async function auditBookingAndClaims(outputDirectory, models, label) {
   }
 }
 
+async function auditConfirmedReleaseContent(outputDirectory, models, label) {
+  const readOutput = (file) => readFile(resolve(outputDirectory, file), "utf8");
+  const [homeHtml, listingHtml, policiesHtml, reviewsHtml, privacyHtml, stSilasHtml] = await Promise.all([
+    readOutput("index.html"),
+    readOutput("villas.html"),
+    readOutput("policies.html"),
+    readOutput("reviews.html"),
+    readOutput("privacy.html"),
+    readOutput("villas/st-silas.html"),
+  ]);
+  const allHtml = (await Promise.all((await htmlFiles(outputDirectory)).map((file) => readFile(file, "utf8")))).join("\n");
+  const homeText = visibleText(homeHtml);
+  const listingText = visibleText(listingHtml);
+  const policiesText = visibleText(policiesHtml);
+  const privacyText = visibleText(privacyHtml);
+  const stSilasText = visibleText(stSilasHtml);
+  const stSilas = models.villas.find((entry) => entry.data.slug === "st-silas")?.data;
+
+  record("release-content", `${label}/index.html`, "inventory is described as four accommodation options across three properties", /four accommodation options across three (?:Barbados )?properties/i.test(homeText), homeText.slice(0, 500));
+  record("release-content", `${label}/villas.html`, "listing count uses accommodation options rather than four properties", /4 accommodation options/i.test(listingText) && !/4 villas/i.test(listingText), listingText.slice(0, 500));
+  record("release-content", `${label}/villas/st-silas.html`, "St. Silas confirmed bathroom, capacity and no-pool facts render", stSilas?.bathrooms === 2.5 && stSilas?.max_guests === 6 && !(stSilas?.amenities || []).some((item) => /pool/i.test(item)) && /2\.5 bathrooms/i.test(stSilasText) && /up to 6 guests/i.test(stSilasText) && /does not have a swimming pool or pool access/i.test(stSilasText), JSON.stringify({ bathrooms: stSilas?.bathrooms, maxGuests: stSilas?.max_guests, amenities: stSilas?.amenities }));
+
+  const policyPhrases = [
+    "valid credit card is required to secure every reservation",
+    "per apartment, per night, with taxes and fees included",
+    "cash and credit cards are accepted",
+    "remaining balance is paid in full on arrival",
+    "at least 30 full days before check-in",
+    "fewer than 30 full days remain before check-in",
+    "check-in: 3:00 PM",
+    "check-out: 11:00 AM",
+    "guests of all ages are welcome",
+    "pets are not allowed",
+  ];
+  record("release-content", `${label}/policies.html`, "all confirmed booking and stay terms render", policyPhrases.every((phrase) => policiesText.toLowerCase().includes(phrase.toLowerCase())), JSON.stringify(policyPhrases.filter((phrase) => !policiesText.toLowerCase().includes(phrase.toLowerCase()))));
+
+  record("release-content", `${label}/reviews.html`, "unsupported verified-review wording is absent", !/verified guest/i.test(visibleText(reviewsHtml)) && !/verified guest/i.test(reviewsHtml), "");
+  record("release-content", `${label}/privacy.html`, "privacy notice identifies Best E Villas and inactive analytics", privacyText.includes("Best E Villas") && /does not currently activate analytics or advertising cookies/i.test(privacyText) && /data-ga-measurement-id=""/i.test(privacyHtml), privacyText.slice(0, 500));
+  record("release-content", label, "official social links and privacy route render in the shared footer", allHtml.includes('https://www.facebook.com/Bestevillas/') && allHtml.includes('https://www.instagram.com/bestevillasbarbados/') && allHtml.includes('privacy.html'), "");
+  record("release-content", label, "visible footer country uses Barbados rather than country code", /St\. Silas, St\. James, Barbados/i.test(visibleText(allHtml)) && !/,\s*BB\b/.test(visibleText(allHtml)), "");
+  record("release-content", label, "unconfirmed exact guest address is not exposed", !/Lot 249|Valencia Close/i.test(allHtml), "");
+  record("release-content", label, "internal home links use the canonical site root", !/href=["'][^"']*\/index\.html["']/i.test(allHtml), "");
+
+  const guidePost = models.guidePosts.find((entry) => entry.data.slug === "barbados-attractions-dive-into-adventure-with-best-e-villas");
+  if (guidePost) {
+    const guideHtml = await readOutput(`guide/${guidePost.data.slug}.html`);
+    const guideSchemas = parseSchemas(guideHtml).parsed;
+    const article = guideSchemas
+      .flatMap((schema) => schema?.["@graph"] || [schema])
+      .find((entry) => entry?.["@type"] === "BlogPosting");
+    record("release-content", `${label}/guide/${guidePost.data.slug}.html`, "Best E Villas guide author resolves to the business organization", article?.author?.["@id"] === `${productionOrigin}/#business`, JSON.stringify(article?.author || null));
+  }
+
+  for (const file of await htmlFiles(outputDirectory)) {
+    const output = relative(outputDirectory, file).replaceAll("\\", "/");
+    const html = await readFile(file, "utf8");
+    const desktopNav = html.match(/<nav class="desktop-nav"[\s\S]*?<\/nav>/i)?.[0] || "";
+    const mobileNav = html.match(/<nav class="mobile-nav"[\s\S]*?<\/nav>/i)?.[0] || "";
+    record("release-content", `${label}/${output}`, "Contact appears in desktop and mobile navigation", /contact\.html/i.test(desktopNav) && /contact\.html/i.test(mobileNav), "");
+  }
+
+  for (const villa of models.villas.filter((entry) => entry.data.status === "published")) {
+    const html = await readOutput(`villas/${villa.data.slug}.html`);
+    const text = visibleText(html);
+    const count = text.split(villa.data.summary).length - 1;
+    record("release-content", `${label}/villas/${villa.data.slug}.html`, "villa summary is not duplicated in visible copy", count === 1, `${count} visible occurrences`);
+  }
+}
+
 async function auditSafeFixture(outputDirectory, label) {
   const files = await htmlFiles(outputDirectory);
   const combinedHtml = (await Promise.all(files.map((file) => readFile(file, "utf8")))).join("\n");
@@ -524,6 +595,7 @@ async function auditOutput(outputDirectory, models, label, mode, { safeFixture =
   await auditMetadataAndIndexing(outputDirectory, models, label, mode);
   await auditSitemap(outputDirectory, models, label);
   await auditBookingAndClaims(outputDirectory, models, label);
+  await auditConfirmedReleaseContent(outputDirectory, models, label);
   await validateLocalReferences(outputDirectory, manifest?.build?.basePath || "/", label);
   if (safeFixture) await auditSafeFixture(outputDirectory, label);
   return manifest;

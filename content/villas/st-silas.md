@@ -10,6 +10,7 @@ location:
   coast: West Coast
 bedrooms: 3
 bathrooms: 2.5
+max_guests: 6
 summary: A roomy three-bedroom retreat close to Apes Hill, Royal Westmoreland, Warrens and the beaches of Barbados' West Coast.
 booking_url: https://direct-book.com/properties/bestevillasstsilasstjames
 hero_image: /assets/images/properties/st-silas/2026-09-18-blue-exterior-aerial.jpg
@@ -34,7 +35,6 @@ gallery:
   - image: /assets/images/properties/st-silas/2026-09-18-blue-exterior-front.jpg
     alt: Front view of the blue St. Silas villas and garden
 amenities:
-  - Pool access
   - Wi-Fi
   - Equipped kitchen
   - Air conditioning
@@ -45,6 +45,6 @@ seo:
   noindex: false
 ---
 
-A roomy three-bedroom retreat close to Apes Hill, Royal Westmoreland, Warrens and the beaches of Barbados' West Coast.
+The villa accommodates up to six guests in three double beds. St. Silas does not have a swimming pool or pool access.
 
 Exact amenities, live rates and availability should always be confirmed on the external booking platform before reserving.

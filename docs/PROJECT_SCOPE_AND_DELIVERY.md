@@ -1,6 +1,6 @@
 # Best E Villas production scope and delivery plan
 
-Status date: 2026-09-18
+Status date: 2026-09-24
 
 This document is the scope and delivery baseline for moving the approved Best E Villas preview to the live domain. The public review build is available at:
 
@@ -8,9 +8,9 @@ https://abdulnafa.github.io/bestevillas-mockup/
 
 ## Included production scope
 
-- Responsive Home, Villas, four individual Villa pages, Locations, About, Reviews, Barbados Guide, FAQs, Policies, and Contact pages.
+- Responsive Home, Villas, four individual accommodation pages, Locations, About, Reviews, Barbados Guide, FAQs, Policies, Privacy & Cookies, and Contact pages.
 - Image-led Best E Villas visual system using the supplied logo, one self-hosted font family, a sticky responsive header, smooth scrolling, and restrained accessible motion.
-- Curated responsive property galleries, with the approved Prospect source photography already integrated and Providence/St. Silas photography to follow when supplied.
+- Curated responsive property galleries using the approved supplied photography for Prospect, Providence, and St. Silas.
 - Property discovery filters and villa-specific links to the existing external booking platform.
 - Git-backed Pages CMS editing for site settings, villas, fixed pages, media, and Barbados Guide posts.
 - Technical SEO, AEO, and GEO foundations: canonical/social metadata, structured data, sitemap, robots controls, accessible semantic content, and performance safeguards.

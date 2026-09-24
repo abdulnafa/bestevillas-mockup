@@ -1,23 +1,23 @@
 # Best E Villas production launch handover
 
-Status date: 2026-09-18
+Status date: 2026-09-24
 
 ## Current review baseline
 
 - Public review URL: https://abdulnafa.github.io/bestevillas-mockup/
-- Deployment source: the `main` branch through GitHub Actions; confirm the current SHA in the latest successful Pages workflow before sign-off.
-- Generated preview: 14 routes, four pre-rendered villa pages, legacy redirects, responsive assets, and preview `noindex` protection.
-- Retained live QA baseline: 59/59 full-site browser checks and 27/27 sticky-header/motion checks passed from 1920px through 390px on 2026-09-18.
+- Deployment source: the `main` branch through GitHub Actions for the review preview; the production package is a separate root build for cPanel.
+- Generated release: ten fixed pages, four pre-rendered accommodation pages, the migrated Barbados Attractions guide article, a legacy villa compatibility route, responsive assets, production indexing controls, and Apache redirect/retirement rules.
+- Release QA on 2026-09-24 passed 6,202/6,202 CMS checks, 2,900/2,900 UI checks, 202/202 redirect checks, 35/35 reservation-tooling checks, 127/127 rendered browser checks, and 28/28 sticky-header/motion checks.
 - The GitHub Pages preview is for review only. It is not the live `bestevillas.com` production deployment.
 
 ## Go-live gates
 
 | # | Required from client | Why it blocks launch | Status |
 | --- | --- | --- | --- |
-| 1 | Final stakeholder sign-off and authorized production domain, hosting, CMS, analytics, consent, and search access | Required to publish, administer, measure, and verify the production site | Required before launch |
-| 2 | Confirmed go-live date and review window | Required to schedule review, DNS/cutover, and post-launch monitoring | Required before launch |
-| 3 | Approved accommodation facts, website copy, and policy copy | Prevents unverified claims and premature indexing | Required before launch |
-| 4 | Approved production photography for every property | Required to replace temporary imagery with final assets | Required before launch |
+| 1 | Final stakeholder sign-off and authorized production domain/hosting access | Required to publish and verify the production site | Approved 2026-09-24; manual cPanel upload pending |
+| 2 | Confirmed go-live date and review window | Required to schedule cutover and post-launch monitoring | Approved for 2026-09-24 |
+| 3 | Approved accommodation facts, website copy, and policy copy | Prevents unverified claims and premature indexing | Launch-safe confirmed facts applied; unconfirmed Prospect occupancy/beds omitted |
+| 4 | Approved production photography for every property | Required to replace temporary imagery with final assets | Approved/current supplied imagery applied |
 | 5 | Authorized reservation-data export plus agreed record scope and accommodation mapping | Required to deduplicate, map, and safely review data before a one-time import | Required before migration |
 | 6 | Approved recurring seasonal date boundaries and any holiday or peak exceptions | Required to configure seasonal rates correctly | Required before rate setup |
 
@@ -40,7 +40,7 @@ The reviewer should confirm in one consolidated response:
 2. Reconcile approved production content and assets in `content/` and `assets/images/`.
 3. Export reservation data only through an authorized secure session. Review record scope, accommodation mapping, duplicates, dates, guest counts, and totals before any import.
 4. Complete only the approved reservation-platform settings and verify each saved value after reload. Do not publish, connect services, or import data without the relevant approval.
-5. Configure production analytics and consent without storing private credentials in the repository.
+5. Keep analytics inactive until a valid production identifier and consent decision are supplied; never store private credentials in the repository.
 6. Install locked dependencies and create the root production build:
 
    ```powershell
@@ -53,6 +53,8 @@ The reviewer should confirm in one consolidated response:
    ```powershell
    npm run test:cms
    npm run test:ui
+   npm run test:redirects
+   npm run test:reservations
    node testing/static-audit.mjs
    node testing/seo-audit.mjs
    node testing/production-readiness-audit.mjs
@@ -67,7 +69,7 @@ The reviewer should confirm in one consolidated response:
 - Confirm HTTPS and the preferred non-www canonical domain.
 - Check every sitemap route, villa route, legacy redirect, navigation link, image, and external booking link.
 - Verify desktop/mobile layout, menu state, sticky-header clearance, galleries, reduced-motion behavior, and absence of horizontal overflow.
-- Confirm production pages use approved indexing directives; keep unapproved Policies content excluded.
+- Confirm every production page uses its approved indexing directive; keep any future unapproved draft content excluded.
 - Verify structured data, canonical/social metadata, sitemap, robots, GA4 consent behavior, and Search Console ownership.
 - Perform a Pages CMS test edit through the approved workflow and confirm the resulting deployment.
 - Record the deployed version, test results, sign-off, and rollback reference in project memory.

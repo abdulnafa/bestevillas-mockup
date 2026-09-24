@@ -45,6 +45,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify production redirects and Apache artifact
+        run: npm run test:redirects
+
       - name: Build preview site
         run: npm run build -- --mode preview --base-path /bestevillas-mockup
 

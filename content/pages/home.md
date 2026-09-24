@@ -5,7 +5,7 @@ nav_label: Home
 template: home
 status: published
 hero_heading: Beautiful Barbados villas.
-hero_intro: Comfortable stays on the West and South Coasts, with warm local service.
+hero_intro: Four accommodation options across three Barbados properties, with warm local service on the West and South Coasts.
 hero_image: /assets/images/new/pixieset-hero-balcony-hd.webp
 hero_image_alt: Private balcony looking over tropical palms at Best E Villas
 hero_gallery:
@@ -24,7 +24,7 @@ sections:
     text: |
       Best E Villas offers cosy, comfortable and convenient self-contained accommodation, supported by a family-run team.
 
-      Choose from properties on the West and South Coasts, settle into practical living spaces and use the external booking partner for current dates and rates.
+      Choose from four accommodation options across three properties on the West and South Coasts, settle into practical living spaces and use the external booking partner for current dates and rates.
     image: /assets/images/new/pixieset-second-unit-living.jpg
     image_alt: Blue-accented living and dining space at a Prospect apartment
   - heading: Two coasts. One unforgettable Barbados.

@@ -356,11 +356,13 @@ const routes = [
   "guide.html",
   "faq.html",
   "policies.html",
+  "privacy.html",
   "contact.html",
   "villas/prospect-three.html",
   "villas/prospect-two.html",
   "villas/providence.html",
   "villas/st-silas.html",
+  "guide/barbados-attractions-dive-into-adventure-with-best-e-villas.html",
 ];
 for (const route of routes) {
   const response = await fetch(`${baseUrl}/${route}`);
@@ -438,9 +440,9 @@ try {
     prettyLinks: Array.from(document.querySelectorAll('[data-villa-card] h3 a')).map((link) => link.pathname),
     missingImages: Array.from(document.images).filter((image) => image.complete && image.naturalWidth === 0).length,
   })`);
-  record("CMS villa listing renders four records", listing.cards === 4 && listing.count === "4 villas" && listing.bookingLinks === 4 && listing.prettyLinks.every((path) => /\/villas\/[a-z0-9-]+\.html$/.test(path)) && listing.missingImages === 0, JSON.stringify(listing));
+  record("CMS villa listing renders four accommodation options", listing.cards === 4 && listing.count === "4 accommodation options" && listing.bookingLinks === 4 && listing.prettyLinks.every((path) => /\/villas\/[a-z0-9-]+\.html$/.test(path)) && listing.missingImages === 0, JSON.stringify(listing));
   const filtered = await page.evaluate(`(() => { const form = document.querySelector('#villa-filter-form'); form.querySelector('[name="location"]').value = 'south'; form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true })); return { visible: Array.from(document.querySelectorAll('[data-villa-card]')).filter((card) => !card.hidden).length, count: document.querySelector('#villa-result-count')?.textContent }; })()`);
-  record("CMS villa filter works", filtered.visible === 1 && filtered.count === "1 villa", JSON.stringify(filtered));
+  record("CMS villa filter works", filtered.visible === 1 && filtered.count === "1 accommodation option", JSON.stringify(filtered));
   const listingClosing = await page.evaluate(closingLayoutProbeExpression());
   recordClosingVisual(listingClosing, "Villas desktop");
   await page.screenshot("cms-villas-closing-desktop.png");
@@ -531,7 +533,7 @@ try {
     record(`Legacy villa query redirects to ${slug}`, legacyRoute.path.endsWith(`/villas/${slug}.html`) && legacyRoute.heading.includes(heading) && legacyRoute.cmsVilla === slug && !legacyRoute.staleTemplate, JSON.stringify(legacyRoute));
   }
 
-  const fixedPages = ["locations.html", "about.html", "reviews.html", "guide.html", "faq.html", "policies.html", "contact.html"];
+  const fixedPages = ["locations.html", "about.html", "reviews.html", "guide.html", "faq.html", "policies.html", "privacy.html", "contact.html"];
   const fixedHeroPaths = {};
   for (const route of fixedPages) {
     await page.navigate(route);
@@ -560,6 +562,11 @@ try {
   await page.navigate("locations.html");
   const internalMobileMenu = await page.evaluate(`(() => { const toggle = document.querySelector('.menu-toggle'); const nav = document.querySelector('.site-header > .mobile-nav'); const before = getComputedStyle(nav).display; toggle.click(); const open = getComputedStyle(nav).display; const expanded = toggle.getAttribute('aria-expanded'); toggle.click(); return { before, open, after: getComputedStyle(nav).display, expanded, closedExpanded: toggle.getAttribute('aria-expanded'), overflow: document.documentElement.scrollWidth > innerWidth }; })()`);
   record("Internal-page mobile menu opens and closes", internalMobileMenu.before === "none" && internalMobileMenu.open !== "none" && internalMobileMenu.after === "none" && internalMobileMenu.expanded === "true" && internalMobileMenu.closedExpanded === "false" && !internalMobileMenu.overflow, JSON.stringify(internalMobileMenu));
+
+  await page.viewport(1440, 1000);
+  await page.navigate("guide/barbados-attractions-dive-into-adventure-with-best-e-villas.html");
+  const guidePost = await page.evaluate(`(() => ({ heading: document.querySelector('h1')?.textContent.trim(), author: document.querySelector('.page-hero p:last-child')?.textContent.trim(), brokenImages: Array.from(document.images).filter((image) => image.complete && image.naturalWidth === 0).length, overflow: document.documentElement.scrollWidth > innerWidth, schema: Array.from(document.querySelectorAll('script[type="application/ld+json"]'), (node) => node.textContent).join(' ') }))()`);
+  record("Migrated Barbados attractions guide renders cleanly", guidePost.heading?.includes("Barbados Attractions") && guidePost.author?.includes("Best E Villas") && guidePost.brokenImages === 0 && !guidePost.overflow && guidePost.schema.includes("BlogPosting") && guidePost.schema.includes("#business"), JSON.stringify(guidePost));
 
   await page.viewport(390, 844, true);
   await page.navigate("index.html?mobile=1");

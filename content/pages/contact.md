@@ -15,7 +15,7 @@ sections:
 
       - **Telephone:** +1 246 233 2814
       - **Email:** errolbest@bestevillas.com
-      - **Address:** Lot 249, 2nd Avenue, Valencia Close North, St. Silas, St. James, Barbados
+      - **Area:** St. Silas, St. James, Barbados
     image: /assets/images/properties/st-silas/2026-09-18-blue-exterior-front.jpg
     image_alt: Blue Best E Villas property and garden in St. Silas, Barbados
   - heading: Include the details that matter.

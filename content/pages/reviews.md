@@ -15,7 +15,7 @@ sections:
 
       - **Tracey:** A peaceful, comfortable home from home with friendly, helpful staff.
       - **Janice:** A welcoming, relaxing family stay and a useful base while researching family heritage nearby.
-      - **Yvette Taylor:** A spacious two-bedroom apartment, a pool and warm help from the housekeeper.
+      - **Yvette:** A spacious two-bedroom apartment, a pool and warm help from the housekeeper.
       - **Shakiah and Glynis:** Generous space, cleanliness and a helpful team, including assistance arranging airport transport.
       - **Jayden:** A location, outdoor facilities and welcoming team that the family valued across return visits.
   - heading: Comfort for shared time away.
@@ -32,7 +32,7 @@ call_to_action:
   url: /villas.html
 seo:
   meta_title: Guest Reviews | Best E Villas Barbados
-  meta_description: Read verified guest experiences about comfortable stays, helpful local service and Barbados holidays with Best E Villas.
+  meta_description: Read guest comments about comfortable stays, helpful local service and Barbados holidays with Best E Villas.
   canonical_path: /reviews.html
   noindex: false
 ---

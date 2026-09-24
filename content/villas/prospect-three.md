@@ -45,6 +45,4 @@ seo:
   noindex: false
 ---
 
-A spacious three-bedroom base near West Coast beaches, Bridgetown and the University of the West Indies, with the everyday comforts families need for an easy Barbados stay.
-
 Exact amenities, live rates and availability should always be confirmed on the external booking platform before reserving.

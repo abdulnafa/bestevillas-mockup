@@ -5,7 +5,7 @@ A responsive, image-first front-end preview for the Best E Villas website revamp
 ## Included pages
 
 - `index.html` — refined booking-focused homepage
-- `villas.html` — filterable four-villa collection
+- `villas.html` — four accommodation options across three properties
 - `villas/prospect-three.html` — one of four pre-rendered villa pages
 - `locations.html`
 - `about.html`
@@ -13,7 +13,10 @@ A responsive, image-first front-end preview for the Best E Villas website revamp
 - `guide.html`
 - `faq.html`
 - `policies.html`
+- `privacy.html`
 - `contact.html`
+
+Published Barbados Guide articles are generated under `guide/`, including the refreshed attractions article migrated from the previous website.
 
 The other villa routes are `prospect-two`, `providence`, and `st-silas` under `villas/`. Legacy `villa.html?villa=...` URLs redirect known property keys to their pre-rendered routes.
 
@@ -22,7 +25,7 @@ The other villa routes are `prospect-two`, `providence`, and `st-silas` under `v
 - Responsive desktop, tablet, and mobile layouts
 - Keyboard-accessible image carousel and mobile navigation
 - Homepage availability bar and villa location/bedroom filters
-- Property-specific galleries, verified facts, and stable Direct-book links
+- Property-specific galleries, confirmed facts, and stable Direct-book links
 - Five existing guest-review summaries without invented ratings or sources
 - Clear external-booking and no-on-site-payment messaging
 - DM Sans self-hosted under its Open Font License
@@ -102,9 +105,9 @@ No deployment secret is stored in this project. GitHub supplies a short-lived Pa
 
 - The preview intentionally uses `noindex, nofollow`; remove it only when the replacement site is ready for the live domain.
 - Guests compare properties on this website and complete reservations on the existing external booking platform. This site does not process payments.
-- The client logo and curated full-resolution Prospect photography are integrated as optimized local assets. Approved Providence and St. Silas production photography is still required.
+- The client logo and approved current property photography are integrated as optimized local assets. Genuine higher-resolution Providence originals can be added later if supplied.
 - Pages CMS is configured in `.pages.yml`; repository authorization, rendering, and deployment are described in `docs/CMS_SETUP.md`.
-- Final policies, occupancy/bed details, rate-season dates, the GA4 Measurement ID/consent activation, Search Console, and hosting/domain access still require client confirmation or access.
+- Prospect occupancy/bed details, rate-season dates, the GA4 Measurement ID/consent activation, Search Console, and CMS authorization can be completed when supplied; analytics remains inactive in the meantime.
 - Current prices were intentionally omitted because the external booking platform is the source of live rates.
 
 The final production scope and dependency-based schedule are in `docs/PROJECT_SCOPE_AND_DELIVERY.md`. The stakeholder gates, cutover checks, rollback rule, and post-launch handover are in `docs/PRODUCTION_LAUNCH_HANDOVER.md`.

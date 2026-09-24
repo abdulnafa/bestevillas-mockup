@@ -16,9 +16,11 @@ const pageOutputs = {
   guide: "guide.html",
   faq: "faq.html",
   policies: "policies.html",
+  privacy: "privacy.html",
   contact: "contact.html",
 };
 const sharedFiles = ["styles.css", "internal-pages.css", "script.js", "analytics.js"];
+const productionServerConfig = "deployment/apache-production.htaccess";
 const imageMetadataCache = new Map();
 const sourceDisplayWidths = new Map();
 
@@ -678,7 +680,9 @@ function schemaForRoute({ kind, record, canonical, site }) {
           image: canonicalUrl(data.hero_image),
           datePublished: data.published_at,
           dateModified: data.updated_at || data.published_at,
-          author: { "@type": "Person", name: data.author },
+          author: data.author === site.site_name
+            ? { "@id": `${productionOrigin}/#business` }
+            : { "@type": "Person", name: data.author },
           publisher: { "@id": `${productionOrigin}/#business` },
           mainEntityOfPage: canonical,
         },
@@ -920,7 +924,7 @@ function hydrateGlobalContent(html, site, basePath) {
   output = output.replace(/errolbest@bestevillas\.com/gi, escapeHtml(site.contact.email));
   output = output.replace(/\+1 246 233 2814/g, escapeHtml(site.contact.phone_display));
   output = output.replace(/<div class="footer-brand">([\s\S]*?)<p>[\s\S]*?<\/p>/i, `<div class="footer-brand">$1<p>${escapeHtml(site.footer_summary)}</p><p>${escapeHtml(site.tagline)}</p>`);
-  output = output.replace(/<p>St\. James, Barbados<\/p>/g, `<p>${escapeHtml(site.address.street)}, ${escapeHtml(site.address.locality)}, ${escapeHtml(site.address.country_code)}</p>`);
+  output = output.replace(/<p>St\. James, Barbados<\/p>/g, `<p>${escapeHtml(site.address.street)}, ${escapeHtml(site.address.locality)}, ${escapeHtml(site.brand_location)}</p>`);
   return rewriteLocalReferences(output, basePath);
 }
 
@@ -942,16 +946,17 @@ function navMarkup(models, basePath, current = "", availabilityHref = "/villas.h
     [pageLabel(models, "about", "Our Story"), "about.html", "about"],
     [pageLabel(models, "guide", "Barbados Guide"), "guide.html", "guide"],
     [pageLabel(models, "reviews", "Reviews"), "reviews.html", "reviews"],
+    [pageLabel(models, "contact", "Contact"), "contact.html", "contact"],
   ];
   const links = items.map(([label, url, slug]) => `<a href="${publicUrl(url, basePath)}"${current === slug ? ' aria-current="page"' : ""}>${label}</a>`).join("");
   const availabilityUrl = localReference(availabilityHref, basePath);
-  return `<header class="site-header solid-header" id="site-header"><div class="header-inner container-wide"><a class="brand" href="${publicUrl("index.html", basePath)}" aria-label="${escapeAttribute(site.site_name)} home"><img class="brand-logo" src="${publicUrl("assets/images/brand/best-e-villas-logo-white.png", basePath)}" width="1015" height="245" alt="" aria-hidden="true" decoding="async" loading="eager" /></a><nav class="desktop-nav" aria-label="Primary navigation">${links}</nav><div class="header-actions"><a class="button button-light header-cta" href="${escapeAttribute(availabilityUrl)}">Check availability</a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-navigation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button></div></div><nav class="mobile-nav" id="mobile-navigation" aria-label="Mobile navigation" aria-hidden="true">${links}<a href="${publicUrl("faq.html", basePath)}">${escapeHtml(pageLabel(models, "faq", "FAQs"))}</a><a class="button button-coral" href="${escapeAttribute(availabilityUrl)}">Check availability</a></nav></header>`;
+  return `<header class="site-header solid-header" id="site-header"><div class="header-inner container-wide"><a class="brand" href="${publicUrl("", basePath)}" aria-label="${escapeAttribute(site.site_name)} home"><img class="brand-logo" src="${publicUrl("assets/images/brand/best-e-villas-logo-white.png", basePath)}" width="1015" height="245" alt="" aria-hidden="true" decoding="async" loading="eager" /></a><nav class="desktop-nav" aria-label="Primary navigation">${links}</nav><div class="header-actions"><a class="button button-light header-cta" href="${escapeAttribute(availabilityUrl)}">Check availability</a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-navigation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button></div></div><nav class="mobile-nav" id="mobile-navigation" aria-label="Mobile navigation" aria-hidden="true">${links}<a href="${publicUrl("faq.html", basePath)}">${escapeHtml(pageLabel(models, "faq", "FAQs"))}</a><a class="button button-coral" href="${escapeAttribute(availabilityUrl)}">Check availability</a></nav></header>`;
 }
 
 function footerMarkup(models, basePath) {
   const site = models.site;
   const social = (site.social_links || []).map((item) => `<a href="${escapeAttribute(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.label)}</a>`).join("");
-  return `<footer class="site-footer"><div class="container footer-main"><div class="footer-brand"><a class="brand brand-footer" href="${publicUrl("index.html", basePath)}" aria-label="${escapeAttribute(site.site_name)} home"><img class="brand-logo" src="${publicUrl("assets/images/brand/best-e-villas-logo-white.png", basePath)}" width="1015" height="245" alt="" aria-hidden="true" decoding="async" loading="lazy" /></a><p>${escapeHtml(site.footer_summary)}</p><p>${escapeHtml(site.tagline)}</p></div><div class="footer-column"><h2>Explore</h2><a href="${publicUrl("villas.html", basePath)}">${escapeHtml(pageLabel(models, "villas", "Our Villas"))}</a><a href="${publicUrl("locations.html", basePath)}">${escapeHtml(pageLabel(models, "locations", "Locations"))}</a><a href="${publicUrl("guide.html", basePath)}">${escapeHtml(pageLabel(models, "guide", "Barbados Guide"))}</a><a href="${publicUrl("reviews.html", basePath)}">${escapeHtml(pageLabel(models, "reviews", "Guest Reviews"))}</a></div><div class="footer-column"><h2>About</h2><a href="${publicUrl("about.html", basePath)}">${escapeHtml(pageLabel(models, "about", "Our Story"))}</a><a href="${publicUrl("faq.html", basePath)}">${escapeHtml(pageLabel(models, "faq", "FAQs"))}</a><a href="${publicUrl("policies.html", basePath)}">${escapeHtml(pageLabel(models, "policies", "Policies"))}</a><a href="${publicUrl("contact.html", basePath)}">${escapeHtml(pageLabel(models, "contact", "Contact Us"))}</a>${social}</div><div class="footer-column footer-contact"><h2>Stay in touch</h2><a href="${escapeAttribute(site.contact.phone_link)}">${escapeHtml(site.contact.phone_display)}</a><a href="mailto:${escapeAttribute(site.contact.email)}">${escapeHtml(site.contact.email)}</a><p>${escapeHtml(site.address.street)}, ${escapeHtml(site.address.locality)}, ${escapeHtml(site.address.country_code)}</p></div></div><div class="container footer-bottom"><span>© <span data-current-year></span> ${escapeHtml(site.site_name)}.</span><span>Made for memorable Barbados stays.</span></div></footer>`;
+  return `<footer class="site-footer"><div class="container footer-main"><div class="footer-brand"><a class="brand brand-footer" href="${publicUrl("", basePath)}" aria-label="${escapeAttribute(site.site_name)} home"><img class="brand-logo" src="${publicUrl("assets/images/brand/best-e-villas-logo-white.png", basePath)}" width="1015" height="245" alt="" aria-hidden="true" decoding="async" loading="lazy" /></a><p>${escapeHtml(site.footer_summary)}</p><p>${escapeHtml(site.tagline)}</p></div><div class="footer-column"><h2>Explore</h2><a href="${publicUrl("villas.html", basePath)}">${escapeHtml(pageLabel(models, "villas", "Our Villas"))}</a><a href="${publicUrl("locations.html", basePath)}">${escapeHtml(pageLabel(models, "locations", "Locations"))}</a><a href="${publicUrl("guide.html", basePath)}">${escapeHtml(pageLabel(models, "guide", "Barbados Guide"))}</a><a href="${publicUrl("reviews.html", basePath)}">${escapeHtml(pageLabel(models, "reviews", "Guest Reviews"))}</a></div><div class="footer-column"><h2>About</h2><a href="${publicUrl("about.html", basePath)}">${escapeHtml(pageLabel(models, "about", "Our Story"))}</a><a href="${publicUrl("faq.html", basePath)}">${escapeHtml(pageLabel(models, "faq", "FAQs"))}</a><a href="${publicUrl("policies.html", basePath)}">${escapeHtml(pageLabel(models, "policies", "Policies"))}</a><a href="${publicUrl("privacy.html", basePath)}">${escapeHtml(pageLabel(models, "privacy", "Privacy & Cookies"))}</a><a href="${publicUrl("contact.html", basePath)}">${escapeHtml(pageLabel(models, "contact", "Contact Us"))}</a>${social}</div><div class="footer-column footer-contact"><h2>Stay in touch</h2><a href="${escapeAttribute(site.contact.phone_link)}">${escapeHtml(site.contact.phone_display)}</a><a href="mailto:${escapeAttribute(site.contact.email)}">${escapeHtml(site.contact.email)}</a><p>${escapeHtml(site.address.street)}, ${escapeHtml(site.address.locality)}, ${escapeHtml(site.brand_location)}</p></div></div><div class="container footer-bottom"><span>© <span data-current-year></span> ${escapeHtml(site.site_name)}.</span><span>Made for memorable Barbados stays.</span></div></footer>`;
 }
 
 function renderCmsSections(page, basePath, imageRoot = projectRoot) {
@@ -982,7 +987,7 @@ function renderHomeVillaCards(villas, basePath, imageRoot = projectRoot) {
 }
 
 function renderPageHero(page, basePath, imageRoot = projectRoot) {
-  return `<section class="page-hero"><div class="container"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="${publicUrl("index.html", basePath)}">Home</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(page.data.nav_label)}</span></nav><div class="page-hero-grid"><div><h1>${escapeHtml(page.data.hero_heading)}</h1><p class="hero-copy">${escapeHtml(page.data.hero_intro)}</p></div><figure class="hero-media"><img ${imageAttributes(page.data.hero_image, basePath, { sizes: "(max-width: 860px) calc(100vw - 48px), 50vw", loading: "eager", fetchPriority: "high" }, imageRoot)} alt="${escapeAttribute(safeImageAlt(page.data.hero_image_alt))}" /><span class="cms-image-description">${escapeHtml(page.data.hero_image_alt)}</span></figure></div></div></section>`;
+  return `<section class="page-hero"><div class="container"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="${publicUrl("", basePath)}">Home</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(page.data.nav_label)}</span></nav><div class="page-hero-grid"><div><h1>${escapeHtml(page.data.hero_heading)}</h1><p class="hero-copy">${escapeHtml(page.data.hero_intro)}</p></div><figure class="hero-media"><img ${imageAttributes(page.data.hero_image, basePath, { sizes: "(max-width: 860px) calc(100vw - 48px), 50vw", loading: "eager", fetchPriority: "high" }, imageRoot)} alt="${escapeAttribute(safeImageAlt(page.data.hero_image_alt))}" /><span class="cms-image-description">${escapeHtml(page.data.hero_image_alt)}</span></figure></div></div></section>`;
 }
 
 function renderBasePageBody(page, models, options) {
@@ -995,11 +1000,11 @@ function renderHomeMain(page, models, options) {
   const slides = gallery.map((item, index) => `<figure class="hero-slide${index === 0 ? " active" : ""}" data-slide="${index}"${index ? ' aria-hidden="true"' : ""}><img ${imageAttributes(item.image, options.basePath, { sizes: "100vw", loading: index === 0 ? "eager" : "lazy", fetchPriority: index === 0 ? "high" : "low", placeholder: index > 0 }, options.imageRoot)} alt="${escapeAttribute(safeImageAlt(item.alt))}" /><span class="cms-image-description">${escapeHtml(item.alt)}</span></figure>`).join("");
   const featured = models.publishedVillas.filter((record) => record.data.featured);
   const cards = featured.length ? featured : models.publishedVillas;
-  return `<main id="main-content" data-cms-source="${escapeAttribute(page.source)}"><section class="hero hero-carousel" id="top" aria-labelledby="hero-title" aria-roledescription="carousel"><div class="hero-slides" aria-live="polite">${slides}</div><div class="hero-content container"><h1 id="hero-title">${escapeHtml(page.data.hero_heading)}</h1><p class="hero-copy">${escapeHtml(page.data.hero_intro)}</p></div><div class="carousel-controls" aria-label="Villa gallery controls"><button class="carousel-button carousel-previous" type="button" aria-label="Previous image">←</button><span class="carousel-count" aria-live="polite"><strong>01</strong> / ${String(gallery.length).padStart(2, "0")}</span><button class="carousel-button carousel-next" type="button" aria-label="Next image">→</button></div></section><section class="booking-shell" id="booking" aria-label="Villa availability"><div class="booking-bar cms-booking-bar container"><div><strong>Find your Barbados villa</strong><p>Compare the collection, then use the existing booking partner for live dates and rates.</p></div><a class="button button-coral search-button" href="${publicUrl("villas.html", options.basePath)}">Check availability</a></div></section><section class="intro section-pad"><div class="container narrow-copy"><p class="eyebrow">${escapeHtml(page.data.nav_label)}</p><div class="rich-text">${renderMarkdown(page.body)}</div></div></section><section class="villas-section section-pad" id="villas"><div class="container"><div class="section-heading"><div><p class="eyebrow">Our collection</p><h2>Find your Barbados stay</h2></div><p>Four comfortable villas across Barbados’ West and South Coasts.</p></div><div class="villa-grid" id="villa-grid">${renderHomeVillaCards(cards, options.basePath, options.imageRoot)}</div></div></section>${renderCmsSections(page, options.basePath, options.imageRoot)}${renderCallToAction(page, options.basePath)}</main>`;
+  return `<main id="main-content" data-cms-source="${escapeAttribute(page.source)}"><section class="hero hero-carousel" id="top" aria-labelledby="hero-title" aria-roledescription="carousel"><div class="hero-slides" aria-live="polite">${slides}</div><div class="hero-content container"><h1 id="hero-title">${escapeHtml(page.data.hero_heading)}</h1><p class="hero-copy">${escapeHtml(page.data.hero_intro)}</p></div><div class="carousel-controls" aria-label="Villa gallery controls"><button class="carousel-button carousel-previous" type="button" aria-label="Previous image">←</button><span class="carousel-count" aria-live="polite"><strong>01</strong> / ${String(gallery.length).padStart(2, "0")}</span><button class="carousel-button carousel-next" type="button" aria-label="Next image">→</button></div></section><section class="booking-shell" id="booking" aria-label="Villa availability"><div class="booking-bar cms-booking-bar container"><div><strong>Find your Barbados villa</strong><p>Compare the collection, then use the existing booking partner for live dates and rates.</p></div><a class="button button-coral search-button" href="${publicUrl("villas.html", options.basePath)}">Check availability</a></div></section><section class="intro section-pad"><div class="container narrow-copy"><p class="eyebrow">${escapeHtml(page.data.nav_label)}</p><div class="rich-text">${renderMarkdown(page.body)}</div></div></section><section class="villas-section section-pad" id="villas"><div class="container"><div class="section-heading"><div><p class="eyebrow">Our collection</p><h2>Find your Barbados stay</h2></div><p>Four accommodation options across three Barbados properties on the West and South Coasts.</p></div><div class="villa-grid" id="villa-grid">${renderHomeVillaCards(cards, options.basePath, options.imageRoot)}</div></div></section>${renderCmsSections(page, options.basePath, options.imageRoot)}${renderCallToAction(page, options.basePath)}</main>`;
 }
 
 function renderListingMain(page, models, options) {
-  return `<main id="main-content" data-cms-source="${escapeAttribute(page.source)}"><section class="listing-hero" aria-labelledby="listing-title"><img ${imageAttributes(page.data.hero_image, options.basePath, { sizes: "100vw", loading: "eager", fetchPriority: "high" }, options.imageRoot)} alt="${escapeAttribute(safeImageAlt(page.data.hero_image_alt))}" /><span class="cms-image-description">${escapeHtml(page.data.hero_image_alt)}</span><div class="listing-hero-copy container"><h1 id="listing-title">${escapeHtml(page.data.hero_heading)}</h1><p>${escapeHtml(page.data.hero_intro)}</p></div></section><section class="filter-section" aria-label="Filter villas"><form class="filter-bar container" id="villa-filter-form"><label><span>Location</span><select name="location"><option value="all">All locations</option><option value="west">West Coast</option><option value="south">South Coast</option></select></label><label><span>Bedrooms</span><select name="bedrooms"><option value="all">Any</option><option value="2">2+ bedrooms</option><option value="3">3+ bedrooms</option></select></label><button class="button button-coral" type="submit">Search villas</button><button class="filter-reset" type="reset">Reset</button></form></section><section class="villas-listing section-pad" id="villa-results" aria-labelledby="villa-results-title"><div class="container"><div class="listing-heading"><div><h2 id="villa-results-title">Our villas</h2><div class="rich-text">${renderMarkdown(page.body)}</div></div><strong id="villa-result-count" aria-live="polite">${models.publishedVillas.length} villas</strong></div><div class="villa-results-grid">${renderVillaCards(models.publishedVillas, options.basePath, options.imageRoot)}</div><div class="empty-state" id="villa-empty" hidden><h3>No villas match these filters.</h3><p>Reset the filters to see the complete collection.</p></div></div></section>${renderCmsSections(page, options.basePath, options.imageRoot)}${renderCallToAction(page, options.basePath)}</main>`;
+  return `<main id="main-content" data-cms-source="${escapeAttribute(page.source)}"><section class="listing-hero" aria-labelledby="listing-title"><img ${imageAttributes(page.data.hero_image, options.basePath, { sizes: "100vw", loading: "eager", fetchPriority: "high" }, options.imageRoot)} alt="${escapeAttribute(safeImageAlt(page.data.hero_image_alt))}" /><span class="cms-image-description">${escapeHtml(page.data.hero_image_alt)}</span><div class="listing-hero-copy container"><h1 id="listing-title">${escapeHtml(page.data.hero_heading)}</h1><p>${escapeHtml(page.data.hero_intro)}</p></div></section><section class="filter-section" aria-label="Filter villas"><form class="filter-bar container" id="villa-filter-form"><label><span>Location</span><select name="location"><option value="all">All locations</option><option value="west">West Coast</option><option value="south">South Coast</option></select></label><label><span>Bedrooms</span><select name="bedrooms"><option value="all">Any</option><option value="2">2+ bedrooms</option><option value="3">3+ bedrooms</option></select></label><button class="button button-coral" type="submit">Search villas</button><button class="filter-reset" type="reset">Reset</button></form></section><section class="villas-listing section-pad" id="villa-results" aria-labelledby="villa-results-title"><div class="container"><div class="listing-heading"><div><h2 id="villa-results-title">Our accommodation options</h2><div class="rich-text">${renderMarkdown(page.body)}</div></div><strong id="villa-result-count" aria-live="polite">${models.publishedVillas.length} accommodation options</strong></div><div class="villa-results-grid">${renderVillaCards(models.publishedVillas, options.basePath, options.imageRoot)}</div><div class="empty-state" id="villa-empty" hidden><h3>No accommodation options match these filters.</h3><p>Reset the filters to see the complete collection.</p></div></div></section>${renderCmsSections(page, options.basePath, options.imageRoot)}${renderCallToAction(page, options.basePath)}</main>`;
 }
 
 function renderFixedPageDocument(page, models, options) {
@@ -1163,11 +1168,14 @@ function robotsTxt(mode) {
   return `User-agent: *\nAllow: /\n\nSitemap: ${productionOrigin}/sitemap.xml\n`;
 }
 
-async function copySharedFiles(outputRoot) {
+async function copySharedFiles(outputRoot, mode) {
   for (const file of sharedFiles) {
     await cp(resolve(projectRoot, file), resolve(outputRoot, file));
   }
   await cp(resolve(projectRoot, "assets"), resolve(outputRoot, "assets"), { recursive: true });
+  if (mode === "production") {
+    await cp(resolve(projectRoot, productionServerConfig), resolve(outputRoot, ".htaccess"));
+  }
 }
 
 async function assertReplaceableOutput(outputRoot) {
@@ -1227,14 +1235,16 @@ export async function buildSite(providedOptions = {}) {
     villas: models.publishedVillas,
     guidePosts: models.publishedGuidePosts,
   });
-  if (models.publishedPages.length !== Object.keys(pageOutputs).length) throw new Error("All nine fixed pages must be published for this build.");
+  if (models.publishedPages.length !== Object.keys(pageOutputs).length) {
+    throw new Error(`All ${Object.keys(pageOutputs).length} fixed pages must be published for this build.`);
+  }
   if (!models.publishedVillas.length) throw new Error("At least one published villa is required.");
   await assertReplaceableOutput(options.out);
   await mkdir(dirname(options.out), { recursive: true });
   let stagingRoot = await mkdtemp(resolve(dirname(options.out), `.${basename(options.out)}-build-`));
   try {
     const renderOptions = { ...options, out: stagingRoot, imageRoot: stagingRoot };
-    await copySharedFiles(stagingRoot);
+    await copySharedFiles(stagingRoot, options.mode);
     await prepareResponsiveImageVariants(publishedImageReferences, stagingRoot);
     await writeOutput(stagingRoot, "cms-runtime.js", runtimeScript());
     await writeOutput(stagingRoot, "site-content.js", siteContentScript(models));

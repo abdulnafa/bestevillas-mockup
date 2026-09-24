@@ -63,11 +63,12 @@ const villaData = {
     addressRegion: "Christ Church",
     bedrooms: 2,
     bathrooms: 1,
+    maxGuests: 4,
     seoDescription:
       "Explore the two-bedroom Best E Villas vacation rental in Providence, Christ Church, with one bathroom, shared pool access and Wi-Fi.",
     description:
       "A peaceful two-bedroom South Coast base near Miami Beach, Oistins, St. Lawrence Gap and Barbados Golf Club.",
-    facts: ["2 bedrooms", "1 bathroom", "Shared pool", "Wi-Fi"],
+    facts: ["2 bedrooms", "1 bathroom", "Up to 4 guests", "Two double beds", "Shared pool", "Wi-Fi"],
     images: [
       { src: "assets/images/properties/providence/2026-09-18-exterior-pool.jpg", alt: "Entrance and pool at Providence Terrace in Christ Church, Barbados", width: 1024, height: 683 },
       { src: "assets/images/properties/providence/2026-09-18-living-room.jpg", alt: "Open-plan living room at Providence Terrace", width: 1024, height: 683 },
@@ -88,11 +89,12 @@ const villaData = {
     addressRegion: "St. James",
     bedrooms: 3,
     bathrooms: 2.5,
+    maxGuests: 6,
     seoDescription:
-      "Explore the three-bedroom Best E Villas vacation rental in St. Silas Heights, St. James, with 2.5 bathrooms, pool access and Wi-Fi.",
+      "Explore the three-bedroom Best E Villas vacation rental in St. Silas Heights, St. James, with 2.5 bathrooms and Wi-Fi. This property has no pool.",
     description:
       "A roomy three-bedroom retreat close to Apes Hill, Royal Westmoreland, Warrens and the beaches of Barbados’ West Coast.",
-    facts: ["3 bedrooms", "2.5 bathrooms", "Pool access", "Wi-Fi"],
+    facts: ["3 bedrooms", "2.5 bathrooms", "Up to 6 guests", "Three double beds", "No swimming pool", "Wi-Fi"],
     images: [
       { src: "assets/images/properties/st-silas/2026-09-18-blue-exterior-aerial.jpg", alt: "Aerial view of the blue St. Silas villas in Barbados", width: 1600, height: 900 },
       { src: "assets/images/properties/st-silas/2026-09-18-living-room.jpg", alt: "Bright living room at the St. Silas villa", width: 1600, height: 1066 },
@@ -297,7 +299,7 @@ function initVillaFilters() {
       if (matches) visible += 1;
     });
 
-    resultCount.textContent = `${visible} villa${visible === 1 ? "" : "s"}`;
+    resultCount.textContent = `${visible} accommodation option${visible === 1 ? "" : "s"}`;
     document.querySelector("#villa-empty")?.toggleAttribute("hidden", visible !== 0);
 
     if (updateUrl) {
@@ -379,7 +381,7 @@ function initVillaTemplate() {
       amenityFeature: villa.facts.slice(2).map((fact) => ({
         "@type": "LocationFeatureSpecification",
         name: fact,
-        value: true,
+        value: !/^No\s/i.test(fact),
       })),
       provider: { "@id": "https://bestevillas.com/#business" },
       potentialAction: { "@type": "ReserveAction", target: villa.bookingUrl },

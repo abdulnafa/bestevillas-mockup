@@ -7,7 +7,7 @@ contact:
   phone_display: "+1 246 233 2814"
   phone_link: "tel:+12462332814"
 address:
-  street: Lot 249, 2nd Avenue, Valencia Close North, St. Silas
+  street: St. Silas
   locality: St. James
   country_code: BB
 footer_summary: Cosy, comfortable and convenient vacation rentals on the West and South Coasts of Barbados.
@@ -15,4 +15,8 @@ primary_markets:
   - USA
   - Canada
   - UK
-social_links: []
+social_links:
+  - label: Facebook
+    url: https://www.facebook.com/Bestevillas/
+  - label: Instagram
+    url: https://www.instagram.com/bestevillasbarbados/

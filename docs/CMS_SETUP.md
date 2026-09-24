@@ -18,7 +18,7 @@ Pages CMS reads configuration per repository and branch. If `.pages.yml` is chan
 
 ## Editing safeguards
 
-- The four existing villa records and nine fixed site-page records cannot be created, renamed, or deleted in the dashboard. This protects route keys used by the current site.
+- The four existing accommodation records and ten fixed site-page records cannot be created, renamed, or deleted in the dashboard. This protects route keys used by the current site.
 - Guide posts can be created and deleted. Their filenames are generated from the date and slug.
 - Villa booking URLs must use secure `direct-book.com` addresses.
 - Occupancy is optional and should remain empty until confirmed by the client.
@@ -31,7 +31,7 @@ Pages CMS reads configuration per repository and branch. If `.pages.yml` is chan
 | --- | --- | --- |
 | Global settings | `content/site.yml` | One protected YAML file |
 | Villas | `content/villas/*.md` | Four protected Markdown records with YAML frontmatter |
-| Fixed pages | `content/pages/*.md` | Nine protected Markdown records with YAML frontmatter |
+| Fixed pages | `content/pages/*.md` | Ten protected Markdown records with YAML frontmatter |
 | Guide/blog | `content/guide/*.md` | Editors may create and delete Markdown posts |
 | Images | `assets/images/` | Editors may select or upload approved web images |
 
@@ -57,7 +57,7 @@ Preview mode keeps search-engine protection active. Build the approved live site
 npm run build -- --mode production --base-path /
 ```
 
-Production mode must be used only after content approval and launch checks. Individual records that are not approved for indexing, including the Policies page until sign-off, remain excluded according to their CMS settings.
+Production mode must be used only after content approval and launch checks. Individual records remain excluded from indexing whenever their CMS setting requests it.
 
 The renderer prepends the selected base path when converting stored root-relative values such as `/assets/images/...`. This makes the same CMS records work under `/bestevillas-mockup/` for the preview and `/` on the canonical domain.
 

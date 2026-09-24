@@ -9,6 +9,7 @@
     "test:cms": "node testing/cms-build-audit.mjs",
     "test:ui": "node testing/ui-regression-audit.mjs",
     "test:browser:header": "node testing/header-motion-browser-smoke.mjs",
+    "test:redirects": "node testing/apache-redirect-audit.mjs",
     "test:reservations": "node testing/reservation-csv-audit.mjs",
     "reservations:convert": "node scripts/reservations/convert-siteminder-to-innboss.mjs"
   },

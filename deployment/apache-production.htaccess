@@ -1,0 +1,58 @@
+# Best E Villas production routing for the Apache document root.
+# Keep legacy mappings before host/scheme normalization so every redirect lands
+# on the final HTTPS, non-www URL in one response.
+
+DirectoryIndex index.html
+Options -Indexes -MultiViews
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Retire the query-based compatibility URL with a direct canonical redirect.
+  RewriteCond %{QUERY_STRING} ^villa=prospect-three(?:&|$) [NC]
+  RewriteRule ^villa\.html$ https://bestevillas.com/villas/prospect-three.html [R=301,L,NE,QSD]
+  RewriteCond %{QUERY_STRING} ^villa=prospect-two(?:&|$) [NC]
+  RewriteRule ^villa\.html$ https://bestevillas.com/villas/prospect-two.html [R=301,L,NE,QSD]
+  RewriteCond %{QUERY_STRING} ^villa=providence(?:&|$) [NC]
+  RewriteRule ^villa\.html$ https://bestevillas.com/villas/providence.html [R=301,L,NE,QSD]
+  RewriteCond %{QUERY_STRING} ^villa=st-silas(?:&|$) [NC]
+  RewriteRule ^villa\.html$ https://bestevillas.com/villas/st-silas.html [R=301,L,NE,QSD]
+
+  # Genuine WordPress pages with a direct equivalent in the new site.
+  RewriteRule ^index\.html$ https://bestevillas.com/ [R=301,L,NE,NC]
+  RewriteRule ^home/?$ https://bestevillas.com/ [R=301,L,NE]
+  RewriteRule ^villas/?$ https://bestevillas.com/villas.html [R=301,L,NE]
+  RewriteRule ^reviews/?$ https://bestevillas.com/reviews.html [R=301,L,NE]
+  RewriteRule ^about-us/?$ https://bestevillas.com/about.html [R=301,L,NE]
+  RewriteRule ^contact-us/?$ https://bestevillas.com/contact.html [R=301,L,NE]
+  RewriteRule ^(?:faqs?|frequently-asked-questions)/?$ https://bestevillas.com/faq.html [R=301,L,NE,NC]
+  RewriteRule ^(?:book|gallery|rooms|room-listing-[123])/?$ https://bestevillas.com/villas.html [R=301,L,NE,NC]
+  RewriteRule ^blog/?$ https://bestevillas.com/guide.html [R=301,L,NE,NC]
+  RewriteRule ^(?:privacy-policy|privacy-policy-2)/?$ https://bestevillas.com/privacy.html [R=301,L,NE,NC]
+  RewriteRule ^(?:wp-sitemap|sitemap_index|post-sitemap|page-sitemap|product-sitemap|team-sitemap|category-sitemap|product_cat-sitemap)\.xml$ https://bestevillas.com/sitemap.xml [R=301,L,NE,NC]
+
+  # Genuine property and editorial URLs retain their search value.
+  RewriteRule ^prospect-3-bedrooms/?$ https://bestevillas.com/villas/prospect-three.html [R=301,L,NE,NC]
+  RewriteRule ^prospect-2-bedroom-units/?$ https://bestevillas.com/villas/prospect-two.html [R=301,L,NE,NC]
+  RewriteRule ^providence-terrace-2-bedroom-units/?$ https://bestevillas.com/villas/providence.html [R=301,L,NE,NC]
+  RewriteRule ^st-silas-3-bedroom-units/?$ https://bestevillas.com/villas/st-silas.html [R=301,L,NE,NC]
+  RewriteRule ^barbados-attractions-dive-into-adventure-with-best-e-villas/?$ https://bestevillas.com/guide/barbados-attractions-dive-into-adventure-with-best-e-villas.html [R=301,L,NE,NC]
+
+  # Permanently remove obsolete theme demos, WooCommerce, team and taxonomy URLs.
+  RewriteRule ^(?:demo|sample-page|error|thank-you|shop|cart(?:-2)?|checkout(?:-2)?|my-account(?:-2)?|refund_returns-2|swimming|fitness|spa-center)/?$ - [G,L,NC]
+  RewriteRule ^(?:product|product-category|team|category)(?:/.*)?$ - [G,L,NC]
+  RewriteRule ^(?:how-to-travel-with-paper-map-2|nature-holiday-quotes|introducing-this-amazing-tour|dinner-at-5-star-hotel|how-to-booking-room-online|pack-wisely-before-traveling|hello-world)/?$ - [G,L,NC]
+  RewriteRule ^(?:single-room|single-room-2|standard-room|standard-room-2|couble-room|deluxe-room|family-room|vip-room|vintage-room|double-room)/?$ - [G,L,NC]
+  RewriteRule ^(?:uncategorized|restaurant|tourist|travel|romancy|balcony|ground-floor)/?$ - [G,L,NC]
+
+  # Normalize every remaining host to the public apex in one response.
+  RewriteCond %{HTTP_HOST} !^bestevillas\.com$ [NC]
+  RewriteRule ^ https://bestevillas.com%{REQUEST_URI} [R=301,L,NE]
+
+  # Normalize the scheme while respecting HTTPS terminated by the Sucuri proxy.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]
+  RewriteRule ^ https://bestevillas.com%{REQUEST_URI} [R=301,L,NE]
+</IfModule>
+
+ErrorDocument 410 "This legacy page has been permanently removed."
