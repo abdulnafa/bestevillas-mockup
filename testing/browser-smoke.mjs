@@ -248,17 +248,38 @@ try {
   record("External booking links present", listingInitial.directLinks === 4, `${listingInitial.directLinks} links`);
   await page.screenshot("villas-desktop.png");
 
-  const filtered = await page.evaluate(`(() => {
+  const filtered = await page.evaluate(`(async () => {
     const form = document.querySelector('#villa-filter-form');
     form.querySelector('[name="location"]').value = 'south';
-    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    form.querySelector('[name="bedrooms"]').value = '2';
+    form.scrollIntoView({ block: 'start', behavior: 'instant' });
+    await new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)));
+    form.querySelector('button[type="submit"]').click();
+    const deadline = Date.now() + 3000;
+    let headerBottom;
+    let resultsTop;
+    do {
+      headerBottom = document.querySelector('.site-header').getBoundingClientRect().bottom;
+      resultsTop = document.querySelector('#villa-results').getBoundingClientRect().top;
+      const resultsOffset = resultsTop - headerBottom;
+      if (document.activeElement?.id === 'villa-results-title' && resultsOffset >= 8 && resultsOffset <= 80) break;
+      await new Promise((done) => setTimeout(done, 25));
+    } while (Date.now() < deadline);
     return {
       visible: Array.from(document.querySelectorAll('[data-villa-card]')).filter((card) => !card.hidden).length,
       count: document.querySelector('#villa-result-count')?.textContent,
       url: location.href,
+      activeId: document.activeElement?.id,
+      resultsOffset: resultsTop - headerBottom,
     };
   })()`);
-  record("Villa location filter", filtered.visible === 1 && filtered.count === "1 accommodation option" && filtered.url.includes("location=south"), JSON.stringify(filtered));
+  record("Villa location filter", filtered.visible === 1
+    && filtered.count === "1 accommodation option"
+    && filtered.url.includes("location=south")
+    && filtered.url.includes("bedrooms=2")
+    && filtered.activeId === "villa-results-title"
+    && filtered.resultsOffset >= 8
+    && filtered.resultsOffset <= 80, JSON.stringify(filtered));
   await page.screenshot("villas-filtered-desktop.png");
 
   await page.navigate(`${baseUrl}/villa.html?villa=providence`);
@@ -394,6 +415,52 @@ try {
   })`);
   record("Villa listing mobile layout", !mobileListing.overflow && mobileListing.cards === 4, JSON.stringify(mobileListing));
   await page.screenshot("villas-mobile.png");
+
+  const mobileFilter = await page.evaluate(`(async () => {
+    const form = document.querySelector('#villa-filter-form');
+    form.querySelector('[name="location"]').value = 'south';
+    form.querySelector('[name="bedrooms"]').value = '2';
+    form.scrollIntoView({ block: 'start', behavior: 'instant' });
+    await new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)));
+    const beforeScrollY = scrollY;
+    form.querySelector('button[type="submit"]').click();
+    const deadline = Date.now() + 3000;
+    let state;
+    do {
+      const visibleCards = Array.from(document.querySelectorAll('[data-villa-card]')).filter((card) => !card.hidden);
+      const headerBottom = document.querySelector('.site-header').getBoundingClientRect().bottom;
+      const resultsTop = document.querySelector('#villa-results').getBoundingClientRect().top;
+      const firstCardTop = visibleCards[0]?.getBoundingClientRect().top ?? null;
+      state = {
+        visible: visibleCards.length,
+        visibleTitle: visibleCards[0]?.querySelector('h3')?.textContent?.trim(),
+        count: document.querySelector('#villa-result-count')?.textContent?.trim(),
+        url: location.href,
+        activeId: document.activeElement?.id,
+        beforeScrollY,
+        afterScrollY: scrollY,
+        resultsOffset: resultsTop - headerBottom,
+        firstCardTop,
+        viewportHeight: innerHeight,
+        overflow: document.documentElement.scrollWidth > innerWidth + 1,
+      };
+      if (state.activeId === 'villa-results-title' && state.resultsOffset >= 8 && state.resultsOffset <= 80 && state.firstCardTop < state.viewportHeight) break;
+      await new Promise((done) => setTimeout(done, 25));
+    } while (Date.now() < deadline);
+    return state;
+  })()`);
+  record("Villa mobile Search villas reveals results", mobileFilter.visible === 1
+    && mobileFilter.visibleTitle?.includes("Providence")
+    && mobileFilter.count === "1 accommodation option"
+    && mobileFilter.url.includes("location=south")
+    && mobileFilter.url.includes("bedrooms=2")
+    && mobileFilter.activeId === "villa-results-title"
+    && mobileFilter.afterScrollY > mobileFilter.beforeScrollY
+    && mobileFilter.resultsOffset >= 8
+    && mobileFilter.resultsOffset <= 80
+    && mobileFilter.firstCardTop < mobileFilter.viewportHeight
+    && !mobileFilter.overflow, JSON.stringify(mobileFilter));
+  await page.screenshot("villas-filtered-mobile.png");
 
   const internalPages = [
     ["locations.html", "Two coasts"],

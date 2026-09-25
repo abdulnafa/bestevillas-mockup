@@ -45,7 +45,7 @@ for (const page of pages) {
   record(page, "image alt text", imagesWithoutAlt.length === 0, `${imagesWithoutAlt.length} missing`);
   record(page, "approved logo in header and footer", brandLogos.length === 2 && brandLogos.every((image) => /assets\/images\/brand\/best-e-villas-logo-white\.png/i.test(image)), `${brandLogos.length} logo images`);
   record(page, "legacy placeholder branding removed", !/\bbrand-(?:mark|copy)\b/i.test(html));
-  record(page, "shared interaction script", /<script\s+src=["']script\.js["']><\/script>/i.test(html));
+  record(page, "shared interaction script", /<script\s+src=["']script\.js(?:[?][^"']+)?["']><\/script>/i.test(html));
   record(page, "safe new tabs", unsafeBlankLinks.length === 0, `${unsafeBlankLinks.length} missing noopener`);
   record(page, "title", /<title>[^<]+<\/title>/i.test(html));
   record(page, "meta description", /<meta\s+name=["']description["']/i.test(html) || /<meta[\s\S]*?name=["']description["']/i.test(html));

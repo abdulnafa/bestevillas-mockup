@@ -12,6 +12,107 @@ function record(name, passed, detail = "") {
   results.push(result);
 }
 
+function villaFilterInteractionProbeExpression(locationValue = "south", bedroomValue = "2", action = "submit") {
+  return `(async () => {
+    const form = document.querySelector('#villa-filter-form');
+    const locationSelect = form?.querySelector('[name="location"]');
+    const bedroomSelect = form?.querySelector('[name="bedrooms"]');
+    const resultsSection = document.querySelector('#villa-results');
+    const resultsTitle = document.querySelector('#villa-results-title');
+    const resultCount = document.querySelector('#villa-result-count');
+    const header = document.querySelector('.site-header');
+    if (!form || !locationSelect || !bedroomSelect || !resultsSection || !resultsTitle || !resultCount || !header) {
+      return { missing: true };
+    }
+    form.scrollIntoView({ block: 'start', behavior: 'instant' });
+    await new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)));
+    const beforeScrollY = scrollY;
+    locationSelect.value = ${JSON.stringify(locationValue)};
+    bedroomSelect.value = ${JSON.stringify(bedroomValue)};
+    if (${JSON.stringify(action)} === 'reset') form.reset();
+    else form.requestSubmit();
+
+    const deadline = Date.now() + 3000;
+    let state;
+    do {
+      const visibleCards = Array.from(document.querySelectorAll('[data-villa-card]')).filter((card) => !card.hidden);
+      const headerBottom = header.getBoundingClientRect().bottom;
+      const resultsTop = resultsSection.getBoundingClientRect().top;
+      const titleTop = resultsTitle.getBoundingClientRect().top;
+      const firstCardTop = visibleCards[0]?.getBoundingClientRect().top ?? null;
+      state = {
+        missing: false,
+        visible: visibleCards.length,
+        count: resultCount.textContent?.trim(),
+        url: location.href,
+        activeId: document.activeElement?.id || '',
+        beforeScrollY,
+        afterScrollY: scrollY,
+        headerBottom,
+        resultsTop,
+        resultsOffset: resultsTop - headerBottom,
+        titleTop,
+        firstCardTop,
+        viewportHeight: innerHeight,
+      };
+      const resultsRevealed = state.activeId === 'villa-results-title'
+        && state.resultsOffset >= 8
+        && state.resultsOffset <= 80
+        && state.titleTop < state.viewportHeight
+        && state.firstCardTop !== null
+        && state.firstCardTop < state.viewportHeight;
+      if (resultsRevealed) break;
+      await new Promise((done) => setTimeout(done, 25));
+    } while (Date.now() < deadline);
+    return state;
+  })()`;
+}
+
+function villaFilterStateProbeExpression(beforeScrollY = 0) {
+  return `(async () => {
+    const resultsSection = document.querySelector('#villa-results');
+    const resultsTitle = document.querySelector('#villa-results-title');
+    const resultCount = document.querySelector('#villa-result-count');
+    const header = document.querySelector('.site-header');
+    if (!resultsSection || !resultsTitle || !resultCount || !header) return { missing: true };
+    const deadline = Date.now() + 3000;
+    let state;
+    do {
+      const visibleCards = Array.from(document.querySelectorAll('[data-villa-card]')).filter((card) => !card.hidden);
+      const headerBottom = header.getBoundingClientRect().bottom;
+      const resultsTop = resultsSection.getBoundingClientRect().top;
+      const titleTop = resultsTitle.getBoundingClientRect().top;
+      const firstCardTop = visibleCards[0]?.getBoundingClientRect().top ?? null;
+      state = {
+        missing: false,
+        visible: visibleCards.length,
+        visibleTitles: visibleCards.map((card) => card.querySelector('h3')?.textContent?.trim() || ''),
+        count: resultCount.textContent?.trim(),
+        url: location.href,
+        activeId: document.activeElement?.id || '',
+        beforeScrollY: ${Number(beforeScrollY) || 0},
+        afterScrollY: scrollY,
+        headerBottom,
+        resultsTop,
+        resultsOffset: resultsTop - headerBottom,
+        titleTop,
+        firstCardTop,
+        viewportHeight: innerHeight,
+        overflow: document.documentElement.scrollWidth > innerWidth + 1,
+      };
+      const resultsRevealed = state.activeId === 'villa-results-title'
+        && state.resultsOffset >= 8
+        && state.resultsOffset <= 80
+        && state.titleTop < state.viewportHeight
+        && state.firstCardTop !== null
+        && state.firstCardTop < state.viewportHeight;
+      if (resultsRevealed) break;
+      await new Promise((done) => setTimeout(done, 25));
+    } while (Date.now() < deadline);
+    return state;
+  })()`;
+}
+
 function villaLayoutProbeExpression() {
   return `(async () => {
     const waitForFrames = () => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)));
@@ -331,6 +432,37 @@ async function openPage(url, navigationBaseUrl = baseUrl) {
     await writeFile(resolve(evidenceDir, filename), Buffer.from(captured.data, "base64"));
   }
 
+  async function tap(selector, waitForNavigation = false) {
+    const targetPosition = await evaluate(`(async () => {
+      const element = document.querySelector(${JSON.stringify(selector)});
+      if (!element) return { missing: true };
+      element.scrollIntoView({ block: 'center', inline: 'center', behavior: 'instant' });
+      await new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)));
+      const rect = element.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      const hit = document.elementFromPoint(x, y);
+      return {
+        missing: false,
+        x,
+        y,
+        width: rect.width,
+        height: rect.height,
+        topmost: Boolean(hit && (hit === element || element.contains(hit))),
+        beforeScrollY: scrollY,
+      };
+    })()`);
+    if (targetPosition.missing || !targetPosition.topmost) return targetPosition;
+    const navigation = waitForNavigation ? waitFor("Page.loadEventFired") : null;
+    await send("Input.dispatchTouchEvent", {
+      type: "touchStart",
+      touchPoints: [{ x: targetPosition.x, y: targetPosition.y, radiusX: 1, radiusY: 1, force: 1 }],
+    });
+    await send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+    if (navigation) await navigation;
+    return targetPosition;
+  }
+
   async function close() {
     socket.close();
     await fetch(`${debugUrl}/json/close/${target.id}`);
@@ -341,7 +473,7 @@ async function openPage(url, navigationBaseUrl = baseUrl) {
   await send("Log.enable");
   await send("Network.enable");
   await send("Network.setCacheDisabled", { cacheDisabled: true });
-  return { close, evaluate, messages, navigate, screenshot, viewport };
+  return { close, evaluate, messages, navigate, screenshot, tap, viewport };
 }
 
 await mkdir(evidenceDir, { recursive: true });
@@ -441,8 +573,16 @@ try {
     missingImages: Array.from(document.images).filter((image) => image.complete && image.naturalWidth === 0).length,
   })`);
   record("CMS villa listing renders four accommodation options", listing.cards === 4 && listing.count === "4 accommodation options" && listing.bookingLinks === 4 && listing.prettyLinks.every((path) => /\/villas\/[a-z0-9-]+\.html$/.test(path)) && listing.missingImages === 0, JSON.stringify(listing));
-  const filtered = await page.evaluate(`(() => { const form = document.querySelector('#villa-filter-form'); form.querySelector('[name="location"]').value = 'south'; form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true })); return { visible: Array.from(document.querySelectorAll('[data-villa-card]')).filter((card) => !card.hidden).length, count: document.querySelector('#villa-result-count')?.textContent }; })()`);
-  record("CMS villa filter works", filtered.visible === 1 && filtered.count === "1 accommodation option", JSON.stringify(filtered));
+  const filtered = await page.evaluate(villaFilterInteractionProbeExpression());
+  record("CMS villa filter reveals matching results", filtered.visible === 1
+    && filtered.count === "1 accommodation option"
+    && filtered.url.includes("location=south")
+    && filtered.url.includes("bedrooms=2")
+    && filtered.activeId === "villa-results-title"
+    && filtered.resultsOffset >= 8
+    && filtered.resultsOffset <= 80
+    && filtered.titleTop < filtered.viewportHeight
+    && filtered.firstCardTop < filtered.viewportHeight, JSON.stringify(filtered));
   const listingClosing = await page.evaluate(closingLayoutProbeExpression());
   recordClosingVisual(listingClosing, "Villas desktop");
   await page.screenshot("cms-villas-closing-desktop.png");
@@ -589,6 +729,50 @@ try {
   await page.screenshot("cms-home-footer-mobile.png");
 
   await page.navigate("villas.html?mobile=1");
+  await page.evaluate(`(() => {
+    const form = document.querySelector('#villa-filter-form');
+    form.querySelector('[name="location"]').value = 'south';
+    form.querySelector('[name="bedrooms"]').value = '2';
+    return true;
+  })()`);
+  const searchTap = await page.tap('#villa-filter-form button[type="submit"]');
+  record("Mobile Search villas button is a usable touch target", !searchTap.missing && searchTap.topmost && searchTap.width >= 44 && searchTap.height >= 44, JSON.stringify(searchTap));
+  const mobileFiltered = await page.evaluate(villaFilterStateProbeExpression(searchTap.beforeScrollY));
+  record("Mobile Search villas reveals the filtered cards", mobileFiltered.visible === 1
+    && mobileFiltered.visibleTitles.length === 1
+    && mobileFiltered.visibleTitles[0].includes("Providence")
+    && mobileFiltered.count === "1 accommodation option"
+    && mobileFiltered.url.includes("location=south")
+    && mobileFiltered.url.includes("bedrooms=2")
+    && mobileFiltered.activeId === "villa-results-title"
+    && mobileFiltered.afterScrollY > mobileFiltered.beforeScrollY
+    && mobileFiltered.resultsOffset >= 8
+    && mobileFiltered.resultsOffset <= 80
+    && mobileFiltered.titleTop < mobileFiltered.viewportHeight
+    && mobileFiltered.firstCardTop < mobileFiltered.viewportHeight
+    && !mobileFiltered.overflow, JSON.stringify(mobileFiltered));
+  await page.screenshot("cms-villas-filtered-mobile.png");
+  const resultLinkTap = await page.tap('[data-villa-card]:not([hidden]) h3 a', true);
+  const resultDestination = await page.evaluate(`({ path: location.pathname, heading: document.querySelector('h1')?.textContent?.trim() })`);
+  record("Filtered Providence result opens its villa page", !resultLinkTap.missing
+    && resultLinkTap.topmost
+    && /\/villas\/providence[.]html$/.test(resultDestination.path)
+    && resultDestination.heading?.includes("Providence"), JSON.stringify({ resultLinkTap, resultDestination }));
+
+  await page.navigate("villas.html?location=south&bedrooms=2&mobile=1");
+  const resetTap = await page.tap('#villa-filter-form button[type="reset"]');
+  record("Mobile Reset is a usable touch target", !resetTap.missing && resetTap.topmost && resetTap.width >= 44 && resetTap.height >= 44, JSON.stringify(resetTap));
+  const mobileReset = await page.evaluate(villaFilterStateProbeExpression(resetTap.beforeScrollY));
+  record("Mobile villa filter reset reveals all cards", mobileReset.visible === 4
+    && mobileReset.count === "4 accommodation options"
+    && !mobileReset.url.includes("location=")
+    && !mobileReset.url.includes("bedrooms=")
+    && mobileReset.activeId === "villa-results-title"
+    && mobileReset.resultsOffset >= 8
+    && mobileReset.resultsOffset <= 80
+    && mobileReset.titleTop < mobileReset.viewportHeight
+    && mobileReset.firstCardTop < mobileReset.viewportHeight
+    && !mobileReset.overflow, JSON.stringify(mobileReset));
   const mobileListingClosing = await page.evaluate(closingLayoutProbeExpression());
   recordClosingVisual(mobileListingClosing, "Villas mobile", true);
   await page.screenshot("cms-villas-closing-mobile.png");

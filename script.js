@@ -279,8 +279,10 @@ function initDateForms() {
 function initVillaFilters() {
   const form = document.querySelector("#villa-filter-form");
   const cards = [...document.querySelectorAll("[data-villa-card]")];
+  const results = document.querySelector("#villa-results");
+  const resultsTitle = document.querySelector("#villa-results-title");
   const resultCount = document.querySelector("#villa-result-count");
-  if (!form || !cards.length || !resultCount) return;
+  if (!form || !cards.length || !results || !resultsTitle || !resultCount) return;
 
   const location = form.querySelector('[name="location"]');
   const bedrooms = form.querySelector('[name="bedrooms"]');
@@ -311,11 +313,23 @@ function initVillaFilters() {
     }
   }
 
+  function revealResults() {
+    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    window.requestAnimationFrame(() => {
+      results.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      resultsTitle.focus({ preventScroll: true });
+    });
+  }
+
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     applyFilters();
+    revealResults();
   });
-  form.addEventListener("reset", () => window.setTimeout(() => applyFilters(), 0));
+  form.addEventListener("reset", () => window.setTimeout(() => {
+    applyFilters();
+    revealResults();
+  }, 0));
   applyFilters(false);
 }
 

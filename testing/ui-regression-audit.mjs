@@ -506,6 +506,19 @@ try {
   }
 
   const indexHtml = htmlByRoute.get("index.html") || "";
+  const villasHtml = htmlByRoute.get("villas.html") || "";
+  const resultsHeadingTag = (villasHtml.match(/<h2\b[^>]*\bid=["']villa-results-title["'][^>]*>/i) || [""])[0];
+  const resultsHeadingAttributes = attributes(resultsHeadingTag);
+  record("villa-filter", "villas.html", "focused results heading includes the result count", resultsHeadingAttributes.tabindex === "-1" && resultsHeadingAttributes["aria-describedby"] === "villa-result-count", resultsHeadingTag || "missing");
+  record("villa-filter", "villas.html", "result count remains an atomic accessible status", /<strong\b[^>]*\bid=["']villa-result-count["'][^>]*\brole=["']status["'][^>]*\baria-live=["']polite["'][^>]*\baria-atomic=["']true["']/i.test(villasHtml));
+  record("villa-filter", "villas.html", "search hotfix uses a versioned runtime URL", /<script\b[^>]*\bsrc=["'][^"']*script[.]js[?]v=20260925-1["']/i.test(villasHtml));
+
+  const runtimePath = resolve(distDir, "script.js");
+  const runtimePresent = await exists(runtimePath);
+  record("routes", "script.js", "generated runtime exists", runtimePresent);
+  const runtimeSource = runtimePresent ? await readFile(runtimePath, "utf8") : "";
+  record("villa-filter", "script.js", "submit reveals and focuses filtered results", /results\.scrollIntoView\(\{[^}]*behavior:[^}]*block:\s*["']start["']/s.test(runtimeSource) && /resultsTitle\.focus\(\{\s*preventScroll:\s*true\s*\}\)/.test(runtimeSource));
+  record("villa-filter", "script.js", "results motion respects reduced-motion preference", /prefers-reduced-motion:\s*reduce/.test(runtimeSource) && /reduceMotion\s*\?\s*["']auto["']\s*:\s*["']smooth["']/.test(runtimeSource));
   auditDeferredHomeMedia(indexHtml);
   for (const route of manifest.routes || []) {
     if (["villa", "legacy-villa"].includes(route.kind) && htmlByRoute.has(route.outputPath)) {
@@ -537,6 +550,8 @@ try {
     if (stylesheet === "styles.css") {
       auditVillaGalleryCss(css);
       auditGeneratedClosingLayout(indexHtml, css, "index.html");
+      const htmlBody = ruleBody(css.replace(/\/\*[\s\S]*?\*\//g, ""), "html");
+      record("villa-filter", "styles.css", "results scrolling clears the sticky header", hasDeclaration(htmlBody, "scroll-padding-top", "calc\\(var\\(--header-height\\)\\s*\\+\\s*16px\\)"), htmlBody.trim());
     }
   }
 } catch (error) {
